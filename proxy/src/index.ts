@@ -313,12 +313,33 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
 
   if (!antwort.ok) {
     const status = antwort.status;
-    // Fehlerdetails ins Worker-Log (wrangler tail) — hilft bei der Diagnose
-    console.log('Demo-KI-Fehler', status, (await antwort.text()).slice(0, 500));
-    if (status === 429 || status >= 500) {
-      return demoFehler(503, 'ki', 'Der KI-Dienst ist gerade ausgelastet. Bitte versuchen Sie es in einer Minute erneut.', origin);
+    const rohtext = await antwort.text();
+    let apiTyp = '';
+    try {
+      apiTyp = (JSON.parse(rohtext) as { error?: { type?: string } }).error?.type ?? '';
+    } catch {
+      /* Fehler-Body war kein JSON */
     }
-    return demoFehler(502, 'ki', 'Die Analyse ist fehlgeschlagen. Bitte versuchen Sie es mit einem neuen, gut beleuchteten Foto.', origin);
+    // Volle Details nur ins Worker-Log (wrangler tail), nie an den Browser
+    console.error('Demo-KI-Fehler', status, apiTyp, rohtext.slice(0, 500));
+
+    // Kurz-Kennung in der Meldung: verrät nichts Internes, sagt aber beim
+    // nächsten Test sofort, welche Schicht gestolpert ist (z. B. „KI-401“).
+    const kennung = `KI-${status}`;
+
+    if (status === 429 || status >= 500) {
+      return demoFehler(503, 'ki', `Der KI-Dienst ist gerade ausgelastet. Bitte versuchen Sie es in einer Minute erneut. (${kennung})`, origin);
+    }
+    // Schlüssel ungültig, Modell nicht freigeschaltet oder Guthaben des
+    // Betreibers leer: daran ändert ein neues Foto nichts. Früher lief der
+    // Nutzer hier in eine Endlosschleife aus immer neuen Fotos.
+    if (status === 401 || status === 403 || status === 404 || /credit|billing|quota/i.test(rohtext)) {
+      return demoFehler(503, 'ki_dienst', `Die Analyse ist gerade nicht möglich — das liegt an uns, nicht an Ihrem Foto. Bitte versuchen Sie es später noch einmal. (${kennung})`, origin);
+    }
+    if (status === 413) {
+      return demoFehler(400, 'datei', `Die Datei ist für die Analyse zu groß. Bitte fotografieren Sie den Brief ohne Zoom oder nutzen Sie ein kleineres PDF. (${kennung})`, origin);
+    }
+    return demoFehler(502, 'ki', `Die Analyse ist fehlgeschlagen. Bitte versuchen Sie es mit einem neuen, gut beleuchteten Foto. (${kennung})`, origin);
   }
 
   const daten = (await antwort.json()) as {
@@ -326,7 +347,26 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
     content?: { type: string; text?: string }[];
   };
 
-  // Erst NACH erfolgreichem KI-Aufruf zählen (Fehler kosten kein Kontingent).
+  if (daten.stop_reason === 'refusal') {
+    return demoFehler(422, 'inhalt', 'Die KI konnte diesen Inhalt nicht verarbeiten. Bitte prüfen Sie, ob das Foto wirklich einen Behördenbrief zeigt.', origin);
+  }
+  if (daten.stop_reason === 'max_tokens') {
+    return demoFehler(502, 'ki', 'Der Brief ist sehr lang — die Analyse wurde abgeschnitten. Bitte fotografieren Sie nur die wichtigste Seite.', origin);
+  }
+  const textBlock = [...(daten.content ?? [])].reverse().find((b) => b.type === 'text');
+  if (!textBlock?.text) {
+    return demoFehler(502, 'ki', 'Die KI hat keine verwertbare Antwort geliefert. Bitte erneut versuchen.', origin);
+  }
+
+  let analyse: unknown;
+  try {
+    analyse = JSON.parse(textBlock.text);
+  } catch {
+    return demoFehler(502, 'ki', 'Die Antwort war unlesbar. Bitte erneut versuchen.', origin);
+  }
+
+  // Erst zählen/abbuchen, wenn wirklich ein verwertbares Ergebnis vorliegt.
+  // (Vorher kostete auch eine abgelehnte oder unlesbare Antwort ein Guthaben.)
   // Tag-, IP- und Anon-Zähler laufen nach 48h ab (sie sind tagesbasiert).
   const TAG_TTL = 60 * 60 * 48;
   if (bezahlt) {
@@ -345,21 +385,6 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
       schreiben.push(env.RATE_LIMIT.put(mailKey, heute));
     }
     await Promise.all(schreiben);
-  }
-
-  if (daten.stop_reason === 'refusal') {
-    return demoFehler(422, 'inhalt', 'Die KI konnte diesen Inhalt nicht verarbeiten. Bitte prüfen Sie, ob das Foto wirklich einen Behördenbrief zeigt.', origin);
-  }
-  const textBlock = [...(daten.content ?? [])].reverse().find((b) => b.type === 'text');
-  if (!textBlock?.text) {
-    return demoFehler(502, 'ki', 'Die KI hat keine verwertbare Antwort geliefert. Bitte erneut versuchen.', origin);
-  }
-
-  let analyse: unknown;
-  try {
-    analyse = JSON.parse(textBlock.text);
-  } catch {
-    return demoFehler(502, 'ki', 'Die Antwort war unlesbar. Bitte erneut versuchen.', origin);
   }
 
   return Response.json(

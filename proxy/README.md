@@ -54,6 +54,29 @@ npm run dev   # startet den Worker auf http://localhost:8787
 Dann in `claudeClient.ts` vorübergehend `PROXY_URL = 'http://localhost:8787'`
 setzen (im Simulator; auf echtem Gerät die LAN-IP des Rechners verwenden).
 
+## Fehlersuche: „Die Analyse ist fehlgeschlagen"
+
+Die Demo-Seite hängt an jede KI-Fehlermeldung eine Kennung `KI-<HTTP-Status>`.
+Damit sieht man sofort, woran es liegt, ohne ins Log zu schauen:
+
+| Kennung | Ursache | Was zu tun ist |
+| --- | --- | --- |
+| `KI-401` / `KI-403` | `ANTHROPIC_API_KEY` fehlt, ist abgelaufen oder wurde neu erzeugt | `npx wrangler secret put ANTHROPIC_API_KEY`, dann `npm run deploy` |
+| `KI-404` | Das Modell ist für den Account nicht freigeschaltet | Modellzugang in der Anthropic-Console prüfen |
+| `KI-400` | Guthaben des Anthropic-Accounts leer, oder die Anfrage wurde abgelehnt | Guthaben in der Console prüfen; sonst Log lesen (siehe unten) |
+| `KI-413` | Datei zu groß | Foto ohne Zoom, kleineres PDF |
+| `KI-429` / `KI-5xx` | Anthropic ausgelastet | später erneut versuchen |
+
+Den vollständigen Fehlertext von Anthropic zeigt das Worker-Log:
+
+```bash
+cd proxy
+npx wrangler tail
+```
+
+Dann auf der Webseite einen Brief hochladen — im Log erscheint eine Zeile
+`Demo-KI-Fehler <status> <typ> <Originaltext von Anthropic>`.
+
 ## Später ergänzen (wenn Abo/IAP kommt)
 
 - Abo-Prüfung: RevenueCat-Webhook oder Receipt-Validierung vor dem Weiterleiten
