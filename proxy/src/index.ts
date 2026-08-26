@@ -318,6 +318,11 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
     if (status === 429 || status >= 500) {
       return demoFehler(503, 'ki', 'Der KI-Dienst ist gerade ausgelastet. Bitte versuchen Sie es in einer Minute erneut.', origin);
     }
+    // 401/403 = Problem auf UNSERER Seite (z. B. ungültiger Schlüssel).
+    // Nutzer darf dann nicht aufgefordert werden, ein besseres Foto zu machen.
+    if (status === 401 || status === 403) {
+      return demoFehler(503, 'ki_konfig', 'Der Dienst ist gerade nicht erreichbar — das liegt an uns, nicht an Ihrem Foto. Bitte versuchen Sie es später noch einmal.', origin);
+    }
     return demoFehler(502, 'ki', 'Die Analyse ist fehlgeschlagen. Bitte versuchen Sie es mit einem neuen, gut beleuchteten Foto.', origin);
   }
 
@@ -486,10 +491,12 @@ async function kaufenHandler(request: Request, env: Env): Promise<Response> {
     headers: { Authorization: `Bearer ${env.STRIPE_SECRET_KEY}`, 'content-type': 'application/x-www-form-urlencoded' },
     body: params.toString(),
   });
-  const s = (await r.json()) as { url?: string };
+  const s = (await r.json()) as { url?: string; error?: { message?: string; type?: string; code?: string } };
   if (!r.ok || !s.url) {
     console.log('Stripe-Checkout-Fehler', r.status, JSON.stringify(s).slice(0, 300));
-    return demoFehler(502, 'stripe', 'Die Bezahlseite konnte nicht geöffnet werden. Bitte später erneut versuchen.', origin);
+    // TEMP-DIAGNOSE (wieder entfernen): Stripe-Grund mitgeben
+    const grund = `${r.status} ${s.error?.type ?? ''} ${s.error?.code ?? ''} ${s.error?.message ?? ''}`.trim();
+    return demoFehler(502, 'stripe', `Die Bezahlseite konnte nicht geöffnet werden. [${grund}]`, origin);
   }
   return Response.json({ url: s.url }, { headers: demoCorsHeaders(origin) });
 }
