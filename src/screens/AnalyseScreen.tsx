@@ -72,6 +72,11 @@ export function AnalyseScreen({ navigation, route }: Props) {
   const checkliste = cache?.checkliste ?? analyse.checkliste;
   const fachbegriffe = cache?.fachbegriffe ?? analyse.fachbegriffe;
 
+  // Arabisch, Farsi, Urdu, Paschtu laufen von rechts nach links. Ohne das
+  // steht der übersetzte Text linksbündig und liest sich falsch.
+  const rtl = !!sprache.rtl;
+  const rtlText = rtl ? ({ writingDirection: 'rtl', textAlign: 'right' } as const) : null;
+
   const sprscheWaehlen = async (neu: Sprache) => {
     setSprachwahlOffen(false);
     setSprache(neu);
@@ -221,8 +226,8 @@ export function AnalyseScreen({ navigation, route }: Props) {
 
       {/* ── Das ist passiert ── */}
       <Text style={styles.kicker}>Das ist passiert</Text>
-      <Text style={styles.kernaussage}>{kernaussage}</Text>
-      <Text style={styles.erklaerung}>{erklaerung}</Text>
+      <Text style={[styles.kernaussage, rtlText]}>{kernaussage}</Text>
+      <Text style={[styles.erklaerung, rtlText]}>{erklaerung}</Text>
 
       {/* ── Das müssen Sie tun ── */}
       {checkliste.length > 0 && (
@@ -235,7 +240,7 @@ export function AnalyseScreen({ navigation, route }: Props) {
               return (
                 <Pressable
                   key={i}
-                  style={styles.todoZeile}
+                  style={[styles.todoZeile, rtl && { flexDirection: 'row-reverse' as const }]}
                   onPress={() => setErledigt((e) => ({ ...e, [i]: !e[i] }))}
                   accessibilityRole="checkbox"
                   accessibilityState={{ checked: fertig }}
@@ -247,7 +252,7 @@ export function AnalyseScreen({ navigation, route }: Props) {
                       <Text style={styles.todoNummer}>{i + 1}</Text>
                     )}
                   </View>
-                  <Text style={[styles.todoText, fertig && styles.durchgestrichen]}>{punkt}</Text>
+                  <Text style={[styles.todoText, fertig && styles.durchgestrichen, rtlText]}>{punkt}</Text>
                 </Pressable>
               );
             })}
@@ -264,7 +269,7 @@ export function AnalyseScreen({ navigation, route }: Props) {
             {fachbegriffe.map((f, i) => (
               <View key={i} style={styles.begriffKarte}>
                 <Text style={styles.begriff}>{f.begriff}</Text>
-                <Text style={styles.begriffText}>{f.erklaerung}</Text>
+                <Text style={[styles.begriffText, rtlText]}>{f.erklaerung}</Text>
               </View>
             ))}
           </View>

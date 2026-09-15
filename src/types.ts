@@ -90,18 +90,43 @@ export interface Sprache {
   name: string;
   /** Name in der Sprache selbst (damit Nutzer ihre Sprache erkennen). */
   eigenname: string;
+  /** Schrift läuft von rechts nach links (Arabisch, Farsi, Urdu, Paschtu). */
+  rtl?: boolean;
 }
 
+/**
+ * Zielsprachen für die Übersetzung — grob nach Größe der jeweiligen
+ * Sprachgemeinschaft in Deutschland sortiert, damit die häufigsten oben
+ * stehen und man nicht lange scrollen muss.
+ */
 export const SPRACHEN: Sprache[] = [
   { code: 'tr', name: 'Türkisch', eigenname: 'Türkçe' },
-  { code: 'ar', name: 'Arabisch', eigenname: 'العربية' },
-  { code: 'en', name: 'Englisch', eigenname: 'English' },
+  { code: 'ar', name: 'Arabisch', eigenname: 'العربية', rtl: true },
   { code: 'ru', name: 'Russisch', eigenname: 'Русский' },
   { code: 'uk', name: 'Ukrainisch', eigenname: 'Українська' },
-  { code: 'fr', name: 'Französisch', eigenname: 'Français' },
-  { code: 'fa', name: 'Farsi', eigenname: 'فارسی' },
-  { code: 'ro', name: 'Rumänisch', eigenname: 'Română' },
   { code: 'pl', name: 'Polnisch', eigenname: 'Polski' },
+  { code: 'ro', name: 'Rumänisch', eigenname: 'Română' },
+  { code: 'en', name: 'Englisch', eigenname: 'English' },
+  { code: 'fa', name: 'Farsi / Dari', eigenname: 'فارسی', rtl: true },
+  { code: 'ku', name: 'Kurdisch (Kurmancî)', eigenname: 'Kurdî' },
+  { code: 'bg', name: 'Bulgarisch', eigenname: 'Български' },
+  { code: 'hr', name: 'Kroatisch', eigenname: 'Hrvatski' },
+  { code: 'sr', name: 'Serbisch', eigenname: 'Српски' },
+  { code: 'bs', name: 'Bosnisch', eigenname: 'Bosanski' },
+  { code: 'sq', name: 'Albanisch', eigenname: 'Shqip' },
+  { code: 'it', name: 'Italienisch', eigenname: 'Italiano' },
+  { code: 'el', name: 'Griechisch', eigenname: 'Ελληνικά' },
+  { code: 'es', name: 'Spanisch', eigenname: 'Español' },
+  { code: 'pt', name: 'Portugiesisch', eigenname: 'Português' },
+  { code: 'fr', name: 'Französisch', eigenname: 'Français' },
+  { code: 'hu', name: 'Ungarisch', eigenname: 'Magyar' },
+  { code: 'vi', name: 'Vietnamesisch', eigenname: 'Tiếng Việt' },
+  { code: 'hi', name: 'Hindi', eigenname: 'हिन्दी' },
+  { code: 'ur', name: 'Urdu', eigenname: 'اردو', rtl: true },
+  { code: 'ps', name: 'Paschtu', eigenname: 'پښتو', rtl: true },
+  { code: 'ti', name: 'Tigrinya', eigenname: 'ትግርኛ' },
+  { code: 'so', name: 'Somali', eigenname: 'Soomaali' },
+  { code: 'zh', name: 'Chinesisch', eigenname: '中文' },
 ];
 
 /** Untere Tab-Leiste: Fristen-Übersicht · Scannen · Archiv. */
