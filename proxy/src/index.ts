@@ -493,10 +493,9 @@ async function kaufenHandler(request: Request, env: Env): Promise<Response> {
   });
   const s = (await r.json()) as { url?: string; error?: { message?: string; type?: string; code?: string } };
   if (!r.ok || !s.url) {
+    // Grund nur ins Worker-Log (wrangler tail) — Nutzer sehen keine Technik.
     console.log('Stripe-Checkout-Fehler', r.status, JSON.stringify(s).slice(0, 300));
-    // TEMP-DIAGNOSE (wieder entfernen): Stripe-Grund mitgeben
-    const grund = `${r.status} ${s.error?.type ?? ''} ${s.error?.code ?? ''} ${s.error?.message ?? ''}`.trim();
-    return demoFehler(502, 'stripe', `Die Bezahlseite konnte nicht geöffnet werden. [${grund}]`, origin);
+    return demoFehler(502, 'stripe', 'Die Bezahlung ist gerade nicht möglich. Bitte versuchen Sie es später noch einmal.', origin);
   }
   return Response.json({ url: s.url }, { headers: demoCorsHeaders(origin) });
 }
