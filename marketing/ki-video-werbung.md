@@ -35,7 +35,7 @@ Diesen Block kannst du in jedes KI-Tool kopieren, wenn es Kontext braucht:
 
 > BehördenKlar ist eine App, die Behördenbriefe verständlich macht. Man
 > fotografiert den Brief, die App erklärt ihn in einfacher Sprache, zeigt
-> Fristen und übersetzt in 9 Sprachen. Zielgruppe: Menschen, die bei Post
+> Fristen und übersetzt in über 25 Sprachen. Zielgruppe: Menschen, die bei Post
 > vom Amt unsicher sind. Stimmung: ruhig, respektvoll, warm. Das Gefühl,
 > das wir verkaufen, ist Erleichterung.
 
@@ -110,7 +110,7 @@ stärker, wenn sie sich selbst wiedererkennen.
 | Szene 1 | „Post vom Amt. Und jetzt?" |
 | Szene 2 | „Einfach fotografieren." |
 | Szene 3 | „In einfachen Worten erklärt." |
-| Szene 4 | „Fristen im Blick. 9 Sprachen." |
+| Szene 4 | „Fristen im Blick. 25+ Sprachen." |
 | Schluss | „BehördenKlar — Brief rein. Klartext raus." + Webseite |
 
 **Musik:** ruhig, warm, kein Techno. Bei Pixabay/YouTube Audio Library

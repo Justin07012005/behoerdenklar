@@ -20,7 +20,7 @@ iPhone-App entwickelt, die Behördenbriefe verständlich macht:
 
 Brief fotografieren — die App erklärt in einfacher Sprache (A2), was das
 Amt will, zeigt Fristen und Termine mit Erinnerung und erstellt auf Wunsch
-einen Antwort-Entwurf. Die Erklärung lässt sich in 9 Sprachen übersetzen,
+einen Antwort-Entwurf. Die Erklärung lässt sich in über 25 Sprachen übersetzen,
 unter anderem Arabisch, Türkisch, Ukrainisch und Farsi — die deutschen
 Fachbegriffe bleiben dabei sichtbar, damit Ihre Klientinnen und Klienten
 sie im Brief wiederfinden.
