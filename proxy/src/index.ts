@@ -535,13 +535,25 @@ async function webhookHandler(request: Request, env: Env): Promise<Response> {
   const t = teile['t'];
   const v1 = teile['v1'];
   if (!t || !v1) return new Response('Signatur fehlt', { status: 400 });
+  // Ohne gesetztes Secret koennen wir nichts pruefen. Sauber ablehnen statt
+  // im hmacHex mit einem 500er (Worker-Exception) zu sterben.
+  if (!env.STRIPE_WEBHOOK_SECRET) {
+    console.log('Webhook ohne STRIPE_WEBHOOK_SECRET aufgerufen — Secret fehlt!');
+    return new Response('Webhook nicht konfiguriert', { status: 503 });
+  }
   const erwartet = await hmacHex(env.STRIPE_WEBHOOK_SECRET, `${t}.${payload}`);
   if (!gleich(v1, erwartet)) return new Response('Signatur ungültig', { status: 400 });
 
-  const event = JSON.parse(payload) as {
+  let event: {
     type?: string;
     data?: { object?: { id?: string; metadata?: Record<string, string>; customer_details?: { email?: string } } };
   };
+  try {
+    event = JSON.parse(payload);
+  } catch {
+    return new Response('Kein gültiges JSON', { status: 400 });
+  }
+
   if (event.type === 'checkout.session.completed') {
     const o = event.data?.object;
     const walletId = o?.metadata?.walletId;
