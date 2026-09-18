@@ -17,10 +17,31 @@
   <link rel="alternate" hreflang="de" href="https://behoerdenklar.de/">
   <link rel="alternate" hreflang="tr" href="https://behoerdenklar.de/tr">
   <link rel="alternate" hreflang="ar" href="https://behoerdenklar.de/ar">
-  <link rel="alternate" hreflang="en" href="https://behoerdenklar.de/en">
-  <link rel="alternate" hreflang="uk" href="https://behoerdenklar.de/uk">
   <link rel="alternate" hreflang="ru" href="https://behoerdenklar.de/ru">
+  <link rel="alternate" hreflang="uk" href="https://behoerdenklar.de/uk">
   <link rel="alternate" hreflang="pl" href="https://behoerdenklar.de/pl">
+  <link rel="alternate" hreflang="ro" href="https://behoerdenklar.de/ro">
+  <link rel="alternate" hreflang="en" href="https://behoerdenklar.de/en">
+  <link rel="alternate" hreflang="fa" href="https://behoerdenklar.de/fa">
+  <link rel="alternate" hreflang="ku" href="https://behoerdenklar.de/ku">
+  <link rel="alternate" hreflang="bg" href="https://behoerdenklar.de/bg">
+  <link rel="alternate" hreflang="hr" href="https://behoerdenklar.de/hr">
+  <link rel="alternate" hreflang="sr" href="https://behoerdenklar.de/sr">
+  <link rel="alternate" hreflang="bs" href="https://behoerdenklar.de/bs">
+  <link rel="alternate" hreflang="sq" href="https://behoerdenklar.de/sq">
+  <link rel="alternate" hreflang="it" href="https://behoerdenklar.de/it">
+  <link rel="alternate" hreflang="el" href="https://behoerdenklar.de/el">
+  <link rel="alternate" hreflang="es" href="https://behoerdenklar.de/es">
+  <link rel="alternate" hreflang="pt" href="https://behoerdenklar.de/pt">
+  <link rel="alternate" hreflang="fr" href="https://behoerdenklar.de/fr">
+  <link rel="alternate" hreflang="hu" href="https://behoerdenklar.de/hu">
+  <link rel="alternate" hreflang="vi" href="https://behoerdenklar.de/vi">
+  <link rel="alternate" hreflang="hi" href="https://behoerdenklar.de/hi">
+  <link rel="alternate" hreflang="ur" href="https://behoerdenklar.de/ur">
+  <link rel="alternate" hreflang="ps" href="https://behoerdenklar.de/ps">
+  <link rel="alternate" hreflang="ti" href="https://behoerdenklar.de/ti">
+  <link rel="alternate" hreflang="so" href="https://behoerdenklar.de/so">
+  <link rel="alternate" hreflang="zh" href="https://behoerdenklar.de/zh">
   <link rel="alternate" hreflang="x-default" href="https://behoerdenklar.de/">
   <link rel="canonical" href="https://behoerdenklar.de/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -285,6 +306,12 @@
     .rat-karte span { font-size: 14.5px; color: var(--grau); }
     .rat-alle { margin-top: 14px; font-size: 16px; }
     .rat-alle a { color: var(--amtsblau); font-weight: 700; }
+
+    .sprachwahl {
+      font-family: inherit; font-size: 15px; color: var(--tinte);
+      background: #fff; border: 1.5px solid var(--tinte); padding: 6px 10px;
+      max-width: 220px; cursor: pointer;
+    }
   </style>
   <script type="application/ld+json">
   {
@@ -363,13 +390,36 @@
     </div>
     <nav class="sprachen" aria-label="Sprache wählen">
       🌐
-      <span class="aktiv">Deutsch</span>
-      <a href="tr.html" lang="tr">Türkçe</a>
-      <a href="ar.html" lang="ar">العربية</a>
-      <a href="en.html" lang="en">English</a>
-      <a href="uk.html" lang="uk">Українська</a>
-      <a href="ru.html" lang="ru">Русский</a>
-      <a href="pl.html" lang="pl">Polski</a>
+      <select class="sprachwahl" onchange="if(this.value)location.href=this.value">
+      <option value="index.html" lang="de" selected>Deutsch</option>
+      <option value="tr.html" lang="tr">Türkçe</option>
+      <option value="ar.html" lang="ar">العربية</option>
+      <option value="ru.html" lang="ru">Русский</option>
+      <option value="uk.html" lang="uk">Українська</option>
+      <option value="pl.html" lang="pl">Polski</option>
+      <option value="ro.html" lang="ro">Română</option>
+      <option value="en.html" lang="en">English</option>
+      <option value="fa.html" lang="fa">فارسی</option>
+      <option value="ku.html" lang="ku">Kurdî</option>
+      <option value="bg.html" lang="bg">Български</option>
+      <option value="hr.html" lang="hr">Hrvatski</option>
+      <option value="sr.html" lang="sr">Српски</option>
+      <option value="bs.html" lang="bs">Bosanski</option>
+      <option value="sq.html" lang="sq">Shqip</option>
+      <option value="it.html" lang="it">Italiano</option>
+      <option value="el.html" lang="el">Ελληνικά</option>
+      <option value="es.html" lang="es">Español</option>
+      <option value="pt.html" lang="pt">Português</option>
+      <option value="fr.html" lang="fr">Français</option>
+      <option value="hu.html" lang="hu">Magyar</option>
+      <option value="vi.html" lang="vi">Tiếng Việt</option>
+      <option value="hi.html" lang="hi">हिन्दी</option>
+      <option value="ur.html" lang="ur">اردو</option>
+      <option value="ps.html" lang="ps">پښتو</option>
+      <option value="ti.html" lang="ti">ትግርኛ</option>
+      <option value="so.html" lang="so">Soomaali</option>
+      <option value="zh.html" lang="zh">中文</option>
+      </select>
     </nav>
 
     <header>
@@ -403,6 +453,13 @@
         </p>
 
         <div id="hpPaketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15.5px;">
+          📧 <strong>Bitte geben Sie beim Bezahlen Ihre E-Mail-Adresse an.</strong>
+          Sie bekommen danach einen persönlichen Zugangs-Link — damit nutzen Sie
+          Ihr Guthaben auf <strong>jedem Gerät</strong>: Handy, Tablet, Computer.
+          Ohne diesen Link ist Ihr Guthaben nur in diesem einen Browser
+          gespeichert und wäre weg, wenn Sie den Verlauf löschen.
+        </p>
 
         <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 18px; font-size: 14px; line-height: 1.5; cursor: pointer;">
           <input type="checkbox" id="hpKaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
