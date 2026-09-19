@@ -90,6 +90,7 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }
     .cta:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--tinte); }
+    .cta-sek { background: #fff; color: var(--amtsblau); }
     .stempel {
       display: inline-block; padding: 7px 14px; border: 2.5px solid var(--stempelrot);
       color: var(--stempelrot); font-family: 'Courier New', ui-monospace, monospace;
@@ -282,9 +283,12 @@
       <h1>وصلتك رسالة من دائرة ألمانية؟<br><span class="markiert">الآن تفهمها بسهولة.</span></h1>
       <p class="intro">صوّر الرسالة. يشرحها BehördenKlar بكلمات بسيطة — <strong>وبالعربية</strong> — مع كل المواعيد النهائية وقائمة بما عليك فعله.</p>
       <div class="hero-fuss">
-        <a class="cta" href="#anmelden">انضم إلى قائمة الانتظار&nbsp;→</a>
-        <span class="stempel">قريباً على iPhone</span>
+        <a class="cta" href="/demo?sprache=ar">📷 جرّب مجاناً الآن&nbsp;→</a>
+        <a class="cta cta-sek" href="#kaufen">شراء رصيد</a>
       </div>
+      <p style="margin-top: 16px; font-size: 15.5px; color: var(--grau);">
+        تحليلان مجاناً — بدون حساب. &nbsp;·&nbsp; <a href="#anmelden">انضم إلى قائمة الانتظار</a>
+      </p>
     </header>
 
     <section>
@@ -316,8 +320,26 @@
       </div>
     </section>
 
+    <section id="kaufen">
+      <h2>§ 3 &nbsp;اشترِ رصيداً واستخدمه فوراً</h2>
+      <div class="antrag" style="border-color: var(--amtsblau);">
+        <h3>اشرح المزيد من الرسائل</h3>
+        <p>لا داعي للانتظار: اشترِ رصيداً واستخدم BehördenKlar مباشرة في المتصفح — على أي جهاز وبدون تطبيق. رصيدك لا ينتهي.</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15px;">
+          📧 أدخل بريدك الإلكتروني عند الدفع. ستحصل على رابط وصول شخصي — به تستخدم رصيدك على أي جهاز.
+        </p>
+        <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.5; cursor: pointer;">
+          <input type="checkbox" id="kaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
+          <span>أطلب صراحةً أن تبدأ الخدمة فوراً بعد الشراء، وأعلم أن حقي في الانسحاب يسقط بذلك. <a href="/agb.html" target="_blank">AGB</a> · <a href="/widerruf.html" target="_blank">Widerruf</a> (بالألمانية)</span>
+        </label>
+        <p id="kaufFehler" style="display: none; margin-top: 12px; color: #b3261e; font-size: 14px; font-weight: 600;"></p>
+        <p class="klein">🔒 دفع آمن عبر Stripe. بدون ضريبة قيمة مضافة (§19 UStG). المزوّد: Webklar GbR — يظهر في كشف حسابك „Webklar".</p>
+      </div>
+    </section>
+
     <section id="anmelden">
-      <h2>§ 3 &nbsp;وصول مبكر</h2>
+      <h2>§ 4 &nbsp;وصول مبكر</h2>
       <div class="antrag">
         <p class="formular-kopf">استمارة F-01 · قائمة الانتظار</p>
         <h3>كن من الأوائل</h3>
@@ -335,7 +357,7 @@
     </section>
 
     <section>
-      <h2>§ 4 &nbsp;الأسئلة الشائعة</h2>
+      <h2>§ 5 &nbsp;الأسئلة الشائعة</h2>
       <details>
         <summary>كم التكلفة؟</summary>
         <p>أول 3 رسائل مجاناً (5 مع رمز قائمة الانتظار). بعد ذلك تشتري رصيداً: 5 تحليلات بـ 2,99 يورو أو 15 بـ 6,99 يورو. بدون اشتراك وبدون حساب.</p>
@@ -356,6 +378,42 @@
       &nbsp;·&nbsp; <a href="datenschutz.html">سياسة الخصوصية (بالألمانية)</a>
     </footer>
   </div>
+  <script>
+  (function () {
+    'use strict';
+    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var PAKETE = [
+      { priceId: 'price_1U6BNnBsRA1AOdnedGW5eefh', titel: '5', preis: '2,99 €' },
+      { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15', preis: '6,99 €', best: true }
+    ];
+    var liste = document.getElementById('paketListe');
+    var konsens = document.getElementById('kaufKonsens');
+    var fehler = document.getElementById('kaufFehler');
+    if (!liste) return;
+    konsens.addEventListener('change', function () { if (konsens.checked) fehler.style.display = 'none'; });
+    PAKETE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.className = 'cta'; b.type = 'button';
+      b.style.width = '100%'; b.style.display = 'flex';
+      b.style.justifyContent = 'space-between'; b.style.alignItems = 'center';
+      var l = document.createElement('span');
+      l.textContent = (p.best ? '⭐ ' : '') + p.titel + ' \u00D7 تحليل';
+      var r = document.createElement('strong'); r.textContent = p.preis;
+      b.appendChild(l); b.appendChild(r);
+      b.addEventListener('click', function () { starte(p.priceId, b); });
+      liste.appendChild(b);
+    });
+    function starte(priceId, knopf) {
+      if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = 'يرجى تأكيد المربع أولاً.'; konsens.focus(); return; }
+      fehler.style.display = 'none';
+      var alt = knopf.innerHTML; knopf.disabled = true;
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
+        .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = 'تعذّر فتح صفحة الدفع. يرجى المحاولة مرة أخرى.'; });
+    }
+  })();
+  </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "11f017e9a707466b9151921db6125dde"}'></script>
 </body>

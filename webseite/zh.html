@@ -90,6 +90,7 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }
     .cta:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--tinte); }
+    .cta-sek { background: #fff; color: var(--amtsblau); }
     .stempel {
       display: inline-block; padding: 7px 14px; border: 2.5px solid var(--stempelrot);
       color: var(--stempelrot); font-family: 'Courier New', ui-monospace, monospace;
@@ -282,9 +283,12 @@
       <h1>收到德国政府部门的信？<br><span class="markiert">终于看懂了。</span></h1>
       <p class="intro">给信件拍张照片。BehördenKlar 会用简单的话——<strong>而且是中文</strong>——向您解释，并列出所有期限和待办事项。</p>
       <div class="hero-fuss">
-        <a class="cta" href="#anmelden">加入等候名单&nbsp;→</a>
-        <span class="stempel">即将登陆 iPhone</span>
+        <a class="cta" href="/demo?sprache=zh">📷 立即免费试用&nbsp;→</a>
+        <a class="cta cta-sek" href="#kaufen">购买额度</a>
       </div>
+      <p style="margin-top: 16px; font-size: 15.5px; color: var(--grau);">
+        2 次分析免费——无需账号。 &nbsp;·&nbsp; <a href="#anmelden">加入等候名单</a>
+      </p>
     </header>
 
     <section>
@@ -316,8 +320,26 @@
       </div>
     </section>
 
+    <section id="kaufen">
+      <h2>§ 3 &nbsp;购买额度，立刻开始</h2>
+      <div class="antrag" style="border-color: var(--amtsblau);">
+        <h3>让更多信件得到解释</h3>
+        <p>无需等待：购买额度，直接在浏览器中使用 BehördenKlar——任何设备都行，无需应用。额度不会过期。</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15px;">
+          📧 付款时请填写电子邮箱。您会收到专属访问链接——凭它，您的额度在任何设备上都能使用。
+        </p>
+        <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.5; cursor: pointer;">
+          <input type="checkbox" id="kaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
+          <span>我明确要求服务在购买后立即开始，并知悉我的撤回权因此终止。 <a href="/agb.html" target="_blank">AGB</a> · <a href="/widerruf.html" target="_blank">Widerruf</a> (德语)</span>
+        </label>
+        <p id="kaufFehler" style="display: none; margin-top: 12px; color: #b3261e; font-size: 14px; font-weight: 600;"></p>
+        <p class="klein">🔒 通过 Stripe 安全付款。不含增值税（§19 UStG）。提供方：Webklar GbR——您的账单上会显示“Webklar”。</p>
+      </div>
+    </section>
+
     <section id="anmelden">
-      <h2>§ 3 &nbsp;抢先体验</h2>
+      <h2>§ 4 &nbsp;抢先体验</h2>
       <div class="antrag">
         <p class="formular-kopf">表格 F-01 · 等候名单</p>
         <h3>成为最早的用户</h3>
@@ -335,7 +357,7 @@
     </section>
 
     <section>
-      <h2>§ 4 &nbsp;常见问题</h2>
+      <h2>§ 5 &nbsp;常见问题</h2>
       <details>
         <summary>收费多少？</summary>
         <p>前 3 封信免费（用等候名单的兑换码则是 5 封）。之后购买额度：5 次分析 2,99 €，15 次 6,99 €。无订阅，无需注册账号。</p>
@@ -356,6 +378,42 @@
       &nbsp;·&nbsp; <a href="datenschutz.html">隐私政策（德语）</a>
     </footer>
   </div>
+  <script>
+  (function () {
+    'use strict';
+    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var PAKETE = [
+      { priceId: 'price_1U6BNnBsRA1AOdnedGW5eefh', titel: '5', preis: '2,99 €' },
+      { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15', preis: '6,99 €', best: true }
+    ];
+    var liste = document.getElementById('paketListe');
+    var konsens = document.getElementById('kaufKonsens');
+    var fehler = document.getElementById('kaufFehler');
+    if (!liste) return;
+    konsens.addEventListener('change', function () { if (konsens.checked) fehler.style.display = 'none'; });
+    PAKETE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.className = 'cta'; b.type = 'button';
+      b.style.width = '100%'; b.style.display = 'flex';
+      b.style.justifyContent = 'space-between'; b.style.alignItems = 'center';
+      var l = document.createElement('span');
+      l.textContent = (p.best ? '⭐ ' : '') + p.titel + ' \u00D7 次分析';
+      var r = document.createElement('strong'); r.textContent = p.preis;
+      b.appendChild(l); b.appendChild(r);
+      b.addEventListener('click', function () { starte(p.priceId, b); });
+      liste.appendChild(b);
+    });
+    function starte(priceId, knopf) {
+      if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = '请先勾选方框。'; konsens.focus(); return; }
+      fehler.style.display = 'none';
+      var alt = knopf.innerHTML; knopf.disabled = true;
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
+        .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = '无法打开付款页面，请重试。'; });
+    }
+  })();
+  </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "11f017e9a707466b9151921db6125dde"}'></script>
 </body>

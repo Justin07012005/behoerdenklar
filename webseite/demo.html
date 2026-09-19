@@ -266,6 +266,11 @@
           <p id="guthabenBanner" class="bonus-zeile" style="display: none;">
             💳 Ihr Guthaben: <strong id="guthabenZahl">0</strong> Analysen — laden Sie den nächsten Brief hoch.
           </p>
+          <p style="margin-bottom: 14px; font-size: 15.5px;">
+            🌐 <label for="sprachWahl">Erklärung in dieser Sprache:</label>
+            <select id="sprachWahl" style="font-family: inherit; font-size: 15.5px; padding: 5px 8px; border: 1.5px solid var(--tinte); background: #fff; margin-inline-start: 6px;"></select>
+          </p>
+
           <label class="konsens">
             <input type="checkbox" id="konsens">
             <span>
@@ -446,6 +451,22 @@
       { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15 Analysen', preis: '6,99 €', best: true },
     ];
 
+    // Zielsprache: kommt als ?sprache=tr von den Sprachseiten, wird gemerkt.
+    var SPRACH_SCHLUESSEL = 'bk_sprache';
+    var SPRACH_NAMEN = {
+      de:'Deutsch', tr:'Türkçe', ar:'العربية', ru:'Русский', uk:'Українська', pl:'Polski',
+      ro:'Română', en:'English', fa:'فارسی', ku:'Kurdî', bg:'Български', hr:'Hrvatski',
+      sr:'Српски', bs:'Bosanski', sq:'Shqip', it:'Italiano', el:'Ελληνικά', es:'Español',
+      pt:'Português', fr:'Français', hu:'Magyar', vi:'Tiếng Việt', hi:'हिन्दी', ur:'اردو',
+      ps:'پښتو', ti:'ትግርኛ', so:'Soomaali', zh:'中文'
+    };
+    function zielsprache() {
+      var p = new URLSearchParams(window.location.search).get('sprache');
+      if (p && SPRACH_NAMEN[p]) { try { localStorage.setItem(SPRACH_SCHLUESSEL, p); } catch (e) {} return p; }
+      try { var g = localStorage.getItem(SPRACH_SCHLUESSEL); if (g && SPRACH_NAMEN[g]) return g; } catch (e) {}
+      return 'de';
+    }
+
     var konsens = document.getElementById('konsens');
     var startKnopf = document.getElementById('startKnopf');
     var dateiFeld = document.getElementById('datei');
@@ -582,6 +603,7 @@
           turnstileToken: token,
         };
         var email = emailFeld.value.trim();
+        body.zielsprache = zielsprache();
         if (bezahlt) body.walletToken = walletToken();
         else if (benutzt() >= 1 && email) body.email = email;
 
@@ -836,6 +858,21 @@
     kaufKonsens.addEventListener('change', function () {
       if (kaufKonsens.checked) kaufFehler.style.display = 'none';
     });
+
+    // Sprachauswahl aufbauen
+    (function () {
+      var feld = document.getElementById('sprachWahl');
+      var aktiv = zielsprache();
+      Object.keys(SPRACH_NAMEN).forEach(function (c) {
+        var o = document.createElement('option');
+        o.value = c; o.textContent = SPRACH_NAMEN[c];
+        if (c === aktiv) o.selected = true;
+        feld.appendChild(o);
+      });
+      feld.addEventListener('change', function () {
+        try { localStorage.setItem(SPRACH_SCHLUESSEL, feld.value); } catch (e) {}
+      });
+    })();
 
     rendrePakete();
     pruefeRueckkehr();

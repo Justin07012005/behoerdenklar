@@ -83,6 +83,18 @@ const WEGWERF_DOMAINS = new Set([
 ]);
 
 /** Identisch zur App (src/services/analyse.ts) — gleiche Qualität in der Demo. */
+/** Zielsprachen der Web-Demo — identisch zur Sprachauswahl der Webseite.
+ *  Der Wert wird NUR als Name in den Prompt gesetzt, nie als freier Text,
+ *  damit niemand ueber das Feld eigene Anweisungen einschleusen kann. */
+const DEMO_SPRACHEN: Record<string, string> = {
+  de: 'Deutsch', tr: 'Türkisch', ar: 'Arabisch', ru: 'Russisch', uk: 'Ukrainisch',
+  pl: 'Polnisch', ro: 'Rumänisch', en: 'Englisch', fa: 'Farsi', ku: 'Kurdisch (Kurmancî)',
+  bg: 'Bulgarisch', hr: 'Kroatisch', sr: 'Serbisch', bs: 'Bosnisch', sq: 'Albanisch',
+  it: 'Italienisch', el: 'Griechisch', es: 'Spanisch', pt: 'Portugiesisch', fr: 'Französisch',
+  hu: 'Ungarisch', vi: 'Vietnamesisch', hi: 'Hindi', ur: 'Urdu', ps: 'Paschtu',
+  ti: 'Tigrinya', so: 'Somali', zh: 'Chinesisch',
+};
+
 const DEMO_SYSTEM_PROMPT = `Du bist ein Assistent, der deutschen Behördenbriefe für Privatpersonen verständlich macht. Die Nutzer sind Deutsche, die Amtsdeutsch schwer verstehen, oder Menschen mit Deutsch als Fremdsprache.
 
 Deine Aufgabe:
@@ -175,7 +187,7 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
     return demoFehler(403, 'origin', 'Aufruf nur von der BehördenKlar-Webseite erlaubt.', origin);
   }
 
-  let body: { bild?: string; mimeType?: string; turnstileToken?: string; email?: string; walletToken?: string };
+  let body: { bild?: string; mimeType?: string; turnstileToken?: string; email?: string; walletToken?: string; zielsprache?: string };
   try {
     body = await request.json();
   } catch {
@@ -185,6 +197,9 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
   const { bild, mimeType, turnstileToken } = body;
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : null;
   const walletToken = typeof body.walletToken === 'string' ? body.walletToken : null;
+  const sprachCode = typeof body.zielsprache === 'string' && DEMO_SPRACHEN[body.zielsprache]
+    ? body.zielsprache : 'de';
+  const sprachName = DEMO_SPRACHEN[sprachCode];
 
   if (typeof bild !== 'string' || bild.length === 0 || bild.length > DEMO_MAX_BASE64) {
     return demoFehler(400, 'datei', 'Die Datei fehlt oder ist zu groß (max. 5 MB).', origin);
@@ -297,7 +312,9 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
     body: JSON.stringify({
       model: 'claude-sonnet-5',
       max_tokens: MAX_TOKENS_OBERGRENZE,
-      system: DEMO_SYSTEM_PROMPT,
+      system: sprachCode === 'de'
+        ? DEMO_SYSTEM_PROMPT
+        : `${DEMO_SYSTEM_PROMPT}\n\nWICHTIG — ZIELSPRACHE: Schreibe ALLE Textfelder deiner Antwort auf ${sprachName}, nicht auf Deutsch. Ausnahme: das Feld "begriff" bei fachbegriffe bleibt der deutsche Originalbegriff aus dem Brief (der Nutzer muss ihn im Brief wiederfinden) — nur dessen "erklaerung" wird auf ${sprachName} geschrieben. Datumsangaben bleiben im ISO-Format.`,
       output_config: { format: { type: 'json_schema', schema: DEMO_SCHEMA } },
       messages: [
         {
@@ -372,6 +389,7 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
       analyse,
       versuch: bezahlt ? 'bezahlt' : email ? 2 : 1,
       guthaben: bezahlt ? walletRest - 1 : undefined,
+      sprache: sprachCode,
     },
     { headers: demoCorsHeaders(origin) }
   );

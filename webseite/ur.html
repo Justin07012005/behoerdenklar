@@ -90,6 +90,7 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }
     .cta:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--tinte); }
+    .cta-sek { background: #fff; color: var(--amtsblau); }
     .stempel {
       display: inline-block; padding: 7px 14px; border: 2.5px solid var(--stempelrot);
       color: var(--stempelrot); font-family: 'Courier New', ui-monospace, monospace;
@@ -282,9 +283,12 @@
       <h1>جرمن دفتر سے خط؟<br><span class="markiert">اب سمجھ میں آتا ہے۔</span></h1>
       <p class="intro">خط کی تصویر لیں۔ BehördenKlar اسے آسان الفاظ میں — <strong>اور اردو میں</strong> — سمجھاتا ہے۔ تمام آخری تاریخوں اور کاموں کی فہرست کے ساتھ۔</p>
       <div class="hero-fuss">
-        <a class="cta" href="#anmelden">انتظار کی فہرست میں شامل ہوں&nbsp;→</a>
-        <span class="stempel">جلد ہی iPhone پر</span>
+        <a class="cta" href="/demo?sprache=ur">📷 ابھی مفت آزمائیں&nbsp;→</a>
+        <a class="cta cta-sek" href="#kaufen">کریڈٹ خریدیں</a>
       </div>
+      <p style="margin-top: 16px; font-size: 15.5px; color: var(--grau);">
+        2 تجزیے مفت — بغیر اکاؤنٹ کے۔ &nbsp;·&nbsp; <a href="#anmelden">انتظار کی فہرست میں شامل ہوں</a>
+      </p>
     </header>
 
     <section>
@@ -316,8 +320,26 @@
       </div>
     </section>
 
+    <section id="kaufen">
+      <h2>§ 3 &nbsp;کریڈٹ خریدیں اور فوراً شروع کریں</h2>
+      <div class="antrag" style="border-color: var(--amtsblau);">
+        <h3>مزید خطوط سمجھوائیں</h3>
+        <p>انتظار کی ضرورت نہیں: کریڈٹ خریدیں اور BehördenKlar براہِ راست براؤزر میں استعمال کریں — ہر آلے پر، بغیر ایپ کے۔ آپ کا کریڈٹ ختم نہیں ہوتا۔</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15px;">
+          📧 ادائیگی کے وقت اپنا ای میل پتہ درج کریں۔ آپ کو ذاتی رسائی لنک ملے گا — اس سے آپ کا کریڈٹ ہر آلے پر کام کرتا ہے۔
+        </p>
+        <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.5; cursor: pointer;">
+          <input type="checkbox" id="kaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
+          <span>میں واضح طور پر مطالبہ کرتا/کرتی ہوں کہ خدمت خریداری کے فوراً بعد شروع ہو، اور مجھے معلوم ہے کہ اس سے میرا دستبرداری کا حق ختم ہو جاتا ہے۔ <a href="/agb.html" target="_blank">AGB</a> · <a href="/widerruf.html" target="_blank">Widerruf</a> (جرمن میں)</span>
+        </label>
+        <p id="kaufFehler" style="display: none; margin-top: 12px; color: #b3261e; font-size: 14px; font-weight: 600;"></p>
+        <p class="klein">🔒 Stripe کے ذریعے محفوظ ادائیگی۔ کوئی ویٹ نہیں (§19 UStG)۔ فراہم کنندہ: Webklar GbR — آپ کے اکاؤنٹ کی تفصیل میں „Webklar" نظر آئے گا۔</p>
+      </div>
+    </section>
+
     <section id="anmelden">
-      <h2>§ 3 &nbsp;جلد رسائی</h2>
+      <h2>§ 4 &nbsp;جلد رسائی</h2>
       <div class="antrag">
         <p class="formular-kopf">فارم F-01 · انتظار کی فہرست</p>
         <h3>سب سے پہلے شامل ہوں</h3>
@@ -335,7 +357,7 @@
     </section>
 
     <section>
-      <h2>§ 4 &nbsp;اکثر پوچھے جانے والے سوالات</h2>
+      <h2>§ 5 &nbsp;اکثر پوچھے جانے والے سوالات</h2>
       <details>
         <summary>اس کی قیمت کیا ہے؟</summary>
         <p>پہلے 3 خط مفت ہیں (انتظار کی فہرست کے کوڈ کے ساتھ 5)۔ اس کے بعد آپ کریڈٹ خریدتے ہیں: 5 تجزیے 2,99 € میں یا 15 تجزیے 6,99 € میں۔ کوئی سبسکرپشن نہیں، کوئی اکاؤنٹ نہیں۔</p>
@@ -356,6 +378,42 @@
       &nbsp;·&nbsp; <a href="datenschutz.html">رازداری کی پالیسی (جرمن میں)</a>
     </footer>
   </div>
+  <script>
+  (function () {
+    'use strict';
+    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var PAKETE = [
+      { priceId: 'price_1U6BNnBsRA1AOdnedGW5eefh', titel: '5', preis: '2,99 €' },
+      { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15', preis: '6,99 €', best: true }
+    ];
+    var liste = document.getElementById('paketListe');
+    var konsens = document.getElementById('kaufKonsens');
+    var fehler = document.getElementById('kaufFehler');
+    if (!liste) return;
+    konsens.addEventListener('change', function () { if (konsens.checked) fehler.style.display = 'none'; });
+    PAKETE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.className = 'cta'; b.type = 'button';
+      b.style.width = '100%'; b.style.display = 'flex';
+      b.style.justifyContent = 'space-between'; b.style.alignItems = 'center';
+      var l = document.createElement('span');
+      l.textContent = (p.best ? '⭐ ' : '') + p.titel + ' \u00D7 تجزیے';
+      var r = document.createElement('strong'); r.textContent = p.preis;
+      b.appendChild(l); b.appendChild(r);
+      b.addEventListener('click', function () { starte(p.priceId, b); });
+      liste.appendChild(b);
+    });
+    function starte(priceId, knopf) {
+      if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = 'براہ کرم پہلے خانے پر نشان لگائیں۔'; konsens.focus(); return; }
+      fehler.style.display = 'none';
+      var alt = knopf.innerHTML; knopf.disabled = true;
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
+        .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = 'ادائیگی کا صفحہ نہیں کھل سکا۔ براہ کرم دوبارہ کوشش کریں۔'; });
+    }
+  })();
+  </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "11f017e9a707466b9151921db6125dde"}'></script>
 </body>

@@ -90,6 +90,7 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }
     .cta:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--tinte); }
+    .cta-sek { background: #fff; color: var(--amtsblau); }
     .stempel {
       display: inline-block; padding: 7px 14px; border: 2.5px solid var(--stempelrot);
       color: var(--stempelrot); font-family: 'Courier New', ui-monospace, monospace;
@@ -282,9 +283,12 @@
       <h1>Scrisoare de la o autoritate germană?<br><span class="markiert">Acum se înțelege.</span></h1>
       <p class="intro">Fotografiază scrisoarea. BehördenKlar o explică în cuvinte simple — <strong>și în română</strong>. Cu toate termenele și o listă de pași.</p>
       <div class="hero-fuss">
-        <a class="cta" href="#anmelden">Pe lista de așteptare&nbsp;→</a>
-        <span class="stempel">În curând pe iPhone</span>
+        <a class="cta" href="/demo?sprache=ro">📷 Încearcă gratuit&nbsp;→</a>
+        <a class="cta cta-sek" href="#kaufen">Cumpără credit</a>
       </div>
+      <p style="margin-top: 16px; font-size: 15.5px; color: var(--grau);">
+        2 analize gratuite — fără cont. &nbsp;·&nbsp; <a href="#anmelden">Pe lista de așteptare</a>
+      </p>
     </header>
 
     <section>
@@ -316,8 +320,26 @@
       </div>
     </section>
 
+    <section id="kaufen">
+      <h2>§ 3 &nbsp;Cumpără credit și începe imediat</h2>
+      <div class="antrag" style="border-color: var(--amtsblau);">
+        <h3>Explică mai multe scrisori</h3>
+        <p>Nu trebuie să aștepți: cumpără credit și folosește BehördenKlar direct în browser — pe orice dispozitiv, fără aplicație. Creditul nu expiră.</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15px;">
+          📧 Introdu la plată adresa de e-mail. Primești un link personal de acces — cu el creditul funcționează pe orice dispozitiv.
+        </p>
+        <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.5; cursor: pointer;">
+          <input type="checkbox" id="kaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
+          <span>Solicit în mod expres ca serviciul să înceapă imediat după cumpărare și știu că astfel dreptul meu de retragere se stinge. <a href="/agb.html" target="_blank">AGB</a> · <a href="/widerruf.html" target="_blank">Widerruf</a> (în germană)</span>
+        </label>
+        <p id="kaufFehler" style="display: none; margin-top: 12px; color: #b3261e; font-size: 14px; font-weight: 600;"></p>
+        <p class="klein">🔒 Plată sigură prin Stripe. Fără TVA (§19 UStG). Furnizor: Webklar GbR — pe extras apare „Webklar".</p>
+      </div>
+    </section>
+
     <section id="anmelden">
-      <h2>§ 3 &nbsp;Acces timpuriu</h2>
+      <h2>§ 4 &nbsp;Acces timpuriu</h2>
       <div class="antrag">
         <p class="formular-kopf">Formular F-01 · Listă de așteptare</p>
         <h3>Fii printre primii</h3>
@@ -335,7 +357,7 @@
     </section>
 
     <section>
-      <h2>§ 4 &nbsp;Întrebări frecvente</h2>
+      <h2>§ 5 &nbsp;Întrebări frecvente</h2>
       <details>
         <summary>Cât costă?</summary>
         <p>Primele 3 scrisori sunt gratuite (5 cu codul din lista de așteptare). Apoi cumperi credit: 5 analize la 2,99 €, 15 la 6,99 €. Fără abonament și fără cont.</p>
@@ -356,6 +378,42 @@
       &nbsp;·&nbsp; <a href="datenschutz.html">Politica de confidențialitate (în germană)</a>
     </footer>
   </div>
+  <script>
+  (function () {
+    'use strict';
+    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var PAKETE = [
+      { priceId: 'price_1U6BNnBsRA1AOdnedGW5eefh', titel: '5', preis: '2,99 €' },
+      { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15', preis: '6,99 €', best: true }
+    ];
+    var liste = document.getElementById('paketListe');
+    var konsens = document.getElementById('kaufKonsens');
+    var fehler = document.getElementById('kaufFehler');
+    if (!liste) return;
+    konsens.addEventListener('change', function () { if (konsens.checked) fehler.style.display = 'none'; });
+    PAKETE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.className = 'cta'; b.type = 'button';
+      b.style.width = '100%'; b.style.display = 'flex';
+      b.style.justifyContent = 'space-between'; b.style.alignItems = 'center';
+      var l = document.createElement('span');
+      l.textContent = (p.best ? '⭐ ' : '') + p.titel + ' \u00D7 analize';
+      var r = document.createElement('strong'); r.textContent = p.preis;
+      b.appendChild(l); b.appendChild(r);
+      b.addEventListener('click', function () { starte(p.priceId, b); });
+      liste.appendChild(b);
+    });
+    function starte(priceId, knopf) {
+      if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = 'Te rugăm să bifezi mai întâi căsuța.'; konsens.focus(); return; }
+      fehler.style.display = 'none';
+      var alt = knopf.innerHTML; knopf.disabled = true;
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
+        .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = 'Pagina de plată nu a putut fi deschisă. Încearcă din nou.'; });
+    }
+  })();
+  </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "11f017e9a707466b9151921db6125dde"}'></script>
 </body>

@@ -90,6 +90,7 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }
     .cta:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--tinte); }
+    .cta-sek { background: #fff; color: var(--amtsblau); }
     .stempel {
       display: inline-block; padding: 7px 14px; border: 2.5px solid var(--stempelrot);
       color: var(--stempelrot); font-family: 'Courier New', ui-monospace, monospace;
@@ -282,9 +283,12 @@
       <h1>Pismo njemačke ustanove?<br><span class="markiert">Napokon razumljivo.</span></h1>
       <p class="intro">Fotografirajte pismo. BehördenKlar ga objašnjava jednostavnim riječima — <strong>i na hrvatskom</strong>. Sa svim rokovima i popisom zadataka.</p>
       <div class="hero-fuss">
-        <a class="cta" href="#anmelden">Na listu čekanja&nbsp;→</a>
-        <span class="stempel">Uskoro na iPhoneu</span>
+        <a class="cta" href="/demo?sprache=hr">📷 Isprobajte besplatno&nbsp;→</a>
+        <a class="cta cta-sek" href="#kaufen">Kupite bodove</a>
       </div>
+      <p style="margin-top: 16px; font-size: 15.5px; color: var(--grau);">
+        2 analize besplatno — bez računa. &nbsp;·&nbsp; <a href="#anmelden">Na listu čekanja</a>
+      </p>
     </header>
 
     <section>
@@ -316,8 +320,26 @@
       </div>
     </section>
 
+    <section id="kaufen">
+      <h2>§ 3 &nbsp;Kupite bodove i počnite odmah</h2>
+      <div class="antrag" style="border-color: var(--amtsblau);">
+        <h3>Objasnite više pisama</h3>
+        <p>Ne morate čekati: kupite bodove i koristite BehördenKlar odmah u pregledniku — na svakom uređaju, bez aplikacije. Bodovi ne istječu.</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15px;">
+          📧 Pri plaćanju unesite e-mail adresu. Dobit ćete osobnu poveznicu za pristup — s njom bodovi rade na svakom uređaju.
+        </p>
+        <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.5; cursor: pointer;">
+          <input type="checkbox" id="kaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
+          <span>Izričito zahtijevam da usluga započne odmah nakon kupnje i znam da time prestaje moje pravo na odustajanje. <a href="/agb.html" target="_blank">AGB</a> · <a href="/widerruf.html" target="_blank">Widerruf</a> (na njemačkom)</span>
+        </label>
+        <p id="kaufFehler" style="display: none; margin-top: 12px; color: #b3261e; font-size: 14px; font-weight: 600;"></p>
+        <p class="klein">🔒 Sigurno plaćanje putem Stripea. Bez PDV-a (§19 UStG). Pružatelj: Webklar GbR — na izvodu će pisati „Webklar".</p>
+      </div>
+    </section>
+
     <section id="anmelden">
-      <h2>§ 3 &nbsp;Rani pristup</h2>
+      <h2>§ 4 &nbsp;Rani pristup</h2>
       <div class="antrag">
         <p class="formular-kopf">Obrazac F-01 · Lista čekanja</p>
         <h3>Budite među prvima</h3>
@@ -335,7 +357,7 @@
     </section>
 
     <section>
-      <h2>§ 4 &nbsp;Česta pitanja</h2>
+      <h2>§ 5 &nbsp;Česta pitanja</h2>
       <details>
         <summary>Koliko košta?</summary>
         <p>Prva 3 pisma su besplatna (5 s kodom s liste čekanja). Zatim kupujete bodove: 5 analiza za 2,99 €, 15 za 6,99 €. Bez pretplate i bez računa.</p>
@@ -356,6 +378,42 @@
       &nbsp;·&nbsp; <a href="datenschutz.html">Pravila privatnosti (na njemačkom)</a>
     </footer>
   </div>
+  <script>
+  (function () {
+    'use strict';
+    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var PAKETE = [
+      { priceId: 'price_1U6BNnBsRA1AOdnedGW5eefh', titel: '5', preis: '2,99 €' },
+      { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15', preis: '6,99 €', best: true }
+    ];
+    var liste = document.getElementById('paketListe');
+    var konsens = document.getElementById('kaufKonsens');
+    var fehler = document.getElementById('kaufFehler');
+    if (!liste) return;
+    konsens.addEventListener('change', function () { if (konsens.checked) fehler.style.display = 'none'; });
+    PAKETE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.className = 'cta'; b.type = 'button';
+      b.style.width = '100%'; b.style.display = 'flex';
+      b.style.justifyContent = 'space-between'; b.style.alignItems = 'center';
+      var l = document.createElement('span');
+      l.textContent = (p.best ? '⭐ ' : '') + p.titel + ' \u00D7 analiza';
+      var r = document.createElement('strong'); r.textContent = p.preis;
+      b.appendChild(l); b.appendChild(r);
+      b.addEventListener('click', function () { starte(p.priceId, b); });
+      liste.appendChild(b);
+    });
+    function starte(priceId, knopf) {
+      if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = 'Molimo najprije označite kućicu.'; konsens.focus(); return; }
+      fehler.style.display = 'none';
+      var alt = knopf.innerHTML; knopf.disabled = true;
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
+        .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = 'Stranica za plaćanje nije se mogla otvoriti. Pokušajte ponovno.'; });
+    }
+  })();
+  </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "11f017e9a707466b9151921db6125dde"}'></script>
 </body>

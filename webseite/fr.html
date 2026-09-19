@@ -90,6 +90,7 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }
     .cta:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--tinte); }
+    .cta-sek { background: #fff; color: var(--amtsblau); }
     .stempel {
       display: inline-block; padding: 7px 14px; border: 2.5px solid var(--stempelrot);
       color: var(--stempelrot); font-family: 'Courier New', ui-monospace, monospace;
@@ -282,9 +283,12 @@
       <h1>Un courrier de l’administration allemande ?<br><span class="markiert">Enfin compréhensible.</span></h1>
       <p class="intro">Photographiez le courrier. BehördenKlar l’explique avec des mots simples — <strong>et en français</strong>. Avec tous les délais et une liste de choses à faire.</p>
       <div class="hero-fuss">
-        <a class="cta" href="#anmelden">Rejoindre la liste d’attente&nbsp;→</a>
-        <span class="stempel">Bientôt sur iPhone</span>
+        <a class="cta" href="/demo?sprache=fr">📷 Essayez gratuitement&nbsp;→</a>
+        <a class="cta cta-sek" href="#kaufen">Acheter du crédit</a>
       </div>
+      <p style="margin-top: 16px; font-size: 15.5px; color: var(--grau);">
+        2 analyses gratuites — sans compte. &nbsp;·&nbsp; <a href="#anmelden">Rejoindre la liste d’attente</a>
+      </p>
     </header>
 
     <section>
@@ -316,8 +320,26 @@
       </div>
     </section>
 
+    <section id="kaufen">
+      <h2>§ 3 &nbsp;Achetez du crédit et commencez tout de suite</h2>
+      <div class="antrag" style="border-color: var(--amtsblau);">
+        <h3>Faites expliquer d’autres courriers</h3>
+        <p>Pas besoin d’attendre : achetez du crédit et utilisez BehördenKlar directement dans le navigateur — sur tout appareil, sans application. Le crédit n’expire pas.</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15px;">
+          📧 Indiquez votre adresse e-mail au moment du paiement. Vous recevrez un lien d’accès personnel — grâce à lui votre crédit fonctionne sur tout appareil.
+        </p>
+        <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.5; cursor: pointer;">
+          <input type="checkbox" id="kaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
+          <span>Je demande expressément que la prestation commence immédiatement après l’achat et je sais que mon droit de rétractation s’éteint de ce fait. <a href="/agb.html" target="_blank">AGB</a> · <a href="/widerruf.html" target="_blank">Widerruf</a> (en allemand)</span>
+        </label>
+        <p id="kaufFehler" style="display: none; margin-top: 12px; color: #b3261e; font-size: 14px; font-weight: 600;"></p>
+        <p class="klein">🔒 Paiement sécurisé via Stripe. Sans TVA (§19 UStG). Prestataire : Webklar GbR — votre relevé indiquera « Webklar ».</p>
+      </div>
+    </section>
+
     <section id="anmelden">
-      <h2>§ 3 &nbsp;Accès anticipé</h2>
+      <h2>§ 4 &nbsp;Accès anticipé</h2>
       <div class="antrag">
         <p class="formular-kopf">Formulaire F-01 · Liste d’attente</p>
         <h3>Soyez parmi les premiers</h3>
@@ -335,7 +357,7 @@
     </section>
 
     <section>
-      <h2>§ 4 &nbsp;Questions fréquentes</h2>
+      <h2>§ 5 &nbsp;Questions fréquentes</h2>
       <details>
         <summary>Combien ça coûte ?</summary>
         <p>Les 3 premiers courriers sont gratuits (5 avec le code de la liste d’attente). Ensuite vous achetez du crédit : 5 analyses pour 2,99 € ou 15 pour 6,99 €. Sans abonnement et sans compte.</p>
@@ -356,6 +378,42 @@
       &nbsp;·&nbsp; <a href="datenschutz.html">Politique de confidentialité (en allemand)</a>
     </footer>
   </div>
+  <script>
+  (function () {
+    'use strict';
+    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var PAKETE = [
+      { priceId: 'price_1U6BNnBsRA1AOdnedGW5eefh', titel: '5', preis: '2,99 €' },
+      { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15', preis: '6,99 €', best: true }
+    ];
+    var liste = document.getElementById('paketListe');
+    var konsens = document.getElementById('kaufKonsens');
+    var fehler = document.getElementById('kaufFehler');
+    if (!liste) return;
+    konsens.addEventListener('change', function () { if (konsens.checked) fehler.style.display = 'none'; });
+    PAKETE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.className = 'cta'; b.type = 'button';
+      b.style.width = '100%'; b.style.display = 'flex';
+      b.style.justifyContent = 'space-between'; b.style.alignItems = 'center';
+      var l = document.createElement('span');
+      l.textContent = (p.best ? '⭐ ' : '') + p.titel + ' \u00D7 analyses';
+      var r = document.createElement('strong'); r.textContent = p.preis;
+      b.appendChild(l); b.appendChild(r);
+      b.addEventListener('click', function () { starte(p.priceId, b); });
+      liste.appendChild(b);
+    });
+    function starte(priceId, knopf) {
+      if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = 'Veuillez d’abord cocher la case.'; konsens.focus(); return; }
+      fehler.style.display = 'none';
+      var alt = knopf.innerHTML; knopf.disabled = true;
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
+        .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = 'La page de paiement n’a pas pu être ouverte. Réessayez.'; });
+    }
+  })();
+  </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "11f017e9a707466b9151921db6125dde"}'></script>
 </body>

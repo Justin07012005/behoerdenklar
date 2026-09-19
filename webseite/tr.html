@@ -90,6 +90,7 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }
     .cta:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--tinte); }
+    .cta-sek { background: #fff; color: var(--amtsblau); }
     .stempel {
       display: inline-block; padding: 7px 14px; border: 2.5px solid var(--stempelrot);
       color: var(--stempelrot); font-family: 'Courier New', ui-monospace, monospace;
@@ -282,9 +283,12 @@
       <h1>Alman dairesinden mektup mu geldi?<br><span class="markiert">Artık anlamak kolay.</span></h1>
       <p class="intro">Mektubun fotoğrafını çekin. BehördenKlar mektubu basit kelimelerle — <strong>ve Türkçe olarak</strong> — açıklar. Bütün süreler ve yapılacaklar listesi ile birlikte.</p>
       <div class="hero-fuss">
-        <a class="cta" href="#anmelden">Bekleme listesine katıl&nbsp;→</a>
-        <span class="stempel">Yakında iPhone'da</span>
+        <a class="cta" href="/demo?sprache=tr">📷 Hemen ücretsiz dene&nbsp;→</a>
+        <a class="cta cta-sek" href="#kaufen">Kontör al</a>
       </div>
+      <p style="margin-top: 16px; font-size: 15.5px; color: var(--grau);">
+        2 analiz ücretsiz — hesap gerekmez. &nbsp;·&nbsp; <a href="#anmelden">Bekleme listesine katıl</a>
+      </p>
     </header>
 
     <section>
@@ -316,8 +320,26 @@
       </div>
     </section>
 
+    <section id="kaufen">
+      <h2>§ 3 &nbsp;Kontör al ve hemen kullan</h2>
+      <div class="antrag" style="border-color: var(--amtsblau);">
+        <h3>Daha fazla mektup açıklatın</h3>
+        <p>Beklemenize gerek yok: Kontör alın ve BehördenKlar’ı tarayıcıda hemen kullanın — her cihazda, uygulama olmadan. Kontörünüz süresiz geçerlidir.</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15px;">
+          📧 Ödeme sırasında e-posta adresinizi girin. Kişisel erişim bağlantınızı alırsınız — böylece kontörünüzü her cihazda kullanabilirsiniz.
+        </p>
+        <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.5; cursor: pointer;">
+          <input type="checkbox" id="kaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
+          <span>Hizmetin satın alma sonrası hemen başlamasını açıkça talep ediyorum ve cayma hakkımın böylece sona erdiğini kabul ediyorum. <a href="/agb.html" target="_blank">AGB</a> · <a href="/widerruf.html" target="_blank">Widerruf</a> (Almanca)</span>
+        </label>
+        <p id="kaufFehler" style="display: none; margin-top: 12px; color: #b3261e; font-size: 14px; font-weight: 600;"></p>
+        <p class="klein">🔒 Stripe ile güvenli ödeme. KDV yok (§19 UStG). Sağlayıcı: Webklar GbR — hesap ekstrenizde „Webklar" görünür.</p>
+      </div>
+    </section>
+
     <section id="anmelden">
-      <h2>§ 3 &nbsp;Erken erişim</h2>
+      <h2>§ 4 &nbsp;Erken erişim</h2>
       <div class="antrag">
         <p class="formular-kopf">Form F-01 · Bekleme listesi</p>
         <h3>İlk kullananlardan olun</h3>
@@ -335,7 +357,7 @@
     </section>
 
     <section>
-      <h2>§ 4 &nbsp;Sık sorulan sorular</h2>
+      <h2>§ 5 &nbsp;Sık sorulan sorular</h2>
       <details>
         <summary>Ücreti ne kadar?</summary>
         <p>İlk 3 mektup ücretsiz (bekleme listesi koduyla 5). Sonrasında kontör satın alırsınız: 5 analiz 2,99 €, 15 analiz 6,99 €. Abonelik yok, hesap açmak yok.</p>
@@ -356,6 +378,42 @@
       &nbsp;·&nbsp; <a href="datenschutz.html">Gizlilik politikası (Almanca)</a>
     </footer>
   </div>
+  <script>
+  (function () {
+    'use strict';
+    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var PAKETE = [
+      { priceId: 'price_1U6BNnBsRA1AOdnedGW5eefh', titel: '5', preis: '2,99 €' },
+      { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15', preis: '6,99 €', best: true }
+    ];
+    var liste = document.getElementById('paketListe');
+    var konsens = document.getElementById('kaufKonsens');
+    var fehler = document.getElementById('kaufFehler');
+    if (!liste) return;
+    konsens.addEventListener('change', function () { if (konsens.checked) fehler.style.display = 'none'; });
+    PAKETE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.className = 'cta'; b.type = 'button';
+      b.style.width = '100%'; b.style.display = 'flex';
+      b.style.justifyContent = 'space-between'; b.style.alignItems = 'center';
+      var l = document.createElement('span');
+      l.textContent = (p.best ? '⭐ ' : '') + p.titel + ' \u00D7 analiz';
+      var r = document.createElement('strong'); r.textContent = p.preis;
+      b.appendChild(l); b.appendChild(r);
+      b.addEventListener('click', function () { starte(p.priceId, b); });
+      liste.appendChild(b);
+    });
+    function starte(priceId, knopf) {
+      if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = 'Lütfen önce kutucuğu işaretleyin.'; konsens.focus(); return; }
+      fehler.style.display = 'none';
+      var alt = knopf.innerHTML; knopf.disabled = true;
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
+        .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = 'Ödeme sayfası açılamadı. Lütfen tekrar deneyin.'; });
+    }
+  })();
+  </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "11f017e9a707466b9151921db6125dde"}'></script>
 </body>

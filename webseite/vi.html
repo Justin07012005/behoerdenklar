@@ -90,6 +90,7 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }
     .cta:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--tinte); }
+    .cta-sek { background: #fff; color: var(--amtsblau); }
     .stempel {
       display: inline-block; padding: 7px 14px; border: 2.5px solid var(--stempelrot);
       color: var(--stempelrot); font-family: 'Courier New', ui-monospace, monospace;
@@ -282,9 +283,12 @@
       <h1>Thư từ một cơ quan Đức?<br><span class="markiert">Cuối cùng cũng hiểu được.</span></h1>
       <p class="intro">Chụp ảnh lá thư. BehördenKlar giải thích bằng lời đơn giản — <strong>và bằng tiếng Việt</strong>. Kèm mọi thời hạn và danh sách việc cần làm.</p>
       <div class="hero-fuss">
-        <a class="cta" href="#anmelden">Vào danh sách chờ&nbsp;→</a>
-        <span class="stempel">Sắp có trên iPhone</span>
+        <a class="cta" href="/demo?sprache=vi">📷 Dùng thử miễn phí&nbsp;→</a>
+        <a class="cta cta-sek" href="#kaufen">Mua lượt</a>
       </div>
+      <p style="margin-top: 16px; font-size: 15.5px; color: var(--grau);">
+        2 lần phân tích miễn phí — không cần tài khoản. &nbsp;·&nbsp; <a href="#anmelden">Vào danh sách chờ</a>
+      </p>
     </header>
 
     <section>
@@ -316,8 +320,26 @@
       </div>
     </section>
 
+    <section id="kaufen">
+      <h2>§ 3 &nbsp;Mua lượt và bắt đầu ngay</h2>
+      <div class="antrag" style="border-color: var(--amtsblau);">
+        <h3>Giải thích thêm nhiều thư</h3>
+        <p>Bạn không phải chờ: mua lượt và dùng BehördenKlar ngay trong trình duyệt — trên mọi thiết bị, không cần ứng dụng. Lượt không hết hạn.</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15px;">
+          📧 Hãy nhập địa chỉ email khi thanh toán. Bạn sẽ nhận được liên kết truy cập cá nhân — với nó lượt của bạn dùng được trên mọi thiết bị.
+        </p>
+        <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.5; cursor: pointer;">
+          <input type="checkbox" id="kaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
+          <span>Tôi yêu cầu rõ ràng rằng dịch vụ bắt đầu ngay sau khi mua và tôi biết rằng quyền rút lui của tôi chấm dứt vì điều đó. <a href="/agb.html" target="_blank">AGB</a> · <a href="/widerruf.html" target="_blank">Widerruf</a> (bằng tiếng Đức)</span>
+        </label>
+        <p id="kaufFehler" style="display: none; margin-top: 12px; color: #b3261e; font-size: 14px; font-weight: 600;"></p>
+        <p class="klein">🔒 Thanh toán an toàn qua Stripe. Không VAT (§19 UStG). Nhà cung cấp: Webklar GbR — sao kê của bạn sẽ hiển thị „Webklar".</p>
+      </div>
+    </section>
+
     <section id="anmelden">
-      <h2>§ 3 &nbsp;Truy cập sớm</h2>
+      <h2>§ 4 &nbsp;Truy cập sớm</h2>
       <div class="antrag">
         <p class="formular-kopf">Mẫu F-01 · Danh sách chờ</p>
         <h3>Hãy là người đầu tiên</h3>
@@ -335,7 +357,7 @@
     </section>
 
     <section>
-      <h2>§ 4 &nbsp;Câu hỏi thường gặp</h2>
+      <h2>§ 5 &nbsp;Câu hỏi thường gặp</h2>
       <details>
         <summary>Giá bao nhiêu?</summary>
         <p>3 lá thư đầu tiên miễn phí (5 nếu có mã từ danh sách chờ). Sau đó bạn mua lượt: 5 lần phân tích 2,99 €, 15 lần 6,99 €. Không thuê bao, không cần tài khoản.</p>
@@ -356,6 +378,42 @@
       &nbsp;·&nbsp; <a href="datenschutz.html">Chính sách bảo mật (tiếng Đức)</a>
     </footer>
   </div>
+  <script>
+  (function () {
+    'use strict';
+    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var PAKETE = [
+      { priceId: 'price_1U6BNnBsRA1AOdnedGW5eefh', titel: '5', preis: '2,99 €' },
+      { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15', preis: '6,99 €', best: true }
+    ];
+    var liste = document.getElementById('paketListe');
+    var konsens = document.getElementById('kaufKonsens');
+    var fehler = document.getElementById('kaufFehler');
+    if (!liste) return;
+    konsens.addEventListener('change', function () { if (konsens.checked) fehler.style.display = 'none'; });
+    PAKETE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.className = 'cta'; b.type = 'button';
+      b.style.width = '100%'; b.style.display = 'flex';
+      b.style.justifyContent = 'space-between'; b.style.alignItems = 'center';
+      var l = document.createElement('span');
+      l.textContent = (p.best ? '⭐ ' : '') + p.titel + ' \u00D7 lần phân tích';
+      var r = document.createElement('strong'); r.textContent = p.preis;
+      b.appendChild(l); b.appendChild(r);
+      b.addEventListener('click', function () { starte(p.priceId, b); });
+      liste.appendChild(b);
+    });
+    function starte(priceId, knopf) {
+      if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = 'Vui lòng đánh dấu ô trước.'; konsens.focus(); return; }
+      fehler.style.display = 'none';
+      var alt = knopf.innerHTML; knopf.disabled = true;
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
+        .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = 'Không mở được trang thanh toán. Vui lòng thử lại.'; });
+    }
+  })();
+  </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "11f017e9a707466b9151921db6125dde"}'></script>
 </body>

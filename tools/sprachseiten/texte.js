@@ -43,6 +43,19 @@ const SPRACHEN = [
 const TEXTE = {};
 
 TEXTE.tr = {
+  ctaDemo: "Hemen ücretsiz dene",
+  ctaKauf: "Kontör al",
+  demoHinweis: "2 analiz ücretsiz — hesap gerekmez.",
+  kaufTitel: "Kontör al ve hemen kullan",
+  kaufH3: "Daha fazla mektup açıklatın",
+  kaufText: "Beklemenize gerek yok: Kontör alın ve BehördenKlar’ı tarayıcıda hemen kullanın — her cihazda, uygulama olmadan. Kontörünüz süresiz geçerlidir.",
+  kaufEmail: "Ödeme sırasında e-posta adresinizi girin. Kişisel erişim bağlantınızı alırsınız — böylece kontörünüzü her cihazda kullanabilirsiniz.",
+  kaufKonsens: "Hizmetin satın alma sonrası hemen başlamasını açıkça talep ediyorum ve cayma hakkımın böylece sona erdiğini kabul ediyorum.",
+  kaufSicher: "Stripe ile güvenli ödeme. KDV yok (§19 UStG). Sağlayıcı: Webklar GbR — hesap ekstrenizde „Webklar\" görünür.",
+  paketWort: "analiz",
+  aufDeutsch: "Almanca",
+  kaufFehlerHaken: "Lütfen önce kutucuğu işaretleyin.",
+  kaufFehlerAllg: "Ödeme sayfası açılamadı. Lütfen tekrar deneyin.",
   s4Titel: "Sık sorulan sorular",
   faq: [
     { f: "Ücreti ne kadar?", a: "İlk 3 mektup ücretsiz (bekleme listesi koduyla 5). Sonrasında kontör satın alırsınız: 5 analiz 2,99 €, 15 analiz 6,99 €. Abonelik yok, hesap açmak yok." },
@@ -74,6 +87,19 @@ TEXTE.tr = {
 };
 
 TEXTE.ar = {
+  ctaDemo: "جرّب مجاناً الآن",
+  ctaKauf: "شراء رصيد",
+  demoHinweis: "تحليلان مجاناً — بدون حساب.",
+  kaufTitel: "اشترِ رصيداً واستخدمه فوراً",
+  kaufH3: "اشرح المزيد من الرسائل",
+  kaufText: "لا داعي للانتظار: اشترِ رصيداً واستخدم BehördenKlar مباشرة في المتصفح — على أي جهاز وبدون تطبيق. رصيدك لا ينتهي.",
+  kaufEmail: "أدخل بريدك الإلكتروني عند الدفع. ستحصل على رابط وصول شخصي — به تستخدم رصيدك على أي جهاز.",
+  kaufKonsens: "أطلب صراحةً أن تبدأ الخدمة فوراً بعد الشراء، وأعلم أن حقي في الانسحاب يسقط بذلك.",
+  kaufSicher: "دفع آمن عبر Stripe. بدون ضريبة قيمة مضافة (§19 UStG). المزوّد: Webklar GbR — يظهر في كشف حسابك „Webklar\".",
+  paketWort: "تحليل",
+  aufDeutsch: "بالألمانية",
+  kaufFehlerHaken: "يرجى تأكيد المربع أولاً.",
+  kaufFehlerAllg: "تعذّر فتح صفحة الدفع. يرجى المحاولة مرة أخرى.",
   s4Titel: "الأسئلة الشائعة",
   faq: [
     { f: "كم التكلفة؟", a: "أول 3 رسائل مجاناً (5 مع رمز قائمة الانتظار). بعد ذلك تشتري رصيداً: 5 تحليلات بـ 2,99 يورو أو 15 بـ 6,99 يورو. بدون اشتراك وبدون حساب." },
@@ -105,6 +131,19 @@ TEXTE.ar = {
 };
 
 TEXTE.ru = {
+  ctaDemo: "Попробовать бесплатно",
+  ctaKauf: "Купить баланс",
+  demoHinweis: "2 разбора бесплатно — без регистрации.",
+  kaufTitel: "Купите баланс и начните сразу",
+  kaufH3: "Разобрать больше писем",
+  kaufText: "Ждать не нужно: купите баланс и пользуйтесь BehördenKlar прямо в браузере — на любом устройстве, без приложения. Баланс не сгорает.",
+  kaufEmail: "Укажите при оплате адрес электронной почты. Вы получите персональную ссылку доступа — с ней баланс работает на любом устройстве.",
+  kaufKonsens: "Я прямо требую, чтобы услуга началась сразу после покупки, и мне известно, что тем самым моё право на отказ прекращается.",
+  kaufSicher: "Безопасная оплата через Stripe. Без НДС (§19 UStG). Поставщик: Webklar GbR — в выписке появится «Webklar».",
+  paketWort: "разборов",
+  aufDeutsch: "на немецком",
+  kaufFehlerHaken: "Пожалуйста, сначала отметьте галочку.",
+  kaufFehlerAllg: "Страницу оплаты не удалось открыть. Попробуйте ещё раз.",
   s4Titel: "Частые вопросы",
   faq: [
     { f: "Сколько это стоит?", a: "Первые 3 письма бесплатно (5 с кодом из списка ожидания). Дальше вы покупаете баланс: 5 разборов за 2,99 €, 15 за 6,99 €. Без подписки и без учётной записи." },
@@ -136,6 +175,19 @@ TEXTE.ru = {
 };
 
 TEXTE.uk = {
+  ctaDemo: "Спробувати безкоштовно",
+  ctaKauf: "Купити баланс",
+  demoHinweis: "2 аналізи безкоштовно — без реєстрації.",
+  kaufTitel: "Купіть баланс і почніть одразу",
+  kaufH3: "Проаналізувати більше листів",
+  kaufText: "Чекати не потрібно: купіть баланс і користуйтеся BehördenKlar прямо у браузері — на будь-якому пристрої, без застосунку. Баланс не згорає.",
+  kaufEmail: "Вкажіть під час оплати адресу електронної пошти. Ви отримаєте персональне посилання доступу — з ним баланс працює на будь-якому пристрої.",
+  kaufKonsens: "Я прямо вимагаю, щоб послуга почалася одразу після купівлі, і мені відомо, що моє право на відмову цим припиняється.",
+  kaufSicher: "Безпечна оплата через Stripe. Без ПДВ (§19 UStG). Постачальник: Webklar GbR — у виписці з’явиться «Webklar».",
+  paketWort: "аналізів",
+  aufDeutsch: "німецькою",
+  kaufFehlerHaken: "Будь ласка, спершу поставте галочку.",
+  kaufFehlerAllg: "Не вдалося відкрити сторінку оплати. Спробуйте ще раз.",
   s4Titel: "Часті запитання",
   faq: [
     { f: "Скільки це коштує?", a: "Перші 3 листи безкоштовно (5 з кодом зі списку очікування). Далі ви купуєте баланс: 5 аналізів за 2,99 €, 15 за 6,99 €. Без підписки й без облікового запису." },
@@ -167,6 +219,19 @@ TEXTE.uk = {
 };
 
 TEXTE.pl = {
+  ctaDemo: "Wypróbuj za darmo",
+  ctaKauf: "Kup doładowanie",
+  demoHinweis: "2 analizy za darmo — bez konta.",
+  kaufTitel: "Kup doładowanie i zacznij od razu",
+  kaufH3: "Wyjaśnij więcej pism",
+  kaufText: "Nie musisz czekać: kup doładowanie i korzystaj z BehördenKlar od razu w przeglądarce — na każdym urządzeniu, bez aplikacji. Doładowanie nie wygasa.",
+  kaufEmail: "Podaj przy płatności adres e-mail. Otrzymasz osobisty link dostępu — dzięki niemu doładowanie działa na każdym urządzeniu.",
+  kaufKonsens: "Wyraźnie żądam, aby usługa rozpoczęła się natychmiast po zakupie, i wiem, że tym samym tracę prawo odstąpienia.",
+  kaufSicher: "Bezpieczna płatność przez Stripe. Bez VAT (§19 UStG). Dostawca: Webklar GbR — na wyciągu pojawi się „Webklar\".",
+  paketWort: "analiz",
+  aufDeutsch: "po niemiecku",
+  kaufFehlerHaken: "Najpierw zaznacz pole.",
+  kaufFehlerAllg: "Nie udało się otworzyć strony płatności. Spróbuj ponownie.",
   s4Titel: "Częste pytania",
   faq: [
     { f: "Ile to kosztuje?", a: "Pierwsze 3 pisma za darmo (5 z kodem z listy oczekujących). Potem kupujesz doładowanie: 5 analiz za 2,99 €, 15 za 6,99 €. Bez abonamentu i bez konta." },
@@ -198,6 +263,19 @@ TEXTE.pl = {
 };
 
 TEXTE.ro = {
+  ctaDemo: "Încearcă gratuit",
+  ctaKauf: "Cumpără credit",
+  demoHinweis: "2 analize gratuite — fără cont.",
+  kaufTitel: "Cumpără credit și începe imediat",
+  kaufH3: "Explică mai multe scrisori",
+  kaufText: "Nu trebuie să aștepți: cumpără credit și folosește BehördenKlar direct în browser — pe orice dispozitiv, fără aplicație. Creditul nu expiră.",
+  kaufEmail: "Introdu la plată adresa de e-mail. Primești un link personal de acces — cu el creditul funcționează pe orice dispozitiv.",
+  kaufKonsens: "Solicit în mod expres ca serviciul să înceapă imediat după cumpărare și știu că astfel dreptul meu de retragere se stinge.",
+  kaufSicher: "Plată sigură prin Stripe. Fără TVA (§19 UStG). Furnizor: Webklar GbR — pe extras apare „Webklar\".",
+  paketWort: "analize",
+  aufDeutsch: "în germană",
+  kaufFehlerHaken: "Te rugăm să bifezi mai întâi căsuța.",
+  kaufFehlerAllg: "Pagina de plată nu a putut fi deschisă. Încearcă din nou.",
   s4Titel: "Întrebări frecvente",
   faq: [
     { f: "Cât costă?", a: "Primele 3 scrisori sunt gratuite (5 cu codul din lista de așteptare). Apoi cumperi credit: 5 analize la 2,99 €, 15 la 6,99 €. Fără abonament și fără cont." },
@@ -229,6 +307,19 @@ TEXTE.ro = {
 };
 
 TEXTE.en = {
+  ctaDemo: "Try it free now",
+  ctaKauf: "Buy credit",
+  demoHinweis: "2 analyses free — no account needed.",
+  kaufTitel: "Buy credit and start right away",
+  kaufH3: "Get more letters explained",
+  kaufText: "No need to wait: buy credit and use BehördenKlar right here in your browser — on any device, no app. Your credit never expires.",
+  kaufEmail: "Enter your email address when paying. You will get a personal access link — with it your credit works on any device.",
+  kaufKonsens: "I expressly request that the service starts immediately after purchase, and I understand that my right of withdrawal ends as a result.",
+  kaufSicher: "Secure payment via Stripe. No VAT (§19 UStG). Provider: Webklar GbR — your bank statement will show “Webklar”.",
+  paketWort: "analyses",
+  aufDeutsch: "in German",
+  kaufFehlerHaken: "Please tick the box first.",
+  kaufFehlerAllg: "The payment page could not be opened. Please try again.",
   s4Titel: "Frequently asked questions",
   faq: [
     { f: "What does it cost?", a: "Your first 3 letters are free (5 with the waiting-list code). After that you buy credit: 5 analyses for €2.99 or 15 for €6.99. No subscription, no account." },
@@ -260,6 +351,19 @@ TEXTE.en = {
 };
 
 TEXTE.fa = {
+  ctaDemo: "همین حالا رایگان امتحان کنید",
+  ctaKauf: "خرید اعتبار",
+  demoHinweis: "۲ تحلیل رایگان — بدون حساب کاربری.",
+  kaufTitel: "اعتبار بخرید و فوراً شروع کنید",
+  kaufH3: "نامه‌های بیشتری را توضیح دهید",
+  kaufText: "لازم نیست صبر کنید: اعتبار بخرید و BehördenKlar را همین‌جا در مرورگر استفاده کنید — روی هر دستگاهی، بدون برنامه. اعتبار شما منقضی نمی‌شود.",
+  kaufEmail: "هنگام پرداخت نشانی ایمیل خود را وارد کنید. یک پیوند دسترسی شخصی دریافت می‌کنید — با آن اعتبارتان روی هر دستگاهی کار می‌کند.",
+  kaufKonsens: "صراحتاً درخواست می‌کنم خدمات بلافاصله پس از خرید آغاز شود و می‌دانم که حق انصراف من با این کار از بین می‌رود.",
+  kaufSicher: "پرداخت امن از طریق Stripe. بدون مالیات بر ارزش افزوده (§19 UStG). ارائه‌دهنده: Webklar GbR — در صورتحساب شما «Webklar» نمایش داده می‌شود.",
+  paketWort: "تحلیل",
+  aufDeutsch: "به آلمانی",
+  kaufFehlerHaken: "لطفاً ابتدا تیک را بزنید.",
+  kaufFehlerAllg: "صفحه پرداخت باز نشد. لطفاً دوباره تلاش کنید.",
   s4Titel: "پرسش‌های پرتکرار",
   faq: [
     { f: "هزینه آن چقدر است؟", a: "سه نامه اول رایگان است (با کد فهرست انتظار ۵ نامه). پس از آن اعتبار می‌خرید: ۵ تحلیل با ۲٫۹۹ یورو یا ۱۵ تحلیل با ۶٫۹۹ یورو. بدون اشتراک و بدون حساب کاربری." },
@@ -291,6 +395,19 @@ TEXTE.fa = {
 };
 
 TEXTE.ku = {
+  ctaDemo: "Niha belaş biceribîne",
+  ctaKauf: "Kredî bikire",
+  demoHinweis: "2 analîz belaş — bê hesab.",
+  kaufTitel: "Kredî bikire û tavilê dest pê bike",
+  kaufH3: "Zêdetir nameyan rave bike",
+  kaufText: "Ne hewce ye tu li bendê bimînî: kredî bikire û BehördenKlar rasterast di gerokê de bi kar bîne — li ser her amûrê, bê sepan. Krediya te bi dem re naçe.",
+  kaufEmail: "Dema dravdanê navnîşana e-nameyê xwe binivîse. Tu girêdaneke gihîştinê ya kesane digirî — bi wê krediya te li ser her amûrê dixebite.",
+  kaufKonsens: "Ez bi eşkereyî dixwazim ku xizmet tavilê piştî kirînê dest pê bike û dizanim ku mafê min ê vekişînê bi vê yekê diqede.",
+  kaufSicher: "Dravdana ewle bi Stripe. Bê VAT (§19 UStG). Peydakar: Webklar GbR — di rapora hesabê de „Webklar\" xuya dibe.",
+  paketWort: "analîz",
+  aufDeutsch: "bi almanî",
+  kaufFehlerHaken: "Ji kerema xwe pêşî qutîkê nîşan bike.",
+  kaufFehlerAllg: "Rûpela dravdanê venebû. Ji kerema xwe dîsa biceribîne.",
   s4Titel: "Pirsên pir tên kirin",
   faq: [
     { f: "Ew çiqas dike?", a: "Sê nameyên pêşîn belaş in (bi koda lîsteya bendewariyê 5). Piştre tu krediyê dikirî: 5 analîz bi 2,99 €, 15 bi 6,99 €. Bê abone, bê hesab." },
@@ -322,6 +439,19 @@ TEXTE.ku = {
 };
 
 TEXTE.bg = {
+  ctaDemo: "Опитайте безплатно",
+  ctaKauf: "Купете кредит",
+  demoHinweis: "2 анализа безплатно — без регистрация.",
+  kaufTitel: "Купете кредит и започнете веднага",
+  kaufH3: "Обяснете още писма",
+  kaufText: "Не е нужно да чакате: купете кредит и използвайте BehördenKlar директно в браузъра — на всяко устройство, без приложение. Кредитът не изтича.",
+  kaufEmail: "Въведете при плащането имейл адрес. Ще получите личен линк за достъп — с него кредитът работи на всяко устройство.",
+  kaufKonsens: "Изрично изисквам услугата да започне веднага след покупката и знам, че с това правото ми на отказ отпада.",
+  kaufSicher: "Сигурно плащане чрез Stripe. Без ДДС (§19 UStG). Доставчик: Webklar GbR — в извлечението ще се появи „Webklar\".",
+  paketWort: "анализа",
+  aufDeutsch: "на немски",
+  kaufFehlerHaken: "Моля, първо отбележете полето.",
+  kaufFehlerAllg: "Страницата за плащане не можа да се отвори. Опитайте отново.",
   s4Titel: "Често задавани въпроси",
   faq: [
     { f: "Колко струва?", a: "Първите 3 писма са безплатни (5 с кода от списъка на чакащите). След това купувате кредит: 5 анализа за 2,99 €, 15 за 6,99 €. Без абонамент и без регистрация." },
@@ -353,6 +483,19 @@ TEXTE.bg = {
 };
 
 TEXTE.hr = {
+  ctaDemo: "Isprobajte besplatno",
+  ctaKauf: "Kupite bodove",
+  demoHinweis: "2 analize besplatno — bez računa.",
+  kaufTitel: "Kupite bodove i počnite odmah",
+  kaufH3: "Objasnite više pisama",
+  kaufText: "Ne morate čekati: kupite bodove i koristite BehördenKlar odmah u pregledniku — na svakom uređaju, bez aplikacije. Bodovi ne istječu.",
+  kaufEmail: "Pri plaćanju unesite e-mail adresu. Dobit ćete osobnu poveznicu za pristup — s njom bodovi rade na svakom uređaju.",
+  kaufKonsens: "Izričito zahtijevam da usluga započne odmah nakon kupnje i znam da time prestaje moje pravo na odustajanje.",
+  kaufSicher: "Sigurno plaćanje putem Stripea. Bez PDV-a (§19 UStG). Pružatelj: Webklar GbR — na izvodu će pisati „Webklar\".",
+  paketWort: "analiza",
+  aufDeutsch: "na njemačkom",
+  kaufFehlerHaken: "Molimo najprije označite kućicu.",
+  kaufFehlerAllg: "Stranica za plaćanje nije se mogla otvoriti. Pokušajte ponovno.",
   s4Titel: "Česta pitanja",
   faq: [
     { f: "Koliko košta?", a: "Prva 3 pisma su besplatna (5 s kodom s liste čekanja). Zatim kupujete bodove: 5 analiza za 2,99 €, 15 za 6,99 €. Bez pretplate i bez računa." },
@@ -384,6 +527,19 @@ TEXTE.hr = {
 };
 
 TEXTE.sr = {
+  ctaDemo: "Испробајте бесплатно",
+  ctaKauf: "Купите бодове",
+  demoHinweis: "2 анализе бесплатно — без налога.",
+  kaufTitel: "Купите бодове и почните одмах",
+  kaufH3: "Објасните више писама",
+  kaufText: "Не морате да чекате: купите бодове и користите BehördenKlar одмах у прегледачу — на сваком уређају, без апликације. Бодови не истичу.",
+  kaufEmail: "При плаћању унесите имејл адресу. Добићете личну везу за приступ — с њом бодови раде на сваком уређају.",
+  kaufKonsens: "Изричито захтевам да услуга почне одмах након куповине и знам да тиме престаје моје право на одустајање.",
+  kaufSicher: "Сигурно плаћање преко Stripe-а. Без ПДВ-а (§19 UStG). Пружалац: Webklar GbR — на изводу ће писати „Webklar\".",
+  paketWort: "анализа",
+  aufDeutsch: "на немачком",
+  kaufFehlerHaken: "Молимо најпре означите поље.",
+  kaufFehlerAllg: "Страница за плаћање није могла да се отвори. Покушајте поново.",
   s4Titel: "Честа питања",
   faq: [
     { f: "Колико кошта?", a: "Прва 3 писма су бесплатна (5 са кодом са листе чекања). Затим купујете бодове: 5 анализа за 2,99 €, 15 за 6,99 €. Без претплате и без налога." },
@@ -415,6 +571,19 @@ TEXTE.sr = {
 };
 
 TEXTE.bs = {
+  ctaDemo: "Isprobajte besplatno",
+  ctaKauf: "Kupite bodove",
+  demoHinweis: "2 analize besplatno — bez računa.",
+  kaufTitel: "Kupite bodove i počnite odmah",
+  kaufH3: "Objasnite više pisama",
+  kaufText: "Ne morate čekati: kupite bodove i koristite BehördenKlar odmah u pregledniku — na svakom uređaju, bez aplikacije. Bodovi ne ističu.",
+  kaufEmail: "Pri plaćanju unesite e-mail adresu. Dobit ćete lični link za pristup — s njim bodovi rade na svakom uređaju.",
+  kaufKonsens: "Izričito zahtijevam da usluga počne odmah nakon kupovine i znam da time prestaje moje pravo na odustajanje.",
+  kaufSicher: "Sigurno plaćanje putem Stripea. Bez PDV-a (§19 UStG). Pružalac: Webklar GbR — na izvodu će pisati „Webklar\".",
+  paketWort: "analiza",
+  aufDeutsch: "na njemačkom",
+  kaufFehlerHaken: "Molimo najprije označite polje.",
+  kaufFehlerAllg: "Stranica za plaćanje nije se mogla otvoriti. Pokušajte ponovo.",
   s4Titel: "Česta pitanja",
   faq: [
     { f: "Koliko košta?", a: "Prva 3 pisma su besplatna (5 s kodom s liste čekanja). Zatim kupujete bodove: 5 analiza za 2,99 €, 15 za 6,99 €. Bez pretplate i bez računa." },
@@ -446,6 +615,19 @@ TEXTE.bs = {
 };
 
 TEXTE.sq = {
+  ctaDemo: "Provoni falas tani",
+  ctaKauf: "Blini kredi",
+  demoHinweis: "2 analiza falas — pa llogari.",
+  kaufTitel: "Blini kredi dhe filloni menjëherë",
+  kaufH3: "Shpjegoni më shumë letra",
+  kaufText: "Nuk keni pse të prisni: blini kredi dhe përdorni BehördenKlar drejtpërdrejt në shfletues — në çdo pajisje, pa aplikacion. Kredia nuk skadon.",
+  kaufEmail: "Gjatë pagesës vendosni adresën e emailit. Merrni një lidhje personale hyrjeje — me të kredia funksionon në çdo pajisje.",
+  kaufKonsens: "Kërkoj shprehimisht që shërbimi të fillojë menjëherë pas blerjes dhe e di se e drejta ime e tërheqjes shuhet me këtë.",
+  kaufSicher: "Pagesë e sigurt përmes Stripe. Pa TVSH (§19 UStG). Ofruesi: Webklar GbR — në pasqyrën tuaj shfaqet „Webklar\".",
+  paketWort: "analiza",
+  aufDeutsch: "në gjermanisht",
+  kaufFehlerHaken: "Ju lutemi shënoni fillimisht kutinë.",
+  kaufFehlerAllg: "Faqja e pagesës nuk u hap. Ju lutemi provoni sërish.",
   s4Titel: "Pyetje të shpeshta",
   faq: [
     { f: "Sa kushton?", a: "3 letrat e para janë falas (5 me kodin e listës së pritjes). Më pas blini kredi: 5 analiza për 2,99 €, 15 për 6,99 €. Pa abonim dhe pa llogari." },
@@ -477,6 +659,19 @@ TEXTE.sq = {
 };
 
 TEXTE.it = {
+  ctaDemo: "Prova subito gratis",
+  ctaKauf: "Acquista credito",
+  demoHinweis: "2 analisi gratuite — senza account.",
+  kaufTitel: "Acquista credito e inizia subito",
+  kaufH3: "Fatti spiegare altre lettere",
+  kaufText: "Non devi aspettare: acquista credito e usa BehördenKlar direttamente nel browser — su qualsiasi dispositivo, senza app. Il credito non scade.",
+  kaufEmail: "Inserisci il tuo indirizzo email al pagamento. Riceverai un link di accesso personale — con quello il credito funziona su ogni dispositivo.",
+  kaufKonsens: "Richiedo espressamente che il servizio inizi subito dopo l’acquisto e sono consapevole che il mio diritto di recesso si estingue.",
+  kaufSicher: "Pagamento sicuro tramite Stripe. Senza IVA (§19 UStG). Fornitore: Webklar GbR — sull’estratto conto comparirà „Webklar\".",
+  paketWort: "analisi",
+  aufDeutsch: "in tedesco",
+  kaufFehlerHaken: "Spunta prima la casella.",
+  kaufFehlerAllg: "Non è stato possibile aprire la pagina di pagamento. Riprova.",
   s4Titel: "Domande frequenti",
   faq: [
     { f: "Quanto costa?", a: "Le prime 3 lettere sono gratis (5 con il codice della lista d’attesa). Poi acquisti credito: 5 analisi a 2,99 € o 15 a 6,99 €. Nessun abbonamento, nessun account." },
@@ -508,6 +703,19 @@ TEXTE.it = {
 };
 
 TEXTE.el = {
+  ctaDemo: "Δοκιμάστε δωρεάν",
+  ctaKauf: "Αγορά μονάδων",
+  demoHinweis: "2 αναλύσεις δωρεάν — χωρίς λογαριασμό.",
+  kaufTitel: "Αγοράστε μονάδες και ξεκινήστε αμέσως",
+  kaufH3: "Εξηγήστε περισσότερα γράμματα",
+  kaufText: "Δεν χρειάζεται να περιμένετε: αγοράστε μονάδες και χρησιμοποιήστε το BehördenKlar απευθείας στο πρόγραμμα περιήγησης — σε κάθε συσκευή, χωρίς εφαρμογή. Οι μονάδες δεν λήγουν.",
+  kaufEmail: "Κατά την πληρωμή δώστε τη διεύθυνση email σας. Θα λάβετε προσωπικό σύνδεσμο πρόσβασης — μαζί του οι μονάδες λειτουργούν σε κάθε συσκευή.",
+  kaufKonsens: "Ζητώ ρητά να ξεκινήσει η υπηρεσία αμέσως μετά την αγορά και γνωρίζω ότι έτσι παύει το δικαίωμα υπαναχώρησής μου.",
+  kaufSicher: "Ασφαλής πληρωμή μέσω Stripe. Χωρίς ΦΠΑ (§19 UStG). Πάροχος: Webklar GbR — στο αντίγραφο κίνησης θα εμφανιστεί „Webklar\".",
+  paketWort: "αναλύσεις",
+  aufDeutsch: "στα γερμανικά",
+  kaufFehlerHaken: "Τσεκάρετε πρώτα το πλαίσιο.",
+  kaufFehlerAllg: "Η σελίδα πληρωμής δεν άνοιξε. Δοκιμάστε ξανά.",
   s4Titel: "Συχνές ερωτήσεις",
   faq: [
     { f: "Πόσο κοστίζει;", a: "Τα πρώτα 3 γράμματα είναι δωρεάν (5 με τον κωδικό της λίστας αναμονής). Έπειτα αγοράζετε μονάδες: 5 αναλύσεις 2,99 € ή 15 για 6,99 €. Χωρίς συνδρομή, χωρίς λογαριασμό." },
@@ -539,6 +747,19 @@ TEXTE.el = {
 };
 
 TEXTE.es = {
+  ctaDemo: "Pruébalo gratis ahora",
+  ctaKauf: "Comprar saldo",
+  demoHinweis: "2 análisis gratis — sin cuenta.",
+  kaufTitel: "Compra saldo y empieza enseguida",
+  kaufH3: "Haz que te expliquen más cartas",
+  kaufText: "No hace falta esperar: compra saldo y usa BehördenKlar directamente en el navegador — en cualquier dispositivo, sin app. El saldo no caduca.",
+  kaufEmail: "Indica tu correo al pagar. Recibirás un enlace de acceso personal — con él tu saldo funciona en cualquier dispositivo.",
+  kaufKonsens: "Solicito expresamente que el servicio comience inmediatamente tras la compra y sé que con ello se extingue mi derecho de desistimiento.",
+  kaufSicher: "Pago seguro con Stripe. Sin IVA (§19 UStG). Proveedor: Webklar GbR — en tu extracto aparecerá „Webklar\".",
+  paketWort: "análisis",
+  aufDeutsch: "en alemán",
+  kaufFehlerHaken: "Marca primero la casilla.",
+  kaufFehlerAllg: "No se pudo abrir la página de pago. Inténtalo de nuevo.",
   s4Titel: "Preguntas frecuentes",
   faq: [
     { f: "¿Cuánto cuesta?", a: "Las primeras 3 cartas son gratis (5 con el código de la lista de espera). Después compras saldo: 5 análisis por 2,99 € o 15 por 6,99 €. Sin suscripción y sin cuenta." },
@@ -570,6 +791,19 @@ TEXTE.es = {
 };
 
 TEXTE.pt = {
+  ctaDemo: "Experimente grátis agora",
+  ctaKauf: "Comprar saldo",
+  demoHinweis: "2 análises grátis — sem conta.",
+  kaufTitel: "Compre saldo e comece já",
+  kaufH3: "Peça a explicação de mais cartas",
+  kaufText: "Não precisa de esperar: compre saldo e use o BehördenKlar diretamente no navegador — em qualquer dispositivo, sem aplicação. O saldo não expira.",
+  kaufEmail: "Indique o seu e-mail ao pagar. Receberá uma ligação de acesso pessoal — com ela o saldo funciona em qualquer dispositivo.",
+  kaufKonsens: "Solicito expressamente que o serviço comece imediatamente após a compra e sei que o meu direito de livre resolução se extingue com isso.",
+  kaufSicher: "Pagamento seguro através da Stripe. Sem IVA (§19 UStG). Fornecedor: Webklar GbR — no seu extrato aparecerá „Webklar\".",
+  paketWort: "análises",
+  aufDeutsch: "em alemão",
+  kaufFehlerHaken: "Assinale primeiro a caixa.",
+  kaufFehlerAllg: "Não foi possível abrir a página de pagamento. Tente novamente.",
   s4Titel: "Perguntas frequentes",
   faq: [
     { f: "Quanto custa?", a: "As primeiras 3 cartas são grátis (5 com o código da lista de espera). Depois compra saldo: 5 análises por 2,99 € ou 15 por 6,99 €. Sem assinatura e sem conta." },
@@ -601,6 +835,19 @@ TEXTE.pt = {
 };
 
 TEXTE.fr = {
+  ctaDemo: "Essayez gratuitement",
+  ctaKauf: "Acheter du crédit",
+  demoHinweis: "2 analyses gratuites — sans compte.",
+  kaufTitel: "Achetez du crédit et commencez tout de suite",
+  kaufH3: "Faites expliquer d’autres courriers",
+  kaufText: "Pas besoin d’attendre : achetez du crédit et utilisez BehördenKlar directement dans le navigateur — sur tout appareil, sans application. Le crédit n’expire pas.",
+  kaufEmail: "Indiquez votre adresse e-mail au moment du paiement. Vous recevrez un lien d’accès personnel — grâce à lui votre crédit fonctionne sur tout appareil.",
+  kaufKonsens: "Je demande expressément que la prestation commence immédiatement après l’achat et je sais que mon droit de rétractation s’éteint de ce fait.",
+  kaufSicher: "Paiement sécurisé via Stripe. Sans TVA (§19 UStG). Prestataire : Webklar GbR — votre relevé indiquera « Webklar ».",
+  paketWort: "analyses",
+  aufDeutsch: "en allemand",
+  kaufFehlerHaken: "Veuillez d’abord cocher la case.",
+  kaufFehlerAllg: "La page de paiement n’a pas pu être ouverte. Réessayez.",
   s4Titel: "Questions fréquentes",
   faq: [
     { f: "Combien ça coûte ?", a: "Les 3 premiers courriers sont gratuits (5 avec le code de la liste d’attente). Ensuite vous achetez du crédit : 5 analyses pour 2,99 € ou 15 pour 6,99 €. Sans abonnement et sans compte." },
@@ -632,6 +879,19 @@ TEXTE.fr = {
 };
 
 TEXTE.hu = {
+  ctaDemo: "Próbálja ki ingyen",
+  ctaKauf: "Egyenleg vásárlása",
+  demoHinweis: "2 elemzés ingyen — fiók nélkül.",
+  kaufTitel: "Vásároljon egyenleget és kezdje azonnal",
+  kaufH3: "Magyaráztasson el több levelet",
+  kaufText: "Nem kell várnia: vásároljon egyenleget és használja a BehördenKlart közvetlenül a böngészőben — bármely készüléken, alkalmazás nélkül. Az egyenleg nem jár le.",
+  kaufEmail: "Fizetéskor adja meg e-mail címét. Személyes hozzáférési linket kap — ezzel az egyenleg bármely készüléken működik.",
+  kaufKonsens: "Kifejezetten kérem, hogy a szolgáltatás a vásárlás után azonnal induljon, és tudomásul veszem, hogy elállási jogom ezzel megszűnik.",
+  kaufSicher: "Biztonságos fizetés a Stripe-on keresztül. ÁFA nélkül (§19 UStG). Szolgáltató: Webklar GbR — a kivonaton „Webklar\" jelenik meg.",
+  paketWort: "elemzés",
+  aufDeutsch: "németül",
+  kaufFehlerHaken: "Kérjük, előbb jelölje be a négyzetet.",
+  kaufFehlerAllg: "A fizetési oldal nem nyílt meg. Próbálja újra.",
   s4Titel: "Gyakori kérdések",
   faq: [
     { f: "Mennyibe kerül?", a: "Az első 3 levél ingyenes (a várólista kódjával 5). Utána egyenleget vásárol: 5 elemzés 2,99 €, 15 elemzés 6,99 €. Előfizetés és fiók nélkül." },
@@ -663,6 +923,19 @@ TEXTE.hu = {
 };
 
 TEXTE.vi = {
+  ctaDemo: "Dùng thử miễn phí",
+  ctaKauf: "Mua lượt",
+  demoHinweis: "2 lần phân tích miễn phí — không cần tài khoản.",
+  kaufTitel: "Mua lượt và bắt đầu ngay",
+  kaufH3: "Giải thích thêm nhiều thư",
+  kaufText: "Bạn không phải chờ: mua lượt và dùng BehördenKlar ngay trong trình duyệt — trên mọi thiết bị, không cần ứng dụng. Lượt không hết hạn.",
+  kaufEmail: "Hãy nhập địa chỉ email khi thanh toán. Bạn sẽ nhận được liên kết truy cập cá nhân — với nó lượt của bạn dùng được trên mọi thiết bị.",
+  kaufKonsens: "Tôi yêu cầu rõ ràng rằng dịch vụ bắt đầu ngay sau khi mua và tôi biết rằng quyền rút lui của tôi chấm dứt vì điều đó.",
+  kaufSicher: "Thanh toán an toàn qua Stripe. Không VAT (§19 UStG). Nhà cung cấp: Webklar GbR — sao kê của bạn sẽ hiển thị „Webklar\".",
+  paketWort: "lần phân tích",
+  aufDeutsch: "bằng tiếng Đức",
+  kaufFehlerHaken: "Vui lòng đánh dấu ô trước.",
+  kaufFehlerAllg: "Không mở được trang thanh toán. Vui lòng thử lại.",
   s4Titel: "Câu hỏi thường gặp",
   faq: [
     { f: "Giá bao nhiêu?", a: "3 lá thư đầu tiên miễn phí (5 nếu có mã từ danh sách chờ). Sau đó bạn mua lượt: 5 lần phân tích 2,99 €, 15 lần 6,99 €. Không thuê bao, không cần tài khoản." },
@@ -694,6 +967,19 @@ TEXTE.vi = {
 };
 
 TEXTE.hi = {
+  ctaDemo: "अभी मुफ़्त आज़माएँ",
+  ctaKauf: "क्रेडिट खरीदें",
+  demoHinweis: "2 विश्लेषण मुफ़्त — बिना खाते के।",
+  kaufTitel: "क्रेडिट खरीदें और तुरंत शुरू करें",
+  kaufH3: "और चिट्ठियाँ समझवाएँ",
+  kaufText: "इंतज़ार की ज़रूरत नहीं: क्रेडिट खरीदें और BehördenKlar सीधे ब्राउज़र में इस्तेमाल करें — हर उपकरण पर, बिना ऐप के। आपका क्रेडिट समाप्त नहीं होता।",
+  kaufEmail: "भुगतान करते समय अपना ई-मेल पता दें। आपको एक निजी पहुँच लिंक मिलेगा — उससे आपका क्रेडिट हर उपकरण पर काम करता है।",
+  kaufKonsens: "मैं स्पष्ट रूप से माँग करता/करती हूँ कि सेवा खरीद के तुरंत बाद शुरू हो, और मुझे पता है कि इससे मेरा वापसी का अधिकार समाप्त हो जाता है।",
+  kaufSicher: "Stripe के ज़रिए सुरक्षित भुगतान। कोई जीएसटी नहीं (§19 UStG)। प्रदाता: Webklar GbR — आपके खाते के विवरण में „Webklar\" दिखेगा।",
+  paketWort: "विश्लेषण",
+  aufDeutsch: "जर्मन में",
+  kaufFehlerHaken: "कृपया पहले बॉक्स पर निशान लगाएँ।",
+  kaufFehlerAllg: "भुगतान पृष्ठ नहीं खुल सका। कृपया फिर कोशिश करें।",
   s4Titel: "अक्सर पूछे जाने वाले सवाल",
   faq: [
     { f: "इसकी कीमत क्या है?", a: "पहली 3 चिट्ठियाँ मुफ़्त हैं (प्रतीक्षा सूची के कोड से 5)। उसके बाद आप क्रेडिट खरीदते हैं: 5 विश्लेषण 2,99 € में या 15 विश्लेषण 6,99 € में। कोई सदस्यता नहीं, कोई खाता नहीं।" },
@@ -725,6 +1011,19 @@ TEXTE.hi = {
 };
 
 TEXTE.ur = {
+  ctaDemo: "ابھی مفت آزمائیں",
+  ctaKauf: "کریڈٹ خریدیں",
+  demoHinweis: "2 تجزیے مفت — بغیر اکاؤنٹ کے۔",
+  kaufTitel: "کریڈٹ خریدیں اور فوراً شروع کریں",
+  kaufH3: "مزید خطوط سمجھوائیں",
+  kaufText: "انتظار کی ضرورت نہیں: کریڈٹ خریدیں اور BehördenKlar براہِ راست براؤزر میں استعمال کریں — ہر آلے پر، بغیر ایپ کے۔ آپ کا کریڈٹ ختم نہیں ہوتا۔",
+  kaufEmail: "ادائیگی کے وقت اپنا ای میل پتہ درج کریں۔ آپ کو ذاتی رسائی لنک ملے گا — اس سے آپ کا کریڈٹ ہر آلے پر کام کرتا ہے۔",
+  kaufKonsens: "میں واضح طور پر مطالبہ کرتا/کرتی ہوں کہ خدمت خریداری کے فوراً بعد شروع ہو، اور مجھے معلوم ہے کہ اس سے میرا دستبرداری کا حق ختم ہو جاتا ہے۔",
+  kaufSicher: "Stripe کے ذریعے محفوظ ادائیگی۔ کوئی ویٹ نہیں (§19 UStG)۔ فراہم کنندہ: Webklar GbR — آپ کے اکاؤنٹ کی تفصیل میں „Webklar\" نظر آئے گا۔",
+  paketWort: "تجزیے",
+  aufDeutsch: "جرمن میں",
+  kaufFehlerHaken: "براہ کرم پہلے خانے پر نشان لگائیں۔",
+  kaufFehlerAllg: "ادائیگی کا صفحہ نہیں کھل سکا۔ براہ کرم دوبارہ کوشش کریں۔",
   s4Titel: "اکثر پوچھے جانے والے سوالات",
   faq: [
     { f: "اس کی قیمت کیا ہے؟", a: "پہلے 3 خط مفت ہیں (انتظار کی فہرست کے کوڈ کے ساتھ 5)۔ اس کے بعد آپ کریڈٹ خریدتے ہیں: 5 تجزیے 2,99 € میں یا 15 تجزیے 6,99 € میں۔ کوئی سبسکرپشن نہیں، کوئی اکاؤنٹ نہیں۔" },
@@ -756,6 +1055,19 @@ TEXTE.ur = {
 };
 
 TEXTE.ps = {
+  ctaDemo: "اوس یې وړیا وازمویئ",
+  ctaKauf: "کریډیټ واخلئ",
+  demoHinweis: "۲ شننې وړیا — پرته له حساب.",
+  kaufTitel: "کریډیټ واخلئ او سمدستي پیل وکړئ",
+  kaufH3: "نور لیکونه رابرسېره کړئ",
+  kaufText: "انتظار ته اړتیا نشته: کریډیټ واخلئ او BehördenKlar مستقیم په براوزر کې وکاروئ — په هره وسیله، پرته له اپلیکیشنه. ستاسو کریډیټ نه ختمېږي.",
+  kaufEmail: "د تادیې پر مهال خپله بریښنالیک پته ولیکئ. تاسو به یو شخصي لاسرسي لینک ترلاسه کړئ — په هغې سره ستاسو کریډیټ په هره وسیله کار کوي.",
+  kaufKonsens: "زه په ښکاره غوښتنه کوم چې خدمت له پیرودنې وروسته سمدستي پیل شي، او پوهېږم چې زما د بېرته اخیستو حق پدې سره پای ته رسېږي.",
+  kaufSicher: "د Stripe له لارې خوندي تادیه. بې له VAT (§19 UStG). چمتو کوونکی: Webklar GbR — ستاسو په حساب کې به „Webklar\" ښکاره شي.",
+  paketWort: "شننې",
+  aufDeutsch: "په آلماني",
+  kaufFehlerHaken: "مهرباني وکړئ لومړی بکس نښه کړئ.",
+  kaufFehlerAllg: "د تادیې پاڼه نه پرانیستل کېده. مهرباني وکړئ بیا هڅه وکړئ.",
   s4Titel: "ډېرې پوښتل شوې پوښتنې",
   faq: [
     { f: "بیه یې څومره ده؟", a: "لومړي ۳ لیکونه وړیا دي (د انتظار لړلیک کوډ سره ۵). وروسته تاسو کریډیټ اخلئ: ۵ شننې په ۲٫۹۹ یورو یا ۱۵ په ۶٫۹۹ یورو. نه ګډون، نه حساب." },
@@ -787,6 +1099,19 @@ TEXTE.ps = {
 };
 
 TEXTE.ti = {
+  ctaDemo: "ሕጂ ብነጻ ፈትኖ",
+  ctaKauf: "ክሬዲት ግዛእ",
+  demoHinweis: "2 መጽናዕቲ ብነጻ — ኣካውንት ኣየድልን።",
+  kaufTitel: "ክሬዲት ግዛእን ሽዑ ጀምርን",
+  kaufH3: "ተወሳኺ ደብዳበታት ኣብርህ",
+  kaufText: "ክትጽበ ኣየድልየካን፦ ክሬዲት ግዛእ እሞ BehördenKlar ኣብዚ ኣብ ብራውዘር ተጠቐመሉ — ኣብ ዝኾነ መሳርሒ፣ ብዘይ መተግበሪ። ክሬዲትካ ኣይውዳእን።",
+  kaufEmail: "ኣብ ግዜ ክፍሊት ናይ ኢመይል ኣድራሻኻ ኣእቱ። ውልቃዊ መእተዊ መላግቦ ክትረክብ ኢኻ — ብእኡ ክሬዲትካ ኣብ ዝኾነ መሳርሒ ይሰርሕ።",
+  kaufKonsens: "እቲ ኣገልግሎት ድሕሪ ምግዛእ ሽዑ ንሽዑ ክጅምር ብንጹር እሓትት፣ ብኡ ድማ መሰል ምስሓብ ከም ዝጠፍእ እፈልጥ እየ።",
+  kaufSicher: "ብStripe ውሑስ ክፍሊት። ትእዛዝ VAT የለን (§19 UStG)። ኣቕራቢ፦ Webklar GbR — ኣብ ናይ ባንክኻ ሓበሬታ „Webklar\" ክርአ እዩ።",
+  paketWort: "መጽናዕቲ",
+  aufDeutsch: "ብጀርመንኛ",
+  kaufFehlerHaken: "በጃኻ ቅድሚ ኩሉ ነቲ ሳጹን ምልክት ግበረሉ።",
+  kaufFehlerAllg: "ናይ ክፍሊት ገጽ ክኽፈት ኣይከኣለን። በጃኻ እንደገና ፈትን።",
   s4Titel: "ብተደጋጋሚ ዝሕተቱ ሕቶታት",
   faq: [
     { f: "ክንደይ ይኸፍል?", a: "እቶም ቀዳሞት 3 ደብዳበታት ብነጻ እዮም (ብናይ ምጽባይ ዝርዝር ኮድ 5)። ድሕሪኡ ክሬዲት ትገዝእ፦ 5 መጽናዕቲ ብ2,99 € ወይ 15 ብ6,99 €። ዝኾነ ምዝገባ ወይ ኣካውንት ኣየድልን።" },
@@ -818,6 +1143,19 @@ TEXTE.ti = {
 };
 
 TEXTE.so = {
+  ctaDemo: "Hadda isku day bilaash",
+  ctaKauf: "Iibso rasiid",
+  demoHinweis: "2 falanqayn oo bilaash ah — koonto looma baahna.",
+  kaufTitel: "Iibso rasiid oo isla markiiba bilow",
+  kaufH3: "Sharrax warqado dheeraad ah",
+  kaufText: "Uma baahnid inaad sugto: iibso rasiid oo isticmaal BehördenKlar halkan browser-ka — qalab kasta, app la’aan. Rasiidkaagu wuu joogaa, ma dhamaado.",
+  kaufEmail: "Markaad bixinayso geli cinwaanka iimaylkaaga. Waxaad heli doontaa link gaar ah oo gelitaan — isaga rasiidkaagu wuxuu ka shaqeeyaa qalab kasta.",
+  kaufKonsens: "Waxaan si cad u codsanayaa in adeegga uu isla markiiba bilaabmo iibka kaddib, waanan ogahay in xaqayga laga noqoshadu uu sidaas ku dhammaado.",
+  kaufSicher: "Lacag bixin ammaan ah oo Stripe ah. VAT ma leh (§19 UStG). Bixiye: Webklar GbR — warbixinta xisaabtaada waxaa ka muuqan doona „Webklar\".",
+  paketWort: "falanqayn",
+  aufDeutsch: "Jarmal ahaan",
+  kaufFehlerHaken: "Fadlan marka hore calaamadee sanduuqa.",
+  kaufFehlerAllg: "Boggii lacag bixinta lama furi karin. Fadlan mar kale isku day.",
   s4Titel: "Su’aalaha inta badan la weydiiyo",
   faq: [
     { f: "Intee ayey ku kacaysaa?", a: "3-da warqadood ee ugu horreeya waa bilaash (5 haddii aad haysato koodhka liiska sugitaanka). Kadib waxaad iibsanaysaa rasiid: 5 falanqayn 2,99 € ama 15 falanqayn 6,99 €. Rukun ma jiro, koonto looma baahna." },
@@ -849,6 +1187,19 @@ TEXTE.so = {
 };
 
 TEXTE.zh = {
+  ctaDemo: "立即免费试用",
+  ctaKauf: "购买额度",
+  demoHinweis: "2 次分析免费——无需账号。",
+  kaufTitel: "购买额度，立刻开始",
+  kaufH3: "让更多信件得到解释",
+  kaufText: "无需等待：购买额度，直接在浏览器中使用 BehördenKlar——任何设备都行，无需应用。额度不会过期。",
+  kaufEmail: "付款时请填写电子邮箱。您会收到专属访问链接——凭它，您的额度在任何设备上都能使用。",
+  kaufKonsens: "我明确要求服务在购买后立即开始，并知悉我的撤回权因此终止。",
+  kaufSicher: "通过 Stripe 安全付款。不含增值税（§19 UStG）。提供方：Webklar GbR——您的账单上会显示“Webklar”。",
+  paketWort: "次分析",
+  aufDeutsch: "德语",
+  kaufFehlerHaken: "请先勾选方框。",
+  kaufFehlerAllg: "无法打开付款页面，请重试。",
   s4Titel: "常见问题",
   faq: [
     { f: "收费多少？", a: "前 3 封信免费（用等候名单的兑换码则是 5 封）。之后购买额度：5 次分析 2,99 €，15 次 6,99 €。无订阅，无需注册账号。" },

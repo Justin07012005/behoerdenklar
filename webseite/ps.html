@@ -90,6 +90,7 @@
       transition: transform .12s ease, box-shadow .12s ease;
     }
     .cta:hover { transform: translate(2px,2px); box-shadow: 3px 3px 0 var(--tinte); }
+    .cta-sek { background: #fff; color: var(--amtsblau); }
     .stempel {
       display: inline-block; padding: 7px 14px; border: 2.5px solid var(--stempelrot);
       color: var(--stempelrot); font-family: 'Courier New', ui-monospace, monospace;
@@ -282,9 +283,12 @@
       <h1>د آلمان له یوې ادارې څخه لیک؟<br><span class="markiert">اوس پرې پوهېږئ.</span></h1>
       <p class="intro">د لیک عکس واخلئ. BehördenKlar یې په ساده کلمو — <strong>او په پښتو</strong> — تشریح کوي. د ټولو وختونو او د کارونو لیست سره.</p>
       <div class="hero-fuss">
-        <a class="cta" href="#anmelden">د انتظار لړلیک ته ننوځئ&nbsp;→</a>
-        <span class="stempel">ډېر ژر په iPhone کې</span>
+        <a class="cta" href="/demo?sprache=ps">📷 اوس یې وړیا وازمویئ&nbsp;→</a>
+        <a class="cta cta-sek" href="#kaufen">کریډیټ واخلئ</a>
       </div>
+      <p style="margin-top: 16px; font-size: 15.5px; color: var(--grau);">
+        ۲ شننې وړیا — پرته له حساب. &nbsp;·&nbsp; <a href="#anmelden">د انتظار لړلیک ته ننوځئ</a>
+      </p>
     </header>
 
     <section>
@@ -316,8 +320,26 @@
       </div>
     </section>
 
+    <section id="kaufen">
+      <h2>§ 3 &nbsp;کریډیټ واخلئ او سمدستي پیل وکړئ</h2>
+      <div class="antrag" style="border-color: var(--amtsblau);">
+        <h3>نور لیکونه رابرسېره کړئ</h3>
+        <p>انتظار ته اړتیا نشته: کریډیټ واخلئ او BehördenKlar مستقیم په براوزر کې وکاروئ — په هره وسیله، پرته له اپلیکیشنه. ستاسو کریډیټ نه ختمېږي.</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15px;">
+          📧 د تادیې پر مهال خپله بریښنالیک پته ولیکئ. تاسو به یو شخصي لاسرسي لینک ترلاسه کړئ — په هغې سره ستاسو کریډیټ په هره وسیله کار کوي.
+        </p>
+        <label style="display: flex; gap: 10px; align-items: flex-start; margin-top: 16px; font-size: 14px; line-height: 1.5; cursor: pointer;">
+          <input type="checkbox" id="kaufKonsens" style="margin-top: 3px; flex-shrink: 0;">
+          <span>زه په ښکاره غوښتنه کوم چې خدمت له پیرودنې وروسته سمدستي پیل شي، او پوهېږم چې زما د بېرته اخیستو حق پدې سره پای ته رسېږي. <a href="/agb.html" target="_blank">AGB</a> · <a href="/widerruf.html" target="_blank">Widerruf</a> (په آلماني)</span>
+        </label>
+        <p id="kaufFehler" style="display: none; margin-top: 12px; color: #b3261e; font-size: 14px; font-weight: 600;"></p>
+        <p class="klein">🔒 د Stripe له لارې خوندي تادیه. بې له VAT (§19 UStG). چمتو کوونکی: Webklar GbR — ستاسو په حساب کې به „Webklar" ښکاره شي.</p>
+      </div>
+    </section>
+
     <section id="anmelden">
-      <h2>§ 3 &nbsp;لومړنی لاسرسی</h2>
+      <h2>§ 4 &nbsp;لومړنی لاسرسی</h2>
       <div class="antrag">
         <p class="formular-kopf">فورمه F-01 · د انتظار لړلیک</p>
         <h3>له لومړیو څخه اوسئ</h3>
@@ -335,7 +357,7 @@
     </section>
 
     <section>
-      <h2>§ 4 &nbsp;ډېرې پوښتل شوې پوښتنې</h2>
+      <h2>§ 5 &nbsp;ډېرې پوښتل شوې پوښتنې</h2>
       <details>
         <summary>بیه یې څومره ده؟</summary>
         <p>لومړي ۳ لیکونه وړیا دي (د انتظار لړلیک کوډ سره ۵). وروسته تاسو کریډیټ اخلئ: ۵ شننې په ۲٫۹۹ یورو یا ۱۵ په ۶٫۹۹ یورو. نه ګډون، نه حساب.</p>
@@ -356,6 +378,42 @@
       &nbsp;·&nbsp; <a href="datenschutz.html">د محرمیت تګلاره (په آلماني)</a>
     </footer>
   </div>
+  <script>
+  (function () {
+    'use strict';
+    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var PAKETE = [
+      { priceId: 'price_1U6BNnBsRA1AOdnedGW5eefh', titel: '5', preis: '2,99 €' },
+      { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15', preis: '6,99 €', best: true }
+    ];
+    var liste = document.getElementById('paketListe');
+    var konsens = document.getElementById('kaufKonsens');
+    var fehler = document.getElementById('kaufFehler');
+    if (!liste) return;
+    konsens.addEventListener('change', function () { if (konsens.checked) fehler.style.display = 'none'; });
+    PAKETE.forEach(function (p) {
+      var b = document.createElement('button');
+      b.className = 'cta'; b.type = 'button';
+      b.style.width = '100%'; b.style.display = 'flex';
+      b.style.justifyContent = 'space-between'; b.style.alignItems = 'center';
+      var l = document.createElement('span');
+      l.textContent = (p.best ? '⭐ ' : '') + p.titel + ' \u00D7 شننې';
+      var r = document.createElement('strong'); r.textContent = p.preis;
+      b.appendChild(l); b.appendChild(r);
+      b.addEventListener('click', function () { starte(p.priceId, b); });
+      liste.appendChild(b);
+    });
+    function starte(priceId, knopf) {
+      if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = 'مهرباني وکړئ لومړی بکس نښه کړئ.'; konsens.focus(); return; }
+      fehler.style.display = 'none';
+      var alt = knopf.innerHTML; knopf.disabled = true;
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
+        .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = 'د تادیې پاڼه نه پرانیستل کېده. مهرباني وکړئ بیا هڅه وکړئ.'; });
+    }
+  })();
+  </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
   <script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "11f017e9a707466b9151921db6125dde"}'></script>
 </body>
