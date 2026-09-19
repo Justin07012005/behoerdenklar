@@ -57,6 +57,60 @@ const WAEHLER_CSS = `
       max-width: 220px; cursor: pointer;
     }`;
 
+/**
+ * Strukturierte Daten je Sprachseite. Beschreibung und Sprache kommen aus
+ * texte.js, damit Google die Seite in der jeweiligen Sprache einordnet —
+ * ein deutscher Block auf der tuerkischen Seite waere widerspruechlich.
+ */
+function schemaBlock(s, t) {
+  const daten = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'BehördenKlar',
+    description: t.beschreibung,
+    applicationCategory: 'AccessibilityApplication',
+    operatingSystem: 'iOS, Web',
+    inLanguage: ALLE.map((x) => x.code),
+    offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
+    author: { '@type': 'Organization', name: 'Webklar GbR', url: BASIS },
+  };
+  return JSON.stringify(daten, null, 2)
+    .split('\n').map((z) => '  ' + z).join('\n');
+}
+
+/**
+ * Sitemap mit Sprach-Angaben (xhtml:link). Google erkennt die Alternativen
+ * dadurch auch ohne die HTML-Tags — doppelt haelt besser, gerade bei 28 Sprachen.
+ * Die Nicht-Sprachseiten (Demo, Ratgeber) bleiben unveraendert bestehen.
+ */
+function sitemapSchreiben() {
+  const pfad = path.join(AUS, 'sitemap.xml');
+  const heute = new Date().toISOString().slice(0, 10);
+  const alt = fs.existsSync(pfad) ? fs.readFileSync(pfad, 'utf8') : '';
+  const andere = (alt.match(/<url>.*?<\/url>/gs) || []).filter(
+    (u) => /\/(demo|ratgeber)/.test(u)
+  );
+
+  const sprachLinks = ALLE.map(
+    (x) => `    <xhtml:link rel="alternate" hreflang="${x.code}" href="${BASIS}${x.pfad}"/>`
+  ).join('\n') + `\n    <xhtml:link rel="alternate" hreflang="x-default" href="${BASIS}/"/>`;
+
+  const bloecke = ALLE.map(
+    (x) => `  <url>\n    <loc>${BASIS}${x.pfad}</loc>\n    <lastmod>${heute}</lastmod>\n${sprachLinks}\n  </url>`
+  );
+
+  const xml = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
+    '        xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    ...bloecke,
+    ...andere.map((u) => '  ' + u.replace(/\s+/g, ' ')),
+    '</urlset>',
+  ].join('\n');
+  fs.writeFileSync(pfad, xml + '\n', 'utf8');
+  return ALLE.length + andere.length;
+}
+
 function seite(s) {
   const t = TEXTE[s.code];
   if (!t) throw new Error('Keine Texte für ' + s.code);
@@ -74,6 +128,7 @@ function seite(s) {
     .replace(/\{\{URL\}\}/g, `${BASIS}/${s.code}`)
     .replace(/\{\{HREFLANG\}\}/g, hreflangBlock())
     .replace(/\{\{WAEHLER_CSS\}\}/g, WAEHLER_CSS)
+    .replace(/\{\{SCHEMA\}\}/g, schemaBlock(s, t))
     .replace(/\{\{WAEHLER\}\}/g, waehlerBlock(s.code, t.navLabel))
     .replace(/\{\{H1_A\}\}/g, t.h1a)
     .replace(/\{\{H1_B\}\}/g, t.h1b)
@@ -126,4 +181,5 @@ if (!idx.includes('.sprachwahl {')) {
 }
 fs.writeFileSync(idxPfad, idx, 'utf8');
 
-console.log(`${n} Sprachseiten erzeugt + index.html aktualisiert (${ALLE.length} Sprachen gesamt)`);
+const urls = sitemapSchreiben();
+console.log(`${n} Sprachseiten erzeugt + index.html aktualisiert (${ALLE.length} Sprachen) + sitemap.xml mit ${urls} URLs`);
