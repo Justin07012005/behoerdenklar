@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar пояснює листи з німецьких установ простими словами — українською. Сфотографуйте, зрозумійте, відповідайте правильно.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar пояснює листи з німецьких установ простими словами — українською. Сфотографуйте, зрозумійте, відповідайте правильно.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Скільки це коштує?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Перші 3 листи безкоштовно (5 з кодом зі списку очікування). Далі ви купуєте баланс: 5 аналізів за 2,99 €, 15 за 6,99 €. Без підписки й без облікового запису."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Які листи застосунок пояснює?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Листи з джобцентру, відомства у справах іноземців, пенсійного страхування, лікарняної каси, сімейної каси (Kindergeld), податкової або органу зі штрафів — словом, майже будь-який офіційний лист."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Що відбувається з моїми даними?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ваші листи залишаються зашифрованими на вашому пристрої. Для аналізу фото один раз безпечно надсилається до ШІ і видаляється там щонайпізніше через 30 днів. Обліковий запис не потрібен."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Ми збережемо адресу лише для цього одного листа. Відписатися можна будь-коли. <a href="datenschutz.html">Політика конфіденційності (німецькою)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Часті запитання</h2>
+      <details>
+        <summary>Скільки це коштує?</summary>
+        <p>Перші 3 листи безкоштовно (5 з кодом зі списку очікування). Далі ви купуєте баланс: 5 аналізів за 2,99 €, 15 за 6,99 €. Без підписки й без облікового запису.</p>
+      </details>
+      <details>
+        <summary>Які листи застосунок пояснює?</summary>
+        <p>Листи з джобцентру, відомства у справах іноземців, пенсійного страхування, лікарняної каси, сімейної каси (Kindergeld), податкової або органу зі штрафів — словом, майже будь-який офіційний лист.</p>
+      </details>
+      <details>
+        <summary>Що відбувається з моїми даними?</summary>
+        <p>Ваші листи залишаються зашифрованими на вашому пристрої. Для аналізу фото один раз безпечно надсилається до ШІ і видаляється там щонайпізніше через 30 днів. Обліковий запис не потрібен.</p>
+      </details>
     </section>
 
     <footer>

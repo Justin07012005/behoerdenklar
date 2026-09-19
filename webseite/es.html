@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar explica las cartas oficiales alemanas con palabras sencillas — en español. Haz una foto, entiéndela, responde bien.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar explica las cartas oficiales alemanas con palabras sencillas — en español. Haz una foto, entiéndela, responde bien.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las primeras 3 cartas son gratis (5 con el código de la lista de espera). Después compras saldo: 5 análisis por 2,99 € o 15 por 6,99 €. Sin suscripción y sin cuenta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué cartas puede explicar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cartas del Jobcenter, de la Oficina de Extranjería, del seguro de pensiones, de la mutua de salud, de la caja familiar (Kindergeld), de Hacienda o de la oficina de multas — en resumen, casi cualquier carta oficial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué pasa con mis datos?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Tus cartas permanecen cifradas en tu propio dispositivo. Para el análisis, la foto se envía una sola vez de forma segura a la IA y allí se borra como máximo a los 30 días. No necesitas cuenta."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Guardamos tu dirección solo para este único mensaje. Puedes darte de baja cuando quieras. <a href="datenschutz.html">Política de privacidad (en alemán)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Preguntas frecuentes</h2>
+      <details>
+        <summary>¿Cuánto cuesta?</summary>
+        <p>Las primeras 3 cartas son gratis (5 con el código de la lista de espera). Después compras saldo: 5 análisis por 2,99 € o 15 por 6,99 €. Sin suscripción y sin cuenta.</p>
+      </details>
+      <details>
+        <summary>¿Qué cartas puede explicar?</summary>
+        <p>Cartas del Jobcenter, de la Oficina de Extranjería, del seguro de pensiones, de la mutua de salud, de la caja familiar (Kindergeld), de Hacienda o de la oficina de multas — en resumen, casi cualquier carta oficial.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa con mis datos?</summary>
+        <p>Tus cartas permanecen cifradas en tu propio dispositivo. Para el análisis, la foto se envía una sola vez de forma segura a la IA y allí se borra como máximo a los 30 días. No necesitas cuenta.</p>
+      </details>
     </section>
 
     <footer>

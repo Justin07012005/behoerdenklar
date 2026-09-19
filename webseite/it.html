@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar spiega le lettere ufficiali tedesche con parole semplici — in italiano. Scatta una foto, capisci, rispondi correttamente.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar spiega le lettere ufficiali tedesche con parole semplici — in italiano. Scatta una foto, capisci, rispondi correttamente.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Quanto costa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le prime 3 lettere sono gratis (5 con il codice della lista d’attesa). Poi acquisti credito: 5 analisi a 2,99 € o 15 a 6,99 €. Nessun abbonamento, nessun account."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quali lettere può spiegare?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Lettere del Jobcenter, dell’Ufficio stranieri, dell’assicurazione pensionistica, della cassa malattia, della cassa familiare (Kindergeld), dell’ufficio delle imposte o dell’ufficio sanzioni — in breve, quasi ogni lettera ufficiale."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Che fine fanno i miei dati?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Le tue lettere restano cifrate sul tuo dispositivo. Per l’analisi la foto viene inviata una sola volta in modo sicuro all’IA e viene cancellata lì al più tardi dopo 30 giorni. Non serve un account."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Conserviamo il tuo indirizzo solo per questo unico messaggio. Puoi cancellarti in qualsiasi momento. <a href="datenschutz.html">Informativa sulla privacy (in tedesco)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Domande frequenti</h2>
+      <details>
+        <summary>Quanto costa?</summary>
+        <p>Le prime 3 lettere sono gratis (5 con il codice della lista d’attesa). Poi acquisti credito: 5 analisi a 2,99 € o 15 a 6,99 €. Nessun abbonamento, nessun account.</p>
+      </details>
+      <details>
+        <summary>Quali lettere può spiegare?</summary>
+        <p>Lettere del Jobcenter, dell’Ufficio stranieri, dell’assicurazione pensionistica, della cassa malattia, della cassa familiare (Kindergeld), dell’ufficio delle imposte o dell’ufficio sanzioni — in breve, quasi ogni lettera ufficiale.</p>
+      </details>
+      <details>
+        <summary>Che fine fanno i miei dati?</summary>
+        <p>Le tue lettere restano cifrate sul tuo dispositivo. Per l’analisi la foto viene inviata una sola volta in modo sicuro all’IA e viene cancellata lì al più tardi dopo 30 giorni. Non serve un account.</p>
+      </details>
     </section>
 
     <footer>

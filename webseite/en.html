@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar explains German official letters in plain words — in English. Take a photo, understand it, respond correctly.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar explains German official letters in plain words — in English. Take a photo, understand it, respond correctly.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What does it cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your first 3 letters are free (5 with the waiting-list code). After that you buy credit: 5 analyses for €2.99 or 15 for €6.99. No subscription, no account."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which letters can the app explain?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Letters from the Jobcenter, the immigration office, pension insurance, health insurance, the family benefits office (Kindergeld), the tax office or the fines authority — in short, almost any official letter."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to my data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your letters stay encrypted on your own device. For the analysis the photo is sent once, securely, to the AI and is deleted there after 30 days at the latest. You do not need an account."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">We store your address only for this single message. You can unsubscribe at any time. <a href="datenschutz.html">Privacy policy (German)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Frequently asked questions</h2>
+      <details>
+        <summary>What does it cost?</summary>
+        <p>Your first 3 letters are free (5 with the waiting-list code). After that you buy credit: 5 analyses for €2.99 or 15 for €6.99. No subscription, no account.</p>
+      </details>
+      <details>
+        <summary>Which letters can the app explain?</summary>
+        <p>Letters from the Jobcenter, the immigration office, pension insurance, health insurance, the family benefits office (Kindergeld), the tax office or the fines authority — in short, almost any official letter.</p>
+      </details>
+      <details>
+        <summary>What happens to my data?</summary>
+        <p>Your letters stay encrypted on your own device. For the analysis the photo is sent once, securely, to the AI and is deleted there after 30 days at the latest. You do not need an account.</p>
+      </details>
     </section>
 
     <footer>

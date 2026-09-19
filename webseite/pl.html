@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar wyjaśnia pisma z niemieckich urzędów prostymi słowami — po polsku. Zrób zdjęcie, zrozum, odpowiedz poprawnie.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar wyjaśnia pisma z niemieckich urzędów prostymi słowami — po polsku. Zrób zdjęcie, zrozum, odpowiedz poprawnie.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Ile to kosztuje?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pierwsze 3 pisma za darmo (5 z kodem z listy oczekujących). Potem kupujesz doładowanie: 5 analiz za 2,99 €, 15 za 6,99 €. Bez abonamentu i bez konta."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Jakie pisma aplikacja wyjaśnia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Pisma z Jobcenter, urzędu do spraw cudzoziemców, ubezpieczenia emerytalnego, kasy chorych, kasy rodzinnej (Kindergeld), urzędu skarbowego lub organu mandatowego — krótko mówiąc prawie każde oficjalne pismo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Co dzieje się z moimi danymi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Twoje pisma pozostają zaszyfrowane na Twoim urządzeniu. Do analizy zdjęcie jest raz bezpiecznie wysyłane do SI i usuwane tam najpóźniej po 30 dniach. Konto nie jest potrzebne."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Zapiszemy adres tylko dla tej jednej wiadomości. W każdej chwili możesz się wypisać. <a href="datenschutz.html">Polityka prywatności (po niemiecku)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Częste pytania</h2>
+      <details>
+        <summary>Ile to kosztuje?</summary>
+        <p>Pierwsze 3 pisma za darmo (5 z kodem z listy oczekujących). Potem kupujesz doładowanie: 5 analiz za 2,99 €, 15 za 6,99 €. Bez abonamentu i bez konta.</p>
+      </details>
+      <details>
+        <summary>Jakie pisma aplikacja wyjaśnia?</summary>
+        <p>Pisma z Jobcenter, urzędu do spraw cudzoziemców, ubezpieczenia emerytalnego, kasy chorych, kasy rodzinnej (Kindergeld), urzędu skarbowego lub organu mandatowego — krótko mówiąc prawie każde oficjalne pismo.</p>
+      </details>
+      <details>
+        <summary>Co dzieje się z moimi danymi?</summary>
+        <p>Twoje pisma pozostają zaszyfrowane na Twoim urządzeniu. Do analizy zdjęcie jest raz bezpiecznie wysyłane do SI i usuwane tam najpóźniej po 30 dniach. Konto nie jest potrzebne.</p>
+      </details>
     </section>
 
     <footer>

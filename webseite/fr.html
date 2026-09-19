@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar explique les courriers administratifs allemands avec des mots simples — en français. Prenez une photo, comprenez, répondez correctement.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar explique les courriers administratifs allemands avec des mots simples — en français. Prenez une photo, comprenez, répondez correctement.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Combien ça coûte ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les 3 premiers courriers sont gratuits (5 avec le code de la liste d’attente). Ensuite vous achetez du crédit : 5 analyses pour 2,99 € ou 15 pour 6,99 €. Sans abonnement et sans compte."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quels courriers peut-elle expliquer ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Les courriers du Jobcenter, du service des étrangers, de l’assurance retraite, de la caisse maladie, de la caisse familiale (Kindergeld), du fisc ou du service des amendes — bref, presque tout courrier officiel."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Que deviennent mes données ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Vos courriers restent chiffrés sur votre appareil. Pour l’analyse, la photo est envoyée une seule fois de façon sécurisée à l’IA et y est supprimée au plus tard au bout de 30 jours. Aucun compte nécessaire."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Nous conservons votre adresse uniquement pour ce seul message. Vous pouvez vous désinscrire à tout moment. <a href="datenschutz.html">Politique de confidentialité (en allemand)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Questions fréquentes</h2>
+      <details>
+        <summary>Combien ça coûte ?</summary>
+        <p>Les 3 premiers courriers sont gratuits (5 avec le code de la liste d’attente). Ensuite vous achetez du crédit : 5 analyses pour 2,99 € ou 15 pour 6,99 €. Sans abonnement et sans compte.</p>
+      </details>
+      <details>
+        <summary>Quels courriers peut-elle expliquer ?</summary>
+        <p>Les courriers du Jobcenter, du service des étrangers, de l’assurance retraite, de la caisse maladie, de la caisse familiale (Kindergeld), du fisc ou du service des amendes — bref, presque tout courrier officiel.</p>
+      </details>
+      <details>
+        <summary>Que deviennent mes données ?</summary>
+        <p>Vos courriers restent chiffrés sur votre appareil. Pour l’analyse, la photo est envoyée une seule fois de façon sécurisée à l’IA et y est supprimée au plus tard au bout de 30 jours. Aucun compte nécessaire.</p>
+      </details>
     </section>
 
     <footer>

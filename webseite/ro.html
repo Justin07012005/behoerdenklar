@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar explică scrisorile oficiale germane în cuvinte simple — în română. Fă o poză, înțelege, răspunde corect.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar explică scrisorile oficiale germane în cuvinte simple — în română. Fă o poză, înțelege, răspunde corect.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Cât costă?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Primele 3 scrisori sunt gratuite (5 cu codul din lista de așteptare). Apoi cumperi credit: 5 analize la 2,99 €, 15 la 6,99 €. Fără abonament și fără cont."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ce scrisori poate explica aplicația?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Scrisori de la Jobcenter, Oficiul pentru Străini, asigurarea de pensie, casa de sănătate, casa familială (Kindergeld), administrația fiscală sau oficiul de amenzi — pe scurt, aproape orice scrisoare oficială."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ce se întâmplă cu datele mele?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Scrisorile tale rămân criptate pe dispozitivul tău. Pentru analiză, fotografia este trimisă o singură dată în siguranță către IA și este ștearsă acolo în cel mult 30 de zile. Nu ai nevoie de cont."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Păstrăm adresa doar pentru acest singur mesaj. Te poți dezabona oricând. <a href="datenschutz.html">Politica de confidențialitate (în germană)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Întrebări frecvente</h2>
+      <details>
+        <summary>Cât costă?</summary>
+        <p>Primele 3 scrisori sunt gratuite (5 cu codul din lista de așteptare). Apoi cumperi credit: 5 analize la 2,99 €, 15 la 6,99 €. Fără abonament și fără cont.</p>
+      </details>
+      <details>
+        <summary>Ce scrisori poate explica aplicația?</summary>
+        <p>Scrisori de la Jobcenter, Oficiul pentru Străini, asigurarea de pensie, casa de sănătate, casa familială (Kindergeld), administrația fiscală sau oficiul de amenzi — pe scurt, aproape orice scrisoare oficială.</p>
+      </details>
+      <details>
+        <summary>Ce se întâmplă cu datele mele?</summary>
+        <p>Scrisorile tale rămân criptate pe dispozitivul tău. Pentru analiză, fotografia este trimisă o singură dată în siguranță către IA și este ștearsă acolo în cel mult 30 de zile. Nu ai nevoie de cont.</p>
+      </details>
     </section>
 
     <footer>

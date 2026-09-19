@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar نامه‌های اداری آلمان را با کلمات ساده — به فارسی — توضیح می‌دهد. عکس بگیرید، بفهمید، درست پاسخ دهید.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar نامه‌های اداری آلمان را با کلمات ساده — به فارسی — توضیح می‌دهد. عکس بگیرید، بفهمید، درست پاسخ دهید.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "هزینه آن چقدر است؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "سه نامه اول رایگان است (با کد فهرست انتظار ۵ نامه). پس از آن اعتبار می‌خرید: ۵ تحلیل با ۲٫۹۹ یورو یا ۱۵ تحلیل با ۶٫۹۹ یورو. بدون اشتراک و بدون حساب کاربری."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "چه نامه‌هایی را می‌تواند توضیح دهد؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نامه‌های مرکز کاریابی (Jobcenter)، اداره اتباع خارجی، بیمه بازنشستگی، بیمه درمانی، صندوق خانواده (Kindergeld)، اداره مالیات یا اداره جرایم — به‌طور خلاصه تقریباً هر نامه رسمی."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "با اطلاعات من چه می‌شود؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "نامه‌های شما رمزگذاری‌شده روی دستگاه خودتان می‌مانند. برای تحلیل، عکس یک بار به‌صورت امن به هوش مصنوعی فرستاده می‌شود و حداکثر پس از ۳۰ روز آنجا پاک می‌شود. به حساب کاربری نیاز ندارید."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">نشانی شما را فقط برای همین یک پیام نگه می‌داریم. هر زمان می‌توانید لغو اشتراک کنید. <a href="datenschutz.html">سیاست حفظ حریم خصوصی (آلمانی)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;پرسش‌های پرتکرار</h2>
+      <details>
+        <summary>هزینه آن چقدر است؟</summary>
+        <p>سه نامه اول رایگان است (با کد فهرست انتظار ۵ نامه). پس از آن اعتبار می‌خرید: ۵ تحلیل با ۲٫۹۹ یورو یا ۱۵ تحلیل با ۶٫۹۹ یورو. بدون اشتراک و بدون حساب کاربری.</p>
+      </details>
+      <details>
+        <summary>چه نامه‌هایی را می‌تواند توضیح دهد؟</summary>
+        <p>نامه‌های مرکز کاریابی (Jobcenter)، اداره اتباع خارجی، بیمه بازنشستگی، بیمه درمانی، صندوق خانواده (Kindergeld)، اداره مالیات یا اداره جرایم — به‌طور خلاصه تقریباً هر نامه رسمی.</p>
+      </details>
+      <details>
+        <summary>با اطلاعات من چه می‌شود؟</summary>
+        <p>نامه‌های شما رمزگذاری‌شده روی دستگاه خودتان می‌مانند. برای تحلیل، عکس یک بار به‌صورت امن به هوش مصنوعی فرستاده می‌شود و حداکثر پس از ۳۰ روز آنجا پاک می‌شود. به حساب کاربری نیاز ندارید.</p>
+      </details>
     </section>
 
     <footer>

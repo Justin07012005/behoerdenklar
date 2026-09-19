@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar Alman resmî mektuplarını basit kelimelerle — Türkçe — açıklar. Fotoğraf çekin, anlayın, doğru cevap verin.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar Alman resmî mektuplarını basit kelimelerle — Türkçe — açıklar. Fotoğraf çekin, anlayın, doğru cevap verin.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Ücreti ne kadar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "İlk 3 mektup ücretsiz (bekleme listesi koduyla 5). Sonrasında kontör satın alırsınız: 5 analiz 2,99 €, 15 analiz 6,99 €. Abonelik yok, hesap açmak yok."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hangi mektupları açıklayabilir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "İş ve İşçi Bulma Kurumu (Jobcenter), Yabancılar Dairesi, emeklilik kurumu, hastalık sigortası, aile kasası (Kindergeld), vergi dairesi veya ceza dairesinden gelen mektuplar — kısacası hemen hemen her resmî mektup."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Verilerime ne oluyor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mektuplarınız şifreli olarak kendi cihazınızda kalır. Analiz için fotoğraf bir kez güvenli şekilde yapay zekâya gönderilir ve orada en geç 30 gün sonra silinir. Hesap açmanız gerekmez."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">E-posta adresinizi sadece bu bir mesaj için saklarız. İstediğiniz zaman listeden çıkabilirsiniz. <a href="datenschutz.html">Gizlilik politikası (Almanca)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Sık sorulan sorular</h2>
+      <details>
+        <summary>Ücreti ne kadar?</summary>
+        <p>İlk 3 mektup ücretsiz (bekleme listesi koduyla 5). Sonrasında kontör satın alırsınız: 5 analiz 2,99 €, 15 analiz 6,99 €. Abonelik yok, hesap açmak yok.</p>
+      </details>
+      <details>
+        <summary>Hangi mektupları açıklayabilir?</summary>
+        <p>İş ve İşçi Bulma Kurumu (Jobcenter), Yabancılar Dairesi, emeklilik kurumu, hastalık sigortası, aile kasası (Kindergeld), vergi dairesi veya ceza dairesinden gelen mektuplar — kısacası hemen hemen her resmî mektup.</p>
+      </details>
+      <details>
+        <summary>Verilerime ne oluyor?</summary>
+        <p>Mektuplarınız şifreli olarak kendi cihazınızda kalır. Analiz için fotoğraf bir kez güvenli şekilde yapay zekâya gönderilir ve orada en geç 30 gün sonra silinir. Hesap açmanız gerekmez.</p>
+      </details>
     </section>
 
     <footer>

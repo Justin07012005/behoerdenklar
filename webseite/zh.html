@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar 用简单的语言解释德国官方信件——中文。拍张照片，看懂内容，正确回复。",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar 用简单的语言解释德国官方信件——中文。拍张照片，看懂内容，正确回复。",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "收费多少？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "前 3 封信免费（用等候名单的兑换码则是 5 封）。之后购买额度：5 次分析 2,99 €，15 次 6,99 €。无订阅，无需注册账号。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "能解释哪些信件？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "来自劳动介绍所（Jobcenter）、外管局、养老保险、医疗保险、家庭金库（Kindergeld）、税务局或罚款机关的信件——简而言之，几乎任何官方信件。"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "我的数据会怎样？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "您的信件以加密方式保存在您自己的设备上。分析时照片会安全地发送给人工智能一次，并最迟在 30 天后在那里删除。您不需要账号。"
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">我们只为这一封邮件保存您的地址。您可以随时退订。 <a href="datenschutz.html">隐私政策（德语）</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;常见问题</h2>
+      <details>
+        <summary>收费多少？</summary>
+        <p>前 3 封信免费（用等候名单的兑换码则是 5 封）。之后购买额度：5 次分析 2,99 €，15 次 6,99 €。无订阅，无需注册账号。</p>
+      </details>
+      <details>
+        <summary>能解释哪些信件？</summary>
+        <p>来自劳动介绍所（Jobcenter）、外管局、养老保险、医疗保险、家庭金库（Kindergeld）、税务局或罚款机关的信件——简而言之，几乎任何官方信件。</p>
+      </details>
+      <details>
+        <summary>我的数据会怎样？</summary>
+        <p>您的信件以加密方式保存在您自己的设备上。分析时照片会安全地发送给人工智能一次，并最迟在 30 天后在那里删除。您不需要账号。</p>
+      </details>
     </section>
 
     <footer>

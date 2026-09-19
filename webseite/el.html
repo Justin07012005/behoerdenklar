@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "Το BehördenKlar εξηγεί τα γερμανικά επίσημα γράμματα με απλά λόγια — στα ελληνικά. Φωτογραφίστε, καταλάβετε, απαντήστε σωστά.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "Το BehördenKlar εξηγεί τα γερμανικά επίσημα γράμματα με απλά λόγια — στα ελληνικά. Φωτογραφίστε, καταλάβετε, απαντήστε σωστά.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Πόσο κοστίζει;",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Τα πρώτα 3 γράμματα είναι δωρεάν (5 με τον κωδικό της λίστας αναμονής). Έπειτα αγοράζετε μονάδες: 5 αναλύσεις 2,99 € ή 15 για 6,99 €. Χωρίς συνδρομή, χωρίς λογαριασμό."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ποια γράμματα μπορεί να εξηγήσει;",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Γράμματα από το Jobcenter, την Υπηρεσία Αλλοδαπών, την ασφάλιση σύνταξης, το ταμείο υγείας, το οικογενειακό ταμείο (Kindergeld), την εφορία ή την υπηρεσία προστίμων — με λίγα λόγια, σχεδόν κάθε επίσημο γράμμα."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Τι γίνεται με τα δεδομένα μου;",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Τα γράμματά σας παραμένουν κρυπτογραφημένα στη συσκευή σας. Για την ανάλυση η φωτογραφία στέλνεται μία φορά με ασφάλεια στην ΤΝ και διαγράφεται εκεί το αργότερο μετά από 30 ημέρες. Δεν χρειάζεστε λογαριασμό."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Αποθηκεύουμε τη διεύθυνση μόνο για αυτό το ένα μήνυμα. Μπορείτε να διαγραφείτε ανά πάσα στιγμή. <a href="datenschutz.html">Πολιτική απορρήτου (στα γερμανικά)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Συχνές ερωτήσεις</h2>
+      <details>
+        <summary>Πόσο κοστίζει;</summary>
+        <p>Τα πρώτα 3 γράμματα είναι δωρεάν (5 με τον κωδικό της λίστας αναμονής). Έπειτα αγοράζετε μονάδες: 5 αναλύσεις 2,99 € ή 15 για 6,99 €. Χωρίς συνδρομή, χωρίς λογαριασμό.</p>
+      </details>
+      <details>
+        <summary>Ποια γράμματα μπορεί να εξηγήσει;</summary>
+        <p>Γράμματα από το Jobcenter, την Υπηρεσία Αλλοδαπών, την ασφάλιση σύνταξης, το ταμείο υγείας, το οικογενειακό ταμείο (Kindergeld), την εφορία ή την υπηρεσία προστίμων — με λίγα λόγια, σχεδόν κάθε επίσημο γράμμα.</p>
+      </details>
+      <details>
+        <summary>Τι γίνεται με τα δεδομένα μου;</summary>
+        <p>Τα γράμματά σας παραμένουν κρυπτογραφημένα στη συσκευή σας. Για την ανάλυση η φωτογραφία στέλνεται μία φορά με ασφάλεια στην ΤΝ και διαγράφεται εκεί το αργότερο μετά από 30 ημέρες. Δεν χρειάζεστε λογαριασμό.</p>
+      </details>
     </section>
 
     <footer>

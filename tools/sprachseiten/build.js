@@ -74,7 +74,9 @@ function schemaBlock(s, t) {
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'EUR' },
     author: { '@type': 'Organization', name: 'Webklar GbR', url: BASIS },
   };
-  return JSON.stringify(daten, null, 2)
+  const faq = faqSchema(t);
+  const inhalt = faq ? [daten, faq] : daten;
+  return JSON.stringify(inhalt, null, 2)
     .split('\n').map((z) => '  ' + z).join('\n');
 }
 
@@ -111,6 +113,27 @@ function sitemapSchreiben() {
   return ALLE.length + andere.length;
 }
 
+/** Sichtbare Fragen — Google verlangt, dass das Schema sichtbaren Text spiegelt. */
+function faqHtml(t) {
+  return (t.faq || [])
+    .map((f) => `      <details>\n        <summary>${f.f}</summary>\n        <p>${f.a}</p>\n      </details>`)
+    .join('\n');
+}
+
+/** Dazu passendes FAQPage-Schema — gleiche Fragen, gleiche Sprache. */
+function faqSchema(t) {
+  if (!t.faq || !t.faq.length) return null;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: t.faq.map((f) => ({
+      '@type': 'Question',
+      name: f.f,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+}
+
 function seite(s) {
   const t = TEXTE[s.code];
   if (!t) throw new Error('Keine Texte für ' + s.code);
@@ -129,6 +152,8 @@ function seite(s) {
     .replace(/\{\{HREFLANG\}\}/g, hreflangBlock())
     .replace(/\{\{WAEHLER_CSS\}\}/g, WAEHLER_CSS)
     .replace(/\{\{SCHEMA\}\}/g, schemaBlock(s, t))
+    .replace(/\{\{S4_TITEL\}\}/g, t.s4Titel || 'FAQ')
+    .replace(/\{\{FAQ_HTML\}\}/g, faqHtml(t))
     .replace(/\{\{WAEHLER\}\}/g, waehlerBlock(s.code, t.navLabel))
     .replace(/\{\{H1_A\}\}/g, t.h1a)
     .replace(/\{\{H1_B\}\}/g, t.h1b)

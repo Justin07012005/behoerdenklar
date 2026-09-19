@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar जर्मन सरकारी चिट्ठियों को आसान शब्दों में समझाता है — हिन्दी में। फ़ोटो लें, समझें, सही जवाब दें।",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar जर्मन सरकारी चिट्ठियों को आसान शब्दों में समझाता है — हिन्दी में। फ़ोटो लें, समझें, सही जवाब दें।",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "इसकी कीमत क्या है?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "पहली 3 चिट्ठियाँ मुफ़्त हैं (प्रतीक्षा सूची के कोड से 5)। उसके बाद आप क्रेडिट खरीदते हैं: 5 विश्लेषण 2,99 € में या 15 विश्लेषण 6,99 € में। कोई सदस्यता नहीं, कोई खाता नहीं।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "यह कौन-सी चिट्ठियाँ समझा सकता है?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "जॉबसेंटर, विदेशी विभाग, पेंशन बीमा, स्वास्थ्य बीमा, परिवार कोष (Kindergeld), कर विभाग या जुर्माना विभाग की चिट्ठियाँ — संक्षेप में, लगभग हर सरकारी चिट्ठी।"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "मेरे डेटा का क्या होता है?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "आपकी चिट्ठियाँ आपके अपने उपकरण पर एन्क्रिप्टेड रहती हैं। विश्लेषण के लिए फ़ोटो एक बार सुरक्षित रूप से एआई को भेजी जाती है और वहाँ अधिकतम 30 दिनों में मिटा दी जाती है। आपको खाते की ज़रूरत नहीं।"
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">हम आपका पता केवल इसी एक संदेश के लिए रखते हैं। आप कभी भी हटा सकते हैं। <a href="datenschutz.html">गोपनीयता नीति (जर्मन में)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;अक्सर पूछे जाने वाले सवाल</h2>
+      <details>
+        <summary>इसकी कीमत क्या है?</summary>
+        <p>पहली 3 चिट्ठियाँ मुफ़्त हैं (प्रतीक्षा सूची के कोड से 5)। उसके बाद आप क्रेडिट खरीदते हैं: 5 विश्लेषण 2,99 € में या 15 विश्लेषण 6,99 € में। कोई सदस्यता नहीं, कोई खाता नहीं।</p>
+      </details>
+      <details>
+        <summary>यह कौन-सी चिट्ठियाँ समझा सकता है?</summary>
+        <p>जॉबसेंटर, विदेशी विभाग, पेंशन बीमा, स्वास्थ्य बीमा, परिवार कोष (Kindergeld), कर विभाग या जुर्माना विभाग की चिट्ठियाँ — संक्षेप में, लगभग हर सरकारी चिट्ठी।</p>
+      </details>
+      <details>
+        <summary>मेरे डेटा का क्या होता है?</summary>
+        <p>आपकी चिट्ठियाँ आपके अपने उपकरण पर एन्क्रिप्टेड रहती हैं। विश्लेषण के लिए फ़ोटो एक बार सुरक्षित रूप से एआई को भेजी जाती है और वहाँ अधिकतम 30 दिनों में मिटा दी जाती है। आपको खाते की ज़रूरत नहीं।</p>
+      </details>
     </section>
 
     <footer>

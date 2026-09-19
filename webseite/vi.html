@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar giải thích thư công quyền Đức bằng lời đơn giản — bằng tiếng Việt. Chụp ảnh, hiểu, trả lời đúng.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar giải thích thư công quyền Đức bằng lời đơn giản — bằng tiếng Việt. Chụp ảnh, hiểu, trả lời đúng.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Giá bao nhiêu?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "3 lá thư đầu tiên miễn phí (5 nếu có mã từ danh sách chờ). Sau đó bạn mua lượt: 5 lần phân tích 2,99 €, 15 lần 6,99 €. Không thuê bao, không cần tài khoản."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Ứng dụng giải thích được những thư nào?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Thư từ Jobcenter, Sở Ngoại kiều, bảo hiểm hưu trí, bảo hiểm y tế, quỹ gia đình (Kindergeld), sở thuế hoặc cơ quan xử phạt — nói ngắn gọn là hầu hết mọi thư chính thức."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Dữ liệu của tôi thì sao?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Thư của bạn được mã hóa và nằm trên thiết bị của bạn. Để phân tích, ảnh được gửi một lần duy nhất và an toàn tới AI, rồi bị xóa ở đó chậm nhất sau 30 ngày. Bạn không cần tài khoản."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Chúng tôi chỉ lưu địa chỉ cho một tin nhắn duy nhất này. Bạn có thể hủy đăng ký bất cứ lúc nào. <a href="datenschutz.html">Chính sách bảo mật (tiếng Đức)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Câu hỏi thường gặp</h2>
+      <details>
+        <summary>Giá bao nhiêu?</summary>
+        <p>3 lá thư đầu tiên miễn phí (5 nếu có mã từ danh sách chờ). Sau đó bạn mua lượt: 5 lần phân tích 2,99 €, 15 lần 6,99 €. Không thuê bao, không cần tài khoản.</p>
+      </details>
+      <details>
+        <summary>Ứng dụng giải thích được những thư nào?</summary>
+        <p>Thư từ Jobcenter, Sở Ngoại kiều, bảo hiểm hưu trí, bảo hiểm y tế, quỹ gia đình (Kindergeld), sở thuế hoặc cơ quan xử phạt — nói ngắn gọn là hầu hết mọi thư chính thức.</p>
+      </details>
+      <details>
+        <summary>Dữ liệu của tôi thì sao?</summary>
+        <p>Thư của bạn được mã hóa và nằm trên thiết bị của bạn. Để phân tích, ảnh được gửi một lần duy nhất và an toàn tới AI, rồi bị xóa ở đó chậm nhất sau 30 ngày. Bạn không cần tài khoản.</p>
+      </details>
     </section>
 
     <footer>

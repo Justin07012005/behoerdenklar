@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "يشرح BehördenKlar الرسائل الرسمية الألمانية بكلمات بسيطة — بالعربية. صوّر الرسالة، افهمها، وردّ بشكل صحيح.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "يشرح BehördenKlar الرسائل الرسمية الألمانية بكلمات بسيطة — بالعربية. صوّر الرسالة، افهمها، وردّ بشكل صحيح.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "كم التكلفة؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "أول 3 رسائل مجاناً (5 مع رمز قائمة الانتظار). بعد ذلك تشتري رصيداً: 5 تحليلات بـ 2,99 يورو أو 15 بـ 6,99 يورو. بدون اشتراك وبدون حساب."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "أي الرسائل يمكن شرحها؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "رسائل من مركز العمل (Jobcenter)، دائرة الأجانب، التأمين التقاعدي، التأمين الصحي، صندوق الأسرة (Kindergeld)، مكتب الضرائب أو دائرة المخالفات — باختصار: تقريباً كل رسالة رسمية."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "ماذا يحدث لبياناتي؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "تبقى رسائلك مشفّرة على جهازك. للتحليل تُرسل الصورة مرة واحدة بشكل آمن إلى الذكاء الاصطناعي وتُحذف هناك خلال 30 يوماً كحد أقصى. لا تحتاج إلى حساب."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">نحفظ بريدك لهذه الرسالة الواحدة فقط. يمكنك إلغاء الاشتراك في أي وقت. <a href="datenschutz.html">سياسة الخصوصية (بالألمانية)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;الأسئلة الشائعة</h2>
+      <details>
+        <summary>كم التكلفة؟</summary>
+        <p>أول 3 رسائل مجاناً (5 مع رمز قائمة الانتظار). بعد ذلك تشتري رصيداً: 5 تحليلات بـ 2,99 يورو أو 15 بـ 6,99 يورو. بدون اشتراك وبدون حساب.</p>
+      </details>
+      <details>
+        <summary>أي الرسائل يمكن شرحها؟</summary>
+        <p>رسائل من مركز العمل (Jobcenter)، دائرة الأجانب، التأمين التقاعدي، التأمين الصحي، صندوق الأسرة (Kindergeld)، مكتب الضرائب أو دائرة المخالفات — باختصار: تقريباً كل رسالة رسمية.</p>
+      </details>
+      <details>
+        <summary>ماذا يحدث لبياناتي؟</summary>
+        <p>تبقى رسائلك مشفّرة على جهازك. للتحليل تُرسل الصورة مرة واحدة بشكل آمن إلى الذكاء الاصطناعي وتُحذف هناك خلال 30 يوماً كحد أقصى. لا تحتاج إلى حساب.</p>
+      </details>
     </section>
 
     <footer>

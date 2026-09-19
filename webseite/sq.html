@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar i shpjegon letrat zyrtare gjermane me fjalë të thjeshta — në shqip. Bëni një foto, kuptoni, përgjigjuni saktë.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar i shpjegon letrat zyrtare gjermane me fjalë të thjeshta — në shqip. Bëni një foto, kuptoni, përgjigjuni saktë.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Sa kushton?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "3 letrat e para janë falas (5 me kodin e listës së pritjes). Më pas blini kredi: 5 analiza për 2,99 €, 15 për 6,99 €. Pa abonim dhe pa llogari."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cilat letra mund të shpjegojë?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Letra nga Jobcenter, Zyra e të Huajve, sigurimi i pensionit, sigurimi shëndetësor, arka familjare (Kindergeld), zyra e tatimeve ose zyra e gjobave — shkurt, pothuajse çdo letër zyrtare."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Çfarë ndodh me të dhënat e mia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Letrat tuaja mbeten të koduara në pajisjen tuaj. Për analizën, fotoja dërgohet një herë në mënyrë të sigurt te inteligjenca artificiale dhe fshihet atje më së voni pas 30 ditësh. Nuk ju duhet llogari."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Adresën e ruajmë vetëm për këtë mesazh të vetëm. Mund të çregjistroheni në çdo kohë. <a href="datenschutz.html">Politika e privatësisë (gjermanisht)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Pyetje të shpeshta</h2>
+      <details>
+        <summary>Sa kushton?</summary>
+        <p>3 letrat e para janë falas (5 me kodin e listës së pritjes). Më pas blini kredi: 5 analiza për 2,99 €, 15 për 6,99 €. Pa abonim dhe pa llogari.</p>
+      </details>
+      <details>
+        <summary>Cilat letra mund të shpjegojë?</summary>
+        <p>Letra nga Jobcenter, Zyra e të Huajve, sigurimi i pensionit, sigurimi shëndetësor, arka familjare (Kindergeld), zyra e tatimeve ose zyra e gjobave — shkurt, pothuajse çdo letër zyrtare.</p>
+      </details>
+      <details>
+        <summary>Çfarë ndodh me të dhënat e mia?</summary>
+        <p>Letrat tuaja mbeten të koduara në pajisjen tuaj. Për analizën, fotoja dërgohet një herë në mënyrë të sigurt te inteligjenca artificiale dhe fshihet atje më së voni pas 30 ditësh. Nuk ju duhet llogari.</p>
+      </details>
     </section>
 
     <footer>

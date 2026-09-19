@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar جرمن سرکاری خطوط کو آسان الفاظ میں سمجھاتا ہے — اردو میں۔ تصویر لیں، سمجھیں، درست جواب دیں۔",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar جرمن سرکاری خطوط کو آسان الفاظ میں سمجھاتا ہے — اردو میں۔ تصویر لیں، سمجھیں، درست جواب دیں۔",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "اس کی قیمت کیا ہے؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "پہلے 3 خط مفت ہیں (انتظار کی فہرست کے کوڈ کے ساتھ 5)۔ اس کے بعد آپ کریڈٹ خریدتے ہیں: 5 تجزیے 2,99 € میں یا 15 تجزیے 6,99 € میں۔ کوئی سبسکرپشن نہیں، کوئی اکاؤنٹ نہیں۔"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "یہ کون سے خط سمجھا سکتا ہے؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "جاب سینٹر، غیر ملکی دفتر، پنشن انشورنس، ہیلتھ انشورنس، فیملی فنڈ (Kindergeld)، ٹیکس دفتر یا جرمانہ دفتر کے خطوط — مختصراً تقریباً ہر سرکاری خط۔"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "میرے ڈیٹا کا کیا ہوتا ہے؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "آپ کے خطوط آپ کے اپنے آلے پر خفیہ شکل میں رہتے ہیں۔ تجزیے کے لیے تصویر ایک بار محفوظ طریقے سے اے آئی کو بھیجی جاتی ہے اور وہاں زیادہ سے زیادہ 30 دن میں مٹا دی جاتی ہے۔ آپ کو اکاؤنٹ کی ضرورت نہیں۔"
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">ہم آپ کا پتہ صرف اسی ایک پیغام کے لیے محفوظ رکھتے ہیں۔ آپ کبھی بھی خارج ہو سکتے ہیں۔ <a href="datenschutz.html">رازداری کی پالیسی (جرمن میں)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;اکثر پوچھے جانے والے سوالات</h2>
+      <details>
+        <summary>اس کی قیمت کیا ہے؟</summary>
+        <p>پہلے 3 خط مفت ہیں (انتظار کی فہرست کے کوڈ کے ساتھ 5)۔ اس کے بعد آپ کریڈٹ خریدتے ہیں: 5 تجزیے 2,99 € میں یا 15 تجزیے 6,99 € میں۔ کوئی سبسکرپشن نہیں، کوئی اکاؤنٹ نہیں۔</p>
+      </details>
+      <details>
+        <summary>یہ کون سے خط سمجھا سکتا ہے؟</summary>
+        <p>جاب سینٹر، غیر ملکی دفتر، پنشن انشورنس، ہیلتھ انشورنس، فیملی فنڈ (Kindergeld)، ٹیکس دفتر یا جرمانہ دفتر کے خطوط — مختصراً تقریباً ہر سرکاری خط۔</p>
+      </details>
+      <details>
+        <summary>میرے ڈیٹا کا کیا ہوتا ہے؟</summary>
+        <p>آپ کے خطوط آپ کے اپنے آلے پر خفیہ شکل میں رہتے ہیں۔ تجزیے کے لیے تصویر ایک بار محفوظ طریقے سے اے آئی کو بھیجی جاتی ہے اور وہاں زیادہ سے زیادہ 30 دن میں مٹا دی جاتی ہے۔ آپ کو اکاؤنٹ کی ضرورت نہیں۔</p>
+      </details>
     </section>
 
     <footer>

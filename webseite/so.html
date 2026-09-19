@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar wuxuu ku sharraxaa warqadaha rasmiga ah ee Jarmalka erayo fudud — af-Soomaali. Sawir qaado, faham, si sax ah uga jawaab.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar wuxuu ku sharraxaa warqadaha rasmiga ah ee Jarmalka erayo fudud — af-Soomaali. Sawir qaado, faham, si sax ah uga jawaab.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Intee ayey ku kacaysaa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "3-da warqadood ee ugu horreeya waa bilaash (5 haddii aad haysato koodhka liiska sugitaanka). Kadib waxaad iibsanaysaa rasiid: 5 falanqayn 2,99 € ama 15 falanqayn 6,99 €. Rukun ma jiro, koonto looma baahna."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Warqadaha noocee ah ayuu sharxi karaa?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Warqadaha ka yimid Jobcenter, Xafiiska Ajaanibta, caymiska hawlgabka, caymiska caafimaadka, sanduuqa qoyska (Kindergeld), xafiiska canshuuraha ama xafiiska ganaaxyada — kooban: ku dhawaad warqad kasta oo rasmi ah."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Maxaa ku dhacaya xogtayda?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Warqadahaagu waxay ku hadhayaan qalabkaaga iyagoo sir ah. Falanqaynta awgeed sawirka hal mar ayaa si ammaan ah loogu diraa AI-ga, halkaasna waxaa laga tirtiraa ugu badnaan 30 maalmood gudahood. Koonto uma baahnid."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Cinwaanka waxaan u kaydinaa kaliya fariintan keliya. Waqti kasta waad ka bixi kartaa. <a href="datenschutz.html">Siyaasadda sirta (Jarmal)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Su’aalaha inta badan la weydiiyo</h2>
+      <details>
+        <summary>Intee ayey ku kacaysaa?</summary>
+        <p>3-da warqadood ee ugu horreeya waa bilaash (5 haddii aad haysato koodhka liiska sugitaanka). Kadib waxaad iibsanaysaa rasiid: 5 falanqayn 2,99 € ama 15 falanqayn 6,99 €. Rukun ma jiro, koonto looma baahna.</p>
+      </details>
+      <details>
+        <summary>Warqadaha noocee ah ayuu sharxi karaa?</summary>
+        <p>Warqadaha ka yimid Jobcenter, Xafiiska Ajaanibta, caymiska hawlgabka, caymiska caafimaadka, sanduuqa qoyska (Kindergeld), xafiiska canshuuraha ama xafiiska ganaaxyada — kooban: ku dhawaad warqad kasta oo rasmi ah.</p>
+      </details>
+      <details>
+        <summary>Maxaa ku dhacaya xogtayda?</summary>
+        <p>Warqadahaagu waxay ku hadhayaan qalabkaaga iyagoo sir ah. Falanqaynta awgeed sawirka hal mar ayaa si ammaan ah loogu diraa AI-ga, halkaasna waxaa laga tirtiraa ugu badnaan 30 maalmood gudahood. Koonto uma baahnid.</p>
+      </details>
     </section>
 
     <footer>

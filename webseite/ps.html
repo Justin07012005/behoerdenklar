@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar د آلمان رسمي لیکونه په ساده کلمو — په پښتو — تشریح کوي. عکس واخلئ، پوه شئ، سم ځواب ورکړئ.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar د آلمان رسمي لیکونه په ساده کلمو — په پښتو — تشریح کوي. عکس واخلئ، پوه شئ، سم ځواب ورکړئ.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "بیه یې څومره ده؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "لومړي ۳ لیکونه وړیا دي (د انتظار لړلیک کوډ سره ۵). وروسته تاسو کریډیټ اخلئ: ۵ شننې په ۲٫۹۹ یورو یا ۱۵ په ۶٫۹۹ یورو. نه ګډون، نه حساب."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "کوم لیکونه رابرسېره کولی شي؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "د جاب سنټر، د بهرنیانو ادارې، د تقاعد بیمې، روغتیايي بیمې، کورنۍ صندوق (Kindergeld)، مالیې ادارې یا د جریمو ادارې لیکونه — په لنډه توګه نږدې هر رسمي لیک."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "زما معلوماتو ته څه کیږي؟",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ستاسو لیکونه پټ شوي ستاسو په خپله وسیله پاتې کیږي. د شننې لپاره عکس یو ځل په خوندي ډول مصنوعي ځیرکتیا ته لیږل کیږي او هلته تر ۳۰ ورځو وروسته ړنګېږي. حساب ته اړتیا نشته."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">موږ ستاسو پته یوازې د همدې یو پیغام لپاره ساتو. هر وخت کولی شئ ځان ایسته کړئ. <a href="datenschutz.html">د محرمیت تګلاره (په آلماني)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;ډېرې پوښتل شوې پوښتنې</h2>
+      <details>
+        <summary>بیه یې څومره ده؟</summary>
+        <p>لومړي ۳ لیکونه وړیا دي (د انتظار لړلیک کوډ سره ۵). وروسته تاسو کریډیټ اخلئ: ۵ شننې په ۲٫۹۹ یورو یا ۱۵ په ۶٫۹۹ یورو. نه ګډون، نه حساب.</p>
+      </details>
+      <details>
+        <summary>کوم لیکونه رابرسېره کولی شي؟</summary>
+        <p>د جاب سنټر، د بهرنیانو ادارې، د تقاعد بیمې، روغتیايي بیمې، کورنۍ صندوق (Kindergeld)، مالیې ادارې یا د جریمو ادارې لیکونه — په لنډه توګه نږدې هر رسمي لیک.</p>
+      </details>
+      <details>
+        <summary>زما معلوماتو ته څه کیږي؟</summary>
+        <p>ستاسو لیکونه پټ شوي ستاسو په خپله وسیله پاتې کیږي. د شننې لپاره عکس یو ځل په خوندي ډول مصنوعي ځیرکتیا ته لیږل کیږي او هلته تر ۳۰ ورځو وروسته ړنګېږي. حساب ته اړتیا نشته.</p>
+      </details>
     </section>
 
     <footer>

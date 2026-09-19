@@ -148,56 +148,94 @@
     }
     .wl-input::placeholder { color: #9a958a; }
     .wl-btn { width: 100%; cursor: pointer; text-align: center; font-family: inherit; }
+    details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
+    summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    summary::-webkit-details-marker { display: none; }
+    summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
+    details[open] summary::after { content: '–'; }
+    details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
   </style>
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "BehördenKlar",
-    "description": "BehördenKlar обяснява официалните немски писма с прости думи — на български. Снимайте, разберете, отговорете правилно.",
-    "applicationCategory": "AccessibilityApplication",
-    "operatingSystem": "iOS, Web",
-    "inLanguage": [
-      "de",
-      "tr",
-      "ar",
-      "ru",
-      "uk",
-      "pl",
-      "ro",
-      "en",
-      "fa",
-      "ku",
-      "bg",
-      "hr",
-      "sr",
-      "bs",
-      "sq",
-      "it",
-      "el",
-      "es",
-      "pt",
-      "fr",
-      "hu",
-      "vi",
-      "hi",
-      "ur",
-      "ps",
-      "ti",
-      "so",
-      "zh"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "EUR"
+  [
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BehördenKlar",
+      "description": "BehördenKlar обяснява официалните немски писма с прости думи — на български. Снимайте, разберете, отговорете правилно.",
+      "applicationCategory": "AccessibilityApplication",
+      "operatingSystem": "iOS, Web",
+      "inLanguage": [
+        "de",
+        "tr",
+        "ar",
+        "ru",
+        "uk",
+        "pl",
+        "ro",
+        "en",
+        "fa",
+        "ku",
+        "bg",
+        "hr",
+        "sr",
+        "bs",
+        "sq",
+        "it",
+        "el",
+        "es",
+        "pt",
+        "fr",
+        "hu",
+        "vi",
+        "hi",
+        "ur",
+        "ps",
+        "ti",
+        "so",
+        "zh"
+      ],
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Webklar GbR",
+        "url": "https://behoerdenklar.de"
+      }
     },
-    "author": {
-      "@type": "Organization",
-      "name": "Webklar GbR",
-      "url": "https://behoerdenklar.de"
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Колко струва?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Първите 3 писма са безплатни (5 с кода от списъка на чакащите). След това купувате кредит: 5 анализа за 2,99 €, 15 за 6,99 €. Без абонамент и без регистрация."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Кои писма може да обясни приложението?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Писма от Jobcenter, службата за чужденци, пенсионното осигуряване, здравната каса, семейната каса (Kindergeld), данъчната служба или службата за глоби — накратко почти всяко официално писмо."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Какво става с данните ми?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Писмата ви остават криптирани на вашето устройство. За анализа снимката се изпраща еднократно и защитено към ИИ и се изтрива там най-късно след 30 дни. Не ви трябва регистрация."
+          }
+        }
+      ]
     }
-  }
+  ]
   </script>
 </head>
 <body>
@@ -294,6 +332,22 @@
         </form>
         <p class="klein">Пазим адреса само за това едно съобщение. Можете да се отпишете по всяко време. <a href="datenschutz.html">Политика за поверителност (на немски)</a>.</p>
       </div>
+    </section>
+
+    <section>
+      <h2>§ 4 &nbsp;Често задавани въпроси</h2>
+      <details>
+        <summary>Колко струва?</summary>
+        <p>Първите 3 писма са безплатни (5 с кода от списъка на чакащите). След това купувате кредит: 5 анализа за 2,99 €, 15 за 6,99 €. Без абонамент и без регистрация.</p>
+      </details>
+      <details>
+        <summary>Кои писма може да обясни приложението?</summary>
+        <p>Писма от Jobcenter, службата за чужденци, пенсионното осигуряване, здравната каса, семейната каса (Kindergeld), данъчната служба или службата за глоби — накратко почти всяко официално писмо.</p>
+      </details>
+      <details>
+        <summary>Какво става с данните ми?</summary>
+        <p>Писмата ви остават криптирани на вашето устройство. За анализа снимката се изпраща еднократно и защитено към ИИ и се изтрива там най-късно след 30 дни. Не ви трябва регистрация.</p>
+      </details>
     </section>
 
     <footer>
