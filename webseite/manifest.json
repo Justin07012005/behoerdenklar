@@ -1,0 +1,13 @@
+{
+  "name": "BehördenKlar",
+  "short_name": "BehördenKlar",
+  "description": "Schwierige Briefe von Amt, Versicherung, Vermieter oder Bank in einfacher Sprache erklärt.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#faf7f0",
+  "theme_color": "#1d4e89",
+  "lang": "de",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
