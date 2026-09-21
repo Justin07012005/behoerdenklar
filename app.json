@@ -30,7 +30,8 @@
         "expo-image-picker",
         {
           "cameraPermission": "BehördenKlar braucht die Kamera, um Ihre Behördenbriefe zu fotografieren.",
-          "photosPermission": "BehördenKlar braucht Zugriff auf Ihre Fotos, um gespeicherte Brief-Fotos auszuwählen."
+          "photosPermission": "BehördenKlar braucht Zugriff auf Ihre Fotos, um gespeicherte Brief-Fotos auszuwählen.",
+          "microphonePermission": false
         }
       ],
       [
