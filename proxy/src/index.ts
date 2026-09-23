@@ -509,6 +509,14 @@ async function kaufenHandler(request: Request, env: Env): Promise<Response> {
   const walletId = crypto.randomUUID();
   const params = new URLSearchParams();
   params.set('mode', 'payment');
+  // Zahlungsart fest auf Karte setzen. Ohne diese Angabe waehlt Stripe die
+  // Methoden selbst ("dynamic payment methods") und stellt Link ganz nach
+  // vorn — mit gespeicherter Karte und einem kleinen, englischen
+  // "Pay without Link" als einzigem Ausweg. Fuer Menschen, die Deutsch kaum
+  // lesen, ist das eine Sackgasse. Sobald weitere Methoden (PayPal, Klarna)
+  // im Stripe-Konto freigeschaltet sind, hier ergaenzen — sonst erscheinen
+  // sie nicht, weil diese Angabe die automatische Auswahl abschaltet.
+  params.set('payment_method_types[0]', 'card');
   params.set('line_items[0][price]', priceId);
   params.set('line_items[0][quantity]', '1');
   params.set('success_url', `${origin}/demo?kauf=ok&session_id={CHECKOUT_SESSION_ID}`);
