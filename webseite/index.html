@@ -735,7 +735,7 @@
       fetch(BASIS + '/kaufen', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ priceId: priceId }),
+        body: JSON.stringify({ priceId: priceId, sprache: 'de' }),
       })
         .then(function (r) { return r.json(); })
         .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('keine url'); })

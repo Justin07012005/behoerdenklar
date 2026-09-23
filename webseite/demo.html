@@ -795,7 +795,7 @@
       fetch(KAUFEN_ENDPUNKT, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ priceId: priceId }),
+        body: JSON.stringify({ priceId: priceId, sprache: zielsprache() }),
       })
         .then(function (r) { return r.json(); })
         .then(function (d) {

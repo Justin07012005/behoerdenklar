@@ -407,7 +407,7 @@
       if (!konsens.checked) { fehler.style.display = 'block'; fehler.textContent = 'कृपया पहले बॉक्स पर निशान लगाएँ।'; konsens.focus(); return; }
       fehler.style.display = 'none';
       var alt = knopf.innerHTML; knopf.disabled = true;
-      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId }) })
+      fetch(BASIS + '/kaufen', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ priceId: priceId, sprache: 'hi' }) })
         .then(function (r) { return r.json(); })
         .then(function (d) { if (d && d.url) { window.location.href = d.url; return; } throw new Error('x'); })
         .catch(function () { knopf.disabled = false; knopf.innerHTML = alt; fehler.style.display = 'block'; fehler.textContent = 'भुगतान पृष्ठ नहीं खुल सका। कृपया फिर कोशिश करें।'; });

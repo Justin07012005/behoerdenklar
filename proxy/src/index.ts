@@ -477,13 +477,26 @@ async function guthabenMail(env: Env, email: string, link: string, credits: numb
 }
 
 /** POST /kaufen — Stripe-Checkout-Session anlegen. */
+/**
+ * Sprachen, die die Stripe-Bezahlseite selbst beherrscht. Nur diese duerfen
+ * als `locale` mitgegeben werden — ein unbekannter Wert laesst Stripe die
+ * Session mit 400 ablehnen, und der Kauf waere kaputt. Fehlt eine Sprache
+ * hier (z. B. Arabisch, Tigrinya), schicken wir GAR NICHTS mit; Stripe
+ * waehlt dann selbst anhand des Browsers.
+ */
+const STRIPE_SPRACHEN = new Set([
+  'bg','cs','da','de','el','en','es','et','fi','fil','fr','hr','hu','id','it',
+  'ja','ko','lt','lv','ms','mt','nb','nl','pl','pt','ro','ru','sk','sl','sv',
+  'th','tr','vi','zh',
+]);
+
 async function kaufenHandler(request: Request, env: Env): Promise<Response> {
   const origin = request.headers.get('origin');
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: demoCorsHeaders(origin) });
   if (request.method !== 'POST') return demoFehler(405, 'methode', 'Nur POST erlaubt.', origin);
   if (!origin || !DEMO_ORIGIN_MUSTER.test(origin)) return demoFehler(403, 'origin', 'Aufruf nur von der BehördenKlar-Webseite erlaubt.', origin);
 
-  let body: { priceId?: string };
+  let body: { priceId?: string; sprache?: string };
   try {
     body = await request.json();
   } catch {
@@ -503,6 +516,10 @@ async function kaufenHandler(request: Request, env: Env): Promise<Response> {
   params.set('metadata[walletId]', walletId);
   params.set('metadata[credits]', String(paket.credits));
   params.set('metadata[origin]', origin);
+  // Bezahlseite in der Sprache zeigen, aus der der Nutzer kommt.
+  if (typeof body.sprache === 'string' && STRIPE_SPRACHEN.has(body.sprache)) {
+    params.set('locale', body.sprache);
+  }
 
   const r = await fetch('https://api.stripe.com/v1/checkout/sessions', {
     method: 'POST',
