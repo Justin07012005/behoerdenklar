@@ -384,11 +384,11 @@
         <p class="ampelzeile" id="ergAmpel" style="display: none;"></p>
       </div>
 
-      <div class="brief-karte" id="ergKalenderKarte" style="display: none; border: 2px solid var(--amtsblau);">
-        <span class="karten-label">Nicht vergessen</span>
+      <div class="brief-karte" id="ergKalenderKarte" style="display: none;">
+        <span class="karten-label" id="ergKalenderLabel">Nicht vergessen</span>
         <div id="ergKalenderText" style="margin-top: 6px;"></div>
         <button class="cta" id="kalenderKnopf" type="button" style="margin-top: 12px;">📅 In meinen Kalender eintragen</button>
-        <p class="klein">
+        <p class="klein" id="ergKalenderHinweis">
           Ihr Handy erinnert Sie <strong>3 Tage</strong> und <strong>1 Tag</strong> vorher.
           Der Eintrag landet nur in Ihrem eigenen Kalender — wir speichern nichts.
         </p>
@@ -874,13 +874,33 @@
 
     function zeigeKalender(a) {
       var karte = document.getElementById('ergKalenderKarte');
+      var knopf = document.getElementById('kalenderKnopf');
+      var hinweis = document.getElementById('ergKalenderHinweis');
+      var label = document.getElementById('ergKalenderLabel');
       var frist = a.frist && isoGueltig(a.frist.datum) ? a.frist : null;
       var termin = a.termin && isoGueltig(a.termin.datum) ? a.termin : null;
-      if (!frist && !termin) return;
-      letzteAnalyse = a;
       var box = document.getElementById('ergKalenderText');
       box.innerHTML = '';
       function zeile(text) { var p = document.createElement('p'); p.setAttribute('dir', 'auto'); p.textContent = text; box.appendChild(p); }
+
+      // Kein Datum im Brief: trotzdem sichtbar sagen, dass gesucht wurde.
+      // Sonst weiss niemand, ob nichts da ist oder etwas kaputt ist — und
+      // "keine Frist" ist fuer einen aengstlichen Leser selbst eine Nachricht.
+      if (!frist && !termin) {
+        letzteAnalyse = null;
+        label.textContent = 'Frist und Termin';
+        zeile('✓ In diesem Brief steht keine Frist und kein Termin — es gibt nichts in den Kalender einzutragen.');
+        knopf.style.display = 'none';
+        hinweis.style.display = 'none';
+        karte.style.border = '';
+        karte.style.display = 'block';
+        return;
+      }
+      letzteAnalyse = a;
+      label.textContent = 'Nicht vergessen';
+      knopf.style.display = '';
+      hinweis.style.display = '';
+      karte.style.border = '2px solid var(--amtsblau)';
       if (frist) zeile('⚠️ Frist: ' + deDatum(frist.datum) + (frist.aktion ? ' — ' + frist.aktion : ''));
       if (termin) zeile('📅 Termin: ' + deDatum(termin.datum) + (termin.uhrzeit ? ', ' + termin.uhrzeit + ' Uhr' : '') + (termin.ort ? ' — ' + termin.ort : ''));
       karte.style.display = 'block';
