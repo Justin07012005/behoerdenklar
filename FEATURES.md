@@ -23,6 +23,71 @@ Selbständige.
 
 ---
 
+## Was BehördenKlar kann, was ein Übersetzer nicht kann
+
+Der Unterschied zu DeepL, Google Translate oder ChatGPT ist **nicht** die
+Übersetzung. Es ist, dass aus einem Foto **strukturierte Daten** werden, mit
+denen die App dann selbst weiterarbeitet.
+
+### 1. Die KI liest Termine und Fristen heraus — als echte Daten
+Nicht als Fließtext, sondern als Felder, mit denen sich rechnen lässt:
+
+| Feld | Was |
+|---|---|
+| `frist` | Datum (ISO) **+ was konkret zu tun ist** |
+| `termin` | Datum, **Uhrzeit**, **Ort** |
+| `brieftyp` · `absender` | Wer schreibt, worum geht es |
+| `checkliste` | konkrete To-dos |
+| `antwort_noetig` | muss überhaupt geantwortet werden? |
+| `antwort_optionen` | welche Antworten kommen infrage |
+| `fachbegriffe` | schwere Wörter + Erklärung |
+
+**Sicherheitsregel im Prompt:** *„Wenn du ein Datum nicht sicher lesen kannst,
+lass das Feld null — erfinde niemals Daten."* Ein halluziniertes Frist-Datum wäre
+schlimmer als gar keins.
+
+### 2. Erinnerungen werden **automatisch** gestellt
+Sofort nach der Analyse, **ohne dass der Nutzer irgendetwas tut**
+(`ScanScreen` → `planeErinnerungen`). Pro Brief bis zu **vier** Benachrichtigungen:
+
+- **3 Tage** und **1 Tag** vor der **Frist**
+- **3 Tage** und **1 Tag** vor dem **Termin**
+
+Jeweils morgens um 9 Uhr, mit dem konkreten Text: *„Frist in 3 Tagen: Jobcenter —
+bis 30.09.: Unterlagen einreichen"*.
+
+**Das ist das eigentliche Produktversprechen:** Man muss nichts mehr im Kopf
+behalten. Ein Übersetzer sagt dir, was dasteht. BehördenKlar meldet sich von
+selbst, bevor es zu spät ist.
+
+### 3. Termin in den Kalender — auf einen Tastendruck
+`AnalyseScreen` → `terminZumKalender`, inklusive Erinnerung einen Tag vorher.
+
+**Bewusst nicht vollautomatisch:** Ungefragt in den Kalender eines Menschen zu
+schreiben, wäre übergriffig — und iOS verlangt ohnehin eine Freigabe. Die
+*Erinnerungen* laufen automatisch, der *Kalendereintrag* auf Wunsch.
+
+### 4. Ampel statt Datum
+Rot ≤ 7 Tage, gelb ≤ 21, sonst grün. Die Startseite sortiert nach
+**Dringlichkeit**, nicht nach Eingang — man sieht sofort, was brennt.
+
+### 5. Antwort-Entwurf
+Die KI schlägt vor, *ob* geantwortet werden muss und *welche* Antworten infrage
+kommen. Der `AntwortScreen` führt in drei Schritten zum fertigen Text, als PDF
+oder zum Teilen.
+
+### 6. Fachbegriffe bleiben deutsch
+Bei der Übersetzung wird **nur die Erklärung** übersetzt, der deutsche Begriff
+bleibt stehen. Sonst findet man ihn im Original-Brief nicht wieder. Dazu ein
+**Amts-Wörterbuch, das offline funktioniert**.
+
+### 7. Ohne Konto, verschlüsselt
+Kein Login, keine Registrierung. Briefe liegen AES-256-GCM-verschlüsselt auf dem
+Gerät, Schlüssel im SecureStore. Optional App-Sperre und Auto-Löschen nach
+30 oder 90 Tagen.
+
+---
+
 ## Die drei Teile
 
 | Teil | Was | Wo |
@@ -61,7 +126,8 @@ Navigation: untere Leiste **Fristen · Scannen (FAB) · Archiv**.
 - **Verschlüsseltes Archiv:** AES-256-GCM, Schlüssel im SecureStore (`krypto.ts`)
 - **App-Sperre:** Face ID / Geräte-Code, plus Sichtschutz im App-Umschalter
 - **Auto-Löschen** nach 30 oder 90 Tagen (`aufbewahrung.ts`)
-- **Kalender + Erinnerungen** für Fristen (`kalender.ts`, `erinnerungen.ts`)
+- **Kalender + Erinnerungen** — siehe oben, das ist das Kernstück
+  (`kalender.ts`, `erinnerungen.ts`)
 - **Vorlesen** über die Gerätestimme — fehlt sie für eine Sprache, passiert nichts
   (abgefangen, kein Absturz)
 - **3 Gratis-Analysen** (`GRATIS_ANALYSEN` in `storage.ts`), mit Aktions-Code
