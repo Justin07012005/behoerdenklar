@@ -104,6 +104,8 @@ Deine Aufgabe:
 4. Erstelle eine konkrete Checkliste, was der Nutzer tun muss.
 5. Sei sachlich und beruhigend, nicht alarmierend.
 
+6. Telefonnummern, Namen und Aktenzeichen übernimmst du NUR, wenn sie wörtlich im Brief stehen. Eine erfundene Telefonnummer ist schlimmer als keine — dann null.
+
 Wichtig: Wenn das Bild kein Behördenbrief ist oder unlesbar ist, schreibe das klar in kernaussage und erklaerung_einfach und lasse frist/termin null.`;
 
 /** Schlanke Demo-Variante des Analyse-Schemas (ohne Antwort-Optionen —
@@ -111,7 +113,7 @@ Wichtig: Wenn das Bild kein Behördenbrief ist oder unlesbar ist, schreibe das k
 const DEMO_SCHEMA = {
   type: 'object',
   additionalProperties: false,
-  required: ['brieftyp', 'absender', 'kernaussage', 'erklaerung_einfach', 'fachbegriffe', 'frist', 'termin', 'checkliste'],
+  required: ['brieftyp', 'absender', 'kernaussage', 'erklaerung_einfach', 'fachbegriffe', 'frist', 'termin', 'checkliste', 'kontakt', 'anruf'],
   properties: {
     brieftyp: { type: 'string', description: 'Kurze Kategorie des Briefs, z. B. "Einladung Jobcenter".' },
     absender: { type: 'string', description: 'Die Behörde, die den Brief geschickt hat.' },
@@ -150,6 +152,28 @@ const DEMO_SCHEMA = {
       ],
     },
     checkliste: { type: 'array', description: 'To-do-Liste. Leer wenn nichts zu tun ist.', items: { type: 'string' } },
+    kontakt: {
+      description: 'Kontaktdaten aus dem Brief. Jedes Feld NUR, wenn es wörtlich im Brief steht — sonst null. Niemals erfinden.',
+      type: 'object', additionalProperties: false,
+      required: ['telefon', 'ansprechpartner', 'aktenzeichen', 'sprechzeiten'],
+      properties: {
+        telefon: { description: 'Telefonnummer genau wie im Brief abgedruckt, sonst null.', anyOf: [{ type: 'string' }, { type: 'null' }] },
+        ansprechpartner: { description: 'Name der zuständigen Person, sonst null.', anyOf: [{ type: 'string' }, { type: 'null' }] },
+        aktenzeichen: { description: 'Aktenzeichen, Kunden-, Steuer- oder BG-Nummer — das, wonach am Telefon gefragt wird. Sonst null.', anyOf: [{ type: 'string' }, { type: 'null' }] },
+        sprechzeiten: { description: 'Telefonische Erreichbarkeit laut Brief, sonst null.', anyOf: [{ type: 'string' }, { type: 'null' }] },
+      },
+    },
+    anruf: {
+      description: 'Spickzettel für einen Anruf bei der Behörde: 3 bis 5 kurze, höfliche Sätze, die man am Telefon sagen kann — Begrüßung, Aktenzeichen nennen, Anliegen, Nachfrage. Leeres Array, wenn ein Anruf nicht sinnvoll ist.',
+      type: 'array',
+      items: {
+        type: 'object', additionalProperties: false, required: ['deutsch', 'bedeutung'],
+        properties: {
+          deutsch: { type: 'string', description: 'Der Satz in einfachem Deutsch — genau so wird er am Telefon gesagt.' },
+          bedeutung: { type: 'string', description: 'Derselbe Satz in der Sprache des Nutzers, damit er versteht, was er sagt.' },
+        },
+      },
+    },
   },
 };
 
@@ -314,7 +338,7 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
       max_tokens: MAX_TOKENS_OBERGRENZE,
       system: sprachCode === 'de'
         ? DEMO_SYSTEM_PROMPT
-        : `${DEMO_SYSTEM_PROMPT}\n\nWICHTIG — ZIELSPRACHE: Schreibe ALLE Textfelder deiner Antwort auf ${sprachName}, nicht auf Deutsch. Ausnahme: das Feld "begriff" bei fachbegriffe bleibt der deutsche Originalbegriff aus dem Brief (der Nutzer muss ihn im Brief wiederfinden) — nur dessen "erklaerung" wird auf ${sprachName} geschrieben. Datumsangaben bleiben im ISO-Format.`,
+        : `${DEMO_SYSTEM_PROMPT}\n\nWICHTIG — ZIELSPRACHE: Schreibe ALLE Textfelder deiner Antwort auf ${sprachName}, nicht auf Deutsch. Ausnahme: das Feld "begriff" bei fachbegriffe bleibt der deutsche Originalbegriff aus dem Brief (der Nutzer muss ihn im Brief wiederfinden) — nur dessen "erklaerung" wird auf ${sprachName} geschrieben. Datumsangaben bleiben im ISO-Format. Ebenfalls NICHT übersetzen: das Feld "deutsch" bei anruf (das wird am Telefon auf Deutsch gesagt) und alle kontakt-Felder (sie stehen so im Brief).`,
       output_config: { format: { type: 'json_schema', schema: DEMO_SCHEMA } },
       messages: [
         {

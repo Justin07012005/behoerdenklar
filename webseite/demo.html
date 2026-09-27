@@ -159,6 +159,12 @@
 
     /* Ergebnis */
     #ergebnis { display: none; }
+    .anruf-satz { border-inline-start: 3px solid var(--amtsblau); background: #fff; padding: 6px 12px; margin: 10px 0; }
+    .anruf-de { font-weight: 700; margin: 0; }
+    .anruf-bed { color: var(--grau); font-size: 15px; margin: 4px 0 0; }
+    .kontakt-zeile { margin: 6px 0; font-size: 16px; }
+    .az-wert { font-family: 'Courier New', ui-monospace, monospace; font-weight: 700; background: var(--marker); padding: 1px 6px; }
+    #ergAnrufKontakt .cta { display: inline-block; width: auto; margin: 4px 0 8px; }
     .brief-karte {
       background: #fff; border: 1px solid rgba(33, 33, 29, 0.28);
       padding: 22px 24px; position: relative; margin-top: 22px;
@@ -374,18 +380,34 @@
 
       <div class="brief-karte">
         <span class="karten-label neutral" id="ergBrieftyp">Brief</span>
-        <p style="margin-top: 6px;"><strong id="ergKern"></strong></p>
+        <p style="margin-top: 6px;"><strong id="ergKern" dir="auto"></strong></p>
         <p class="ampelzeile" id="ergAmpel" style="display: none;"></p>
+      </div>
+
+      <div class="brief-karte" id="ergKalenderKarte" style="display: none; border: 2px solid var(--amtsblau);">
+        <span class="karten-label">Nicht vergessen</span>
+        <div id="ergKalenderText" style="margin-top: 6px;"></div>
+        <button class="cta" id="kalenderKnopf" type="button" style="margin-top: 12px;">📅 In meinen Kalender eintragen</button>
+        <p class="klein">
+          Ihr Handy erinnert Sie <strong>3 Tage</strong> und <strong>1 Tag</strong> vorher.
+          Der Eintrag landet nur in Ihrem eigenen Kalender — wir speichern nichts.
+        </p>
       </div>
 
       <div class="brief-karte">
         <span class="karten-label">Einfach erklärt</span>
-        <p id="ergErklaerung" style="white-space: pre-line;"></p>
+        <p id="ergErklaerung" dir="auto" style="white-space: pre-line;"></p>
       </div>
 
       <div class="brief-karte" id="ergChecklisteKarte" style="display: none;">
         <span class="karten-label neutral">Das müssen Sie tun</span>
         <div id="ergCheckliste"></div>
+      </div>
+
+      <div class="brief-karte" id="ergAnrufKarte" style="display: none;">
+        <span class="karten-label neutral">Anrufen</span>
+        <div id="ergAnrufKontakt" style="margin-top: 6px;"></div>
+        <div id="ergAnrufSaetze"></div>
       </div>
 
       <div class="brief-karte" id="ergBegriffeKarte" style="display: none;">
@@ -688,6 +710,10 @@
 
     function zeigeErgebnis(analyse, versuch, guthabenRest) {
       status.style.display = 'none';
+      // Optionale Karten zuruecksetzen. Sonst bleibt beim zweiten Brief z. B.
+      // die Checkliste des ERSTEN Briefs stehen — zwei Briefe vermischt.
+      ['ergAmpel', 'ergKalenderKarte', 'ergChecklisteKarte', 'ergAnrufKarte', 'ergBegriffeKarte']
+        .forEach(function (id) { document.getElementById(id).style.display = 'none'; });
       document.getElementById('ergBrieftyp').textContent = analyse.brieftyp || 'Ihr Brief';
       document.getElementById('ergKern').textContent = analyse.kernaussage || '';
       document.getElementById('ergErklaerung').textContent = analyse.erklaerung_einfach || '';
@@ -705,7 +731,7 @@
       if (analyse.checkliste && analyse.checkliste.length) {
         document.getElementById('ergChecklisteKarte').style.display = 'block';
         document.getElementById('ergCheckliste').innerHTML = analyse.checkliste
-          .map(function (t) { var d = document.createElement('div'); d.className = 'todo'; d.textContent = t; return d.outerHTML; })
+          .map(function (t) { var d = document.createElement('div'); d.className = 'todo'; d.setAttribute('dir', 'auto'); d.textContent = t; return d.outerHTML; })
           .join('');
       }
       if (analyse.fachbegriffe && analyse.fachbegriffe.length) {
@@ -722,6 +748,9 @@
           })
           .join('');
       }
+
+      zeigeKalender(analyse);
+      zeigeAnruf(analyse);
 
       document.getElementById('ergebnis').style.display = 'block';
 
@@ -757,6 +786,167 @@
         document.getElementById('nochmalZeile').style.display = 'block';
       }
       document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // ---- Kalender (.ics) --------------------------------------------------
+    // Die Datei entsteht im Browser und wird nirgends hochgeladen. Die
+    // Erinnerungen stellt danach der Kalender des Handys selbst.
+    var letzteAnalyse = null;
+
+    function icsText(t) {
+      return String(t || '').replace(/\\/g, '\\\\').replace(/;/g, '\;')
+        .replace(/,/g, '\\,').replace(/\r?\n/g, '\\n');
+    }
+    // RFC 5545: max. 75 BYTE pro Zeile. Nach Bytes falten, nicht nach Zeichen —
+    // arabische oder tigrinische Texte brauchen 2–4 Byte pro Zeichen.
+    function icsFalte(zeile) {
+      var enc = new TextEncoder(), teile = [], akt = '', bytes = 0;
+      for (var zeichen of zeile) {
+        var b = enc.encode(zeichen).length;
+        if (bytes + b > 75) { teile.push(akt); akt = ' ' + zeichen; bytes = 1 + b; }
+        else { akt += zeichen; bytes += b; }
+      }
+      teile.push(akt);
+      return teile.join('\r\n');
+    }
+    function isoGueltig(d) { return typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d); }
+    function deDatum(iso) { return iso.split('-').reverse().join('.'); }
+    function zweistellig(x) { return ('0' + x).slice(-2); }
+    // "Wanduhrzeit" ohne Zeitzone: der Kalender nimmt die Ortszeit des Geraets.
+    // Richtig fuer einen Termin in Deutschland, egal wo der Server steht.
+    function wanduhr(dt) {
+      return dt.getUTCFullYear() + zweistellig(dt.getUTCMonth() + 1) + zweistellig(dt.getUTCDate()) +
+        'T' + zweistellig(dt.getUTCHours()) + zweistellig(dt.getUTCMinutes()) + '00';
+    }
+    function nurDatum(dt) { return wanduhr(dt).slice(0, 8); }
+    function ausIso(iso, h, m) { var t = iso.split('-'); return new Date(Date.UTC(+t[0], +t[1] - 1, +t[2], h || 0, m || 0)); }
+    function eindeutig() {
+      return (window.crypto && crypto.randomUUID ? crypto.randomUUID() : Date.now() + '-' + Math.random().toString(16).slice(2)) + '@behoerdenklar.de';
+    }
+    function alarm(ausloeser, text) {
+      return ['BEGIN:VALARM', 'ACTION:DISPLAY', 'TRIGGER:' + ausloeser, 'DESCRIPTION:' + icsText(text), 'END:VALARM'];
+    }
+
+    function baueIcs(a) {
+      var z = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Webklar GbR//BehoerdenKlar//DE',
+               'CALSCALE:GREGORIAN', 'METHOD:PUBLISH'];
+      var titel = a.brieftyp || 'Brief', stempel = wanduhr(new Date()) + 'Z', n = 0;
+
+      if (a.frist && isoGueltig(a.frist.datum)) {
+        var fTag = ausIso(a.frist.datum);
+        var fDanach = new Date(fTag.getTime() + 86400000);
+        // Titel und Hinweis ohne deutsche Worte: Datum und Symbol versteht jeder,
+        // "aktion" kommt bereits in der Sprache des Nutzers von der KI.
+        z.push('BEGIN:VEVENT', 'UID:' + eindeutig(), 'DTSTAMP:' + stempel,
+               'DTSTART;VALUE=DATE:' + nurDatum(fTag), 'DTEND;VALUE=DATE:' + nurDatum(fDanach),
+               'SUMMARY:' + icsText('⚠️ ' + titel),
+               'DESCRIPTION:' + icsText((a.frist.aktion || '') + '\n\nbehoerdenklar.de'));
+        // Ganztaegig beginnt um 00:00 — so fallen beide Erinnerungen auf 9 Uhr morgens.
+        z.push.apply(z, alarm('-P2DT15H', '⏰ ' + titel + ' — ' + deDatum(a.frist.datum)));
+        z.push.apply(z, alarm('-PT15H', '⏰ ' + titel + ' — ' + deDatum(a.frist.datum)));
+        z.push('END:VEVENT'); n++;
+      }
+
+      if (a.termin && isoGueltig(a.termin.datum)) {
+        var zeit = a.termin.uhrzeit && String(a.termin.uhrzeit).match(/(\d{1,2})[:.](\d{2})/);
+        var h = zeit ? +zeit[1] : -1, m = zeit ? +zeit[2] : -1;
+        z.push('BEGIN:VEVENT', 'UID:' + eindeutig(), 'DTSTAMP:' + stempel);
+        if (zeit && h <= 23 && m <= 59) {
+          var beginn = ausIso(a.termin.datum, h, m);
+          var ende = new Date(beginn.getTime() + 3600000); // eine Stunde, auch ueber Mitternacht korrekt
+          z.push('DTSTART:' + wanduhr(beginn), 'DTEND:' + wanduhr(ende));
+          z.push.apply(z, alarm('-P3D', '📅 ' + titel + ' — ' + deDatum(a.termin.datum) + ', ' + zweistellig(h) + ':' + zweistellig(m)));
+          z.push.apply(z, alarm('-P1D', '📅 ' + titel + ' — ' + deDatum(a.termin.datum) + ', ' + zweistellig(h) + ':' + zweistellig(m)));
+        } else {
+          var tTag = ausIso(a.termin.datum);
+          z.push('DTSTART;VALUE=DATE:' + nurDatum(tTag), 'DTEND;VALUE=DATE:' + nurDatum(new Date(tTag.getTime() + 86400000)));
+          z.push.apply(z, alarm('-P2DT15H', '📅 ' + titel + ' — ' + deDatum(a.termin.datum)));
+          z.push.apply(z, alarm('-PT15H', '📅 ' + titel + ' — ' + deDatum(a.termin.datum)));
+        }
+        z.push('SUMMARY:' + icsText('📅 ' + titel));
+        if (a.termin.ort) z.push('LOCATION:' + icsText(a.termin.ort));
+        z.push('DESCRIPTION:' + icsText('behoerdenklar.de'), 'END:VEVENT'); n++;
+      }
+
+      z.push('END:VCALENDAR');
+      return n ? z.map(icsFalte).join('\r\n') + '\r\n' : null;
+    }
+
+    function zeigeKalender(a) {
+      var karte = document.getElementById('ergKalenderKarte');
+      var frist = a.frist && isoGueltig(a.frist.datum) ? a.frist : null;
+      var termin = a.termin && isoGueltig(a.termin.datum) ? a.termin : null;
+      if (!frist && !termin) return;
+      letzteAnalyse = a;
+      var box = document.getElementById('ergKalenderText');
+      box.innerHTML = '';
+      function zeile(text) { var p = document.createElement('p'); p.setAttribute('dir', 'auto'); p.textContent = text; box.appendChild(p); }
+      if (frist) zeile('⚠️ Frist: ' + deDatum(frist.datum) + (frist.aktion ? ' — ' + frist.aktion : ''));
+      if (termin) zeile('📅 Termin: ' + deDatum(termin.datum) + (termin.uhrzeit ? ', ' + termin.uhrzeit + ' Uhr' : '') + (termin.ort ? ' — ' + termin.ort : ''));
+      karte.style.display = 'block';
+    }
+
+    document.getElementById('kalenderKnopf').addEventListener('click', function () {
+      if (!letzteAnalyse) return;
+      var ics = baueIcs(letzteAnalyse);
+      if (!ics) return;
+      var url = URL.createObjectURL(new Blob([ics], { type: 'text/calendar;charset=utf-8' }));
+      var link = document.createElement('a');
+      link.href = url; link.download = 'BehoerdenKlar-Termin.ics';
+      document.body.appendChild(link); link.click(); link.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 10000);
+    });
+
+    // ---- Anruf-Hilfe ------------------------------------------------------
+    function zeigeAnruf(a) {
+      var karte = document.getElementById('ergAnrufKarte');
+      var k = a.kontakt || {}, saetze = Array.isArray(a.anruf) ? a.anruf : [];
+      if (!k.telefon && !saetze.length) return;
+
+      var box = document.getElementById('ergAnrufKontakt');
+      box.innerHTML = '';
+      if (k.telefon) {
+        var knopf = document.createElement('a');
+        knopf.className = 'cta';
+        knopf.href = 'tel:' + String(k.telefon).replace(/[^\d+]/g, '');
+        knopf.textContent = '📞 ' + k.telefon;
+        box.appendChild(knopf);
+      }
+      function angabe(label, wert, hervorheben) {
+        if (!wert) return;
+        var p = document.createElement('p'); p.className = 'kontakt-zeile';
+        var b = document.createElement('strong'); b.textContent = label + ': ';
+        var w = document.createElement('span'); w.textContent = wert;
+        if (hervorheben) w.className = 'az-wert';
+        p.appendChild(b); p.appendChild(w); box.appendChild(p);
+      }
+      angabe('Ansprechpartner', k.ansprechpartner);
+      angabe('Erreichbar', k.sprechzeiten);
+      angabe('Danach werden Sie gefragt', k.aktenzeichen, true);
+
+      var liste = document.getElementById('ergAnrufSaetze');
+      liste.innerHTML = '';
+      if (saetze.length) {
+        var kopf = document.createElement('p');
+        kopf.style.marginTop = '12px';
+        kopf.innerHTML = '<strong>Das können Sie am Telefon sagen:</strong>';
+        liste.appendChild(kopf);
+        var mitBedeutung = zielsprache() !== 'de';
+        saetze.forEach(function (s) {
+          var d = document.createElement('div'); d.className = 'anruf-satz';
+          var de = document.createElement('p'); de.className = 'anruf-de';
+          de.textContent = '„' + s.deutsch + '“';
+          d.appendChild(de);
+          if (mitBedeutung && s.bedeutung && s.bedeutung !== s.deutsch) {
+            var be = document.createElement('p'); be.className = 'anruf-bed';
+            be.setAttribute('dir', 'auto');
+            be.textContent = s.bedeutung;
+            d.appendChild(be);
+          }
+          liste.appendChild(d);
+        });
+      }
+      karte.style.display = 'block';
     }
 
     // ---- Guthaben kaufen ------------------------------------------------

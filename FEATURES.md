@@ -60,13 +60,38 @@ bis 30.09.: Unterlagen einreichen"*.
 behalten. Ein Übersetzer sagt dir, was dasteht. BehördenKlar meldet sich von
 selbst, bevor es zu spät ist.
 
-### 3. Termin in den Kalender — auf einen Tastendruck
-`AnalyseScreen` → `terminZumKalender`, inklusive Erinnerung einen Tag vorher.
+### 3. Frist und Termin in den Kalender — auch im Web
+**App:** `AnalyseScreen` → `terminZumKalender`, auf Tastendruck.
 
-**Bewusst nicht vollautomatisch:** Ungefragt in den Kalender eines Menschen zu
-schreiben, wäre übergriffig — und iOS verlangt ohnehin eine Freigabe. Die
-*Erinnerungen* laufen automatisch, der *Kalendereintrag* auf Wunsch.
+**Web (seit 27.09.):** Nach der Analyse erscheint direkt unter der Frist
+„📅 In meinen Kalender eintragen". Der Browser erzeugt eine `.ics`-Datei mit
+Frist **und** Termin, jeweils mit Erinnerung **3 Tage und 1 Tag vorher**. Die
+Datei entsteht auf dem Gerät und wird **nirgends hochgeladen** — die Erinnerungen
+stellt danach der Kalender des Handys selbst. Funktioniert ohne App und ohne Konto.
 
+Details, die schiefgehen können und abgesichert sind:
+- Zeilen nach **Bytes** gefaltet (RFC 5545: max. 75), nicht nach Zeichen —
+  Arabisch/Tigrinya brauchen 2–4 Byte pro Zeichen
+- Termin um 23:30 endet korrekt am **nächsten** Tag
+- Uhrzeit ohne Zeitzone („Wanduhrzeit") = Ortszeit des Geräts
+- Titel und Erinnerungstext ohne deutsche Wörter: Symbol + Datum versteht jeder,
+  die `aktion` kommt schon in der Sprache des Nutzers
+
+**Bewusst nicht vollautomatisch:** Ungefragt in einen fremden Kalender zu
+schreiben, wäre übergriffig.
+
+### 3b. Anruf-Hilfe (Web, seit 27.09.)
+Die KI liest `kontakt` aus dem Brief — Telefon, Ansprechpartner, Aktenzeichen,
+Sprechzeiten — und schreibt einen **Spickzettel** mit 3–5 Sätzen für das Telefonat.
+
+- Telefonnummer als **Anruf-Knopf** (`tel:`)
+- Aktenzeichen **hervorgehoben** — danach wird am Telefon zuerst gefragt
+- Jeder Satz **auf Deutsch** (so wird er gesagt) und darunter in der Sprache
+  des Nutzers (damit er versteht, was er sagt)
+
+**Regel im Prompt:** Kontaktdaten nur, wenn sie **wörtlich** im Brief stehen.
+Getestet mit einem Brief ohne Telefonnummer → `telefon: null`, nichts erfunden.
+Eine falsche Nummer wäre schlimmer als keine.
 ### 4. Ampel statt Datum
 Rot ≤ 7 Tage, gelb ≤ 21, sonst grün. Die Startseite sortiert nach
 **Dringlichkeit**, nicht nach Eingang — man sieht sofort, was brennt.
