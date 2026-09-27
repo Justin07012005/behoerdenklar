@@ -888,8 +888,13 @@
       // "keine Frist" ist fuer einen aengstlichen Leser selbst eine Nachricht.
       if (!frist && !termin) {
         letzteAnalyse = null;
-        label.textContent = 'Frist und Termin';
-        zeile('✓ In diesem Brief steht keine Frist und kein Termin — es gibt nichts in den Kalender einzutragen.');
+        // NICHT "keine Frist" behaupten: Manche Briefe nennen wiederkehrende
+        // oder bedingte Fristen ("bis zum 10. Tag nach jedem Vierteljahr"),
+        // aus denen sich kein einzelnes Datum machen laesst. Ein Haekchen
+        // wuerde dann "alles erledigt" signalisieren — gefaehrlich falsch.
+        label.textContent = 'Kalender';
+        zeile('ℹ️ Kein festes Datum zum Eintragen gefunden.');
+        zeile('Wichtig: Manche Fristen haben kein festes Datum, zum Beispiel „jedes Vierteljahr" oder nur unter bestimmten Bedingungen. Lesen Sie dazu die Erklärung oben.');
         knopf.style.display = 'none';
         hinweis.style.display = 'none';
         karte.style.border = '';
