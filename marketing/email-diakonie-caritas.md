@@ -1,3 +1,6 @@
+> ⚠️ **VERALTET (Juli 2026).** Spricht noch von iPhone-App, Abo 2,99 €/Monat und
+> der alten Domain. Aktuelle Fassung: `outreach-september.md`.
+
 # E-Mails Nr. 2 + 3: Diakonie Donnersbergkreis & Caritas Kaiserslautern
 
 Absender: behoerdenbriefhelfer@gmail.com

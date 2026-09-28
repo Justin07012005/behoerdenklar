@@ -1,3 +1,6 @@
+> ⚠️ **VERALTET (Juli 2026).** Spricht noch von iPhone-App, Abo 2,99 €/Monat und
+> der alten Domain. Aktuelle Fassung: `outreach-september.md`.
+
 # E-Mail-Vorlage: Beratungsstellen
 
 Absender: behoerdenbriefhelfer@gmail.com
