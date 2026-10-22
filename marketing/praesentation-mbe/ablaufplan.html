@@ -14,25 +14,25 @@
   :root { --papier: #faf7f0; --tinte: #21211d; --grau: #6b675e; --amtsblau: #1d4e89; --rot: #b3372b; --marker: #ffe66b; --gruen: #2e7d4f; }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body { font-family: Georgia, 'Times New Roman', serif; color: var(--tinte); }
-  .seite { width: 210mm; height: 297mm; padding: 11mm 14mm; background: var(--papier); overflow: hidden; position: relative; page-break-after: always; font-size: 9.6pt; line-height: 1.4; }
+  .seite { width: 210mm; height: 297mm; padding: 11mm 14mm; background: var(--papier); overflow: hidden; position: relative; page-break-after: always; font-size: 9.3pt; line-height: 1.34; }
   .seite:last-child { page-break-after: auto; }
   .mono { font-family: 'Courier New', monospace; }
   .kopf { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.6mm solid var(--tinte); padding-bottom: 2mm; }
   .kopf b { font-size: 12.5pt; }
   .kopf span { font-family: 'Courier New', monospace; font-size: 8pt; color: var(--grau); }
-  h1 { font-size: 20pt; line-height: 1.15; margin-top: 4mm; }
+  h1 { font-size: 18pt; line-height: 1.15; margin-top: 3mm; }
   .markiert { background: linear-gradient(104deg, transparent 2%, var(--marker) 4%, var(--marker) 96%, transparent 98%); padding: 0 1.5mm; }
   .unter { color: var(--grau); margin-top: 1.5mm; font-size: 9.5pt; }
   h2 { font-family: 'Courier New', monospace; font-weight: 400; font-size: 8pt; text-transform: uppercase; letter-spacing: .14em; color: var(--grau);
        margin: 5mm 0 2.5mm; display: flex; gap: 3mm; align-items: center; }
   h2::after { content: ''; flex: 1; border-top: 0.25mm solid rgba(33,33,29,.25); }
-  .schritt { display: grid; grid-template-columns: 17mm 1fr; gap: 3mm; padding: 2.4mm 0; border-bottom: 0.25mm dotted rgba(33,33,29,.35); }
+  .schritt { display: grid; grid-template-columns: 17mm 1fr; gap: 3mm; padding: 1.6mm 0; border-bottom: 0.25mm dotted rgba(33,33,29,.35); }
   .zeit { font-family: 'Courier New', monospace; font-weight: 700; color: var(--amtsblau); font-size: 9pt; }
   .schritt h3 { font-size: 10.5pt; margin-bottom: .8mm; }
-  .sag { border-left: 0.8mm solid var(--amtsblau); background: #fff; padding: 1.2mm 2.5mm; margin: 1mm 0; font-style: italic; }
+  .sag { border-left: 0.8mm solid var(--amtsblau); background: #fff; padding: 1mm 2.5mm; margin: 0.8mm 0; font-style: italic; }
   ol, ul { padding-left: 5mm; }
   li { margin-bottom: .6mm; }
-  .ziel { margin-top: 4mm; border: 0.6mm solid var(--tinte); box-shadow: 1.5mm 1.8mm 0 rgba(33,33,29,.9); background: #fff; padding: 3mm 4mm; }
+  .ziel { margin-top: 3mm; border: 0.6mm solid var(--tinte); box-shadow: 1.5mm 1.8mm 0 rgba(33,33,29,.9); background: #fff; padding: 3mm 4mm; }
   .ziel b { color: var(--rot); }
   .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
   .kasten { background: #fff; border: 0.3mm solid rgba(33,33,29,.3); padding: 2.5mm 3.5mm; }
@@ -68,18 +68,18 @@
     <h3>Live-Vorführung mit dem Musterbrief</h3>
     <ol>
       <li>Laptop: <b>behoerdenklar.de/demo</b> ist schon offen, Sprache <b>Arabisch</b> gewählt, Vorführ-Code eingelöst.</li>
-      <li>„Lieber mit dem Handy fotografieren“ antippen, mit dem Handy den QR-Code scannen.</li>
-      <li>Ausgedruckten Musterbrief fotografieren. <i>„Das dauert etwa eine Minute.“</i></li>
+      <li>„Lieber mit dem Handy fotografieren“ erst jetzt antippen (QR gilt 15 Min.), mit dem Handy scannen. Am Handy: Häkchen, „Brief auswählen“, Foto, „Foto verwenden“.</li>
+      <li>Ausgedruckten Musterbrief fotografieren. <i>„Das dauert ein bis zwei Minuten.“</i> In der Wartezeit den Datenschutz-Teil erzählen.</li>
       <li>Laptop zeigt die Erklärung <b>auf Deutsch</b>, das Handy <b>auf Arabisch</b>. Kurz umschalten.</li>
-      <li>Zeigen: <b>rote Ampel</b> (Termin in 7 Tagen), <b>„In meinen Kalender“</b>, <b>Anruf-Hilfe</b> mit Aktenzeichen, Fachbegriff „Fiktionsbescheinigung“ bleibt deutsch.</li>
-      <li>„Ergebnis aufs Handy mitnehmen“: So nimmt jemand die Erklärung nach der Beratung mit nach Hause.</li>
+      <li>Zeigen: <b>rote Ampel</b> (Termin nächste Woche), <b>„In meinen Kalender“</b>, <b>Anruf-Hilfe</b> mit Aktenzeichen, Fachbegriff „Fiktionsbescheinigung“ bleibt deutsch.</li>
+      <li>„Ergebnis aufs Handy mitnehmen“: eine Beraterin mit <b>ihrem</b> Handy scannen lassen. Den Kalender-Eintrag am Handy zeigen, nicht am Laptop.</li>
     </ol>
     <p class="sag">„Alles, was Sie sehen, geht ohne App, im Browser, auf jedem Handy, ohne Konto. Eine App kommt später dazu, zum Beispiel für Erinnerungen.“</p>
   </div></div>
 
   <div class="schritt"><span class="zeit">8–9'</span><div>
     <h3>Datenschutz ehrlich (bevor sie fragen)</h3>
-    <p class="sag">„Kein Konto, wir speichern keine Briefe. Zwischen PC und Handy ist alles Ende-zu-Ende verschlüsselt. Die Erklärung macht ein KI-Dienst in den USA, Anthropic. Der löscht nach spätestens 30 Tagen und trainiert nicht damit. Das steht auch vor dem Hochladen auf der Seite.“</p>
+    <p class="sag">„Kein Konto, wir speichern keine Briefe. Zwischen PC und Handy ist alles Ende-zu-Ende verschlüsselt. Die Erklärung macht ein KI-Dienst in den USA, Anthropic. Der löscht in der Regel nach 30 Tagen und trainiert nicht damit. Das steht vor dem Hochladen auf der Seite, und die Person willigt für jeden Brief einzeln ein.“</p>
   </div></div>
 
   <div class="schritt"><span class="zeit">9–11'</span><div>
@@ -113,7 +113,7 @@
         <li><b>Deploy erledigt</b>, <span class="mono">npm run pruefung</span> alles grün</li>
         <li>MBE-Code angelegt, im Handzettel eingetragen</li>
         <li>Handzettel <b>5×</b> gedruckt, Musterbrief <b>2×</b> gedruckt</li>
-        <li>Einmal komplett durchgespielt, mit Stoppuhr</li>
+        <li>Einmal komplett durchgespielt, mit Stoppuhr (Ampel erst ab Di 27.10. rot, vorher Gelb ist richtig)</li>
         <li>Screenshots und kurzes Video als Notfall offline auf dem Laptop</li>
         <li>Laptop und Handy laden, Ladekabel einpacken</li>
       </ul>
@@ -121,7 +121,9 @@
       <ul class="check kasten">
         <li><b>Eigener Handy-Hotspot</b> an (nicht ihr WLAN)</li>
         <li>Demo-Seite offen, <b>Vorführ-Code</b> eingelöst, Arabisch gewählt</li>
-        <li>Handy entsperrt, Kamera-App bereit, Ton aus</li>
+        <li>Handy: Automatische Sperre „Nie“, Stromsparmodus aus, Ton aus</li>
+        <li>Mac wach halten: im Terminal <span class="mono">caffeinate -d</span></li>
+        <li>Oben steht „Kostenlos über MBE Donnersberg (Vorführung)“</li>
         <li>Notizblock und Stift</li>
       </ul>
       <h2>Notfallplan</h2>
@@ -129,17 +131,22 @@
         <p><b>Kein Internet:</b> Hotspot. Wenn das auch nicht geht: Screenshots zeigen, <i>„Ich lasse Ihnen den Link da, probieren Sie es selbst.“</i></p>
         <p style="margin-top: 1.5mm;"><b>Die KI braucht lange:</b> ruhig weitererzählen (Datenschutz-Teil vorziehen).</p>
         <p style="margin-top: 1.5mm;"><b>Fehlermeldung:</b> nicht nervös werden, zweiten Musterbrief nehmen oder Screenshots.</p>
+        <p style="margin-top: 1.5mm;"><b>Laptop hängt, Handy hat das Ergebnis:</b> einfach das Handy zeigen, dort auf Deutsch umschalten.</p>
+        <p style="margin-top: 1.5mm;"><b>„Deutsch | Arabisch“ fehlt:</b> „Hier hat die Übersetzung gehakt“, Screenshots zeigen.</p>
       </div>
     </div>
 
     <div>
       <h2 style="margin-top: 0;">Typische Fragen</h2>
-      <div class="frage"><b>„Was passiert mit den Daten?“</b>Kein Konto. Wir speichern den Brief nicht. Die KI (Anthropic, USA) löscht nach spätestens 30 Tagen, kein Training. PC ↔ Handy Ende-zu-Ende verschlüsselt.</div>
+      <div class="frage"><b>„Was passiert mit den Daten?“</b>Kein Konto. Wir speichern den Brief nicht. Den Brief muss die KI lesen (Anthropic, USA): in der Regel nach 30 Tagen gelöscht, kein Training. Die Übergabe PC ↔ Handy ist zusätzlich Ende-zu-Ende verschlüsselt. Einen AVV bekommt Ihr Datenschutzbeauftragter von mir.</div>
       <div class="frage"><b>„Ist das nicht einfach ChatGPT?“</b>ChatGPT braucht ein Konto und eine gute Frage, und danach ist der Brief vergessen. Hier reicht ein Foto: Frist in den Kalender, Spickzettel fürs Telefon. Wir erfinden keine Nummern oder Daten.</div>
       <div class="frage"><b>„Ersetzt das unsere Beratung?“</b>Nein. Jede Erklärung verweist bei wichtigen Entscheidungen auf eine Beratungsstelle. Die einfachen Fälle werden abgefangen, die schweren kommen vorbereitet.</div>
       <div class="frage"><b>„Was kostet das nach dem Test?“</b>Ein festes Briefkontingent für die Einrichtung, Ratsuchende zahlen nichts. <span class="klein">Nur auf Nachfrage Zahlen: 100 Briefe 20 €, 500 Briefe 75 €. Untergrenze 10 ct pro Brief. Keine USt. (§ 19).</span></div>
       <div class="frage"><b>„Was kostet Sie ein Brief?“</b>Ehrlich: ein paar Cent für die KI, dazu Server, Zahlungsgebühren und Arbeitszeit.</div>
       <div class="frage"><b>„Gibt es eine App?“</b>Sie ist in Arbeit. Alles Gezeigte geht ohne App. <i>Keinen Termin versprechen.</i></div>
+      <div class="frage"><b>„Mehrseitige Briefe?“</b>Zurzeit ein Foto pro Erklärung: die Seite mit Betreff und Frist. Ein Scanner-PDF am PC geht mehrseitig.</div>
+      <div class="frage"><b>„Die Bedienung ist ja Deutsch?“</b>Die Erklärung kommt in der Muttersprache. Die Knöpfe übersetze ich als Nächstes, gern mit Ihrer Hilfe beim Gegenlesen.</div>
+      <div class="frage"><b>„Kann man das ausdrucken?“</b>Kommt als Nächstes. Bis dahin: Kalender-Eintrag und „Mitnehmen“ aufs Handy.</div>
       <div class="frage"><b>„Wer steckt dahinter?“</b>Ich, mit der Webklar GbR in Winnweiler. Aus dem Donnersbergkreis.</div>
 
       <h2>Nicht sagen</h2>
