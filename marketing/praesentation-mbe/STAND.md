@@ -5,14 +5,14 @@
 >
 > Ausführlicher Prüfbericht mit allen 61 Funden: [plan-bis-29-10.md](plan-bis-29-10.md)
 
-**Zuletzt aktualisiert:** Do 22.10.2026, spätabends: **bereit für den Deploy**
+**Zuletzt aktualisiert:** Do 22.10.2026, nachts: live, plus Handy in 27 Sprachen und zwei Dokumente fertig (warten auf Deploy).
 
 ---
 
 ## Wo wir stehen (in einem Satz)
 
-Alles ist gebaut, zweimal geprüft und lokal getestet, aber **noch nicht live**.
-**Jetzt fehlt nur noch dein „deploy“**, danach kommen die echten Generalproben.
+**Live auf behoerdenklar.de** (Gesundheits-Check 10/10 grün). Dein Vorführ-Code: **`VORF-2EDF`**
+(30 Briefe, bis 30.11.). Morgen: Generalprobe 1 mit deinem Laptop und Handy.
 
 ---
 
@@ -71,10 +71,21 @@ Alles ist gebaut, zweimal geprüft und lokal getestet, aber **noch nicht live**.
 
 > ⚠️ **Hinweis für die Generalproben:** Beim Musterbrief zeigt die Ampel **am Sa 24.10. Gelb** („Noch 10 Tage“) und am Mo 26.10. ebenfalls Gelb. Das ist richtig so. **Ab Di 27.10. ist sie rot.** Bildschirmfotos für den Notfall deshalb erst am Mi 28.10. machen.
 
+## 2b. Neu seit dem Deploy (Do 22.10., spät): fertig, wartet auf den nächsten Deploy
+
+- ✅ **Bedienung am Handy in 27 Sprachen.** Einwilligung, Knöpfe, Hinweise, Fehlermeldungen, Ergebnis-Überschriften, Ampel, Kalender und Anruf-Hilfe kommen in der Sprache der Person, Arabisch/Farsi/Urdu/Paschtu von rechts nach links. **Am PC bleibt alles deutsch.** Je Sprache übersetzt und von einem Lektor geprüft, maschinell auf Vollständigkeit geprüft (0 Fehler).
+- ✅ Cloudflare-Kästchen passt auf schmale Handys. Oben steht „Für Sie kostenlos über …“ statt „2 Analysen gratis“.
+- ✅ Knopf für die Beratung umbenannt: „🔑 Zugang dauerhaft auf ein Handy geben (nur für Mitarbeitende)“, damit man ihn nicht mit „Lieber mit dem Handy fotografieren“ verwechselt.
+- ✅ **[Datenschutz-Blatt](datenschutz-blatt.pdf)** für die Datenschutzbeauftragte des Trägers (2 Seiten, gegen den Code geprüft).
+- ✅ **[Kurzanleitung](kurzanleitung-beratung.pdf)** für Beraterinnen (1 Seite). Der Code wird am Di 27.10. eingetragen.
+- ⏳ **Dein Okay für den nächsten Deploy.**
+- ℹ️ Der Live-Test im automatisierten Browser ging nicht, weil Cloudflare ferngesteuerte Browser blockt. Deshalb ist der echte Test die **Generalprobe morgen mit deinen Geräten**.
+
 ## 3. Was du tun musst
 
-- 👤 **„deploy“ schreiben.** Dann veröffentliche ich zuerst den Worker und danach die Webseite. Ohne das ist nichts davon auf behoerdenklar.de.
-- 👤 **Mo 26.10.: MBE anrufen.** Wer ist der Träger (Diakonie, Caritas …)? Gibt es eine eigene AVV-Vorlage? Und bestätigen: Do 29.10., wie viele Leute, gibt es einen Bildschirm?
+- ✅ ~~„deploy“ schreiben~~: erledigt, live seit Do 22.10. abends.
+- 👤 **Fr 23.10.: Generalprobe 1** mit Laptop und Handy: `behoerdenklar.de/demo?code=VORF-2EDF`, Arabisch, Musterbrief (Ampel noch gelb = richtig).
+- ✅ ~~Mo 26.10. MBE anrufen~~: Entscheidung vom 22.10.: Träger und AVV klärst du **erst, wenn die MBE Interesse hat**, also im Termin oder danach. Den Satz dafür findest du im Spickzettel.
 - 👤 **Entscheiden: Testzeitraum.** „1 Monat“ (deine Wahl) oder ein festes Datum „bis 18.12.“ (mein Vorschlag, damit der Code nicht mitten in der Bestellung abläuft). Wichtig ist das erst beim Anlegen des Codes am Di 27.10.
 - 👤 **Generalproben mitmachen** (mit deinem Handy und Laptop, siehe unten).
 - 👤 🔴 **Alten Anthropic-Schlüssel tauschen**, der im Juli im Chat gepostet wurde (console.anthropic.com → API Keys).
@@ -86,10 +97,10 @@ Alles ist gebaut, zweimal geprüft und lokal getestet, aber **noch nicht live**.
 | Tag | Was | Wer |
 |---|---|---|
 | **Do 22.** | Korrekturen ✅, Gegenprüfung ✅, alles gesichert ✅ | Claude |
-| **Do 22. / Fr 23.** | **Deploy**, sobald du „deploy“ sagst. Danach Vorführ-Code anlegen und `npm run pruefung`. | Claude, nach deinem OK |
+| **Do 22.** | **Deploy** ✅, Vorführ-Code `VORF-2EDF` ✅, `npm run pruefung` ✅ | Claude |
 | **Fr 23. / Sa 24.** | **Generalprobe 1 mit echter KI:** Musterbrief, Arabisch **und** Farsi, mit Stoppuhr, Bildschirmfotos für den Notfall | du und Claude |
-| **So 25.** | Fehler aus der Probe beheben. Neues **Datenschutz-Blatt** für den Datenschutzbeauftragten des Trägers. **Kurzanleitung** für Beraterinnen (1 Seite). | Claude |
-| **Mo 26.** | MBE anrufen. **Generalprobe 2.** Spätester Tag für Code-Änderungen am Worker. | du und Claude |
+| **So 25.** | Fehler aus der Probe beheben. (Datenschutz-Blatt und Kurzanleitung sind schon fertig ✅) | Claude |
+| **Mo 26.** | **Generalprobe 2.** Spätester Tag für Code-Änderungen am Worker. | du und Claude |
 | **Di 27.** | **MBE-Code anlegen**, in den Handzettel eintragen, gedruckten QR mit dem Handy testen, alles drucken (Handzettel 5×, Musterbrief 2×, Kurzanleitung 5×, Datenschutz-Blatt 2×). Ab abends **nichts mehr am Code ändern.** | du und Claude |
 | **Mi 28.** | **Generalprobe 3**, genau wie am Termin. Geräte laden, Checkliste vom Spickzettel. | du |
 | **Do 29.** | **Termin.** Ziel: Code übergeben und Auswertungstermin am 26.11. ausmachen. | du |
@@ -98,8 +109,8 @@ Alles ist gebaut, zweimal geprüft und lokal getestet, aber **noch nicht live**.
 
 ## 5. Wenn noch Zeit ist (vor dem Termin)
 
-- ⏳ **Arabische Bedienung** am Handy (Einwilligung, Knöpfe, Hinweise). Bisher ist nur die Erklärung arabisch. Ca. 2–3 Std.
-- ⏳ Den Hinweis „Kostenlos über …“ auch oben im Seitenkopf zeigen (dort steht noch „2 Analysen gratis“).
+- ✅ ~~Arabische Bedienung~~: erledigt, sogar in allen 27 Sprachen.
+- ✅ ~~„Kostenlos über …“ im Seitenkopf~~: erledigt.
 
 ---
 

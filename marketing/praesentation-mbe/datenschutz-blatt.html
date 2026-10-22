@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<!--
+  Datenschutz-Blatt für die Datenschutzbeauftragte des Trägers (2 Seiten A4).
+  Beschreibt die WEBSEITE behoerdenklar.de/demo inkl. Einrichtungs-Code und
+  Übergabe PC <-> Handy. Ersetzt für die Webseite das alte Factsheet vom Juli
+  (rechtliches/datenschutz-factsheet.md beschreibt die App).
+  Quellen: webseite/datenschutz.html (Stand 22.10.2026), proxy/src/index.ts,
+  webseite/demo.html, webseite/uebergabe.js, proxy/wrangler.toml.
+  PDF: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+    --disable-gpu --allow-file-access-from-files --no-pdf-header-footer \
+    --print-to-pdf=datenschutz-blatt.pdf "file://$PWD/datenschutz-blatt.html"
+-->
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Datenschutz auf einen Blick</title>
+<script src="../../webseite/qrcode.js"></script>
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --papier: #faf7f0; --tinte: #21211d; --grau: #6b675e; --text: #3a3833;
+    --amtsblau: #1d4e89; --stempelrot: #b3372b; --marker: #ffe66b; --gruen: #2e7d4f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: var(--tinte); background: #fff; }
+  .seite {
+    width: 210mm; height: 297mm; overflow: hidden; position: relative;
+    padding: 11mm 14mm 0;
+    background: repeating-linear-gradient(0deg, transparent 0 6.5mm, rgba(33,33,29,0.03) 6.5mm 6.7mm), var(--papier);
+    font-size: 8.8pt; line-height: 1.36;
+    page-break-after: always; break-after: page;
+  }
+  .seite:last-child { page-break-after: auto; break-after: auto; }
+  .mono { font-family: 'Courier New', ui-monospace, monospace; }
+
+  .briefkopf { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 2mm; border-bottom: 0.6mm solid var(--tinte); }
+  .absender { font-weight: 700; font-size: 12.5pt; }
+  .absender small { font-weight: 400; font-size: 8pt; opacity: .6; letter-spacing: .04em; }
+  .az { color: var(--grau); font-size: 8pt; }
+  .betreff { margin-top: 4mm; font-size: 8pt; color: var(--grau); text-transform: uppercase; letter-spacing: .14em; }
+  h1 { font-size: 22pt; line-height: 1.14; margin-top: 1mm; letter-spacing: -0.01em; }
+  .markiert { background: linear-gradient(104deg, transparent 2%, var(--marker) 4%, var(--marker) 96%, transparent 98%); padding: 0 1.5mm; }
+  .anrede { margin-top: 2mm; font-size: 9.6pt; line-height: 1.4; }
+  .anrede i { color: var(--grau); }
+
+  h2 { font-size: 8pt; text-transform: uppercase; letter-spacing: .14em; color: var(--grau); font-weight: 400;
+       margin: 3.8mm 0 2mm; display: flex; align-items: center; gap: 2.5mm; }
+  h2 .nr { font-family: 'Courier New', monospace; font-weight: 700; color: var(--amtsblau); letter-spacing: 0; font-size: 9pt; }
+  h2::after { content: ''; flex: 1; border-top: 0.25mm solid rgba(33,33,29,.25); }
+
+  .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .eins-box { display: grid; grid-template-columns: 1fr 81mm; gap: 5mm; align-items: start; }
+
+  .kasten { background: #fff; border: 0.5mm solid var(--tinte); padding: 3.4mm 3.6mm 2.4mm; position: relative; }
+  .kasten .label { position: absolute; top: -2.6mm; left: 3.5mm; font-family: 'Courier New', monospace; font-size: 7pt;
+       text-transform: uppercase; letter-spacing: .1em; background: var(--tinte); color: var(--papier); padding: .4mm 2mm; }
+  ul.haken { list-style: none; font-size: 8.5pt; line-height: 1.32; }
+  ul.haken li { padding-left: 4mm; position: relative; margin-bottom: .9mm; }
+  ul.haken li::before { content: '✓'; position: absolute; left: 0; color: var(--gruen); font-weight: 700; }
+  ul.haken li.ehrlich::before { content: '!'; color: var(--stempelrot); left: .8mm; }
+
+  /* Datenfluss */
+  .schritte { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 5mm; }
+  .schritt { display: grid; grid-template-columns: 6mm 1fr; gap: 1.2mm; font-size: 8.5pt; line-height: 1.32; color: var(--text); }
+  .schritt .n { font-family: 'Courier New', monospace; font-weight: 700; font-size: 10.5pt; color: var(--amtsblau);
+                border: 0.35mm solid var(--amtsblau); background: #fff; width: 5.4mm; height: 5.4mm; display: flex; align-items: center; justify-content: center; }
+  .schritt b { color: var(--tinte); }
+  .wege { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; margin-top: 2.6mm; }
+  .weg { border: 0.3mm solid rgba(33,33,29,.35); background: #fff; padding: 1.5mm 2.4mm; font-size: 8pt; line-height: 1.3; color: var(--text); }
+  .weg b { color: var(--tinte); }
+
+  /* Tabellen */
+  table { width: 100%; border-collapse: collapse; font-size: 8pt; line-height: 1.24; }
+  th { font-family: 'Courier New', monospace; font-weight: 400; font-size: 7pt; text-transform: uppercase; letter-spacing: .1em;
+       color: var(--grau); text-align: left; padding: 0 2mm .8mm 0; border-bottom: 0.4mm solid var(--tinte); }
+  td { padding: .8mm 2mm .8mm 0; vertical-align: top; border-bottom: 0.25mm dotted rgba(33,33,29,.35); color: var(--text); }
+  td:first-child { color: var(--tinte); font-weight: 700; }
+  td.dauer { color: var(--tinte); }
+  td.dauer b { color: var(--amtsblau); }
+  tr.gruppe td { font-family: 'Courier New', monospace; font-weight: 400; font-size: 7pt; text-transform: uppercase; letter-spacing: .1em;
+                 color: var(--papier); background: var(--tinte); padding: .4mm 2mm; border-bottom: none; }
+  tr.gruppe.hell td { background: rgba(33,33,29,.12); color: var(--grau); }
+  tr.nebensache td { color: var(--grau); }
+  tr.nebensache td:first-child { color: #4d4a43; }
+  .tabfuss { font-size: 7.8pt; color: var(--grau); margin-top: 1.4mm; line-height: 1.32; }
+  .tabfuss b { color: var(--tinte); }
+
+  /* Rollen */
+  .fall h3 { font-size: 9.8pt; line-height: 1.22; margin-bottom: .9mm; }
+  .fall p { font-size: 8.4pt; line-height: 1.32; color: var(--text); margin-bottom: 1mm; }
+  .fall p:last-child { margin-bottom: 0; }
+  .fall .folge { color: var(--tinte); border-left: 0.8mm solid var(--amtsblau); padding-left: 2.2mm; }
+  .fall .folge b { color: var(--amtsblau); }
+  .absprache { margin-top: 3mm; font-size: 8.4pt; line-height: 1.34; color: var(--text); }
+  .absprache .gross { font-weight: 700; font-size: 10.4pt; color: var(--tinte); display: inline-block; margin-bottom: .8mm; }
+
+  /* Einwilligung */
+  .zitat { background: #fff; border-left: 1mm solid var(--amtsblau); padding: 2mm 3mm; font-style: italic; font-size: 8.5pt; line-height: 1.36; }
+  .zitat .quelle { display: block; font-style: normal; font-family: 'Courier New', monospace; font-size: 6.8pt; color: var(--grau); margin-top: .8mm; letter-spacing: .04em; }
+  ul.punkte { list-style: none; font-size: 8.4pt; line-height: 1.32; color: var(--text); }
+  ul.punkte li { padding-left: 3.5mm; position: relative; margin-bottom: .9mm; }
+  ul.punkte li::before { content: '›'; position: absolute; left: 0; color: var(--amtsblau); font-weight: 700; }
+  ul.punkte b { color: var(--tinte); }
+
+  /* Grenzen */
+  .grenzen { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3mm 5mm; list-style: none; font-size: 8.4pt; line-height: 1.32; color: var(--text); }
+  .grenzen li { padding-left: 4mm; position: relative; }
+  .grenzen li::before { content: '!'; position: absolute; left: .8mm; color: var(--stempelrot); font-weight: 700; }
+  .grenzen b { color: var(--tinte); }
+
+  /* Kontakt (Seite 2 unten, ersetzt dort die Fußzeile) */
+  .kontakt-unten { position: absolute; left: 14mm; right: 14mm; bottom: 9mm; }
+  .kontakt-unten h2 { margin-top: 0; }
+  .kontakt { display: grid; grid-template-columns: 1fr 1fr 19mm; gap: 5mm; align-items: center; border: 0.7mm solid var(--tinte);
+             box-shadow: 1.6mm 1.8mm 0 rgba(33,33,29,.9); background: #fff; padding: 2.8mm 4mm; }
+  .kontakt .name { font-size: 11pt; font-weight: 700; line-height: 1.2; }
+  .kontakt p { font-size: 8.4pt; line-height: 1.36; }
+  .kontakt .link { font-family: 'Courier New', monospace; color: var(--amtsblau); font-size: 9.5pt; font-weight: 700; }
+  .kontakt .klein { color: var(--grau); font-size: 7.8pt; }
+  #qr { width: 19mm; height: 19mm; }
+  #qr svg { width: 100%; height: 100%; display: block; }
+  .stempel { display: inline-block; padding: .8mm 2.2mm; border: 0.5mm solid var(--stempelrot); color: var(--stempelrot);
+             font-family: 'Courier New', monospace; font-weight: 700; font-size: 7pt; letter-spacing: .1em;
+             text-transform: uppercase; transform: rotate(-3deg); }
+
+  .fuss { position: absolute; left: 14mm; right: 14mm; bottom: 8mm; border-top: 0.4mm solid var(--tinte); padding-top: 2mm;
+          display: flex; justify-content: space-between; align-items: flex-end; font-size: 8pt; line-height: 1.4; }
+  .fuss .wer b { font-size: 9.5pt; }
+  .fuss .seitenzahl { font-family: 'Courier New', monospace; font-size: 7.5pt; color: var(--grau); letter-spacing: .06em; }
+</style>
+</head>
+<body>
+
+<!-- ============================ SEITE 1 ============================ -->
+<div class="seite">
+
+  <div class="briefkopf">
+    <span class="absender">📬 BehördenKlar <small>by Webklar</small></span>
+    <span class="az mono">Az: KLAR-DATENSCHUTZ/2026 · Stand: 22.10.2026</span>
+  </div>
+
+  <p class="betreff">Für die Datenschutzbeauftragte Ihres Trägers · Webseite behoerdenklar.de/demo</p>
+  <h1>Datenschutz <span class="markiert">auf einen Blick</span></h1>
+  <p class="anrede">
+    Was mit den Daten passiert, wenn Ihre Beratungsstelle BehördenKlar im Browser nutzt, geprüft am
+    Server-Code und an der Datenschutzerklärung. <i>Das Blatt vom Juli 2026 beschrieb die App, nicht die Webseite.</i>
+  </p>
+
+  <h2><span class="nr">1</span> Was BehördenKlar tut</h2>
+  <div class="eins-box">
+    <p>
+      BehördenKlar erklärt Behördenbriefe in einfacher Sprache, auf Wunsch in 27 Sprachen.
+      Ein Foto oder PDF genügt: Eine KI (Claude von Anthropic) schreibt auf, was das Amt will,
+      was zu tun ist und bis wann. Kein Nutzerkonto, keine Anmeldung. Mit einem
+      <b>Einrichtungs-Code</b> ist der Dienst für Ihre Ratsuchenden kostenlos. Über den Code erfährt
+      Ihre Stelle nichts über Briefe, nur Zahlen: übrige Analysen und Nutzung pro Woche und Sprache.
+    </p>
+    <div class="kasten">
+      <span class="label">Kurz gesagt</span>
+      <ul class="haken">
+        <li>Briefe speichern wir nicht, Erklärungen nur verschlüsselt zur Übergabe (max. 15&nbsp;Min.).</li>
+        <li>Mit Code: kein Konto, keine E-Mail-Adresse nötig.</li>
+        <li class="ehrlich">Den Brief liest die KI: Anthropic (USA), in der Regel 30&nbsp;Tage gespeichert, kein Training.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2><span class="nr">2</span> So läuft ein Brief durch das System · Knopf „Lieber mit dem Handy fotografieren“</h2>
+  <div class="schritte">
+    <div class="schritt"><span class="n">1</span><div>
+      <b>QR-Code am Beratungs-PC.</b> Der Browser des PCs erzeugt eine zufällige Kennung und einen
+      neuen AES-256-Schlüssel. Beides steht im QR-Code hinter dem
+      „#“ der Adresse. <b>Den Schlüssel bekommt unser Server nie.</b>
+    </div></div>
+    <div class="schritt"><span class="n">4</span><div>
+      <b>Erklärung.</b> Anthropic (Modell Claude) erklärt den Brief auf Deutsch. Für eine andere
+      Sprache übersetzt ein zweiter KI-Aufruf die Erklärung. Die Antwort geht über unseren Server
+      zurück ans Handy, ohne dort gespeichert zu werden.
+    </div></div>
+    <div class="schritt"><span class="n">2</span><div>
+      <b>Einwilligung am eigenen Handy.</b> Die ratsuchende Person scannt den Code, setzt das
+      Häkchen für diesen einen Brief (Abschnitt&nbsp;6) und fotografiert ihn. Kein Konto, keine App.
+    </div></div>
+    <div class="schritt"><span class="n">5</span><div>
+      <b>Übergabe, Ende-zu-Ende verschlüsselt.</b> Das Handy verschlüsselt die Erklärung mit dem
+      Schlüssel aus dem QR-Code (AES-256-GCM) und legt sie bei uns ab. Der PC holt sie und
+      entschlüsselt sie. <b>Unser Server kann sie nicht lesen.</b>
+    </div></div>
+    <div class="schritt"><span class="n">3</span><div>
+      <b>Weg zur KI.</b> Das Foto geht über eine verschlüsselte Verbindung (TLS) an unseren Server
+      (Cloudflare). Er prüft Bot-Schutz und Guthaben und reicht es an Anthropic weiter,
+      <b>ohne es zu speichern</b>.
+    </div></div>
+    <div class="schritt"><span class="n">6</span><div>
+      <b>Löschen.</b> Der Zwischenspeicher wird beim Abholen gelöscht, sonst <b>spätestens
+      15&nbsp;Minuten</b> nach dem letzten Päckchen. Am PC bleibt die Erklärung nur in der offenen
+      Seite, bis diese neu geladen wird.
+    </div></div>
+  </div>
+  <div class="wege">
+    <div class="weg"><b>Beraterin lädt am Dienst-PC hoch:</b> nur Schritt 3 und 4. Das Häkchen setzt
+      dann die Beraterin (zur Rolle siehe Abschnitt&nbsp;4).</div>
+    <div class="weg"><b>„Ergebnis aufs Handy mitnehmen“:</b> genauso verschlüsselt, beim Abholen
+      gelöscht, sonst nach spätestens 15&nbsp;Minuten.</div>
+  </div>
+
+  <h2><span class="nr">3</span> Was gespeichert wird und wie lange</h2>
+  <table>
+    <colgroup><col style="width: 37mm"><col><col style="width: 45mm"></colgroup>
+    <thead><tr><th>Was</th><th>Was genau</th><th>Wie lange</th></tr></thead>
+    <tbody>
+      <tr class="gruppe"><td colspan="3">Beim Zugang über einen Einrichtungs-Code</td></tr>
+      <tr><td>Brief und Erklärung</td><td>Laufen nur durch unseren Server. Ausnahme: Übergabe, nächste Zeile.</td><td class="dauer"><b>bei uns: gar nicht</b></td></tr>
+      <tr><td>Übergabe-Päckchen</td><td>Erklärung und Statusmeldungen, verschlüsselt, für uns nicht lesbar. Dazu eine Schreib-Bremse pro IP-Adresse (Zeitfenster 1 Minute).</td><td class="dauer">beim Abholen, <b>spätestens 15 Min.</b> nach dem letzten Päckchen</td></tr>
+      <tr><td>Bei Anthropic (KI)</td><td>Foto und Erklärung. Keine Nutzung zum Training der KI.</td><td class="dauer"><b>in der Regel 30 Tage</b>, länger nur bei Missbrauchsverdacht</td></tr>
+      <tr><td>Einrichtungs-Guthaben</td><td>Code, Kennung, Name der Stelle, Ablaufdatum, Restbriefe. Nichts über Ratsuchende.</td><td class="dauer">ohne automatische Frist</td></tr>
+      <tr><td>Nutzungszähler</td><td>Je Analyse nur Datum und Sprache. Kein Briefinhalt, kein Personenbezug.</td><td class="dauer"><b>max. 13 Monate</b></td></tr>
+      <tr><td>Code-Fehlversuche</td><td>Zähler pro IP-Adresse und Tag, nur bei falscher Eingabe.</td><td class="dauer"><b>48 Stunden</b></td></tr>
+      <tr><td>Server-Protokolle</td><td>Zeitpunkt, aufgerufene Adresse, Fehlerart, technische Metadaten. Kein Briefinhalt.</td><td class="dauer"><b>max. 7 Tage</b></td></tr>
+      <tr><td>Im Browser des Geräts</td><td>Zugangs-Nachweis, Code und Name der Stelle, Ablaufdatum, Zahl übriger Briefe, Sprache. Keine Briefe.</td><td class="dauer">bis zum Löschen im Browser</td></tr>
+      <tr class="gruppe hell"><td colspan="3">Nur ohne Einrichtungs-Code: 2 Gratis-Analysen für Privatpersonen</td></tr>
+      <tr class="nebensache"><td>Gratis-Zähler</td><td>Zähler pro IP-Adresse und Tag, dazu die Tagessumme aller Gratis-Analysen.</td><td class="dauer">48 Stunden (Datenschutz&shy;erklärung: „max. 30 Tage“)</td></tr>
+      <tr class="nebensache"><td>E-Mail-Prüfsumme</td><td>Nur für die 2. Gratis-Analyse: SHA-256-Prüfsumme, die Adresse selbst nicht.</td><td class="dauer">unbefristet</td></tr>
+    </tbody>
+  </table>
+  <p class="tabfuss">
+    <b>Rechtsgrundlagen laut Datenschutzerklärung:</b> Brief und Erklärung: Einwilligung (Art. 6 Abs. 1 lit. a,
+    Art. 9 Abs. 2 lit. a DSGVO). Zähler, Schutz vor Missbrauch, Protokolle: berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO).
+  </p>
+
+  <div class="fuss">
+    <div class="wer">
+      <b>Justin Klein</b> · Webklar GbR · Am Schwimmbad 10, 67722 Winnweiler<br>
+      Tel. 0170 4969375 · justin@webklar.com · <b>behoerdenklar.de/datenschutz</b>
+    </div>
+    <span class="seitenzahl">Seite 1 von 2 · bitte wenden</span>
+  </div>
+</div>
+
+<!-- ============================ SEITE 2 ============================ -->
+<div class="seite">
+
+  <div class="briefkopf">
+    <span class="absender">📬 BehördenKlar <small>by Webklar</small></span>
+    <span class="az mono">Datenschutz auf einen Blick · Seite 2 von 2</span>
+  </div>
+
+  <h2 style="margin-top: 5mm; margin-bottom: 3mm;"><span class="nr">4</span> Wer ist verantwortlich? Das hängt davon ab, wer hochlädt</h2>
+  <div class="zwei">
+    <div class="kasten fall">
+      <span class="label">Fall A · Die Person selbst</span>
+      <h3>Die ratsuchende Person nutzt den Dienst selbst</h3>
+      <p>Eigenes Handy, eigenes Häkchen für jeden Brief: zu Hause oder in der Beratung über
+        „Lieber mit dem Handy fotografieren“.</p>
+      <p class="folge"><b>Verantwortlich ist die Webklar GbR</b> (BehördenKlar). Grundlage ist die
+        Einwilligung der Person.</p>
+      <p>Bitte beachten: In der Beratung erscheint die Erklärung auch am Bildschirm Ihrer Stelle.
+        Gespeichert wird sie dort nicht.</p>
+    </div>
+    <div class="kasten fall">
+      <span class="label">Fall B · Ihre Stelle</span>
+      <h3>Ihre Beratungsstelle lädt den Brief selbst hoch</h3>
+      <p>Die Beraterin lädt den Brief einer Klientin am Dienst-PC hoch.</p>
+      <p class="folge">Dann arbeiten <b>wir als Auftragsverarbeiter</b> für Ihre Stelle (Art. 28 DSGVO),
+        mit Cloudflare und Anthropic als Unterauftragsverarbeitern. Einen <b>AVV mit
+        Verschwiegenheitsklausel</b> stellen wir auf Wunsch.</p>
+      <p>Das Häkchen am Dienst-PC setzt dann die Beraterin. Es ersetzt keine Einwilligung der Klientin.</p>
+    </div>
+  </div>
+  <p class="absprache">
+    <span class="gross"><span class="markiert">Vor dem ersten echten Brief am Dienst-PC sprechen wir das ab.</span></span><br>
+    Unser Vorschlag für den Test: Fall A. Haben Sie eine eigene AVV-Vorlage (z. B. nach DSG-EKD oder KDG),
+    schicken Sie sie uns gern.
+  </p>
+
+  <h2><span class="nr">5</span> Dienstleister</h2>
+  <table>
+    <colgroup><col style="width: 37mm"><col><col style="width: 30mm"></colgroup>
+    <thead><tr><th>Wer</th><th>Wofür</th><th>Beim Code-Zugang</th></tr></thead>
+    <tbody>
+      <tr><td>Cloudflare, Inc. (USA)</td><td>Unser Server (Cloudflare Workers), Zwischenspeicher und Zähler, Bot-Schutz (Turnstile), Hosting der Webseite, Besucherstatistik ohne Cookies</td><td class="dauer"><b>ja</b></td></tr>
+      <tr><td>Anthropic PBC (USA)</td><td>KI-Erklärung und Übersetzung (Modell Claude), keine Nutzung zum Training</td><td class="dauer"><b>ja</b></td></tr>
+      <tr class="nebensache"><td>Stripe und Brevo</td><td>Nur für Privatpersonen: Bezahlung beim Kauf von Guthaben (Stripe, Irland/USA), E-Mail mit dem Guthaben-Link und Warteliste (Brevo, Deutschland/Frankreich)</td><td class="dauer">nein, nicht relevant</td></tr>
+    </tbody>
+  </table>
+  <p class="tabfuss" style="color: var(--text); font-size: 8.2pt;">
+    <b>Übermittlung in die USA:</b> gestützt auf EU-Standardvertragsklauseln (Art. 46 Abs. 2 lit. c DSGVO).
+    Sie sind Teil der Auftragsverarbeitungsverträge (DPA) von Cloudflare und Anthropic, die mit deren
+    Geschäftsbedingungen gelten. Die Fundstellen nennen wir Ihnen gern.
+  </p>
+
+  <h2><span class="nr">6</span> Einwilligung: für jeden Brief neu</h2>
+  <div class="zwei" style="grid-template-columns: 1.12fr 1fr;">
+    <p class="zitat">
+      „Ich bin einverstanden, dass das Foto dieses Briefs zur Erklärung an den Server von BehördenKlar
+      und an den KI-Dienst Anthropic (USA) geschickt wird. Briefe können sehr persönliche Angaben
+      enthalten, zum Beispiel zu Gesundheit, Herkunft oder Aufenthalt. BehördenKlar speichert den Brief
+      nicht. Anthropic löscht ihn in der Regel nach 30 Tagen und nutzt ihn nicht zum Training.“
+      <span class="quelle">Text am Häkchen vor dem Hochladen, mit Link zur Datenschutzerklärung</span>
+    </p>
+    <ul class="punkte">
+      <li><b>Ohne Häkchen wird nichts hochgeladen.</b></li>
+      <li><b>Für genau einen Brief:</b> Nach jeder Erklärung ist das Häkchen wieder leer. Die nächste Person wird neu gefragt.</li>
+      <li><b>Grundlage:</b> Art. 6 Abs. 1 lit. a und Art. 9 Abs. 2 lit. a DSGVO.</li>
+      <li><b>Sprache:</b> Der Text steht derzeit nur auf Deutsch, Übersetzungen sind in Arbeit.
+        Bis dahin erklärt die Beraterin ihn bei Bedarf mündlich.</li>
+    </ul>
+  </div>
+
+  <h2><span class="nr">7</span> Ehrliche Grenzen</h2>
+  <ul class="grenzen">
+    <li><b>USA.</b> Anthropic und Cloudflare sitzen in den USA. Eine Beschränkung auf Rechenzentren
+      in der EU ist nicht eingestellt.</li>
+    <li><b>30 Tage bei Anthropic</b> in der Regel, bei Verdacht auf Missbrauch länger. Darauf haben
+      wir keinen Einfluss.</li>
+    <li><b>Ende-zu-Ende gilt nur für die Übergabe.</b> Der Brief selbst geht per TLS über unseren
+      Server zur KI.</li>
+    <li><b>QR-Code nur der richtigen Person zeigen.</b> Wer ihn abfotografiert, kann die Erklärung
+      in diesen 15 Minuten öffnen.</li>
+    <li><b>Gemeinsamer Dienst-PC.</b> Nach jedem Gespräch die Seite neu laden. Kalender-Einträge am
+      Handy der Person anlegen, am PC landet sonst eine Datei mit der Frist im Download-Ordner.</li>
+    <li><b>Keine Rechtsberatung.</b> BehördenKlar erklärt Briefe, ersetzt aber keine Beratung. Auch
+      eine KI kann sich irren.</li>
+    <li><b>Selbstauskunft, kein Zertifikat.</b> Eine anwaltliche Prüfung von Datenschutzerklärung und
+      Blatt steht noch aus.</li>
+    <li><b>Noch offen:</b> AVV-Entwurf, TOMs und ein Textbaustein fürs Verarbeitungsverzeichnis.
+      Sie kommen vor dem ersten echten Brief am Dienst-PC.</li>
+  </ul>
+
+  <div class="kontakt-unten">
+    <h2><span class="nr">8</span> Kontakt und vollständige Datenschutzerklärung</h2>
+    <div class="kontakt">
+      <div>
+        <p class="name">Justin Klein</p>
+        <p>Webklar GbR, vertreten durch<br>Justin Klein und Kenso Grimm<br>
+          Am Schwimmbad 10, 67722 Winnweiler<br>
+          Tel. 0170 4969375 · justin@webklar.com</p>
+      </div>
+      <div>
+        <p class="link">behoerdenklar.de/datenschutz</p>
+        <p class="klein">Für die Webseite besonders die Abschnitte 3a, 4, 5, 8, 9a, 9b und 10.
+          Rückfragen beantworten wir gern, auch im Gespräch mit Ihnen.</p>
+        <p style="margin-top: 1.4mm;"><span class="stempel">Selbstauskunft · Stand 22.10.2026</span></p>
+      </div>
+      <div id="qr"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var qr = qrcode(0, 'M');
+  qr.addData('https://behoerdenklar.de/datenschutz');
+  qr.make();
+  document.getElementById('qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
+</script>
+</body>
+</html>

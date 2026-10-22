@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<!--
+  Kurzanleitung „So geht's am Beratungs-PC“ (DIN A4, 1 Seite, für Beraterinnen).
+  CODE (und ggf. STELLE) unten im Skript eintragen, sobald der Einrichtungs-Code
+  angelegt ist, dann neu als PDF ausgeben (im Ordner marketing/praesentation-mbe):
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu \
+    --allow-file-access-from-files --no-pdf-header-footer \
+    --print-to-pdf=kurzanleitung-beratung.pdf "file://$PWD/kurzanleitung-beratung.html"
+  Knopf- und Meldungstexte stammen wörtlich aus webseite/demo.html, „Der Zugang über …
+  ist abgelaufen“ aus proxy/src/index.ts (Stand 22.10.2026).
+-->
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>So geht's am Beratungs-PC</title>
+<script src="../../webseite/qrcode.js"></script>
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --papier: #faf7f0; --tinte: #21211d; --grau: #6b675e;
+    --amtsblau: #1d4e89; --stempelrot: #b3372b; --marker: #ffe66b; --gruen: #2e7d4f;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: var(--tinte); background: #fff; }
+  .seite {
+    width: 210mm; height: 297mm; overflow: hidden; position: relative;
+    padding: 10mm 14mm 0;
+    background: repeating-linear-gradient(0deg, transparent 0 6.5mm, rgba(33,33,29,0.03) 6.5mm 6.7mm), var(--papier);
+    font-size: 11pt; line-height: 1.36;
+  }
+  .mono { font-family: 'Courier New', ui-monospace, monospace; }
+  .briefkopf { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 2mm; border-bottom: 0.6mm solid var(--tinte); }
+  .absender { font-weight: 700; font-size: 12.5pt; }
+  .absender small { font-weight: 400; font-size: 8pt; opacity: .6; letter-spacing: .04em; }
+  .az { color: var(--grau); font-size: 8pt; }
+  .betreff { margin-top: 3.5mm; font-size: 8pt; color: var(--grau); text-transform: uppercase; letter-spacing: .14em; }
+  h1 { font-size: 23pt; line-height: 1.12; margin-top: 1mm; letter-spacing: -0.01em; }
+  .markiert { background: linear-gradient(104deg, transparent 2%, var(--marker) 4%, var(--marker) 96%, transparent 98%); padding: 0 1.5mm; }
+  .anrede { margin-top: 2mm; font-size: 11.5pt; line-height: 1.36; }
+  
+  /* Knöpfe und Bildschirm-Texte so, wie man sie auf der Seite wiedererkennt */
+  .k { font-weight: 700; background: #fff; border: 0.35mm solid var(--tinte); border-radius: 1mm;
+       padding: 0 1.3mm; margin-right: .5mm; box-shadow: 0.5mm 0.5mm 0 var(--tinte);
+       -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .m { background: rgba(29,78,137,.09); padding: 0 .8mm; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+
+  .kasten { background: #fff; border: 0.5mm solid var(--tinte); padding: 3.6mm 4mm 3.2mm; position: relative; }
+  .kasten .label { position: absolute; top: -2.6mm; left: 3.5mm; font-family: 'Courier New', monospace; font-size: 7.5pt;
+       text-transform: uppercase; letter-spacing: .1em; background: var(--tinte); color: var(--papier); padding: .4mm 2mm; }
+
+  .einmalig { margin-top: 4.4mm; display: grid; grid-template-columns: 1fr 27mm; gap: 5mm; align-items: start; }
+  .einmalig p { font-size: 10.6pt; line-height: 1.34; }
+  .adresse { font-family: 'Courier New', monospace; font-weight: 700; font-size: 12.5pt; color: var(--amtsblau);
+             background: var(--marker); display: inline-block; padding: .4mm 2mm; margin: 1.2mm 0 1.6mm; word-break: break-all; }
+  .luecke { display: inline-block; width: 26mm; border-bottom: 0.35mm solid var(--amtsblau); height: 4.2mm; vertical-align: -0.6mm; }
+  .einmalig ul { list-style: none; font-size: 10pt; line-height: 1.32; }
+  .einmalig li { padding-left: 4mm; position: relative; margin-top: .9mm; }
+  .einmalig li::before { content: '›'; position: absolute; left: .5mm; color: var(--amtsblau); font-weight: 700; }
+  .qrteil { text-align: center; }
+  #qr { width: 25mm; height: 25mm; margin: 0 auto 1.2mm; }
+  #qr svg { width: 100%; height: 100%; display: block; }
+  .qrteil .klein { font-size: 7.8pt; color: var(--grau); line-height: 1.3; }
+  .code { font-family: 'Courier New', monospace; font-weight: 700; font-size: 11pt; letter-spacing: .08em; background: var(--marker); padding: 0 1.5mm; margin-right: 1mm; }
+
+  h2 { font-size: 8pt; text-transform: uppercase; letter-spacing: .14em; color: var(--grau); font-weight: 400;
+       margin: 3.6mm 0 1.4mm; display: flex; align-items: center; gap: 3mm; }
+  h2::after { content: ''; flex: 1; border-top: 0.25mm solid rgba(33,33,29,.25); order: 1; }
+  h2 .legende { order: 2; text-transform: none; letter-spacing: 0; font-size: 9.5pt; color: var(--grau); }
+
+  .schritte { list-style: none; }
+  .schritte li { display: grid; grid-template-columns: 9mm 1fr; gap: 1.5mm; padding: 0.8mm 0; border-bottom: 0.25mm dashed rgba(33,33,29,.22); }
+  .schritte li:last-child { border-bottom: none; }
+  .nr { font-family: 'Courier New', monospace; font-weight: 700; font-size: 17pt; line-height: 1; color: var(--amtsblau); padding-top: .4mm; }
+  .schritte b.t { font-size: 11.6pt; }
+  .schritte p { font-size: 11pt; line-height: 1.34; }
+  .schritte .zusatz { font-size: 9.6pt; color: #3a3833; margin-top: .4mm; }
+
+  .wichtig { margin-top: 3.8mm; border-color: var(--stempelrot); border-width: 0.6mm; }
+  .wichtig .label { background: var(--stempelrot); }
+  .wichtig > p { font-size: 10.4pt; line-height: 1.33; padding-left: 4.5mm; position: relative; margin-bottom: .8mm; }
+  .wichtig > p::before { content: '!'; position: absolute; left: .6mm; color: var(--stempelrot); font-weight: 700; }
+  .meldungen { width: 100%; border-collapse: collapse; margin-top: 1.4mm; font-size: 9.6pt; line-height: 1.28; }
+  .meldungen caption { text-align: left; font-family: 'Courier New', monospace; font-size: 7.5pt; text-transform: uppercase; letter-spacing: .1em; color: var(--grau); padding-bottom: .8mm; }
+  .meldungen td { padding: .4mm 0; vertical-align: top; border-top: 0.25mm solid rgba(33,33,29,.15); }
+  .meldungen td:first-child { width: 39%; padding-right: 3mm; }
+  .meldungen tr.leer td { background: rgba(255,230,107,.45); }
+  .meldungen tr.leer td:first-child { padding-left: 1mm; }
+
+  .fuss { position: absolute; left: 14mm; right: 14mm; bottom: 8mm; border-top: 0.4mm solid var(--tinte); padding-top: 2mm;
+          display: flex; justify-content: space-between; align-items: flex-end; font-size: 8pt; line-height: 1.4; }
+  .fuss .anruf { font-size: 12.5pt; font-weight: 700; line-height: 1.3; }
+  .fuss .anruf .nummer { font-family: 'Courier New', monospace; background: var(--marker); padding: 0 1.5mm; }
+  .stempel { display: inline-block; padding: 1mm 2.5mm; border: 0.5mm solid var(--stempelrot); color: var(--stempelrot);
+             font-family: 'Courier New', monospace; font-weight: 700; font-size: 7.5pt; letter-spacing: .1em;
+             text-transform: uppercase; transform: rotate(-4deg); margin-bottom: 1mm; }
+</style>
+</head>
+<body>
+<div class="seite">
+
+  <div class="briefkopf">
+    <span class="absender">📬 BehördenKlar <small>by Webklar</small></span>
+    <span class="az mono">Az: KLAR-BERATUNG/2026 · Kurzanleitung Beratungs-PC</span>
+  </div>
+
+  <p class="betreff">Kurzanleitung · Für Beraterinnen und Berater</p>
+  <h1>So geht's am <span class="markiert">Beratungs-PC</span></h1>
+  <p class="anrede">
+    Die Person fotografiert ihren Brief mit dem eigenen Handy. Sie lesen am PC mit.
+  </p>
+
+  <div class="kasten einmalig">
+    <span class="label">Einmal einrichten: Lesezeichen</span>
+    <div>
+      <p>Diese Adresse am Beratungs-PC als Lesezeichen speichern, genau so, mit Code:</p>
+      <p><span class="adresse" id="adresseText"></span></p>
+      <ul>
+        <li><b>Lesezeichen von Hand anlegen</b> und die Adresse eintragen. Nicht nur den Stern ☆ klicken: Nach dem Öffnen ist der Code aus der Adresszeile verschwunden.</li>
+        <li>Ihr Code: <span class="code" id="codeText"></span> Nur für die Beratungsstelle: nicht an Ratsuchende weitergeben, Blatt nicht offen auslegen.</li>
+      </ul>
+    </div>
+    <div class="qrteil">
+      <div id="qr"></div>
+      <p class="klein">Gleiche Adresse als QR-Code</p>
+    </div>
+  </div>
+
+  <h2><span>Ablauf für jede Person</span><span class="legende"><span class="k">Knopf</span> = klicken oder tippen · <span class="m">„Text“</span> = steht so auf dem Bildschirm</span></h2>
+  <ol class="schritte">
+    <li><span class="nr">1</span><div>
+      <p><b class="t">Seite öffnen.</b> Lesezeichen anklicken. Oben steht <span class="m">„🤝 Kostenlos über <span id="stelleText"></span> …“</span></p>
+      <p class="zusatz">Fehlt das? Unten <span class="k">🤝 Sie haben einen Code von einer Beratungsstelle?</span> öffnen und den Code einlösen.</p>
+    </div></li>
+    <li><span class="nr">2</span><div>
+      <p><b class="t">Sprache wählen.</b> Bei <span class="m">„🌐 Erklärung in dieser Sprache:“</span> die Sprache der Person einstellen.
+      Oder <span class="m">„Deutsch“</span> lassen: Dann erkennt das Handy seine Sprache selbst.</p>
+    </div></li>
+    <li><span class="nr">3</span><div>
+      <p><b class="t">QR-Code zeigen.</b> <span class="k">📱 Lieber mit dem Handy fotografieren</span> klicken. Die Person scannt den QR-Code mit der Handy-Kamera.
+      Am PC steht dann <span class="m">„✅ Handy verbunden …“</span></p>
+      <p class="zusatz">Nicht <span class="k">🔑 Zugang dauerhaft auf ein Handy geben</span> klicken: Das gibt Ihren Zugang dauerhaft aufs Handy.</p>
+    </div></li>
+    <li><span class="nr">4</span><div>
+      <p><b class="t">Am Handy: Häkchen und Foto.</b> Das Häkchen setzt <b>die Person selbst</b>. Es ist ihre Einwilligung: Das Foto geht an BehördenKlar und an den KI-Dienst Anthropic (USA).
+      Dann tippt sie auf <span class="k">📷 Brief auswählen &amp; erklären lassen</span> und fotografiert den Brief.</p>
+      <p class="zusatz">Häkchen-Text unklar? Kurz erklären. Ein Foto pro Brief, bei mehreren Seiten die mit Betreff und Frist.</p>
+    </div></li>
+    <li><span class="nr">5</span><div>
+      <p><b class="t">1 bis 2 Minuten warten.</b> Dann steht die Erklärung am PC auf Deutsch und am Handy in der Sprache der Person.
+      Umschalten über dem Ergebnis, z. B. <span class="k">Deutsch</span> <span class="k">العربية</span></p>
+    </div></li>
+    <li><span class="nr">6</span><div>
+      <p><b class="t">Kalender am Handy.</b> Die Person tippt am Handy auf <span class="k">📅 In meinen Kalender eintragen</span>. Nicht am PC, sonst landet die Datei auf dem Dienst-PC.</p>
+      <p class="zusatz">Seite am Handy schon zu? Am PC <span class="k">📱 Ergebnis aufs Handy mitnehmen</span> klicken.</p>
+    </div></li>
+    <li><span class="nr">7</span><div>
+      <p><b class="t">Fertig: Seite neu laden (Taste F5).</b> Nächste Person: Sprache neu wählen.</p>
+    </div></li>
+  </ol>
+
+  <div class="kasten wichtig">
+    <span class="label">Wichtig</span>
+    <p><b>Beim Warten nicht neu laden.</b> Falls doch: Das Ergebnis steht am Handy, dort <span class="k">Deutsch</span> tippen.</p>
+    <p><b>Ein QR-Code gilt für einen Brief.</b> Nächster Brief: ab Schritt 3.</p>
+    <table class="meldungen">
+      <caption>Meldungen am PC und was sie bedeuten</caption>
+      <tr><td><span class="m">„⚠️ Am Handy hat es nicht geklappt: …“</span></td><td>Am Handy steht, warum. Dort neu fotografieren.</td></tr>
+      <tr><td><span class="m">„⚠️ Das dauert ungewöhnlich lange …“</span></td><td>Am Handy: <span class="k">🔁 Noch einmal an den Computer senden</span><br>Kein Knopf da? Am PC <span class="k">Abbrechen</span>, dann ab Schritt 3.</td></tr>
+      <tr><td><span class="m">„Der QR-Code ist abgelaufen …“</span></td><td>Schritt 3 wiederholen.</td></tr>
+      <tr><td><span class="m">„⚠️ Keine Verbindung zum Server …“</span></td><td>Internet am PC prüfen, sonst Ihre IT fragen.</td></tr>
+      <tr class="leer"><td><span class="m">„Die kostenlosen Analysen sind aufgebraucht oder abgelaufen …“</span><br><span class="m">„Der Zugang über … ist abgelaufen …“</span></td><td><b>Kontingent leer oder Test zu Ende: Justin anrufen, <span style="white-space: nowrap;">0170 4969375</span>.</b> Danach das Lesezeichen neu öffnen.</td></tr>
+    </table>
+  </div>
+
+  <div class="fuss">
+    <div class="wer">
+      <span class="anruf">Bei Fragen einfach anrufen: Justin Klein · <span class="nummer">0170 4969375</span></span><br>
+      Webklar GbR · Am Schwimmbad 10, 67722 Winnweiler · justin@webklar.com · <b>behoerdenklar.de</b>
+    </div>
+    <span class="stempel">Stand Oktober 2026</span>
+  </div>
+</div>
+
+<script>
+  // Einrichtungs-Code hier eintragen, sobald er angelegt ist (z. B. 'MBE-K7QX').
+  var CODE = '';
+  // Name der Einrichtung, so wie er beim Anlegen des Codes vergeben wurde (steht oben auf der Seite).
+  var STELLE = 'MBE Donnersberg';
+  var url = CODE ? 'https://behoerdenklar.de/demo?code=' + CODE : 'https://behoerdenklar.de/demo';
+  var qr = qrcode(0, 'M');
+  qr.addData(url);
+  qr.make();
+  document.getElementById('qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
+  var codeEl = document.getElementById('codeText');
+  codeEl.textContent = CODE || 'wird beim Termin eingetragen';
+  if (!CODE) { codeEl.style.fontSize = '9pt'; codeEl.style.letterSpacing = '0'; }
+  var adresseEl = document.getElementById('adresseText');
+  adresseEl.textContent = 'behoerdenklar.de/demo?code=' + CODE;
+  if (!CODE) { var l = document.createElement('span'); l.className = 'luecke'; adresseEl.appendChild(l); }
+  document.getElementById('stelleText').textContent = STELLE || 'Ihre Beratungsstelle';
+</script>
+</body>
+</html>
