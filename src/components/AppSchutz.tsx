@@ -14,7 +14,7 @@ import { AppState, AppStateStatus, StyleSheet, Text, View } from 'react-native';
 import * as LocalAuthentication from 'expo-local-authentication';
 import { holeAppSperre } from '../services/storage';
 import { GrossButton } from './GrossButton';
-import { farben, schrift, abstand } from '../theme';
+import { farben, schrift, abstand, schriftart } from '../theme';
 
 export function AppSchutz({ children }: { children: React.ReactNode }) {
   const [entsperrt, setEntsperrt] = useState(false);
@@ -97,14 +97,14 @@ const styles = StyleSheet.create({
     gap: abstand.m,
   },
   sichtschutz: { justifyContent: 'center', alignItems: 'center' },
-  symbol: { fontSize: 56, textAlign: 'center' },
-  titel: {
+  symbol: { fontFamily: schriftart.serif, fontSize: 56, textAlign: 'center' },
+  titel: { fontFamily: schriftart.serif,
     fontSize: schrift.titel,
     fontWeight: '700',
     color: farben.text,
     textAlign: 'center',
   },
-  text: {
+  text: { fontFamily: schriftart.serif,
     fontSize: schrift.basis,
     color: farben.textSekundaer,
     textAlign: 'center',

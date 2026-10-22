@@ -24,7 +24,7 @@ import { terminZumKalender } from '../services/kalender';
 import { berechneAmpel, naechsteFrist, formatiereLangDatum } from '../utils/ampel';
 import { GrossButton } from '../components/GrossButton';
 import { Ikone } from '../components/Ikone';
-import { farben, schrift, abstand, TOUCH_TARGET } from '../theme';
+import { farben, schrift, abstand, TOUCH_TARGET, schriftart, ecke, kartenSchatten } from '../theme';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Analyse'>;
 
@@ -343,66 +343,66 @@ const styles = StyleSheet.create({
   zentriert: { flex: 1, justifyContent: 'center', alignItems: 'center' },
 
   // Frist-Karte
-  fristKarte: { borderRadius: 16, borderWidth: 1, padding: abstand.l },
+  fristKarte: { borderRadius: ecke, borderWidth: 1, padding: abstand.l },
   fristKopf: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 10 },
-  fristKicker: { fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase', fontWeight: '700' },
-  grosseZahl: { fontSize: 64, lineHeight: 64, fontWeight: '800', fontVariant: ['tabular-nums'] },
-  zahlEinheit: { fontSize: 22, fontWeight: '700', lineHeight: 24 },
-  zahlUnter: { fontSize: 13, color: farben.textSekundaer },
+  fristKicker: { fontFamily: schriftart.mono, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase', fontWeight: '700' },
+  grosseZahl: { fontFamily: schriftart.serif, fontSize: 64, lineHeight: 64, fontWeight: '800', fontVariant: ['tabular-nums'] },
+  zahlEinheit: { fontFamily: schriftart.serif, fontSize: 22, fontWeight: '700', lineHeight: 24 },
+  zahlUnter: { fontFamily: schriftart.serif, fontSize: 13, color: farben.textSekundaer },
   trenner: { height: 1, backgroundColor: farben.rand, marginVertical: 14 },
   datenZeile: { flexDirection: 'row', justifyContent: 'space-between', gap: 12, marginTop: 5 },
-  datenLabel: { fontSize: schrift.klein, color: farben.textSekundaer },
-  datenWert: { fontSize: schrift.klein, fontWeight: '700', color: farben.text },
+  datenLabel: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer },
+  datenWert: { fontFamily: schriftart.serif, fontSize: schrift.klein, fontWeight: '700', color: farben.text },
 
   keineFrist: {
     flexDirection: 'row', gap: abstand.s, alignItems: 'center',
-    backgroundColor: farben.ampelGruenHintergrund, borderRadius: 12,
+    backgroundColor: farben.ampelGruenHintergrund, borderRadius: ecke,
     borderLeftWidth: 4, borderLeftColor: farben.ampelGruen, padding: abstand.m,
   },
-  keineFristTitel: { fontSize: schrift.basis, fontWeight: '700', color: farben.text },
-  keineFristText: { fontSize: schrift.klein, color: farben.textSekundaer, marginTop: 2 },
+  keineFristTitel: { fontFamily: schriftart.serif, fontSize: schrift.basis, fontWeight: '700', color: farben.text },
+  keineFristText: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, marginTop: 2 },
 
   // Werkzeuge
   werkzeugZeile: { flexDirection: 'row', gap: abstand.s, marginTop: abstand.m },
-  werkzeug: {
+  werkzeug: { ...kartenSchatten,
     flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 7,
-    backgroundColor: farben.flaeche, borderRadius: 12, minHeight: 48, paddingHorizontal: abstand.s,
+    backgroundColor: farben.flaeche, borderRadius: ecke, minHeight: 48, paddingHorizontal: abstand.s,
   },
-  werkzeugText: { fontSize: schrift.klein, fontWeight: '600', color: farben.primaerFuellung },
+  werkzeugText: { fontFamily: schriftart.serif, fontSize: schrift.klein, fontWeight: '600', color: farben.primaerFuellung },
 
-  kicker: {
+  kicker: { fontFamily: schriftart.mono,
     fontSize: 12, letterSpacing: 1.1, textTransform: 'uppercase',
-    color: farben.primaer, fontWeight: '700', marginTop: abstand.l, marginBottom: abstand.xs,
+    color: farben.textSekundaer, fontWeight: '700', marginTop: abstand.l, marginBottom: abstand.xs,
   },
-  kernaussage: { fontSize: schrift.gross, color: farben.text, lineHeight: 29, fontWeight: '600' },
-  erklaerung: { fontSize: schrift.basis, color: farben.textSekundaer, lineHeight: 27, marginTop: abstand.s },
+  kernaussage: { fontFamily: schriftart.serif, fontSize: schrift.gross, color: farben.text, lineHeight: 29, fontWeight: '600' },
+  erklaerung: { fontFamily: schriftart.serif, fontSize: schrift.basis, color: farben.textSekundaer, lineHeight: 27, marginTop: abstand.s },
   dünnerTrenner: { height: 1, backgroundColor: farben.rand, marginTop: abstand.l },
 
   // To-do
   todoZeile: { flexDirection: 'row', gap: abstand.s, alignItems: 'flex-start', minHeight: 40 },
   todoKreis: {
-    width: 28, height: 28, borderRadius: 14, borderWidth: 1.5, borderColor: farben.primaer,
+    width: 28, height: 28, borderRadius: ecke, borderWidth: 1.5, borderColor: farben.primaer,
     alignItems: 'center', justifyContent: 'center', marginTop: 1,
   },
   todoKreisFertig: { backgroundColor: farben.ampelGruen, borderColor: farben.ampelGruen },
-  todoNummer: { fontSize: schrift.klein, fontWeight: '700', color: farben.primaerFuellung, fontVariant: ['tabular-nums'] },
-  todoText: { flex: 1, fontSize: schrift.basis, color: farben.text, lineHeight: 25, paddingTop: 3 },
+  todoNummer: { fontFamily: schriftart.serif, fontSize: schrift.klein, fontWeight: '700', color: farben.primaerFuellung, fontVariant: ['tabular-nums'] },
+  todoText: { fontFamily: schriftart.serif, flex: 1, fontSize: schrift.basis, color: farben.text, lineHeight: 25, paddingTop: 3 },
   durchgestrichen: { textDecorationLine: 'line-through', color: farben.textSekundaer },
 
   // Fachbegriffe
-  begriffKarte: { backgroundColor: farben.flaeche, borderRadius: 12, padding: abstand.m },
-  begriff: { fontSize: schrift.basis, fontWeight: '700', color: farben.text, marginBottom: 3 },
-  begriffText: { fontSize: schrift.klein, color: farben.textSekundaer, lineHeight: 23 },
+  begriffKarte: { ...kartenSchatten, backgroundColor: farben.flaeche, borderRadius: ecke, padding: abstand.m },
+  begriff: { fontFamily: schriftart.serif, fontSize: schrift.basis, fontWeight: '700', color: farben.text, marginBottom: 3 },
+  begriffText: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, lineHeight: 23 },
 
   schutzZeile: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: abstand.l },
-  schutzText: { fontSize: 11.5, color: farben.textTertiaer },
+  schutzText: { fontFamily: schriftart.serif, fontSize: 11.5, color: farben.textTertiaer },
 
-  text: { fontSize: schrift.basis, color: farben.text, lineHeight: 27 },
+  text: { fontFamily: schriftart.serif, fontSize: schrift.basis, color: farben.text, lineHeight: 27 },
 
   // Modal
   modalHintergrund: { flex: 1, backgroundColor: 'rgba(0,0,0,0.45)', justifyContent: 'center', padding: abstand.l },
-  modalKarte: { backgroundColor: farben.flaeche, borderRadius: 14, padding: abstand.m, maxHeight: '75%' },
-  modalTitel: { fontSize: schrift.gross, fontWeight: '700', color: farben.text, marginBottom: abstand.xs },
+  modalKarte: { ...kartenSchatten, backgroundColor: farben.flaeche, borderRadius: ecke, padding: abstand.m, maxHeight: '75%' },
+  modalTitel: { fontFamily: schriftart.serif, fontSize: schrift.gross, fontWeight: '700', color: farben.text, marginBottom: abstand.xs },
   sprachZeile: { minHeight: TOUCH_TARGET, justifyContent: 'center' },
-  sprachZeileText: { fontSize: schrift.gross, color: farben.text },
+  sprachZeileText: { fontFamily: schriftart.serif, fontSize: schrift.gross, color: farben.text },
 });

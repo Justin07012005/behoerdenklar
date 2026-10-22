@@ -18,7 +18,7 @@ import { initialisiereBenachrichtigungen } from './src/services/erinnerungen';
 import { holeConsent } from './src/services/storage';
 import { AppSchutz } from './src/components/AppSchutz';
 import { Ikone } from './src/components/Ikone';
-import { farben, schrift } from './src/theme';
+import { farben, schrift, schriftart } from './src/theme';
 import { FristenScreen } from './src/screens/FristenScreen';
 import { ArchivScreen } from './src/screens/ArchivScreen';
 import { ConsentScreen } from './src/screens/ConsentScreen';
@@ -67,10 +67,11 @@ function HauptTabs() {
         headerShown: false,
         tabBarActiveTintColor: farben.primaer,
         tabBarInactiveTintColor: farben.textTertiaer,
-        tabBarLabelStyle: { fontSize: 11, fontWeight: '600' },
+        tabBarLabelStyle: { fontFamily: schriftart.serif, fontSize: 12, fontWeight: '700' },
         tabBarStyle: {
-          backgroundColor: farben.flaeche,
-          borderTopColor: farben.rand,
+          backgroundColor: farben.hintergrund,
+          borderTopColor: farben.tinte,
+          borderTopWidth: 2,
           height: 56 + insets.bottom,
           paddingTop: 6,
           paddingBottom: insets.bottom,
@@ -120,7 +121,7 @@ export default function App() {
             headerStyle: { backgroundColor: farben.hintergrund },
             headerShadowVisible: false,
             headerTintColor: farben.primaer,
-            headerTitleStyle: { fontSize: schrift.gross, fontWeight: '700', color: farben.text },
+            headerTitleStyle: { fontFamily: schriftart.serif, fontSize: schrift.gross, fontWeight: '700', color: farben.text },
             headerBackTitle: 'Zurück',
             contentStyle: { backgroundColor: farben.hintergrund },
           }}
@@ -149,12 +150,9 @@ const styles = StyleSheet.create({
     backgroundColor: farben.primaerFuellung,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 3,
-    borderColor: farben.flaeche,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 5,
+    // Wie die Knöpfe der Webseite: Amtsblau, Tinten-Rahmen, harter Schatten
+    borderWidth: 2,
+    borderColor: farben.tinte,
+    boxShadow: '3px 4px 0px #21211D',
   },
 });

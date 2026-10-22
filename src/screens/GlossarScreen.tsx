@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { GLOSSAR } from '../data/glossar';
-import { farben, schrift, abstand } from '../theme';
+import { farben, schrift, abstand, schriftart, ecke, kartenSchatten } from '../theme';
 
 export function GlossarScreen() {
   const [suche, setSuche] = useState('');
@@ -44,30 +44,30 @@ export function GlossarScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: farben.hintergrund },
-  suche: {
+  suche: { fontFamily: schriftart.serif,
     margin: abstand.m,
     borderWidth: 1,
     borderColor: farben.rand,
-    borderRadius: 12,
+    borderRadius: ecke,
     padding: abstand.s,
     fontSize: schrift.basis,
     color: farben.text,
     minHeight: 48,
   },
-  karte: {
+  karte: { ...kartenSchatten,
     backgroundColor: farben.flaeche,
-    borderRadius: 14,
+    borderRadius: ecke,
     padding: abstand.m,
     marginBottom: abstand.s,
   },
-  begriff: { fontSize: schrift.gross, fontWeight: '700', color: farben.primaer },
-  erklaerung: {
+  begriff: { fontFamily: schriftart.serif, fontSize: schrift.gross, fontWeight: '700', color: farben.primaer },
+  erklaerung: { fontFamily: schriftart.serif,
     fontSize: schrift.basis,
     color: farben.text,
     lineHeight: 27,
     marginTop: abstand.xs,
   },
-  leer: {
+  leer: { fontFamily: schriftart.serif,
     textAlign: 'center',
     fontSize: schrift.basis,
     color: farben.textSekundaer,

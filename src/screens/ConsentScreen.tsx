@@ -8,7 +8,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
 import { speichereConsent } from '../services/storage';
 import { GrossButton } from '../components/GrossButton';
-import { farben, schrift, abstand } from '../theme';
+import { farben, schrift, abstand, schriftart, ecke, kartenSchatten } from '../theme';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Consent'>;
 
@@ -60,18 +60,18 @@ export function ConsentScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: farben.hintergrund },
   inhalt: { padding: abstand.l },
-  titel: {
+  titel: { fontFamily: schriftart.serif,
     fontSize: schrift.titel,
     fontWeight: '700',
     color: farben.text,
     marginBottom: abstand.l,
   },
-  karte: {
+  karte: { ...kartenSchatten,
     backgroundColor: farben.flaeche,
-    borderRadius: 14,
+    borderRadius: ecke,
     padding: abstand.m,
     marginBottom: abstand.xl,
     gap: abstand.m,
   },
-  punkt: { fontSize: schrift.basis, color: farben.text, lineHeight: 27 },
+  punkt: { fontFamily: schriftart.serif, fontSize: schrift.basis, color: farben.text, lineHeight: 27 },
 });

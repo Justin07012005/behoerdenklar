@@ -8,7 +8,7 @@
  */
 import React from 'react';
 import { ActivityIndicator, Pressable, StyleSheet, Text, View } from 'react-native';
-import { farben, schrift, abstand, TOUCH_TARGET } from '../theme';
+import { farben, schrift, abstand, TOUCH_TARGET, schriftart, ecke } from '../theme';
 import { Ikone, IkonenName } from './Ikone';
 
 interface Props {
@@ -30,8 +30,8 @@ export function GrossButton({
 }: Props) {
   const istPrimaer = variante === 'primaer';
   const istGefahr = variante === 'gefahr';
-  // Sekundär: dunkles Bronze statt hellem Gold — auf grauer Fläche gut lesbar
-  const inhaltsFarbe = istPrimaer || istGefahr ? farben.primaerText : farben.primaerFuellung;
+  // Wie `.cta` der Webseite: Amtsblau gefüllt bzw. weißes Blatt mit blauer Schrift
+  const inhaltsFarbe = istPrimaer ? farben.primaerText : istGefahr ? farben.fehler : farben.primaer;
   return (
     <Pressable
       onPress={onPress}
@@ -44,7 +44,7 @@ export function GrossButton({
         variante === 'sekundaer' && styles.sekundaer,
         istGefahr && styles.gefahr,
         (deaktiviert || laedt) && styles.deaktiviert,
-        pressed && styles.gedrueckt,
+        pressed && !(deaktiviert || laedt) && styles.gedrueckt,
       ]}
     >
       {laedt ? (
@@ -62,17 +62,19 @@ export function GrossButton({
 const styles = StyleSheet.create({
   button: {
     minHeight: TOUCH_TARGET,
-    borderRadius: 14,
+    borderRadius: ecke,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: abstand.l,
     paddingVertical: abstand.s,
   },
   zeile: { flexDirection: 'row', alignItems: 'center', gap: abstand.xs + 2 },
-  primaer: { backgroundColor: farben.primaerFuellung },
-  sekundaer: { backgroundColor: farben.flaecheSekundaer },
-  gefahr: { backgroundColor: farben.fehler },
-  deaktiviert: { opacity: 0.4 },
-  gedrueckt: { opacity: 0.65 },
-  text: { fontSize: schrift.gross, fontWeight: '600', textAlign: 'center' },
+  // Tinten-Rahmen + harter Versatz-Schatten wie `.cta` auf der Webseite;
+  // beim Drücken rutscht der Knopf in den Schatten (wie dort beim Hover)
+  primaer: { backgroundColor: farben.primaerFuellung, borderWidth: 2, borderColor: farben.tinte, boxShadow: '4px 4px 0px #21211D' },
+  sekundaer: { backgroundColor: farben.flaeche, borderWidth: 2, borderColor: farben.tinte, boxShadow: '4px 4px 0px #21211D' },
+  gefahr: { backgroundColor: farben.flaeche, borderWidth: 2, borderColor: farben.fehler },
+  deaktiviert: { opacity: 0.4, boxShadow: 'none' },
+  gedrueckt: { transform: [{ translateX: 2 }, { translateY: 2 }], boxShadow: '2px 2px 0px #21211D' },
+  text: { fontFamily: schriftart.serif, fontSize: schrift.gross, fontWeight: '700', textAlign: 'center' },
 });

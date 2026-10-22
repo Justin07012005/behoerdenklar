@@ -33,7 +33,7 @@ import {
 import { NUTZT_PROXY } from '../services/claudeClient';
 import { useAppStore } from '../store/useAppStore';
 import { GrossButton } from '../components/GrossButton';
-import { farben, schrift, abstand } from '../theme';
+import { farben, schrift, abstand, schriftart, ecke, kartenSchatten } from '../theme';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Einstellungen'>;
 
@@ -268,30 +268,30 @@ export function EinstellungenScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: farben.hintergrund },
-  abschnittTitel: {
+  abschnittTitel: { fontFamily: schriftart.serif,
     fontSize: schrift.gross,
     fontWeight: '700',
     color: farben.primaer,
     marginBottom: abstand.s,
   },
-  text: { fontSize: schrift.basis, color: farben.text, lineHeight: 27 },
-  hinweis: {
+  text: { fontFamily: schriftart.serif, fontSize: schrift.basis, color: farben.text, lineHeight: 27 },
+  hinweis: { fontFamily: schriftart.serif,
     fontSize: schrift.klein,
     color: farben.textSekundaer,
     lineHeight: 22,
     marginVertical: abstand.s,
   },
-  eingabe: {
+  eingabe: { fontFamily: schriftart.serif,
     borderWidth: 1,
     borderColor: farben.rand,
-    borderRadius: 12,
+    borderRadius: ecke,
     padding: abstand.s,
     fontSize: schrift.basis,
     color: farben.text,
     minHeight: 56,
     marginBottom: abstand.s,
   },
-  karte: { backgroundColor: farben.flaeche, borderRadius: 14, padding: abstand.m },
+  karte: { ...kartenSchatten, backgroundColor: farben.flaeche, borderRadius: ecke, padding: abstand.m },
   trenner: { height: 1, backgroundColor: farben.rand, marginVertical: abstand.l },
   schalterZeile: {
     flexDirection: 'row',
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
   option: {
     borderWidth: 1,
     borderColor: farben.rand,
-    borderRadius: 12,
+    borderRadius: ecke,
     padding: abstand.s,
     minHeight: 56,
     justifyContent: 'center',

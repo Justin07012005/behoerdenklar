@@ -1,38 +1,51 @@
 /**
- * Design-System: ruhig, vertrauenswürdig, barrierefrei.
+ * Design-System — wie die Webseite behoerdenklar.de: ein Amtsbrief, der
+ * endlich verständlich ist. Papier, Tinte, Amtsblau, gelber Textmarker,
+ * Georgia-Serifenschrift, Etiketten in Schreibmaschinenschrift.
+ *
  * - Große Schrift (Basis 18) für die Zielgruppe
- * - Hoher Kontrast (dunkles Blau auf Weiß, WCAG AA)
+ * - Hoher Kontrast (Tinte auf Papier, WCAG AA)
  * - Große Touch-Targets (min. 56px Höhe)
+ *
+ * Die Werte entsprechen den CSS-Variablen der Webseite (--papier, --tinte,
+ * --amtsblau, --marker, --stempelrot …). Ändert sich dort etwas, hier mitziehen.
  */
+import { Platform, TextStyle, ViewStyle } from 'react-native';
+
 export const farben = {
-  // Warme, ruhige Palette nach dem Claude-Design-Entwurf ("Postklar/Classical")
-  // und passend zur Website: Papier-Beige, Gold-Akzent, dunkle Tinte.
-  // Gut lesbar (hoher Kontrast bei Fließtext), nur die Schrift bleibt
-  // die klare System-Schrift statt der dünnen Serifenschrift.
-  hintergrund: '#F1EFE9',      // warmes Off-White (Grund)
-  flaeche: '#FBFAF6',          // warme, fast weiße Karten
-  flaecheSekundaer: '#EAE7E0', // gedämpfte Fläche (graue Taste)
-  primaer: '#B68235',          // Gold-Akzent (Icons, aktive Tabs, Rahmen, Punkte)
-  primaerFuellung: '#7D5411',  // dunkles Bronze — Hintergrund gefüllter Buttons (weiße Schrift lesbar)
-  primaerText: '#FBF7EF',      // warmes Weiß (Text auf gefüllten Buttons)
-  text: '#201F1D',             // dunkle Tinte
-  textSekundaer: '#6B675E',    // warmes Grau (wie --grau der Website)
-  textTertiaer: '#A8A29A',     // helles warmes Grau (Chevrons)
-  rand: '#E2DED6',             // warme Trennlinie
-  // Dezente Gold-Hervorhebung (z. B. aktive Filter-Chips)
-  hervorhebung: '#F7EFE0',
-  hervorhebungRand: '#E9D8BC',
+  hintergrund: '#FAF7F0',      // Papier (--papier)
+  flaeche: '#FFFFFF',          // weißes Formularblatt (Karten, Felder)
+  flaecheSekundaer: '#F1ECDF', // dunkleres Papier (--papier-dunkel)
+  primaer: '#1D4E89',          // Amtsblau (Icons, aktive Tabs, Links)
+  primaerFuellung: '#1D4E89',  // Amtsblau — gefüllte Knöpfe
+  primaerText: '#FFFFFF',      // Text auf gefüllten Knöpfen
+  text: '#21211D',             // Tinte
+  textSekundaer: '#6B675E',    // Grau (--grau)
+  textTertiaer: '#9A958A',     // helles Grau (Platzhalter, Chevrons)
+  rand: 'rgba(33,33,29,0.22)', // dünne Linie wie auf der Webseite
+  tinte: '#21211D',            // harte Rahmen und Schatten
+  marker: '#FFE66B',           // gelber Textmarker (Signatur der Marke)
+  stempelrot: '#B3372B',
+  // Hervorhebung = Textmarker (z. B. aktive Filter)
+  hervorhebung: '#FFE66B',
+  hervorhebungRand: '#21211D',
 
-  // Dringlichkeits-Ampel in den warmen Design-Tönen — als Text auf hellem
-  // Tint gut lesbar (WCAG): Backstein-Rot, Bronze-Gold, Salbei-Grün.
-  ampelRot: '#A23B2B',
-  ampelGelb: '#8A5E14',
-  ampelGruen: '#3F5A4C',
-  ampelRotHintergrund: '#F5E9E5',
-  ampelGelbHintergrund: '#F5EEDF',
-  ampelGruenHintergrund: '#E8EFEA',
+  // Dringlichkeits-Ampel wie auf der Webseite (--rot, --gelb, --gruen),
+  // Gelb etwas dunkler, damit es als Text auf hellem Grund WCAG AA erreicht.
+  ampelRot: '#B3372B',
+  ampelGelb: '#8A5A00',
+  ampelGruen: '#2E7D4F',
+  ampelRotHintergrund: '#FDF1EF',
+  ampelGelbHintergrund: '#FFF6D6',
+  ampelGruenHintergrund: '#E7F4EA',
 
-  fehler: '#A23B2B',
+  fehler: '#B3372B',
+};
+
+/** Schriften der Webseite: Georgia (Text) und Courier (Etiketten). */
+export const schriftart = {
+  serif: Platform.select({ ios: 'Georgia', android: 'serif', default: 'Georgia' }) as string,
+  mono: Platform.select({ ios: 'Courier New', android: 'monospace', default: 'Courier New' }) as string,
 };
 
 export const schrift = {
@@ -54,9 +67,27 @@ export const abstand = {
 /** Mindesthöhe für alle interaktiven Elemente (Barrierefreiheit). */
 export const TOUCH_TARGET = 56;
 
-/**
- * Bewusst leer: Nach Apple-Vorbild heben sich weiße Karten allein durch
- * den grauen System-Hintergrund ab — ohne Schatten und Rahmen.
- * (Als No-Op behalten, damit bestehende Spreads harmlos bleiben.)
- */
-export const kartenSchatten = {} as const;
+/** Papier hat (fast) keine runden Ecken. */
+export const ecke = 2;
+
+/** Karte wie `.brief-karte` der Webseite: weißes Blatt, feine Linie, flacher Schatten. */
+export const kartenSchatten: ViewStyle = {
+  borderWidth: 1,
+  borderColor: 'rgba(33,33,29,0.28)',
+  boxShadow: '4px 5px 0px rgba(33,33,29,0.08)',
+};
+
+/** Formular wie `.antrag`: Tinten-Rahmen mit hartem Versatz-Schatten. */
+export const formularRahmen: ViewStyle = {
+  borderWidth: 2,
+  borderColor: farben.tinte,
+  boxShadow: '6px 7px 0px rgba(33,33,29,0.9)',
+};
+
+/** Etikett wie `h2`/`.karten-label` der Webseite: Schreibmaschine, Versalien. */
+export const etikett: TextStyle = {
+  fontFamily: schriftart.mono,
+  fontSize: 13,
+  letterSpacing: 1.4,
+  textTransform: 'uppercase',
+};

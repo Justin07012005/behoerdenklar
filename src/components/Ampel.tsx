@@ -5,7 +5,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { AmpelStatus } from '../utils/ampel';
-import { abstand, schrift } from '../theme';
+import { abstand, schrift, schriftart, ecke } from '../theme';
 import { Ikone, IkonenName } from './Ikone';
 
 const IKONE: Record<string, IkonenName> = { rot: 'warnung', gelb: 'wecker', gruen: 'info' };
@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderLeftWidth: 6,
-    borderRadius: 12,
+    borderRadius: ecke,
     padding: abstand.m,
     gap: abstand.s,
   },
-  text: { flex: 1, fontSize: schrift.gross, fontWeight: '700' },
+  text: { fontFamily: schriftart.serif, flex: 1, fontSize: schrift.gross, fontWeight: '700' },
 });

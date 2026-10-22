@@ -21,7 +21,7 @@ import {
   NaechsteFrist,
 } from '../utils/ampel';
 import { Ikone } from '../components/Ikone';
-import { farben, schrift, abstand, TOUCH_TARGET } from '../theme';
+import { farben, schrift, abstand, TOUCH_TARGET, schriftart, ecke, kartenSchatten, formularRahmen } from '../theme';
 
 type Nav = NativeStackNavigationProp<RootStackParamList>;
 
@@ -93,8 +93,10 @@ export function FristenScreen() {
       {/* Kopf */}
       <View style={styles.kopf}>
         <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-          <Ikone name="uhr" groesse={22} farbe={farben.primaer} />
-          <Text style={styles.marke}>BehördenKlar</Text>
+          <Ikone name="brief" groesse={22} farbe={farben.primaer} />
+          <Text style={styles.marke}>
+            BehördenKlar <Text style={styles.markeZusatz}>by Webklar</Text>
+          </Text>
         </View>
         <View style={{ flexDirection: 'row', gap: 8 }}>
           <KopfKnopf ikone="buch" label="Glossar" onPress={() => navigation.navigate('Glossar')} />
@@ -104,7 +106,9 @@ export function FristenScreen() {
 
       <View style={{ paddingHorizontal: abstand.m }}>
         <Text style={styles.kicker}>Fristen-Übersicht</Text>
-        <Text style={styles.titel}>Ihre Fristen</Text>
+        <Text style={styles.titel}>
+          Ihre <Text style={styles.markiert}> Fristen </Text>
+        </Text>
         <Text style={styles.unterTitel}>
           Nach Dringlichkeit geordnet. Kümmern Sie sich zuerst um das Oberste.
         </Text>
@@ -238,44 +242,55 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: abstand.m,
-    marginBottom: abstand.m,
+    marginHorizontal: abstand.m,
+    paddingBottom: abstand.s,
+    marginBottom: abstand.l,
+    // Briefkopf wie auf der Webseite: Tinten-Linie unter Absender
+    borderBottomWidth: 2,
+    borderBottomColor: farben.tinte,
   },
-  marke: { fontSize: schrift.gross, fontWeight: '700', color: farben.text },
+  markeZusatz: { fontFamily: schriftart.serif, fontSize: 12, fontWeight: '400', color: farben.textSekundaer },
+  // gelber Textmarker — das Erkennungszeichen der Webseite
+  markiert: { backgroundColor: farben.marker },
+  marke: { fontFamily: schriftart.serif, fontSize: schrift.gross, fontWeight: '700', color: farben.text },
   kopfKnopf: {
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: ecke,
     backgroundColor: farben.flaeche,
+    borderWidth: 1.5,
+    borderColor: farben.tinte,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  kicker: {
+  kicker: { fontFamily: schriftart.mono,
     fontSize: 12,
     letterSpacing: 1.3,
     textTransform: 'uppercase',
-    color: farben.primaer,
+    color: farben.textSekundaer,
     fontWeight: '600',
     marginBottom: 4,
   },
-  titel: { fontSize: schrift.riesig, fontWeight: '800', color: farben.text, marginBottom: 4 },
-  unterTitel: { fontSize: schrift.klein, color: farben.textSekundaer, marginBottom: abstand.l },
+  titel: { fontFamily: schriftart.serif, fontSize: schrift.riesig, fontWeight: '800', color: farben.text, marginBottom: 4 },
+  unterTitel: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, marginBottom: abstand.l },
+  // wichtigste Frist wie ein Formular der Webseite: Tinten-Rahmen, harter Schatten
   heldKarte: {
-    borderRadius: 16,
-    borderLeftWidth: 5,
+    ...formularRahmen,
+    borderRadius: ecke,
+    borderLeftWidth: 7,
     padding: abstand.l,
     marginBottom: abstand.l,
   },
   heldKopf: { flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: 12 },
   punkt: { width: 9, height: 9, borderRadius: 5 },
-  heldKicker: { fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase', fontWeight: '700' },
-  grosseZahl: { fontSize: 68, lineHeight: 68, fontWeight: '800', fontVariant: ['tabular-nums'] },
-  zahlEinheit: { fontSize: 22, fontWeight: '700', lineHeight: 24 },
-  zahlDatum: { fontSize: 13, color: farben.textSekundaer, marginTop: 2 },
+  heldKicker: { fontFamily: schriftart.mono, fontSize: 12, letterSpacing: 0.6, textTransform: 'uppercase', fontWeight: '700' },
+  grosseZahl: { fontFamily: schriftart.serif, fontSize: 68, lineHeight: 68, fontWeight: '800', fontVariant: ['tabular-nums'] },
+  zahlEinheit: { fontFamily: schriftart.serif, fontSize: 22, fontWeight: '700', lineHeight: 24 },
+  zahlDatum: { fontFamily: schriftart.serif, fontSize: 13, color: farben.textSekundaer, marginTop: 2 },
   trenner: { height: 1, backgroundColor: farben.rand, marginVertical: 15 },
-  briefTyp: { fontSize: schrift.gross, fontWeight: '700', color: farben.text, marginBottom: 3 },
-  briefMeta: { fontSize: schrift.klein, color: farben.textSekundaer },
-  abschnitt: {
+  briefTyp: { fontFamily: schriftart.serif, fontSize: schrift.gross, fontWeight: '700', color: farben.text, marginBottom: 3 },
+  briefMeta: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer },
+  abschnitt: { fontFamily: schriftart.mono,
     fontSize: 12,
     letterSpacing: 1.1,
     textTransform: 'uppercase',
@@ -284,42 +299,42 @@ const styles = StyleSheet.create({
     marginTop: abstand.l,
     marginBottom: abstand.s,
   },
-  zeile: {
+  zeile: { ...kartenSchatten,
     flexDirection: 'row',
     alignItems: 'center',
     gap: abstand.m,
     backgroundColor: farben.flaeche,
-    borderRadius: 12,
+    borderRadius: ecke,
     borderLeftWidth: 4,
     padding: abstand.m,
   },
   zahlBox: { width: 54, alignItems: 'center' },
-  zahlKlein: { fontSize: 30, fontWeight: '800', fontVariant: ['tabular-nums'], lineHeight: 32 },
-  zahlBoxLabel: { fontSize: 10, letterSpacing: 0.5, textTransform: 'uppercase', color: farben.textTertiaer },
-  zeileTyp: { fontSize: schrift.basis, fontWeight: '700', color: farben.text },
-  zeileMeta: { fontSize: schrift.klein, color: farben.textSekundaer, marginTop: 2 },
+  zahlKlein: { fontFamily: schriftart.serif, fontSize: 30, fontWeight: '800', fontVariant: ['tabular-nums'], lineHeight: 32 },
+  zahlBoxLabel: { fontFamily: schriftart.mono, fontSize: 10, letterSpacing: 0.5, textTransform: 'uppercase', color: farben.textTertiaer },
+  zeileTyp: { fontFamily: schriftart.serif, fontSize: schrift.basis, fontWeight: '700', color: farben.text },
+  zeileMeta: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, marginTop: 2 },
   tag: { alignSelf: 'flex-start', borderRadius: 5, paddingHorizontal: 9, paddingVertical: 3, marginTop: 7 },
-  tagText: { fontSize: 11, fontWeight: '600' },
-  infoZeile: {
+  tagText: { fontFamily: schriftart.serif, fontSize: 11, fontWeight: '600' },
+  infoZeile: { ...kartenSchatten,
     flexDirection: 'row',
     alignItems: 'center',
     gap: abstand.s,
     backgroundColor: farben.flaeche,
-    borderRadius: 12,
+    borderRadius: ecke,
     padding: abstand.m,
     minHeight: TOUCH_TARGET,
   },
-  schutz: {
+  schutz: { ...kartenSchatten,
     flexDirection: 'row',
     gap: abstand.s,
     alignItems: 'flex-start',
     backgroundColor: farben.flaeche,
-    borderRadius: 12,
+    borderRadius: ecke,
     padding: abstand.m,
     marginTop: abstand.l,
   },
-  schutzText: { flex: 1, fontSize: 12.5, lineHeight: 19, color: farben.textSekundaer },
+  schutzText: { fontFamily: schriftart.serif, flex: 1, fontSize: 12.5, lineHeight: 19, color: farben.textSekundaer },
   leerBox: { alignItems: 'center', gap: abstand.s, marginTop: abstand.xl, marginBottom: abstand.l },
-  leerTitel: { fontSize: schrift.gross, fontWeight: '700', color: farben.text },
-  leerText: { fontSize: schrift.basis, color: farben.textSekundaer, textAlign: 'center', lineHeight: 26 },
+  leerTitel: { fontFamily: schriftart.serif, fontSize: schrift.gross, fontWeight: '700', color: farben.text },
+  leerText: { fontFamily: schriftart.serif, fontSize: schrift.basis, color: farben.textSekundaer, textAlign: 'center', lineHeight: 26 },
 });

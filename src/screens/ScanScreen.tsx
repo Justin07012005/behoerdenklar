@@ -22,7 +22,7 @@ import {
 import { planeErinnerungen } from '../services/erinnerungen';
 import { useAppStore, neueId } from '../store/useAppStore';
 import { GrossButton } from '../components/GrossButton';
-import { farben, schrift, abstand } from '../theme';
+import { farben, schrift, abstand, schriftart } from '../theme';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Scan'>;
 
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     gap: abstand.m,
     justifyContent: 'center',
   },
-  anleitung: {
+  anleitung: { fontFamily: schriftart.serif,
     fontSize: schrift.basis,
     color: farben.textSekundaer,
     textAlign: 'center',
@@ -219,14 +219,14 @@ const styles = StyleSheet.create({
     padding: abstand.xl,
     gap: abstand.m,
   },
-  kontingent: {
+  kontingent: { fontFamily: schriftart.serif,
     fontSize: schrift.klein,
     color: farben.textSekundaer,
     textAlign: 'center',
     marginTop: abstand.m,
   },
-  ladeText: { fontSize: schrift.gross, fontWeight: '700', color: farben.text },
-  ladeHinweis: {
+  ladeText: { fontFamily: schriftart.serif, fontSize: schrift.gross, fontWeight: '700', color: farben.text },
+  ladeHinweis: { fontFamily: schriftart.serif,
     fontSize: schrift.basis,
     color: farben.textSekundaer,
     textAlign: 'center',

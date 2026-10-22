@@ -26,7 +26,7 @@ import { generiereAntwort } from '../services/antwort';
 import { ClaudeFehler } from '../services/claudeClient';
 import { GrossButton } from '../components/GrossButton';
 import { Ikone, IkonenName } from '../components/Ikone';
-import { farben, schrift, abstand } from '../theme';
+import { farben, schrift, abstand, schriftart, ecke, kartenSchatten } from '../theme';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Antwort'>;
 
@@ -258,28 +258,28 @@ function escapeHtml(s: string): string {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: farben.hintergrund },
   zentriert: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  text: { fontSize: schrift.basis, color: farben.text },
+  text: { fontFamily: schriftart.serif, fontSize: schrift.basis, color: farben.text },
 
-  schrittLabel: { fontSize: schrift.klein, color: farben.textSekundaer, fontWeight: '600', marginBottom: abstand.xs },
+  schrittLabel: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, fontWeight: '600', marginBottom: abstand.xs },
   fortschritt: { flexDirection: 'row', gap: 6, marginBottom: abstand.l },
   balken: { flex: 1, height: 5, borderRadius: 3 },
 
-  titel: { fontSize: schrift.titel, fontWeight: '800', color: farben.text, marginBottom: 4 },
-  unterTitel: { fontSize: schrift.klein, color: farben.textSekundaer, lineHeight: 22, marginBottom: abstand.s },
+  titel: { fontFamily: schriftart.serif, fontSize: schrift.titel, fontWeight: '800', color: farben.text, marginBottom: 4 },
+  unterTitel: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, lineHeight: 22, marginBottom: abstand.s },
 
   // Schritt 1 — Karten
-  typKarte: {
+  typKarte: { ...kartenSchatten,
     flexDirection: 'row', alignItems: 'center', gap: abstand.s,
-    backgroundColor: farben.flaeche, borderRadius: 14, padding: abstand.m,
+    backgroundColor: farben.flaeche, borderRadius: ecke, padding: abstand.m,
   },
   typIkone: {
-    width: 44, height: 44, borderRadius: 12, borderWidth: 1, borderColor: farben.primaer,
+    width: 44, height: 44, borderRadius: ecke, borderWidth: 1, borderColor: farben.primaer,
     alignItems: 'center', justifyContent: 'center', flexShrink: 0,
   },
-  typTitel: { fontSize: schrift.basis, fontWeight: '700', color: farben.text },
-  typBeschreibung: { fontSize: schrift.klein, color: farben.textSekundaer, marginTop: 2, lineHeight: 20 },
+  typTitel: { fontFamily: schriftart.serif, fontSize: schrift.basis, fontWeight: '700', color: farben.text },
+  typBeschreibung: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, marginTop: 2, lineHeight: 20 },
   empfohlenTag: { backgroundColor: farben.hervorhebung, borderRadius: 6, paddingHorizontal: 8, paddingVertical: 2 },
-  empfohlenText: { fontSize: 11, fontWeight: '700', color: farben.primaerFuellung },
+  empfohlenText: { fontFamily: schriftart.serif, fontSize: 11, fontWeight: '700', color: farben.primaerFuellung },
 
   // Schritt 2/3
   wahlPill: {
@@ -287,19 +287,19 @@ const styles = StyleSheet.create({
     borderWidth: 1, borderColor: farben.primaer, borderRadius: 9999,
     paddingHorizontal: 12, paddingVertical: 6, marginBottom: abstand.m,
   },
-  wahlPillText: { fontSize: schrift.klein, color: farben.primaerFuellung, fontWeight: '600' },
-  feldLabel: { fontSize: schrift.klein, color: farben.textSekundaer, fontWeight: '600', marginTop: abstand.s, marginBottom: 6 },
-  eingabe: {
-    borderWidth: 1, borderColor: farben.rand, borderRadius: 12, padding: abstand.s,
+  wahlPillText: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.primaerFuellung, fontWeight: '600' },
+  feldLabel: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, fontWeight: '600', marginTop: abstand.s, marginBottom: 6 },
+  eingabe: { fontFamily: schriftart.serif,
+    borderWidth: 1, borderColor: farben.rand, borderRadius: ecke, padding: abstand.s,
     fontSize: schrift.basis, color: farben.text, backgroundColor: farben.flaeche, minHeight: 52,
   },
   mehrzeilig: { minHeight: 110 },
   briefText: { minHeight: 300, lineHeight: 26 },
   infoBox: {
     flexDirection: 'row', gap: abstand.s, alignItems: 'flex-start',
-    backgroundColor: farben.hervorhebung, borderRadius: 12, padding: abstand.m, marginTop: abstand.m,
+    backgroundColor: farben.hervorhebung, borderRadius: ecke, padding: abstand.m, marginTop: abstand.m,
   },
-  infoBoxText: { flex: 1, fontSize: schrift.klein, color: farben.text, lineHeight: 21 },
+  infoBoxText: { fontFamily: schriftart.serif, flex: 1, fontSize: schrift.klein, color: farben.text, lineHeight: 21 },
   zurueck: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 6, marginTop: abstand.m, paddingVertical: abstand.s },
-  zurueckText: { fontSize: schrift.klein, color: farben.primaerFuellung, fontWeight: '600' },
+  zurueckText: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.primaerFuellung, fontWeight: '600' },
 });

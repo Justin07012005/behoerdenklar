@@ -13,7 +13,7 @@ import { berechneAmpel } from '../utils/ampel';
 import { formatiereDatum } from '../services/erinnerungen';
 import { Ikone } from '../components/Ikone';
 import { GrossButton } from '../components/GrossButton';
-import { farben, schrift, abstand, TOUCH_TARGET } from '../theme';
+import { farben, schrift, abstand, TOUCH_TARGET, schriftart, ecke, kartenSchatten } from '../theme';
 
 type Nav = NativeStackNavigationProp<RootStackParamList>;
 
@@ -161,39 +161,39 @@ export function ArchivScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: farben.hintergrund },
-  kicker: {
+  kicker: { fontFamily: schriftart.mono,
     fontSize: 12, letterSpacing: 1.3, textTransform: 'uppercase',
-    color: farben.primaer, fontWeight: '600', marginBottom: 4,
+    color: farben.textSekundaer, fontWeight: '600', marginBottom: 4,
   },
-  titel: { fontSize: schrift.riesig, fontWeight: '800', color: farben.text, marginBottom: abstand.m },
-  sucheBox: {
+  titel: { fontFamily: schriftart.serif, fontSize: schrift.riesig, fontWeight: '800', color: farben.text, marginBottom: abstand.m },
+  sucheBox: { ...kartenSchatten,
     flexDirection: 'row', alignItems: 'center', gap: 8,
-    backgroundColor: farben.flaeche, borderRadius: 12,
+    backgroundColor: farben.flaeche, borderRadius: ecke,
     paddingHorizontal: abstand.s, marginBottom: abstand.s, minHeight: 48,
   },
-  sucheFeld: { flex: 1, fontSize: schrift.basis, color: farben.text, paddingVertical: abstand.s },
+  sucheFeld: { fontFamily: schriftart.serif, flex: 1, fontSize: schrift.basis, color: farben.text, paddingVertical: abstand.s },
   chip: {
     borderRadius: 9999, borderWidth: 1, borderColor: farben.rand,
     backgroundColor: farben.flaeche, paddingHorizontal: 14, paddingVertical: 8,
   },
   chipAktiv: { borderColor: farben.primaer, backgroundColor: farben.hervorhebung },
-  chipText: { fontSize: schrift.klein, color: farben.textSekundaer },
+  chipText: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer },
   chipTextAktiv: { color: farben.primaer, fontWeight: '600' },
-  zahlZeile: {
+  zahlZeile: { fontFamily: schriftart.mono,
     fontSize: 12, letterSpacing: 1, textTransform: 'uppercase',
     color: farben.textTertiaer, marginBottom: abstand.s,
   },
-  zeile: {
+  zeile: { ...kartenSchatten,
     flexDirection: 'row', alignItems: 'center', gap: abstand.s,
-    backgroundColor: farben.flaeche, borderRadius: 12,
+    backgroundColor: farben.flaeche, borderRadius: ecke,
     padding: abstand.m, marginBottom: abstand.s, minHeight: TOUCH_TARGET,
   },
   punkt: { width: 10, height: 10, borderRadius: 5 },
-  zeileTyp: { flex: 1, fontSize: schrift.basis, fontWeight: '700', color: farben.text },
-  datum: { fontSize: schrift.klein, color: farben.textTertiaer, fontVariant: ['tabular-nums'] },
-  zeileMeta: { fontSize: schrift.klein, color: farben.textSekundaer, marginTop: 2 },
-  ampelText: { fontSize: schrift.klein, fontWeight: '600', marginTop: 2 },
+  zeileTyp: { fontFamily: schriftart.serif, flex: 1, fontSize: schrift.basis, fontWeight: '700', color: farben.text },
+  datum: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textTertiaer, fontVariant: ['tabular-nums'] },
+  zeileMeta: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, marginTop: 2 },
+  ampelText: { fontFamily: schriftart.serif, fontSize: schrift.klein, fontWeight: '600', marginTop: 2 },
   leerBox: { alignItems: 'center', gap: abstand.s, marginTop: abstand.xl },
-  leerTitel: { fontSize: schrift.gross, fontWeight: '700', color: farben.text },
-  leerText: { fontSize: schrift.basis, color: farben.textSekundaer, textAlign: 'center', lineHeight: 26 },
+  leerTitel: { fontFamily: schriftart.serif, fontSize: schrift.gross, fontWeight: '700', color: farben.text },
+  leerText: { fontFamily: schriftart.serif, fontSize: schrift.basis, color: farben.textSekundaer, textAlign: 'center', lineHeight: 26 },
 });

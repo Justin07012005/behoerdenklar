@@ -20,7 +20,7 @@ import { holeAusUebergabe, loescheUebergabe, oeffneUebergabe, sendeAnUebergabe }
 import { briefZuWebPaket, leseUebergabeLink, webPaketZuBrief, WebPaket } from '../utils/uebergabeFormat';
 import { GrossButton } from '../components/GrossButton';
 import { Ikone } from '../components/Ikone';
-import { farben, schrift, abstand } from '../theme';
+import { farben, schrift, abstand, schriftart, ecke, kartenSchatten } from '../theme';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Verbinden'>;
 
@@ -173,19 +173,19 @@ export function VerbindenScreen({ navigation, route }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: farben.hintergrund },
-  titel: { fontSize: schrift.titel, fontWeight: '700', color: farben.text, marginBottom: abstand.s },
-  text: { fontSize: schrift.basis, color: farben.text, lineHeight: 26 },
-  klein: { fontSize: schrift.klein, color: farben.textSekundaer, marginBottom: abstand.s },
+  titel: { fontFamily: schriftart.serif, fontSize: schrift.titel, fontWeight: '700', color: farben.text, marginBottom: abstand.s },
+  text: { fontFamily: schriftart.serif, fontSize: schrift.basis, color: farben.text, lineHeight: 26 },
+  klein: { fontFamily: schriftart.serif, fontSize: schrift.klein, color: farben.textSekundaer, marginBottom: abstand.s },
   kameraRahmen: {
-    marginTop: abstand.m, height: 300, borderRadius: 16, overflow: 'hidden',
+    marginTop: abstand.m, height: 300, borderRadius: ecke, overflow: 'hidden',
     backgroundColor: farben.flaecheSekundaer,
   },
   kameraLeer: { flex: 1, justifyContent: 'center', padding: abstand.m, gap: abstand.m },
-  meldung: { marginTop: abstand.m, gap: abstand.m, padding: abstand.m, borderRadius: 16, backgroundColor: farben.flaeche },
+  meldung: { ...kartenSchatten, marginTop: abstand.m, gap: abstand.m, padding: abstand.m, borderRadius: ecke, backgroundColor: farben.flaeche },
   schutzZeile: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: abstand.m },
-  schutzText: { fontSize: 13, color: farben.textTertiaer },
-  feld: {
-    backgroundColor: farben.flaeche, borderRadius: 12, padding: 14, fontSize: schrift.klein,
+  schutzText: { fontFamily: schriftart.serif, fontSize: 13, color: farben.textTertiaer },
+  feld: { fontFamily: schriftart.serif,
+    backgroundColor: farben.flaeche, borderRadius: ecke, padding: 14, fontSize: schrift.klein,
     color: farben.text, borderWidth: 1, borderColor: farben.rand, marginBottom: abstand.s,
   },
 });
