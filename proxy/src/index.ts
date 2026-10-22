@@ -1,3 +1,5 @@
+import { DurableObject } from 'cloudflare:workers';
+
 /**
  * BehördenKlar Backend-Proxy — Cloudflare Worker
  *
@@ -36,6 +38,12 @@ interface Env {
   TOKEN_SIGNING_SECRET: string;
   /** Bezahlung: `wrangler secret put BREVO_API_KEY` (für die Guthaben-Link-Mail) */
   BREVO_API_KEY: string;
+  /** Nur lokal (.dev.vars): "1" erlaubt Aufrufe von http://localhost */
+  LOKAL_TEST?: string;
+  /** Handy ↔ PC: verschlüsselte Übergabe (Durable Object, siehe unten) */
+  UEBERGABE: DurableObjectNamespace<Uebergabe>;
+  /** Handy ↔ PC: Schreib-Bremse pro IP (Rate-Limit-Binding in wrangler.toml) */
+  UEBERGABE_LIMIT: RateLimit;
 }
 
 const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
@@ -71,6 +79,12 @@ function fehler(status: number, typ: string, meldung: string): Response {
 
 /** Nur die eigene Webseite darf den Demo-Endpunkt aufrufen (CORS). */
 const DEMO_ORIGIN_MUSTER = /^https:\/\/([a-z0-9-]+\.)?behoerdenklar\.(de|pages\.dev)$/;
+/** Nur für `wrangler dev` mit LOKAL_TEST=1 in .dev.vars — live nie gesetzt. */
+const LOKAL_MUSTER = /^http:\/\/localhost:\d+$/;
+let lokalTest = false;
+function originOk(origin: string | null): origin is string {
+  return !!origin && (DEMO_ORIGIN_MUSTER.test(origin) || (lokalTest && LOKAL_MUSTER.test(origin)));
+}
 
 /** ~5 MB Datei entsprechen ~6,7 Mio. Base64-Zeichen. */
 const DEMO_MAX_BASE64 = 7_000_000;
@@ -81,6 +95,10 @@ const WEGWERF_DOMAINS = new Set([
   'tempmail.com', 'trashmail.com', 'yopmail.com', 'sharklasers.com',
   'getnada.com', 'dispostable.com', 'maildrop.cc', 'throwawaymail.com',
 ]);
+
+/** Was in jeder Sprache deutsch bzw. unverändert bleiben muss. */
+const SPRACH_AUSNAHMEN = (sprachName: string) =>
+  `Ausnahme: das Feld "begriff" bei fachbegriffe bleibt der deutsche Originalbegriff aus dem Brief (der Nutzer muss ihn im Brief wiederfinden) — nur dessen "erklaerung" wird auf ${sprachName} geschrieben. Datumsangaben bleiben im ISO-Format. Ebenfalls NICHT übersetzen: das Feld "deutsch" bei anruf (das wird am Telefon auf Deutsch gesagt) und alle kontakt-Felder (sie stehen so im Brief).`;
 
 /** Identisch zur App (src/services/analyse.ts) — gleiche Qualität in der Demo. */
 /** Zielsprachen der Web-Demo — identisch zur Sprachauswahl der Webseite.
@@ -178,7 +196,7 @@ const DEMO_SCHEMA = {
 };
 
 function demoCorsHeaders(origin: string | null): Record<string, string> {
-  const erlaubt = origin && DEMO_ORIGIN_MUSTER.test(origin) ? origin : 'https://behoerdenklar.de';
+  const erlaubt = originOk(origin) ? origin : 'https://behoerdenklar.de';
   return {
     'access-control-allow-origin': erlaubt,
     'access-control-allow-methods': 'POST, OPTIONS',
@@ -199,6 +217,39 @@ async function emailHash(email: string, pepper: string): Promise<string> {
   return [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, '0')).join('');
 }
 
+/** Fertige deutsche Analyse in eine andere Sprache übersetzen (Haiku, gleiches Schema).
+ *  Gibt null zurück, wenn etwas schiefgeht — der Aufrufer zeigt dann Deutsch. */
+async function uebersetzeAnalyse(env: Env, analyse: unknown, sprachName: string): Promise<unknown | null> {
+  try {
+    const r = await fetch(ANTHROPIC_URL, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-api-key': env.ANTHROPIC_API_KEY,
+        'anthropic-version': ANTHROPIC_VERSION,
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5',
+        max_tokens: MAX_TOKENS_OBERGRENZE,
+        system: `Du übersetzt die Erklärung eines deutschen Behördenbriefs für Menschen mit wenig Deutschkenntnissen. Du bekommst ein JSON-Objekt. Gib dasselbe Objekt mit derselben Struktur zurück, aber schreibe alle Textfelder auf ${sprachName}, in einfacher, klarer Sprache. Erfinde nichts dazu und lass nichts weg; null bleibt null. ${SPRACH_AUSNAHMEN(sprachName)}`,
+        output_config: { format: { type: 'json_schema', schema: DEMO_SCHEMA } },
+        messages: [{ role: 'user', content: JSON.stringify(analyse) }],
+      }),
+    });
+    if (!r.ok) {
+      console.log('Übersetzung fehlgeschlagen', r.status, (await r.text()).slice(0, 300));
+      return null;
+    }
+    const d = (await r.json()) as { stop_reason?: string; content?: { type: string; text?: string }[] };
+    const text = [...(d.content ?? [])].reverse().find((b) => b.type === 'text')?.text;
+    if (d.stop_reason !== 'end_turn' || !text) return null;
+    return JSON.parse(text);
+  } catch (e) {
+    console.log('Übersetzung fehlgeschlagen', String(e));
+    return null;
+  }
+}
+
 async function demoHandler(request: Request, env: Env): Promise<Response> {
   const origin = request.headers.get('origin');
   if (request.method === 'OPTIONS') {
@@ -207,11 +258,11 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
   if (request.method !== 'POST') {
     return demoFehler(405, 'methode', 'Nur POST erlaubt.', origin);
   }
-  if (!origin || !DEMO_ORIGIN_MUSTER.test(origin)) {
+  if (!originOk(origin)) {
     return demoFehler(403, 'origin', 'Aufruf nur von der BehördenKlar-Webseite erlaubt.', origin);
   }
 
-  let body: { bild?: string; mimeType?: string; turnstileToken?: string; email?: string; walletToken?: string; zielsprache?: string };
+  let body: { bild?: string; mimeType?: string; turnstileToken?: string; email?: string; walletToken?: string; zielsprache?: string; auchDeutsch?: boolean };
   try {
     body = await request.json();
   } catch {
@@ -224,6 +275,10 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
   const sprachCode = typeof body.zielsprache === 'string' && DEMO_SPRACHEN[body.zielsprache]
     ? body.zielsprache : 'de';
   const sprachName = DEMO_SPRACHEN[sprachCode];
+  // Zweisprachig (Beratung am PC, Ratsuchende am Handy): erst auf Deutsch
+  // analysieren, dann mit Haiku übersetzen — wie in der App. Kostet den
+  // Nutzer weiterhin nur EINE Analyse.
+  const zweisprachig = body.auchDeutsch === true && sprachCode !== 'de';
 
   if (typeof bild !== 'string' || bild.length === 0 || bild.length > DEMO_MAX_BASE64) {
     return demoFehler(400, 'datei', 'Die Datei fehlt oder ist zu groß (max. 5 MB).', origin);
@@ -254,14 +309,25 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
   // (die sind nur ein Kosten-Deckel für die kostenlose Stufe).
   let walletId: string | null = null;
   let walletRest = 0;
+  let einrichtungsName: string | null = null;
   if (walletToken) {
     walletId = await verifyWallet(walletToken, env.TOKEN_SIGNING_SECRET);
     if (!walletId) {
       return demoFehler(403, 'wallet_ungueltig', 'Ihr Zugangs-Token ist ungültig. Bitte laden Sie die Seite neu.', origin);
     }
-    walletRest = parseInt((await env.RATE_LIMIT.get(`wallet:${walletId}`)) ?? '0', 10);
+    const [restWert, einrichtung] = await Promise.all([
+      env.RATE_LIMIT.get(`wallet:${walletId}`),
+      ladeEinrichtung(env, walletId),
+    ]);
+    walletRest = parseInt(restWert ?? '0', 10);
+    einrichtungsName = einrichtung?.name ?? null;
+    if (einrichtung && einrichtung.ablauf < heute) {
+      return demoFehler(402, 'kontingent_abgelaufen', `Der Zugang über ${einrichtung.name} ist abgelaufen. Bitte fragen Sie dort nach.`, origin);
+    }
     if (walletRest <= 0) {
-      return demoFehler(402, 'kein_guthaben', 'Ihr Guthaben ist aufgebraucht. Bitte kaufen Sie neues Guthaben.', origin);
+      return einrichtung
+        ? demoFehler(402, 'kontingent_leer', `Die Analysen von ${einrichtung.name} sind aufgebraucht. Bitte fragen Sie dort nach.`, origin)
+        : demoFehler(402, 'kein_guthaben', 'Ihr Guthaben ist aufgebraucht. Bitte kaufen Sie neues Guthaben.', origin);
     }
   }
   const bezahlt = walletId !== null;
@@ -336,9 +402,9 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
     body: JSON.stringify({
       model: 'claude-sonnet-5',
       max_tokens: MAX_TOKENS_OBERGRENZE,
-      system: sprachCode === 'de'
+      system: sprachCode === 'de' || zweisprachig
         ? DEMO_SYSTEM_PROMPT
-        : `${DEMO_SYSTEM_PROMPT}\n\nWICHTIG — ZIELSPRACHE: Schreibe ALLE Textfelder deiner Antwort auf ${sprachName}, nicht auf Deutsch. Ausnahme: das Feld "begriff" bei fachbegriffe bleibt der deutsche Originalbegriff aus dem Brief (der Nutzer muss ihn im Brief wiederfinden) — nur dessen "erklaerung" wird auf ${sprachName} geschrieben. Datumsangaben bleiben im ISO-Format. Ebenfalls NICHT übersetzen: das Feld "deutsch" bei anruf (das wird am Telefon auf Deutsch gesagt) und alle kontakt-Felder (sie stehen so im Brief).`,
+        : `${DEMO_SYSTEM_PROMPT}\n\nWICHTIG — ZIELSPRACHE: Schreibe ALLE Textfelder deiner Antwort auf ${sprachName}, nicht auf Deutsch. ${SPRACH_AUSNAHMEN(sprachName)}`,
       output_config: { format: { type: 'json_schema', schema: DEMO_SCHEMA } },
       messages: [
         {
@@ -408,12 +474,23 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
     return demoFehler(502, 'ki', 'Die Antwort war unlesbar. Bitte erneut versuchen.', origin);
   }
 
+  let analyseDe: unknown = undefined;
+  let ausgabeSprache = sprachCode;
+  if (zweisprachig) {
+    analyseDe = analyse;
+    const uebersetzt = await uebersetzeAnalyse(env, analyse, sprachName);
+    if (uebersetzt) analyse = uebersetzt;
+    else ausgabeSprache = 'de'; // lieber Deutsch als gar nichts
+  }
+
   return Response.json(
     {
       analyse,
+      analyse_de: analyseDe,
       versuch: bezahlt ? 'bezahlt' : email ? 2 : 1,
       guthaben: bezahlt ? walletRest - 1 : undefined,
-      sprache: sprachCode,
+      einrichtung: einrichtungsName ?? undefined,
+      sprache: ausgabeSprache,
     },
     { headers: demoCorsHeaders(origin) }
   );
@@ -518,7 +595,7 @@ async function kaufenHandler(request: Request, env: Env): Promise<Response> {
   const origin = request.headers.get('origin');
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: demoCorsHeaders(origin) });
   if (request.method !== 'POST') return demoFehler(405, 'methode', 'Nur POST erlaubt.', origin);
-  if (!origin || !DEMO_ORIGIN_MUSTER.test(origin)) return demoFehler(403, 'origin', 'Aufruf nur von der BehördenKlar-Webseite erlaubt.', origin);
+  if (!originOk(origin)) return demoFehler(403, 'origin', 'Aufruf nur von der BehördenKlar-Webseite erlaubt.', origin);
 
   let body: { priceId?: string; sprache?: string };
   try {
@@ -571,7 +648,7 @@ async function kaufenHandler(request: Request, env: Env): Promise<Response> {
 async function kaufStatusHandler(request: Request, env: Env): Promise<Response> {
   const origin = request.headers.get('origin');
   if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: demoCorsHeaders(origin) });
-  if (!origin || !DEMO_ORIGIN_MUSTER.test(origin)) return demoFehler(403, 'origin', 'Nicht erlaubt.', origin);
+  if (!originOk(origin)) return demoFehler(403, 'origin', 'Nicht erlaubt.', origin);
 
   const sessionId = new URL(request.url).searchParams.get('session_id') ?? '';
   if (!/^cs_[A-Za-z0-9_]+$/.test(sessionId)) return demoFehler(400, 'session', 'Ungültige Sitzung.', origin);
@@ -591,6 +668,182 @@ async function kaufStatusHandler(request: Request, env: Env): Promise<Response> 
   const token = await signWallet(walletId, env.TOKEN_SIGNING_SECRET);
   const rest = parseInt((await env.RATE_LIMIT.get(`wallet:${walletId}`)) ?? '0', 10);
   return Response.json({ token, guthaben: rest }, { headers: demoCorsHeaders(origin) });
+}
+
+// ============================================================
+// Einrichtungs-Codes — Beratungsstellen zahlen, Ratsuchende nicht
+// ============================================================
+//
+// Ein Code (z. B. `MBE-K7QX`) zeigt auf ein Guthaben wie beim Kauf, nur dass
+// es allen gehört, die den Code kennen. Angelegt wird er von Hand mit
+// tools/einrichtungs-code.js (kein Secret nötig, nur wrangler-Login).
+//
+// KV:  code:<CODE>           -> walletId
+//      wallet:<walletId>     -> Restguthaben (wie beim Kauf)
+//      einrichtung:<walletId> -> {"name":"MBE Donnersberg","ablauf":"2027-01-31"}
+//
+// Der zufällige Teil im Code macht Raten aussichtslos; zusätzlich sind
+// Fehlversuche pro IP und Tag begrenzt.
+
+const CODE_FEHLVERSUCHE_PRO_TAG = 10;
+
+interface Einrichtung {
+  name: string;
+  /** letzter gültiger Tag, ISO-Datum */
+  ablauf: string;
+}
+
+async function ladeEinrichtung(env: Env, walletId: string): Promise<Einrichtung | null> {
+  const roh = await env.RATE_LIMIT.get(`einrichtung:${walletId}`);
+  if (!roh) return null;
+  try {
+    return JSON.parse(roh) as Einrichtung;
+  } catch {
+    return null;
+  }
+}
+
+/** POST /code — Einrichtungs-Code einlösen, signiertes Wallet-Token liefern. */
+async function codeHandler(request: Request, env: Env): Promise<Response> {
+  const origin = request.headers.get('origin');
+  if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: demoCorsHeaders(origin) });
+  if (request.method !== 'POST') return demoFehler(405, 'methode', 'Nur POST erlaubt.', origin);
+  if (!originOk(origin)) return demoFehler(403, 'origin', 'Nicht erlaubt.', origin);
+
+  let body: { code?: string };
+  try {
+    body = await request.json();
+  } catch {
+    return demoFehler(400, 'json', 'Ungültige Anfrage.', origin);
+  }
+  const code = typeof body.code === 'string' ? body.code.trim().toUpperCase().replace(/\s+/g, '') : '';
+
+  const ip = request.headers.get('cf-connecting-ip') ?? 'unbekannt';
+  const heute = new Date().toISOString().slice(0, 10);
+  const failKey = `codefail:${ip}:${heute}`;
+  const fehlversuche = parseInt((await env.RATE_LIMIT.get(failKey)) ?? '0', 10);
+  if (fehlversuche >= CODE_FEHLVERSUCHE_PRO_TAG) {
+    return demoFehler(429, 'code_gesperrt', 'Zu viele falsche Codes. Bitte versuchen Sie es morgen wieder.', origin);
+  }
+
+  const walletId = /^[A-Z0-9-]{4,40}$/.test(code) ? await env.RATE_LIMIT.get(`code:${code}`) : null;
+  const einrichtung = walletId ? await ladeEinrichtung(env, walletId) : null;
+  if (!walletId || !einrichtung) {
+    await env.RATE_LIMIT.put(failKey, String(fehlversuche + 1), { expirationTtl: 60 * 60 * 48 });
+    return demoFehler(404, 'code_unbekannt', 'Diesen Code kennen wir nicht. Bitte prüfen Sie die Schreibweise.', origin);
+  }
+  if (einrichtung.ablauf < heute) {
+    return demoFehler(410, 'kontingent_abgelaufen', `Der Zugang über ${einrichtung.name} ist abgelaufen. Bitte fragen Sie dort nach.`, origin);
+  }
+
+  const rest = parseInt((await env.RATE_LIMIT.get(`wallet:${walletId}`)) ?? '0', 10);
+  const token = await signWallet(walletId, env.TOKEN_SIGNING_SECRET);
+  return Response.json(
+    { token, guthaben: rest, einrichtung: einrichtung.name, ablauf: einrichtung.ablauf },
+    { headers: demoCorsHeaders(origin) }
+  );
+}
+
+// ============================================================
+// Übergabe Handy ↔ PC — Ende-zu-Ende verschlüsselt
+// ============================================================
+//
+// Ein Gerät zeigt einen QR-Code, das andere scannt ihn. Im QR-Code stehen
+// eine zufällige Übergabe-ID und ein AES-Schlüssel — der Schlüssel steht
+// hinter dem `#` der Adresse und wird deshalb NIE an einen Server geschickt.
+// Hier liegen nur verschlüsselte Päckchen, die wir selbst nicht lesen
+// können. Jede Übergabe löscht sich nach 15 Minuten von selbst.
+//
+//   PUT    /uebergabe/<id>/<fach>  -> Päckchen ablegen (Text, verschlüsselt)
+//   GET    /uebergabe/<id>         -> alle Päckchen dieser Übergabe
+//   DELETE /uebergabe/<id>         -> sofort löschen
+//
+// Durable Object statt KV, weil KV Abfragen auf noch nicht vorhandene
+// Schlüssel zwischenspeichert — das Warten am PC würde bis zu einer Minute
+// hängen. Ein Durable Object ist sofort konsistent.
+//
+// Ein Fach (z. B. „status", „ergebnis") wird überschrieben, nicht angehängt.
+
+const UEBERGABE_LEBENSDAUER_MS = 15 * 60 * 1000;
+const UEBERGABE_MAX_ZEICHEN = 400_000; // Analyse-JSON in zwei Sprachen, verschlüsselt
+const UEBERGABE_MAX_SCHREIBVORGAENGE = 50;
+const UEBERGABE_ID_MUSTER = /^[A-Za-z0-9_-]{22}$/; // 128 Bit, base64url
+const UEBERGABE_FACH_MUSTER = /^[a-z]{2,16}$/;
+
+export class Uebergabe extends DurableObject<Env> {
+  async lesen(): Promise<Record<string, string>> {
+    const eintraege = await this.ctx.storage.list<string>({ prefix: 'fach:' });
+    const faecher: Record<string, string> = {};
+    for (const [k, v] of eintraege) faecher[k.slice(5)] = v;
+    return faecher;
+  }
+
+  async schreiben(fach: string, wert: string): Promise<boolean> {
+    const zahl = (await this.ctx.storage.get<number>('zahl')) ?? 0;
+    if (zahl >= UEBERGABE_MAX_SCHREIBVORGAENGE) return false;
+    await this.ctx.storage.put({ [`fach:${fach}`]: wert, zahl: zahl + 1 });
+    if ((await this.ctx.storage.getAlarm()) === null) {
+      await this.ctx.storage.setAlarm(Date.now() + UEBERGABE_LEBENSDAUER_MS);
+    }
+    return true;
+  }
+
+  async loeschen(): Promise<void> {
+    await this.ctx.storage.deleteAlarm();
+    await this.ctx.storage.deleteAll();
+  }
+
+  async alarm(): Promise<void> {
+    await this.ctx.storage.deleteAll();
+  }
+}
+
+function uebergabeCors(origin: string | null): Record<string, string> {
+  return {
+    ...demoCorsHeaders(origin),
+    'access-control-allow-methods': 'GET, PUT, DELETE, OPTIONS',
+    'cache-control': 'no-store',
+  };
+}
+
+async function uebergabeHandler(request: Request, env: Env, pfad: string): Promise<Response> {
+  const origin = request.headers.get('origin');
+  const cors = uebergabeCors(origin);
+  if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
+  // Webseite: nur unsere eigene. Die App schickt keinen Origin-Header.
+  if (origin && !originOk(origin)) {
+    return Response.json({ code: 'origin', meldung: 'Nicht erlaubt.' }, { status: 403, headers: cors });
+  }
+
+  const [, , id, fach] = pfad.split('/'); // "", "uebergabe", id, fach?
+  if (!id || !UEBERGABE_ID_MUSTER.test(id)) {
+    return Response.json({ code: 'id', meldung: 'Ungültige Übergabe.' }, { status: 400, headers: cors });
+  }
+  const stub = env.UEBERGABE.get(env.UEBERGABE.idFromName(id));
+
+  if (request.method === 'GET' && !fach) {
+    return Response.json({ faecher: await stub.lesen() }, { headers: cors });
+  }
+  if (request.method === 'DELETE' && !fach) {
+    await stub.loeschen();
+    return new Response(null, { status: 204, headers: cors });
+  }
+  if (request.method === 'PUT' && fach && UEBERGABE_FACH_MUSTER.test(fach)) {
+    const ip = request.headers.get('cf-connecting-ip') ?? 'unbekannt';
+    const { success } = await env.UEBERGABE_LIMIT.limit({ key: ip });
+    if (!success) {
+      return Response.json({ code: 'zu_viele', meldung: 'Zu viele Anfragen. Bitte kurz warten.' }, { status: 429, headers: cors });
+    }
+    const wert = await request.text();
+    if (!wert || wert.length > UEBERGABE_MAX_ZEICHEN || !/^[A-Za-z0-9_-]+$/.test(wert)) {
+      return Response.json({ code: 'inhalt', meldung: 'Ungültiger Inhalt.' }, { status: 400, headers: cors });
+    }
+    if (!(await stub.schreiben(fach, wert))) {
+      return Response.json({ code: 'voll', meldung: 'Diese Übergabe ist abgeschlossen.' }, { status: 409, headers: cors });
+    }
+    return new Response(null, { status: 204, headers: cors });
+  }
+  return Response.json({ code: 'methode', meldung: 'Nicht erlaubt.' }, { status: 405, headers: cors });
 }
 
 /** POST /stripe-webhook — Sicherungsnetz: Signatur prüfen, Guthaben aktivieren, Link mailen. */
@@ -641,10 +894,13 @@ async function webhookHandler(request: Request, env: Env): Promise<Response> {
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const pfad = new URL(request.url).pathname;
+    lokalTest = env.LOKAL_TEST === '1';
     // Web-Demo + Bezahl-Routen haben eigene Regeln
     if (pfad === '/demo') return demoHandler(request, env);
     if (pfad === '/kaufen') return kaufenHandler(request, env);
     if (pfad === '/kauf-status') return kaufStatusHandler(request, env);
+    if (pfad === '/code') return codeHandler(request, env);
+    if (pfad.startsWith('/uebergabe/')) return uebergabeHandler(request, env, pfad);
     if (pfad === '/stripe-webhook') return webhookHandler(request, env);
 
     if (request.method !== 'POST') {

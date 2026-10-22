@@ -18,3 +18,21 @@ DEMO_LIMIT_IP = "8"
 [[kv_namespaces]]
 binding = "RATE_LIMIT"
 id = "7577adef8ceb4ed6bfaeef81a1d496af"
+
+# Handy <-> PC: verschluesselte Uebergabe per QR-Code (siehe src/index.ts).
+# SQLite-Durable-Objects laufen auch im kostenlosen Workers-Tarif.
+[[durable_objects.bindings]]
+name = "UEBERGABE"
+class_name = "Uebergabe"
+
+[[migrations]]
+tag = "v1-uebergabe"
+new_sqlite_classes = ["Uebergabe"]
+
+# Schreib-Bremse fuer die Uebergabe: 60 Paeckchen pro Minute und IP
+[[ratelimits]]
+name = "UEBERGABE_LIMIT"
+namespace_id = "1001"
+  [ratelimits.simple]
+  limit = 60
+  period = 60
