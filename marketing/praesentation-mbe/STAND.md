@@ -80,6 +80,8 @@
 - ✅ **[Kurzanleitung](kurzanleitung-beratung.pdf)** für Beraterinnen (1 Seite). Der Code wird am Di 27.10. eingetragen.
 - ✅ **Webseite veröffentlicht**, Gesundheits-Check 12/12 grün.
 - ℹ️ Der Live-Test im automatisierten Browser ging nicht, weil Cloudflare ferngesteuerte Browser blockt. Deshalb ist der echte Test die **Generalprobe morgen mit deinen Geräten**.
+- ✅ **Sprach-Durchlauf (lokal, Handy-Größe 375 px):** alle 27 Sprachen nacheinander eingestellt. In jeder Sprache ist **kein deutscher Text mehr übrig**, **nichts ragt über den Rand**, die Schreibrichtung stimmt (Arabisch, Farsi, Urdu und Paschtu von rechts). Tigrinya und Hindi zusätzlich mit Bildschirmfoto angeschaut: Schrift sauber.
+  - Noch offen: die **echte KI-Erklärung** in den Sprachen (kommt erst mit der Generalprobe) und eine Prüfung durch Muttersprachler für Tigrinya, Somali, Paschtu und Kurdisch (nach dem Termin).
 
 ## 3. Was du tun musst
 
