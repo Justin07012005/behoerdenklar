@@ -321,7 +321,7 @@ genutzt wird. Mehr Nutzer heißt mehr Einnahmen, nie mehr Verlust.
 |---|---|---|
 | Deine Kosten (eigene Rechnung ~2,5 ct, mit Puffer für fremde Sprachen) | — | ~5 ct |
 | Privatleute (Webseite) | 2,99 € für 5 · 6,99 € für 15 | 47–60 ct |
-| **Test** für eine Beratungsstelle, 3 Monate | bis 100 Briefe gratis | kostet dich max. ~5 € |
+| **Test** für eine Beratungsstelle, 1 Monat (verlängerbar) + Auswertungsgespräch | bis 100 Briefe gratis | kostet dich max. ~5 € |
 | **Kleines Paket** | 100 Briefe · 20 € | 20 ct |
 | **Großes Paket** | 500 Briefe · 75 € | 15 ct |
 | **Untergrenze beim Verhandeln** | — | 10 ct |

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!--
+  Musterbrief für Vorführungen (Präsentation MBE Kirchheimbolanden, 29.10.2026).
+  Behörde, Person, Aktenzeichen und Telefonnummer sind frei erfunden.
+  Zum Ausdrucken: Chrome → Drucken → A4, Ränder "Keine". PDF/PNG daneben.
+  Daten bei Bedarf anpassen: Frist und Termin sollen bei der Vorführung
+  in 1–3 Wochen liegen, damit die Ampel Gelb/Rot zeigt.
+-->
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Musterbrief Ausländerbehörde</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { background: #fff; }
+  body {
+    font-family: Arial, Helvetica, sans-serif; color: #111;
+    font-size: 10pt; line-height: 1.32;
+  }
+  .seite { width: 210mm; height: 297mm; position: relative; padding: 0 20mm 0 25mm; overflow: hidden; }
+  .kopf { position: absolute; top: 12mm; left: 25mm; right: 20mm; display: flex; justify-content: space-between; align-items: flex-start; }
+  .wappen { display: flex; gap: 4mm; align-items: center; }
+  .wappen svg { width: 13mm; height: 15mm; }
+  .behoerde { font-size: 13pt; font-weight: bold; line-height: 1.2; }
+  .behoerde small { display: block; font-size: 10pt; font-weight: normal; }
+  .absenderzeile { position: absolute; top: 45mm; left: 25mm; font-size: 7pt; text-decoration: underline; }
+  .anschrift { position: absolute; top: 51mm; left: 25mm; width: 85mm; font-size: 10.5pt; line-height: 1.35; }
+  .info { position: absolute; top: 45mm; left: 125mm; width: 65mm; font-size: 8.5pt; line-height: 1.45; }
+  .info td { vertical-align: top; padding: 0 2mm 0.6mm 0; }
+  .info td:first-child { color: #444; white-space: nowrap; }
+  .text { position: absolute; top: 92mm; left: 25mm; right: 20mm; }
+  .betreff { font-weight: bold; margin-bottom: 4mm; }
+  p { margin-bottom: 2.4mm; text-align: justify; hyphens: auto; }
+  ol { margin: 0 0 3mm 6mm; }
+  ol li { margin-bottom: 0.8mm; padding-left: 1mm; }
+  .fett { font-weight: bold; }
+  .gruss { margin-top: 3mm; margin-bottom: 0; }
+  .unterschrift { font-family: 'Brush Script MT', 'Segoe Script', cursive; font-size: 16pt; color: #1b3a7a; margin: 0 0 0 2mm; line-height: 1.2; }
+  .fuss {
+    position: absolute; bottom: 9mm; left: 25mm; right: 20mm;
+    border-top: 0.3mm solid #999; padding-top: 2mm;
+    display: flex; justify-content: space-between; font-size: 7pt; color: #444; line-height: 1.35;
+  }
+  .muster { position: absolute; bottom: 3.5mm; left: 25mm; right: 20mm; font-size: 6.5pt; color: #999; text-align: center; }
+  .falz { position: absolute; left: 4mm; width: 4mm; border-top: 0.2mm solid #bbb; }
+</style>
+</head>
+<body>
+<div class="seite">
+  <span class="falz" style="top: 105mm;"></span>
+  <span class="falz" style="top: 148.5mm;"></span>
+  <span class="falz" style="top: 210mm;"></span>
+
+  <div class="kopf">
+    <div class="wappen">
+      <svg viewBox="0 0 26 30" aria-hidden="true">
+        <path d="M1 1h24v13c0 8-6 13-12 15C7 27 1 22 1 14z" fill="#f4f4f4" stroke="#333" stroke-width="1.2"/>
+        <path d="M1 10h24M13 1v28" stroke="#333" stroke-width="0.8"/>
+        <circle cx="7" cy="5.5" r="2" fill="#2c5aa0"/><circle cx="19" cy="18" r="2.5" fill="#b3372b"/>
+      </svg>
+      <div class="behoerde">Kreisverwaltung Musterhausen<small>Fachbereich 32 – Ausländerbehörde</small></div>
+    </div>
+    <div style="font-size: 8pt; text-align: right; color: #333;">Musterplatz 1<br>67999 Musterhausen</div>
+  </div>
+
+  <div class="absenderzeile">Kreisverwaltung Musterhausen · Musterplatz 1 · 67999 Musterhausen</div>
+
+  <div class="anschrift">
+    Herrn<br>
+    Ahmad Beispiel<br>
+    Lindenweg 5<br>
+    67999 Musterhausen
+  </div>
+
+  <table class="info">
+    <tr><td>Aktenzeichen</td><td>32.1-AE-2026-04711</td></tr>
+    <tr><td>Auskunft erteilt</td><td>Frau Muster</td></tr>
+    <tr><td>Zimmer</td><td>2.14</td></tr>
+    <tr><td>Telefon</td><td>069 90009-314</td></tr>
+    <tr><td>E-Mail</td><td>abh@musterhausen.example</td></tr>
+    <tr><td>Datum</td><td>20.10.2026</td></tr>
+  </table>
+
+  <div class="text">
+    <p class="betreff">Ihr Antrag auf Verlängerung der Aufenthaltserlaubnis vom 01.10.2026<br>
+    hier: Aufforderung zur Vorlage fehlender Unterlagen gemäß § 82 Abs. 1 AufenthG<br>
+    und Einladung zur persönlichen Vorsprache</p>
+
+    <p>Sehr geehrter Herr Beispiel,</p>
+
+    <p>in Ihrer o. g. aufenthaltsrechtlichen Angelegenheit nehmen wir Bezug auf Ihren Antrag auf
+    Verlängerung der Aufenthaltserlaubnis. Ihr derzeitiger Aufenthaltstitel ist bis zum
+    15.11.2026 befristet. Zur abschließenden Prüfung der Erteilungsvoraussetzungen gemäß
+    §§ 5, 8 AufenthG sind die nachfolgend aufgeführten Unterlagen bislang nicht bzw. nicht
+    vollständig vorgelegt worden:</p>
+
+    <ol>
+      <li>gültiger Nationalpass im Original bzw. Nachweise über Ihre Bemühungen zur Passbeschaffung,</li>
+      <li>aktuelle Meldebescheinigung (nicht älter als drei Monate),</li>
+      <li>Nachweise über die Sicherung des Lebensunterhalts (Arbeitsvertrag sowie Lohn- und
+          Gehaltsabrechnungen der letzten drei Monate bzw. aktueller Bewilligungsbescheid des Jobcenters),</li>
+      <li>Nachweis über einen ausreichenden Krankenversicherungsschutz,</li>
+      <li>ein aktuelles biometrisches Lichtbild.</li>
+    </ol>
+
+    <p>Gemäß § 82 Abs. 1 AufenthG obliegt es Ihnen, die für Ihr Anliegen erforderlichen Nachweise
+    unverzüglich beizubringen. Wir fordern Sie daher auf, die vorgenannten Unterlagen
+    <span class="fett">bis spätestens 12.11.2026</span> bei der Ausländerbehörde einzureichen.</p>
+
+    <p>Zur Aufnahme Ihrer biometrischen Merkmale (Fingerabdrücke, Unterschrift) werden Sie
+    gebeten, am <span class="fett">Donnerstag, den 05.11.2026, um 10:30 Uhr</span> in Zimmer 2.14
+    persönlich vorzusprechen. Bitte bringen Sie dieses Schreiben sowie Ihren derzeitigen
+    Aufenthaltstitel mit. Sollten Sie den Termin nicht wahrnehmen können, ist dieser rechtzeitig
+    vorher telefonisch abzusagen.</p>
+
+    <p>Werden die angeforderten Unterlagen nicht fristgerecht vorgelegt, kann über Ihren Antrag
+    nach Aktenlage entschieden werden. Dies kann zur Ablehnung des Antrags führen.</p>
+
+    <p>Hinweis: Da Sie den Antrag vor Ablauf Ihres Aufenthaltstitels gestellt haben, gilt dieser
+    gemäß § 81 Abs. 4 AufenthG bis zur Entscheidung der Ausländerbehörde als fortbestehend
+    (Fiktionswirkung). Eine entsprechende Fiktionsbescheinigung wird Ihnen bei Ihrer Vorsprache
+    ausgehändigt.</p>
+
+    <p>Sprechzeiten: Mo, Di und Do 08:00–12:00 Uhr, Do zusätzlich 14:00–17:30 Uhr.
+    Vorsprachen nur nach vorheriger Terminvereinbarung.</p>
+
+    <p class="gruss">Mit freundlichen Grüßen<br>Im Auftrag</p>
+    <div class="unterschrift">Muster</div>
+    <p style="margin-top: 0;">Muster</p>
+  </div>
+
+  <div class="fuss">
+    <div>Kreisverwaltung Musterhausen<br>Musterplatz 1 · 67999 Musterhausen</div>
+    <div>Telefon 069 90009-0<br>www.musterhausen.example</div>
+    <div>Bankverbindung: Sparkasse Musterhausen<br>IBAN DE00 0000 0000 0000 0000 00</div>
+  </div>
+  <div class="muster">Beispielbrief für Vorführzwecke · Behörde, Person und alle Angaben sind frei erfunden</div>
+</div>
+</body>
+</html>

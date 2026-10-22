@@ -1,6 +1,6 @@
 # BehördenKlar — Überblick für Claude
 
-> Stand: 23.09.2026. Diese Datei beschreibt, **was es gibt**.
+> Stand: 22.10.2026. Diese Datei beschreibt, **was es gibt**.
 > Für Release-Stand und offene Aufgaben siehe die Projekt-Erinnerung.
 > Für Arbeitsregeln siehe `AGENTS.md` (Expo-Docs vor Code lesen!).
 
@@ -92,6 +92,30 @@ Sprechzeiten — und schreibt einen **Spickzettel** mit 3–5 Sätzen für das T
 **Regel im Prompt:** Kontaktdaten nur, wenn sie **wörtlich** im Brief stehen.
 Getestet mit einem Brief ohne Telefonnummer → `telefon: null`, nichts erfunden.
 Eine falsche Nummer wäre schlimmer als keine.
+### 3c. Handy ↔ PC — für die Beratung (seit 22.10.)
+Ein QR-Code verbindet zwei Geräte, **Ende-zu-Ende verschlüsselt** (AES-256-GCM).
+Schlüssel und Übergabe-ID stehen hinter dem `#` der Adresse, gehen also nie an
+einen Server. Der Worker hält nur Chiffrat, höchstens 15 Minuten
+(Durable Object `Uebergabe`, Route `/uebergabe/<id>[/<fach>]`).
+
+| Art (`a=`) | Wer zeigt den QR | Was passiert |
+|---|---|---|
+| `k` Kamera | PC: „Lieber mit dem Handy fotografieren" | Handy fotografiert, Ergebnis erscheint am PC **auf Deutsch** und am Handy **in der Muttersprache** (`auchDeutsch` → Worker analysiert deutsch und übersetzt mit Haiku, kostet 1 Analyse). Guthaben des PCs gilt am Handy nur für diese Sitzung. |
+| `m` Mitnehmen | PC: „Ergebnis aufs Handy mitnehmen" | Ergebnis landet auf dem Handy (Browser) bzw. im App-Archiv, einmal abholbar |
+| `g` Guthaben | PC: „Auch auf dem Handy nutzen" | Guthaben/Einrichtungs-Zugang dauerhaft aufs Handy (Browser) |
+
+Gleiches Päckchen-Format in `webseite/uebergabe.js` und `src/services/uebergabe.ts`
+(IV‖Chiffrat‖Tag, base64url) — Test: `src/utils/__tests__/uebergabe.test.ts`.
+**App:** Brief → „Am Computer zeigen" (`a=k`), Archiv → „Vom Computer übernehmen"
+(`a=m`), Bildschirm `VerbindenScreen` mit QR-Scanner und Link-Einfügen als Ersatz.
+
+### 3d. Einrichtungs-Codes für Beratungsstellen (seit 22.10.)
+Die Einrichtung zahlt, Ratsuchende nicht. Ein Code (z. B. `MBE-K7QX`) zeigt auf
+ein Guthaben wie beim Kauf, mit Name und Ablaufdatum. Einlösen per Link
+`behoerdenklar.de/demo?code=…` oder Eingabefeld; Banner „Kostenlos über …".
+Verwalten mit `node tools/einrichtungs-code.js neu|stand|aufladen|verlaengern`.
+Falsche Codes: max. 10 pro IP und Tag.
+
 ### 4. Ampel statt Datum
 Rot ≤ 7 Tage, gelb ≤ 21, sonst grün. Die Startseite sortiert nach
 **Dringlichkeit**, nicht nach Eingang — man sieht sofort, was brennt.
@@ -207,6 +231,8 @@ und Sprachwähler in der handgemachten `index.html` nach und schreibt die
 | `/kaufen` | Stripe-Bezahlseite erzeugen |
 | `/kauf-status` | Nach Rückkehr: Zahlung prüfen, Guthaben freischalten |
 | `/stripe-webhook` | Sicherungsnetz + Wiederherstellungs-Mail |
+| `/code` | Einrichtungs-Code einlösen → signiertes Guthaben-Token |
+| `/uebergabe/<id>` | Handy ↔ PC: verschlüsselte Päckchen (Durable Object, 15 Min.) |
 
 ### Bezahlung (LIVE, echtes Geld)
 - **Guthaben statt Abo:** 5 Analysen 2,99 € · 15 Analysen 6,99 €
@@ -247,10 +273,15 @@ rotiert werden.
 
 ```bash
 npm run pruefung    # Gesundheits-Check — nach JEDEM Deploy
-npm test            # 35 Tests
+npm test            # 43 Tests
 npx tsc --noEmit    # Typen
 node tools/sprachseiten/build.js   # Sprachseiten neu bauen
 ```
+
+**Lokal testen** (ohne live zu gehen): in `/Users/homefolder/Behörden_App/.claude/launch.json`
+`proxy-worker` (Port 8799, `.dev.vars` mit `LOKAL_TEST=1` und Turnstile-Testschlüssel)
++ `webseite` (Port 4173) starten, dann `http://localhost:4173/demo.html`. Auf
+localhost nimmt die Seite automatisch den lokalen Worker und den Test-Sitekey.
 
 **Deploy:**
 ```bash
