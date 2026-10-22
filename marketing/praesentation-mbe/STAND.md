@@ -5,7 +5,7 @@
 >
 > Ausführlicher Prüfbericht mit allen 61 Funden: [plan-bis-29-10.md](plan-bis-29-10.md)
 
-**Zuletzt aktualisiert:** Do 22.10.2026, nachts: live, plus Handy in 27 Sprachen und zwei Dokumente fertig (warten auf Deploy).
+**Zuletzt aktualisiert:** Do 22.10.2026, nachts: **alles live**, inklusive Handy-Bedienung in 27 Sprachen. Nächster Schritt: deine Generalprobe.
 
 ---
 
@@ -71,14 +71,14 @@
 
 > ⚠️ **Hinweis für die Generalproben:** Beim Musterbrief zeigt die Ampel **am Sa 24.10. Gelb** („Noch 10 Tage“) und am Mo 26.10. ebenfalls Gelb. Das ist richtig so. **Ab Di 27.10. ist sie rot.** Bildschirmfotos für den Notfall deshalb erst am Mi 28.10. machen.
 
-## 2b. Neu seit dem Deploy (Do 22.10., spät): fertig, wartet auf den nächsten Deploy
+## 2b. Zweiter Deploy (Do 22.10., nachts): live ✅
 
 - ✅ **Bedienung am Handy in 27 Sprachen.** Einwilligung, Knöpfe, Hinweise, Fehlermeldungen, Ergebnis-Überschriften, Ampel, Kalender und Anruf-Hilfe kommen in der Sprache der Person, Arabisch/Farsi/Urdu/Paschtu von rechts nach links. **Am PC bleibt alles deutsch.** Je Sprache übersetzt und von einem Lektor geprüft, maschinell auf Vollständigkeit geprüft (0 Fehler).
 - ✅ Cloudflare-Kästchen passt auf schmale Handys. Oben steht „Für Sie kostenlos über …“ statt „2 Analysen gratis“.
 - ✅ Knopf für die Beratung umbenannt: „🔑 Zugang dauerhaft auf ein Handy geben (nur für Mitarbeitende)“, damit man ihn nicht mit „Lieber mit dem Handy fotografieren“ verwechselt.
 - ✅ **[Datenschutz-Blatt](datenschutz-blatt.pdf)** für die Datenschutzbeauftragte des Trägers (2 Seiten, gegen den Code geprüft).
 - ✅ **[Kurzanleitung](kurzanleitung-beratung.pdf)** für Beraterinnen (1 Seite). Der Code wird am Di 27.10. eingetragen.
-- ⏳ **Dein Okay für den nächsten Deploy.**
+- ✅ **Webseite veröffentlicht**, Gesundheits-Check 12/12 grün.
 - ℹ️ Der Live-Test im automatisierten Browser ging nicht, weil Cloudflare ferngesteuerte Browser blockt. Deshalb ist der echte Test die **Generalprobe morgen mit deinen Geräten**.
 
 ## 3. Was du tun musst
