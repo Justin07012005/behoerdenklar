@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<!--
+  Ablaufplan / Spickzettel für die Präsentation bei der MBE Kirchheimbolanden
+  (Do 29.10.2026). Nur für Justin, nicht zum Dalassen. 2 Seiten A4.
+  PDF: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+    --no-pdf-header-footer --print-to-pdf=ablaufplan.pdf "file://$PWD/ablaufplan.html"
+-->
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Ablaufplan Präsentation MBE</title>
+<style>
+  @page { size: A4; margin: 0; }
+  :root { --papier: #faf7f0; --tinte: #21211d; --grau: #6b675e; --amtsblau: #1d4e89; --rot: #b3372b; --marker: #ffe66b; --gruen: #2e7d4f; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: var(--tinte); }
+  .seite { width: 210mm; height: 297mm; padding: 11mm 14mm; background: var(--papier); overflow: hidden; position: relative; page-break-after: always; font-size: 9.6pt; line-height: 1.4; }
+  .seite:last-child { page-break-after: auto; }
+  .mono { font-family: 'Courier New', monospace; }
+  .kopf { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.6mm solid var(--tinte); padding-bottom: 2mm; }
+  .kopf b { font-size: 12.5pt; }
+  .kopf span { font-family: 'Courier New', monospace; font-size: 8pt; color: var(--grau); }
+  h1 { font-size: 20pt; line-height: 1.15; margin-top: 4mm; }
+  .markiert { background: linear-gradient(104deg, transparent 2%, var(--marker) 4%, var(--marker) 96%, transparent 98%); padding: 0 1.5mm; }
+  .unter { color: var(--grau); margin-top: 1.5mm; font-size: 9.5pt; }
+  h2 { font-family: 'Courier New', monospace; font-weight: 400; font-size: 8pt; text-transform: uppercase; letter-spacing: .14em; color: var(--grau);
+       margin: 5mm 0 2.5mm; display: flex; gap: 3mm; align-items: center; }
+  h2::after { content: ''; flex: 1; border-top: 0.25mm solid rgba(33,33,29,.25); }
+  .schritt { display: grid; grid-template-columns: 17mm 1fr; gap: 3mm; padding: 2.4mm 0; border-bottom: 0.25mm dotted rgba(33,33,29,.35); }
+  .zeit { font-family: 'Courier New', monospace; font-weight: 700; color: var(--amtsblau); font-size: 9pt; }
+  .schritt h3 { font-size: 10.5pt; margin-bottom: .8mm; }
+  .sag { border-left: 0.8mm solid var(--amtsblau); background: #fff; padding: 1.2mm 2.5mm; margin: 1mm 0; font-style: italic; }
+  ol, ul { padding-left: 5mm; }
+  li { margin-bottom: .6mm; }
+  .ziel { margin-top: 4mm; border: 0.6mm solid var(--tinte); box-shadow: 1.5mm 1.8mm 0 rgba(33,33,29,.9); background: #fff; padding: 3mm 4mm; }
+  .ziel b { color: var(--rot); }
+  .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .kasten { background: #fff; border: 0.3mm solid rgba(33,33,29,.3); padding: 2.5mm 3.5mm; }
+  .check li { list-style: none; position: relative; padding-left: 5mm; }
+  .check li::before { content: '☐'; position: absolute; left: 0; color: var(--amtsblau); }
+  .frage { margin-bottom: 2mm; }
+  .frage b { display: block; }
+  .nicht { border-left: 0.8mm solid var(--rot); background: #fdf1ef; padding: 1.5mm 2.5mm; }
+  .klein { font-size: 8.3pt; color: var(--grau); }
+</style>
+</head>
+<body>
+
+<div class="seite">
+  <div class="kopf"><b>📬 BehördenKlar · Ablaufplan</b><span>MBE Kirchheimbolanden · Do 29.10.2026 · nur für mich</span></div>
+  <h1>10–15 Minuten. <span class="markiert">Zeigen, zuhören, Testzugang dalassen.</span></h1>
+  <p class="unter">Die Webseite ist die Präsentation. Alles läuft im Browser, ohne App. Die App nur kurz erwähnen.</p>
+
+  <h2>Ablauf</h2>
+
+  <div class="schritt"><span class="zeit">0–1'</span><div>
+    <h3>Begrüßung und wer ich bin</h3>
+    <p class="sag">„Ich bin Justin Klein aus Winnweiler. Meine Mutter ist selbst nach Deutschland gekommen. Briefe vom Amt kenne ich von klein auf, deshalb habe ich BehördenKlar gebaut.“</p>
+  </div></div>
+
+  <div class="schritt"><span class="zeit">1–3'</span><div>
+    <h3>Das Problem aus ihrer Sicht: erst fragen, dann zuhören</h3>
+    <p class="sag">„Wie oft kommt jemand zu Ihnen, bei dem die Frist schon fast vorbei ist? Oder bei dem der Termin erst mal nur fürs Vorlesen draufgeht?“</p>
+    <p>Kurz zuhören und ihre Antwort aufgreifen. Das ist der Aufhänger für alles Weitere.</p>
+  </div></div>
+
+  <div class="schritt"><span class="zeit">3–8'</span><div>
+    <h3>Live-Vorführung mit dem Musterbrief</h3>
+    <ol>
+      <li>Laptop: <b>behoerdenklar.de/demo</b> ist schon offen, Sprache <b>Arabisch</b> gewählt, Vorführ-Code eingelöst.</li>
+      <li>„Lieber mit dem Handy fotografieren“ antippen, mit dem Handy den QR-Code scannen.</li>
+      <li>Ausgedruckten Musterbrief fotografieren. <i>„Das dauert etwa eine Minute.“</i></li>
+      <li>Laptop zeigt die Erklärung <b>auf Deutsch</b>, das Handy <b>auf Arabisch</b>. Kurz umschalten.</li>
+      <li>Zeigen: <b>rote Ampel</b> (Termin in 7 Tagen), <b>„In meinen Kalender“</b>, <b>Anruf-Hilfe</b> mit Aktenzeichen, Fachbegriff „Fiktionsbescheinigung“ bleibt deutsch.</li>
+      <li>„Ergebnis aufs Handy mitnehmen“: So nimmt jemand die Erklärung nach der Beratung mit nach Hause.</li>
+    </ol>
+    <p class="sag">„Alles, was Sie sehen, geht ohne App, im Browser, auf jedem Handy, ohne Konto. Eine App kommt später dazu, zum Beispiel für Erinnerungen.“</p>
+  </div></div>
+
+  <div class="schritt"><span class="zeit">8–9'</span><div>
+    <h3>Datenschutz ehrlich (bevor sie fragen)</h3>
+    <p class="sag">„Kein Konto, wir speichern keine Briefe. Zwischen PC und Handy ist alles Ende-zu-Ende verschlüsselt. Die Erklärung macht ein KI-Dienst in den USA, Anthropic. Der löscht nach spätestens 30 Tagen und trainiert nicht damit. Das steht auch vor dem Hochladen auf der Seite.“</p>
+  </div></div>
+
+  <div class="schritt"><span class="zeit">9–11'</span><div>
+    <h3>Das Angebot: Handzettel übergeben</h3>
+    <p class="sag">„Ich möchte Ihnen einen Testzugang dalassen: einen Monat, bis zu 100 Briefe, kostenlos. Ihre Ratsuchenden zahlen nichts. Der Code steht hier auf dem Zettel.“</p>
+    <p><b>Gleich den Auswertungstermin ausmachen:</b> „Darf ich in vier Wochen wiederkommen, am <b>Do 26.11.</b>, und hören, was es gebracht hat?“</p>
+  </div></div>
+
+  <div class="schritt" style="border-bottom: none;"><span class="zeit">11–15'</span><div>
+    <h3>Zuhören (das ist der eigentliche Gewinn)</h3>
+    <ol>
+      <li>Welche Briefe bringen Ihre Ratsuchenden am häufigsten mit?</li>
+      <li>Was fehlt in dem, was ich gezeigt habe?</li>
+      <li>Würden Sie es empfehlen? Wenn nicht, warum nicht?</li>
+      <li>Darf ich Ihre Stelle auf meiner Seite nennen, und würden Sie auf BehördenKlar verlinken?</li>
+    </ol>
+  </div></div>
+
+  <div class="ziel">
+    <b>Ziel des Termins:</b> Code übergeben <i>und</i> Termin am 26.11. im Kalender. Ein ehrliches „das fehlt noch“ ist auch ein Erfolg. Mitschreiben!
+  </div>
+</div>
+
+<div class="seite">
+  <div class="kopf"><b>📬 BehördenKlar · Vorbereitung &amp; Fragen</b><span>Seite 2</span></div>
+
+  <div class="zwei" style="margin-top: 4mm;">
+    <div>
+      <h2 style="margin-top: 0;">Am Vorabend</h2>
+      <ul class="check kasten">
+        <li><b>Deploy erledigt</b>, <span class="mono">npm run pruefung</span> alles grün</li>
+        <li>MBE-Code angelegt, im Handzettel eingetragen</li>
+        <li>Handzettel <b>5×</b> gedruckt, Musterbrief <b>2×</b> gedruckt</li>
+        <li>Einmal komplett durchgespielt, mit Stoppuhr</li>
+        <li>Screenshots und kurzes Video als Notfall offline auf dem Laptop</li>
+        <li>Laptop und Handy laden, Ladekabel einpacken</li>
+      </ul>
+      <h2>Kurz vor dem Termin</h2>
+      <ul class="check kasten">
+        <li><b>Eigener Handy-Hotspot</b> an (nicht ihr WLAN)</li>
+        <li>Demo-Seite offen, <b>Vorführ-Code</b> eingelöst, Arabisch gewählt</li>
+        <li>Handy entsperrt, Kamera-App bereit, Ton aus</li>
+        <li>Notizblock und Stift</li>
+      </ul>
+      <h2>Notfallplan</h2>
+      <div class="kasten">
+        <p><b>Kein Internet:</b> Hotspot. Wenn das auch nicht geht: Screenshots zeigen, <i>„Ich lasse Ihnen den Link da, probieren Sie es selbst.“</i></p>
+        <p style="margin-top: 1.5mm;"><b>Die KI braucht lange:</b> ruhig weitererzählen (Datenschutz-Teil vorziehen).</p>
+        <p style="margin-top: 1.5mm;"><b>Fehlermeldung:</b> nicht nervös werden, zweiten Musterbrief nehmen oder Screenshots.</p>
+      </div>
+    </div>
+
+    <div>
+      <h2 style="margin-top: 0;">Typische Fragen</h2>
+      <div class="frage"><b>„Was passiert mit den Daten?“</b>Kein Konto. Wir speichern den Brief nicht. Die KI (Anthropic, USA) löscht nach spätestens 30 Tagen, kein Training. PC ↔ Handy Ende-zu-Ende verschlüsselt.</div>
+      <div class="frage"><b>„Ist das nicht einfach ChatGPT?“</b>ChatGPT braucht ein Konto und eine gute Frage, und danach ist der Brief vergessen. Hier reicht ein Foto: Frist in den Kalender, Spickzettel fürs Telefon. Wir erfinden keine Nummern oder Daten.</div>
+      <div class="frage"><b>„Ersetzt das unsere Beratung?“</b>Nein. Jede Erklärung verweist bei wichtigen Entscheidungen auf eine Beratungsstelle. Die einfachen Fälle werden abgefangen, die schweren kommen vorbereitet.</div>
+      <div class="frage"><b>„Was kostet das nach dem Test?“</b>Ein festes Briefkontingent für die Einrichtung, Ratsuchende zahlen nichts. <span class="klein">Nur auf Nachfrage Zahlen: 100 Briefe 20 €, 500 Briefe 75 €. Untergrenze 10 ct pro Brief. Keine USt. (§ 19).</span></div>
+      <div class="frage"><b>„Was kostet Sie ein Brief?“</b>Ehrlich: ein paar Cent für die KI, dazu Server, Zahlungsgebühren und Arbeitszeit.</div>
+      <div class="frage"><b>„Gibt es eine App?“</b>Sie ist in Arbeit. Alles Gezeigte geht ohne App. <i>Keinen Termin versprechen.</i></div>
+      <div class="frage"><b>„Wer steckt dahinter?“</b>Ich, mit der Webklar GbR in Winnweiler. Aus dem Donnersbergkreis.</div>
+
+      <h2>Nicht sagen</h2>
+      <div class="nicht">
+        <p>✗ „Alles bleibt auf dem Handy“: Das stimmt für die Webseite nicht.</p>
+        <p>✗ „Unbegrenzt“: immer eine feste Briefzahl.</p>
+        <p>✗ Ein Datum für die App oder neue Funktionen versprechen.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
