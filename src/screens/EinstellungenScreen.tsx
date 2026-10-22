@@ -249,7 +249,7 @@ export function EinstellungenScreen({ navigation }: Props) {
       <View style={styles.karte}>
         <Text style={styles.text}>
           • Brieffotos werden nur zur Analyse an den KI-Dienst Anthropic (USA)
-          gesendet und dort nach spätestens 30 Tagen gelöscht. Sie werden nicht
+          gesendet und dort in der Regel nach 30 Tagen gelöscht. Sie werden nicht
           zum Training der KI verwendet.{'\n\n'}
           • Alle Ergebnisse liegen ausschließlich auf Ihrem Gerät — verschlüsselt
           gespeichert (AES-256).{'\n\n'}

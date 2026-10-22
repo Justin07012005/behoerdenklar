@@ -60,7 +60,7 @@ TEXTE.tr = {
   faq: [
     { f: "Ücreti ne kadar?", a: "İlk 3 mektup ücretsiz (bekleme listesi koduyla 5). Sonrasında kontör satın alırsınız: 5 analiz 2,99 €, 15 analiz 6,99 €. Abonelik yok, hesap açmak yok." },
     { f: "Hangi mektupları açıklayabilir?", a: "İş ve İşçi Bulma Kurumu (Jobcenter), Yabancılar Dairesi, emeklilik kurumu, hastalık sigortası, aile kasası (Kindergeld), vergi dairesi veya ceza dairesinden gelen mektuplar — kısacası hemen hemen her resmî mektup." },
-    { f: "Verilerime ne oluyor?", a: "Mektuplarınız şifreli olarak kendi cihazınızda kalır. Analiz için fotoğraf bir kez güvenli şekilde yapay zekâya gönderilir ve orada en geç 30 gün sonra silinir. Hesap açmanız gerekmez." },
+    { f: "Verilerime ne oluyor?", a: "Mektuplarınız şifreli olarak kendi cihazınızda kalır. Analiz için fotoğraf bir kez güvenli şekilde yapay zekâya gönderilir ve orada genellikle 30 gün sonra silinir. Hesap açmanız gerekmez." },
   ],
   locale: 'tr_TR', navLabel: 'Dil seçin',
   titel: 'BehördenKlar – Alman resmî mektuplarını anlayın',
@@ -104,7 +104,7 @@ TEXTE.ar = {
   faq: [
     { f: "كم التكلفة؟", a: "أول 3 رسائل مجاناً (5 مع رمز قائمة الانتظار). بعد ذلك تشتري رصيداً: 5 تحليلات بـ 2,99 يورو أو 15 بـ 6,99 يورو. بدون اشتراك وبدون حساب." },
     { f: "أي الرسائل يمكن شرحها؟", a: "رسائل من مركز العمل (Jobcenter)، دائرة الأجانب، التأمين التقاعدي، التأمين الصحي، صندوق الأسرة (Kindergeld)، مكتب الضرائب أو دائرة المخالفات — باختصار: تقريباً كل رسالة رسمية." },
-    { f: "ماذا يحدث لبياناتي؟", a: "تبقى رسائلك مشفّرة على جهازك. للتحليل تُرسل الصورة مرة واحدة بشكل آمن إلى الذكاء الاصطناعي وتُحذف هناك خلال 30 يوماً كحد أقصى. لا تحتاج إلى حساب." },
+    { f: "ماذا يحدث لبياناتي؟", a: "تبقى رسائلك مشفّرة على جهازك. للتحليل تُرسل الصورة مرة واحدة بشكل آمن إلى الذكاء الاصطناعي وتُحذف هناك عادةً بعد 30 يوماً. لا تحتاج إلى حساب." },
   ],
   locale: 'ar_AR', navLabel: 'اختر اللغة',
   titel: 'BehördenKlar – افهم الرسائل الرسمية الألمانية',
@@ -148,7 +148,7 @@ TEXTE.ru = {
   faq: [
     { f: "Сколько это стоит?", a: "Первые 3 письма бесплатно (5 с кодом из списка ожидания). Дальше вы покупаете баланс: 5 разборов за 2,99 €, 15 за 6,99 €. Без подписки и без учётной записи." },
     { f: "Какие письма приложение объясняет?", a: "Письма из джобцентра, ведомства по делам иностранцев, пенсионного страхования, больничной кассы, семейной кассы (Kindergeld), налоговой или органа по штрафам — словом, почти любое официальное письмо." },
-    { f: "Что происходит с моими данными?", a: "Ваши письма остаются зашифрованными на вашем устройстве. Для разбора фото один раз безопасно отправляется ИИ и удаляется там не позднее чем через 30 дней. Учётная запись не нужна." },
+    { f: "Что происходит с моими данными?", a: "Ваши письма остаются зашифрованными на вашем устройстве. Для разбора фото один раз безопасно отправляется ИИ и удаляется там обычно через 30 дней. Учётная запись не нужна." },
   ],
   locale: 'ru_RU', navLabel: 'Выберите язык',
   titel: 'BehördenKlar – понять письмо из немецкого ведомства',
@@ -192,7 +192,7 @@ TEXTE.uk = {
   faq: [
     { f: "Скільки це коштує?", a: "Перші 3 листи безкоштовно (5 з кодом зі списку очікування). Далі ви купуєте баланс: 5 аналізів за 2,99 €, 15 за 6,99 €. Без підписки й без облікового запису." },
     { f: "Які листи застосунок пояснює?", a: "Листи з джобцентру, відомства у справах іноземців, пенсійного страхування, лікарняної каси, сімейної каси (Kindergeld), податкової або органу зі штрафів — словом, майже будь-який офіційний лист." },
-    { f: "Що відбувається з моїми даними?", a: "Ваші листи залишаються зашифрованими на вашому пристрої. Для аналізу фото один раз безпечно надсилається до ШІ і видаляється там щонайпізніше через 30 днів. Обліковий запис не потрібен." },
+    { f: "Що відбувається з моїми даними?", a: "Ваші листи залишаються зашифрованими на вашому пристрої. Для аналізу фото один раз безпечно надсилається до ШІ і видаляється там зазвичай через 30 днів. Обліковий запис не потрібен." },
   ],
   locale: 'uk_UA', navLabel: 'Оберіть мову',
   titel: 'BehördenKlar – зрозуміти лист із німецької установи',
@@ -236,7 +236,7 @@ TEXTE.pl = {
   faq: [
     { f: "Ile to kosztuje?", a: "Pierwsze 3 pisma za darmo (5 z kodem z listy oczekujących). Potem kupujesz doładowanie: 5 analiz za 2,99 €, 15 za 6,99 €. Bez abonamentu i bez konta." },
     { f: "Jakie pisma aplikacja wyjaśnia?", a: "Pisma z Jobcenter, urzędu do spraw cudzoziemców, ubezpieczenia emerytalnego, kasy chorych, kasy rodzinnej (Kindergeld), urzędu skarbowego lub organu mandatowego — krótko mówiąc prawie każde oficjalne pismo." },
-    { f: "Co dzieje się z moimi danymi?", a: "Twoje pisma pozostają zaszyfrowane na Twoim urządzeniu. Do analizy zdjęcie jest raz bezpiecznie wysyłane do SI i usuwane tam najpóźniej po 30 dniach. Konto nie jest potrzebne." },
+    { f: "Co dzieje się z moimi danymi?", a: "Twoje pisma pozostają zaszyfrowane na Twoim urządzeniu. Do analizy zdjęcie jest raz bezpiecznie wysyłane do SI i usuwane tam zwykle po 30 dniach. Konto nie jest potrzebne." },
   ],
   locale: 'pl_PL', navLabel: 'Wybierz język',
   titel: 'BehördenKlar – zrozum pismo z niemieckiego urzędu',
@@ -280,7 +280,7 @@ TEXTE.ro = {
   faq: [
     { f: "Cât costă?", a: "Primele 3 scrisori sunt gratuite (5 cu codul din lista de așteptare). Apoi cumperi credit: 5 analize la 2,99 €, 15 la 6,99 €. Fără abonament și fără cont." },
     { f: "Ce scrisori poate explica aplicația?", a: "Scrisori de la Jobcenter, Oficiul pentru Străini, asigurarea de pensie, casa de sănătate, casa familială (Kindergeld), administrația fiscală sau oficiul de amenzi — pe scurt, aproape orice scrisoare oficială." },
-    { f: "Ce se întâmplă cu datele mele?", a: "Scrisorile tale rămân criptate pe dispozitivul tău. Pentru analiză, fotografia este trimisă o singură dată în siguranță către IA și este ștearsă acolo în cel mult 30 de zile. Nu ai nevoie de cont." },
+    { f: "Ce se întâmplă cu datele mele?", a: "Scrisorile tale rămân criptate pe dispozitivul tău. Pentru analiză, fotografia este trimisă o singură dată în siguranță către IA și este ștearsă acolo de regulă după 30 de zile. Nu ai nevoie de cont." },
   ],
   locale: 'ro_RO', navLabel: 'Alege limba',
   titel: 'BehördenKlar – înțelege scrisoarea de la autoritățile germane',
@@ -324,7 +324,7 @@ TEXTE.en = {
   faq: [
     { f: "What does it cost?", a: "Your first 3 letters are free (5 with the waiting-list code). After that you buy credit: 5 analyses for €2.99 or 15 for €6.99. No subscription, no account." },
     { f: "Which letters can the app explain?", a: "Letters from the Jobcenter, the immigration office, pension insurance, health insurance, the family benefits office (Kindergeld), the tax office or the fines authority — in short, almost any official letter." },
-    { f: "What happens to my data?", a: "Your letters stay encrypted on your own device. For the analysis the photo is sent once, securely, to the AI and is deleted there after 30 days at the latest. You do not need an account." },
+    { f: "What happens to my data?", a: "Your letters stay encrypted on your own device. For the analysis the photo is sent once, securely, to the AI and is usually deleted there after 30 days. You do not need an account." },
   ],
   locale: 'en_US', navLabel: 'Choose language',
   titel: 'BehördenKlar – understand letters from German authorities',
@@ -368,7 +368,7 @@ TEXTE.fa = {
   faq: [
     { f: "هزینه آن چقدر است؟", a: "سه نامه اول رایگان است (با کد فهرست انتظار ۵ نامه). پس از آن اعتبار می‌خرید: ۵ تحلیل با ۲٫۹۹ یورو یا ۱۵ تحلیل با ۶٫۹۹ یورو. بدون اشتراک و بدون حساب کاربری." },
     { f: "چه نامه‌هایی را می‌تواند توضیح دهد؟", a: "نامه‌های مرکز کاریابی (Jobcenter)، اداره اتباع خارجی، بیمه بازنشستگی، بیمه درمانی، صندوق خانواده (Kindergeld)، اداره مالیات یا اداره جرایم — به‌طور خلاصه تقریباً هر نامه رسمی." },
-    { f: "با اطلاعات من چه می‌شود؟", a: "نامه‌های شما رمزگذاری‌شده روی دستگاه خودتان می‌مانند. برای تحلیل، عکس یک بار به‌صورت امن به هوش مصنوعی فرستاده می‌شود و حداکثر پس از ۳۰ روز آنجا پاک می‌شود. به حساب کاربری نیاز ندارید." },
+    { f: "با اطلاعات من چه می‌شود؟", a: "نامه‌های شما رمزگذاری‌شده روی دستگاه خودتان می‌مانند. برای تحلیل، عکس یک بار به‌صورت امن به هوش مصنوعی فرستاده می‌شود و معمولاً پس از ۳۰ روز آنجا پاک می‌شود. به حساب کاربری نیاز ندارید." },
   ],
   locale: 'fa_IR', navLabel: 'زبان را انتخاب کنید',
   titel: 'BehördenKlar – نامه‌های اداری آلمان را بفهمید',
@@ -412,7 +412,7 @@ TEXTE.ku = {
   faq: [
     { f: "Ew çiqas dike?", a: "Sê nameyên pêşîn belaş in (bi koda lîsteya bendewariyê 5). Piştre tu krediyê dikirî: 5 analîz bi 2,99 €, 15 bi 6,99 €. Bê abone, bê hesab." },
     { f: "Kîjan name dikare rave bike?", a: "Nameyên ji Jobcenter, Daîreya Biyaniyan, sîgorteya teqawidiyê, sîgorteya tenduristiyê, sindoqa malbatê (Kindergeld), daîreya bacê an daîreya cezayan — bi kurtî hema hema her nameya fermî." },
-    { f: "Bi daneyên min çi tê kirin?", a: "Nameyên te bi şîfre li ser amûra te dimînin. Ji bo analîzê wêne carekê bi ewlehî ji AI re tê şandin û li wir herî dereng piştî 30 rojan tê jêbirin. Tu hewceyî hesabekî nînî." },
+    { f: "Bi daneyên min çi tê kirin?", a: "Nameyên te bi şîfre li ser amûra te dimînin. Ji bo analîzê wêne carekê bi ewlehî ji AI re tê şandin û li wir bi gelemperî piştî 30 rojan tê jêbirin. Tu hewceyî hesabekî nînî." },
   ],
   locale: 'ku_TR', navLabel: 'Zimên hilbijêre',
   titel: 'BehördenKlar – nameyên fermî yên Almanyayê fêm bike',
@@ -456,7 +456,7 @@ TEXTE.bg = {
   faq: [
     { f: "Колко струва?", a: "Първите 3 писма са безплатни (5 с кода от списъка на чакащите). След това купувате кредит: 5 анализа за 2,99 €, 15 за 6,99 €. Без абонамент и без регистрация." },
     { f: "Кои писма може да обясни приложението?", a: "Писма от Jobcenter, службата за чужденци, пенсионното осигуряване, здравната каса, семейната каса (Kindergeld), данъчната служба или службата за глоби — накратко почти всяко официално писмо." },
-    { f: "Какво става с данните ми?", a: "Писмата ви остават криптирани на вашето устройство. За анализа снимката се изпраща еднократно и защитено към ИИ и се изтрива там най-късно след 30 дни. Не ви трябва регистрация." },
+    { f: "Какво става с данните ми?", a: "Писмата ви остават криптирани на вашето устройство. За анализа снимката се изпраща еднократно и защитено към ИИ и се изтрива там обикновено след 30 дни. Не ви трябва регистрация." },
   ],
   locale: 'bg_BG', navLabel: 'Изберете език',
   titel: 'BehördenKlar – разберете писмото от немска институция',
@@ -500,7 +500,7 @@ TEXTE.hr = {
   faq: [
     { f: "Koliko košta?", a: "Prva 3 pisma su besplatna (5 s kodom s liste čekanja). Zatim kupujete bodove: 5 analiza za 2,99 €, 15 za 6,99 €. Bez pretplate i bez računa." },
     { f: "Koja pisma aplikacija objašnjava?", a: "Pisma Jobcentra, Ureda za strance, mirovinskog osiguranja, zdravstvenog osiguranja, obiteljske blagajne (Kindergeld), porezne uprave ili ureda za kazne — ukratko, gotovo svako službeno pismo." },
-    { f: "Što se događa s mojim podacima?", a: "Vaša pisma ostaju šifrirana na vašem uređaju. Za analizu se fotografija jednom sigurno šalje umjetnoj inteligenciji i ondje se briše najkasnije nakon 30 dana. Račun nije potreban." },
+    { f: "Što se događa s mojim podacima?", a: "Vaša pisma ostaju šifrirana na vašem uređaju. Za analizu se fotografija jednom sigurno šalje umjetnoj inteligenciji i ondje se u pravilu briše nakon 30 dana. Račun nije potreban." },
   ],
   locale: 'hr_HR', navLabel: 'Odaberite jezik',
   titel: 'BehördenKlar – razumite pismo njemačke ustanove',
@@ -544,7 +544,7 @@ TEXTE.sr = {
   faq: [
     { f: "Колико кошта?", a: "Прва 3 писма су бесплатна (5 са кодом са листе чекања). Затим купујете бодове: 5 анализа за 2,99 €, 15 за 6,99 €. Без претплате и без налога." },
     { f: "Која писма апликација објашњава?", a: "Писма Јобцентра, Управе за странце, пензијског осигурања, здравственог осигурања, породичне благајне (Kindergeld), пореске управе или службе за казне — укратко, готово свако службено писмо." },
-    { f: "Шта се дешава са мојим подацима?", a: "Ваша писма остају шифрована на вашем уређају. За анализу се фотографија једном безбедно шаље вештачкој интелигенцији и тамо се брише најкасније после 30 дана. Налог није потребан." },
+    { f: "Шта се дешава са мојим подацима?", a: "Ваша писма остају шифрована на вашем уређају. За анализу се фотографија једном безбедно шаље вештачкој интелигенцији и тамо се по правилу брише после 30 дана. Налог није потребан." },
   ],
   locale: 'sr_RS', navLabel: 'Изаберите језик',
   titel: 'BehördenKlar – разумејте писмо немачке установе',
@@ -588,7 +588,7 @@ TEXTE.bs = {
   faq: [
     { f: "Koliko košta?", a: "Prva 3 pisma su besplatna (5 s kodom s liste čekanja). Zatim kupujete bodove: 5 analiza za 2,99 €, 15 za 6,99 €. Bez pretplate i bez računa." },
     { f: "Koja pisma aplikacija objašnjava?", a: "Pisma Jobcentra, Ureda za strance, penzionog osiguranja, zdravstvenog osiguranja, porodične blagajne (Kindergeld), poreske uprave ili ureda za kazne — ukratko, gotovo svako službeno pismo." },
-    { f: "Šta se dešava s mojim podacima?", a: "Vaša pisma ostaju šifrirana na vašem uređaju. Za analizu se fotografija jednom sigurno šalje vještačkoj inteligenciji i tamo se briše najkasnije nakon 30 dana. Račun nije potreban." },
+    { f: "Šta se dešava s mojim podacima?", a: "Vaša pisma ostaju šifrirana na vašem uređaju. Za analizu se fotografija jednom sigurno šalje vještačkoj inteligenciji i tamo se u pravilu briše nakon 30 dana. Račun nije potreban." },
   ],
   locale: 'bs_BA', navLabel: 'Odaberite jezik',
   titel: 'BehördenKlar – razumijte pismo njemačke ustanove',
@@ -632,7 +632,7 @@ TEXTE.sq = {
   faq: [
     { f: "Sa kushton?", a: "3 letrat e para janë falas (5 me kodin e listës së pritjes). Më pas blini kredi: 5 analiza për 2,99 €, 15 për 6,99 €. Pa abonim dhe pa llogari." },
     { f: "Cilat letra mund të shpjegojë?", a: "Letra nga Jobcenter, Zyra e të Huajve, sigurimi i pensionit, sigurimi shëndetësor, arka familjare (Kindergeld), zyra e tatimeve ose zyra e gjobave — shkurt, pothuajse çdo letër zyrtare." },
-    { f: "Çfarë ndodh me të dhënat e mia?", a: "Letrat tuaja mbeten të koduara në pajisjen tuaj. Për analizën, fotoja dërgohet një herë në mënyrë të sigurt te inteligjenca artificiale dhe fshihet atje më së voni pas 30 ditësh. Nuk ju duhet llogari." },
+    { f: "Çfarë ndodh me të dhënat e mia?", a: "Letrat tuaja mbeten të koduara në pajisjen tuaj. Për analizën, fotoja dërgohet një herë në mënyrë të sigurt te inteligjenca artificiale dhe fshihet atje zakonisht pas 30 ditësh. Nuk ju duhet llogari." },
   ],
   locale: 'sq_AL', navLabel: 'Zgjidhni gjuhën',
   titel: 'BehördenKlar – kuptoni letrën e një institucioni gjerman',
@@ -676,7 +676,7 @@ TEXTE.it = {
   faq: [
     { f: "Quanto costa?", a: "Le prime 3 lettere sono gratis (5 con il codice della lista d’attesa). Poi acquisti credito: 5 analisi a 2,99 € o 15 a 6,99 €. Nessun abbonamento, nessun account." },
     { f: "Quali lettere può spiegare?", a: "Lettere del Jobcenter, dell’Ufficio stranieri, dell’assicurazione pensionistica, della cassa malattia, della cassa familiare (Kindergeld), dell’ufficio delle imposte o dell’ufficio sanzioni — in breve, quasi ogni lettera ufficiale." },
-    { f: "Che fine fanno i miei dati?", a: "Le tue lettere restano cifrate sul tuo dispositivo. Per l’analisi la foto viene inviata una sola volta in modo sicuro all’IA e viene cancellata lì al più tardi dopo 30 giorni. Non serve un account." },
+    { f: "Che fine fanno i miei dati?", a: "Le tue lettere restano cifrate sul tuo dispositivo. Per l’analisi la foto viene inviata una sola volta in modo sicuro all’IA e viene cancellata lì di norma dopo 30 giorni. Non serve un account." },
   ],
   locale: 'it_IT', navLabel: 'Scegli la lingua',
   titel: 'BehördenKlar – capire le lettere degli uffici tedeschi',
@@ -720,7 +720,7 @@ TEXTE.el = {
   faq: [
     { f: "Πόσο κοστίζει;", a: "Τα πρώτα 3 γράμματα είναι δωρεάν (5 με τον κωδικό της λίστας αναμονής). Έπειτα αγοράζετε μονάδες: 5 αναλύσεις 2,99 € ή 15 για 6,99 €. Χωρίς συνδρομή, χωρίς λογαριασμό." },
     { f: "Ποια γράμματα μπορεί να εξηγήσει;", a: "Γράμματα από το Jobcenter, την Υπηρεσία Αλλοδαπών, την ασφάλιση σύνταξης, το ταμείο υγείας, το οικογενειακό ταμείο (Kindergeld), την εφορία ή την υπηρεσία προστίμων — με λίγα λόγια, σχεδόν κάθε επίσημο γράμμα." },
-    { f: "Τι γίνεται με τα δεδομένα μου;", a: "Τα γράμματά σας παραμένουν κρυπτογραφημένα στη συσκευή σας. Για την ανάλυση η φωτογραφία στέλνεται μία φορά με ασφάλεια στην ΤΝ και διαγράφεται εκεί το αργότερο μετά από 30 ημέρες. Δεν χρειάζεστε λογαριασμό." },
+    { f: "Τι γίνεται με τα δεδομένα μου;", a: "Τα γράμματά σας παραμένουν κρυπτογραφημένα στη συσκευή σας. Για την ανάλυση η φωτογραφία στέλνεται μία φορά με ασφάλεια στην ΤΝ και διαγράφεται εκεί συνήθως μετά από 30 ημέρες. Δεν χρειάζεστε λογαριασμό." },
   ],
   locale: 'el_GR', navLabel: 'Επιλέξτε γλώσσα',
   titel: 'BehördenKlar – κατανοήστε το γράμμα γερμανικής υπηρεσίας',
@@ -764,7 +764,7 @@ TEXTE.es = {
   faq: [
     { f: "¿Cuánto cuesta?", a: "Las primeras 3 cartas son gratis (5 con el código de la lista de espera). Después compras saldo: 5 análisis por 2,99 € o 15 por 6,99 €. Sin suscripción y sin cuenta." },
     { f: "¿Qué cartas puede explicar?", a: "Cartas del Jobcenter, de la Oficina de Extranjería, del seguro de pensiones, de la mutua de salud, de la caja familiar (Kindergeld), de Hacienda o de la oficina de multas — en resumen, casi cualquier carta oficial." },
-    { f: "¿Qué pasa con mis datos?", a: "Tus cartas permanecen cifradas en tu propio dispositivo. Para el análisis, la foto se envía una sola vez de forma segura a la IA y allí se borra como máximo a los 30 días. No necesitas cuenta." },
+    { f: "¿Qué pasa con mis datos?", a: "Tus cartas permanecen cifradas en tu propio dispositivo. Para el análisis, la foto se envía una sola vez de forma segura a la IA y allí se borra normalmente a los 30 días. No necesitas cuenta." },
   ],
   locale: 'es_ES', navLabel: 'Elige idioma',
   titel: 'BehördenKlar – entiende las cartas de las oficinas alemanas',
@@ -808,7 +808,7 @@ TEXTE.pt = {
   faq: [
     { f: "Quanto custa?", a: "As primeiras 3 cartas são grátis (5 com o código da lista de espera). Depois compra saldo: 5 análises por 2,99 € ou 15 por 6,99 €. Sem assinatura e sem conta." },
     { f: "Que cartas consegue explicar?", a: "Cartas do Jobcenter, do Serviço de Estrangeiros, do seguro de pensões, da caixa de saúde, da caixa familiar (Kindergeld), das finanças ou do serviço de multas — em resumo, quase qualquer carta oficial." },
-    { f: "O que acontece aos meus dados?", a: "As suas cartas ficam cifradas no seu próprio dispositivo. Para a análise, a foto é enviada uma única vez de forma segura para a IA e é apagada lá no máximo ao fim de 30 dias. Não precisa de conta." },
+    { f: "O que acontece aos meus dados?", a: "As suas cartas ficam cifradas no seu próprio dispositivo. Para a análise, a foto é enviada uma única vez de forma segura para a IA e é apagada lá normalmente ao fim de 30 dias. Não precisa de conta." },
   ],
   locale: 'pt_PT', navLabel: 'Escolha o idioma',
   titel: 'BehördenKlar – perceber as cartas das repartições alemãs',
@@ -852,7 +852,7 @@ TEXTE.fr = {
   faq: [
     { f: "Combien ça coûte ?", a: "Les 3 premiers courriers sont gratuits (5 avec le code de la liste d’attente). Ensuite vous achetez du crédit : 5 analyses pour 2,99 € ou 15 pour 6,99 €. Sans abonnement et sans compte." },
     { f: "Quels courriers peut-elle expliquer ?", a: "Les courriers du Jobcenter, du service des étrangers, de l’assurance retraite, de la caisse maladie, de la caisse familiale (Kindergeld), du fisc ou du service des amendes — bref, presque tout courrier officiel." },
-    { f: "Que deviennent mes données ?", a: "Vos courriers restent chiffrés sur votre appareil. Pour l’analyse, la photo est envoyée une seule fois de façon sécurisée à l’IA et y est supprimée au plus tard au bout de 30 jours. Aucun compte nécessaire." },
+    { f: "Que deviennent mes données ?", a: "Vos courriers restent chiffrés sur votre appareil. Pour l’analyse, la photo est envoyée une seule fois de façon sécurisée à l’IA et y est supprimée en général au bout de 30 jours. Aucun compte nécessaire." },
   ],
   locale: 'fr_FR', navLabel: 'Choisir la langue',
   titel: 'BehördenKlar – comprendre les courriers administratifs allemands',
@@ -896,7 +896,7 @@ TEXTE.hu = {
   faq: [
     { f: "Mennyibe kerül?", a: "Az első 3 levél ingyenes (a várólista kódjával 5). Utána egyenleget vásárol: 5 elemzés 2,99 €, 15 elemzés 6,99 €. Előfizetés és fiók nélkül." },
     { f: "Milyen leveleket tud elmagyarázni?", a: "A Jobcenter, az idegenrendészet, a nyugdíjbiztosító, a betegpénztár, a családi pénztár (Kindergeld), az adóhivatal vagy a bírságoló hatóság leveleit — röviden szinte minden hivatalos levelet." },
-    { f: "Mi történik az adataimmal?", a: "A levelei titkosítva a saját készülékén maradnak. Az elemzéshez a fénykép egyszer, biztonságosan kerül el az MI-hez, és ott legkésőbb 30 nap múlva törlődik. Nincs szükség fiókra." },
+    { f: "Mi történik az adataimmal?", a: "A levelei titkosítva a saját készülékén maradnak. Az elemzéshez a fénykép egyszer, biztonságosan kerül el az MI-hez, és ott általában 30 nap múlva törlődik. Nincs szükség fiókra." },
   ],
   locale: 'hu_HU', navLabel: 'Válasszon nyelvet',
   titel: 'BehördenKlar – értse meg a német hivatali levelet',
@@ -940,7 +940,7 @@ TEXTE.vi = {
   faq: [
     { f: "Giá bao nhiêu?", a: "3 lá thư đầu tiên miễn phí (5 nếu có mã từ danh sách chờ). Sau đó bạn mua lượt: 5 lần phân tích 2,99 €, 15 lần 6,99 €. Không thuê bao, không cần tài khoản." },
     { f: "Ứng dụng giải thích được những thư nào?", a: "Thư từ Jobcenter, Sở Ngoại kiều, bảo hiểm hưu trí, bảo hiểm y tế, quỹ gia đình (Kindergeld), sở thuế hoặc cơ quan xử phạt — nói ngắn gọn là hầu hết mọi thư chính thức." },
-    { f: "Dữ liệu của tôi thì sao?", a: "Thư của bạn được mã hóa và nằm trên thiết bị của bạn. Để phân tích, ảnh được gửi một lần duy nhất và an toàn tới AI, rồi bị xóa ở đó chậm nhất sau 30 ngày. Bạn không cần tài khoản." },
+    { f: "Dữ liệu của tôi thì sao?", a: "Thư của bạn được mã hóa và nằm trên thiết bị của bạn. Để phân tích, ảnh được gửi một lần duy nhất và an toàn tới AI, rồi thường bị xóa ở đó sau 30 ngày. Bạn không cần tài khoản." },
   ],
   locale: 'vi_VN', navLabel: 'Chọn ngôn ngữ',
   titel: 'BehördenKlar – hiểu thư từ cơ quan công quyền Đức',
@@ -984,7 +984,7 @@ TEXTE.hi = {
   faq: [
     { f: "इसकी कीमत क्या है?", a: "पहली 3 चिट्ठियाँ मुफ़्त हैं (प्रतीक्षा सूची के कोड से 5)। उसके बाद आप क्रेडिट खरीदते हैं: 5 विश्लेषण 2,99 € में या 15 विश्लेषण 6,99 € में। कोई सदस्यता नहीं, कोई खाता नहीं।" },
     { f: "यह कौन-सी चिट्ठियाँ समझा सकता है?", a: "जॉबसेंटर, विदेशी विभाग, पेंशन बीमा, स्वास्थ्य बीमा, परिवार कोष (Kindergeld), कर विभाग या जुर्माना विभाग की चिट्ठियाँ — संक्षेप में, लगभग हर सरकारी चिट्ठी।" },
-    { f: "मेरे डेटा का क्या होता है?", a: "आपकी चिट्ठियाँ आपके अपने उपकरण पर एन्क्रिप्टेड रहती हैं। विश्लेषण के लिए फ़ोटो एक बार सुरक्षित रूप से एआई को भेजी जाती है और वहाँ अधिकतम 30 दिनों में मिटा दी जाती है। आपको खाते की ज़रूरत नहीं।" },
+    { f: "मेरे डेटा का क्या होता है?", a: "आपकी चिट्ठियाँ आपके अपने उपकरण पर एन्क्रिप्टेड रहती हैं। विश्लेषण के लिए फ़ोटो एक बार सुरक्षित रूप से एआई को भेजी जाती है और वहाँ आमतौर पर 30 दिन बाद मिटा दी जाती है। आपको खाते की ज़रूरत नहीं।" },
   ],
   locale: 'hi_IN', navLabel: 'भाषा चुनें',
   titel: 'BehördenKlar – जर्मन सरकारी चिट्ठी समझें',
@@ -1028,7 +1028,7 @@ TEXTE.ur = {
   faq: [
     { f: "اس کی قیمت کیا ہے؟", a: "پہلے 3 خط مفت ہیں (انتظار کی فہرست کے کوڈ کے ساتھ 5)۔ اس کے بعد آپ کریڈٹ خریدتے ہیں: 5 تجزیے 2,99 € میں یا 15 تجزیے 6,99 € میں۔ کوئی سبسکرپشن نہیں، کوئی اکاؤنٹ نہیں۔" },
     { f: "یہ کون سے خط سمجھا سکتا ہے؟", a: "جاب سینٹر، غیر ملکی دفتر، پنشن انشورنس، ہیلتھ انشورنس، فیملی فنڈ (Kindergeld)، ٹیکس دفتر یا جرمانہ دفتر کے خطوط — مختصراً تقریباً ہر سرکاری خط۔" },
-    { f: "میرے ڈیٹا کا کیا ہوتا ہے؟", a: "آپ کے خطوط آپ کے اپنے آلے پر خفیہ شکل میں رہتے ہیں۔ تجزیے کے لیے تصویر ایک بار محفوظ طریقے سے اے آئی کو بھیجی جاتی ہے اور وہاں زیادہ سے زیادہ 30 دن میں مٹا دی جاتی ہے۔ آپ کو اکاؤنٹ کی ضرورت نہیں۔" },
+    { f: "میرے ڈیٹا کا کیا ہوتا ہے؟", a: "آپ کے خطوط آپ کے اپنے آلے پر خفیہ شکل میں رہتے ہیں۔ تجزیے کے لیے تصویر ایک بار محفوظ طریقے سے اے آئی کو بھیجی جاتی ہے اور وہاں عام طور پر 30 دن بعد مٹا دی جاتی ہے۔ آپ کو اکاؤنٹ کی ضرورت نہیں۔" },
   ],
   locale: 'ur_PK', navLabel: 'زبان منتخب کریں',
   titel: 'BehördenKlar – جرمن سرکاری خط سمجھیں',
@@ -1072,7 +1072,7 @@ TEXTE.ps = {
   faq: [
     { f: "بیه یې څومره ده؟", a: "لومړي ۳ لیکونه وړیا دي (د انتظار لړلیک کوډ سره ۵). وروسته تاسو کریډیټ اخلئ: ۵ شننې په ۲٫۹۹ یورو یا ۱۵ په ۶٫۹۹ یورو. نه ګډون، نه حساب." },
     { f: "کوم لیکونه رابرسېره کولی شي؟", a: "د جاب سنټر، د بهرنیانو ادارې، د تقاعد بیمې، روغتیايي بیمې، کورنۍ صندوق (Kindergeld)، مالیې ادارې یا د جریمو ادارې لیکونه — په لنډه توګه نږدې هر رسمي لیک." },
-    { f: "زما معلوماتو ته څه کیږي؟", a: "ستاسو لیکونه پټ شوي ستاسو په خپله وسیله پاتې کیږي. د شننې لپاره عکس یو ځل په خوندي ډول مصنوعي ځیرکتیا ته لیږل کیږي او هلته تر ۳۰ ورځو وروسته ړنګېږي. حساب ته اړتیا نشته." },
+    { f: "زما معلوماتو ته څه کیږي؟", a: "ستاسو لیکونه پټ شوي ستاسو په خپله وسیله پاتې کیږي. د شننې لپاره عکس یو ځل په خوندي ډول مصنوعي ځیرکتیا ته لیږل کیږي او هلته معمولاً تر ۳۰ ورځو وروسته ړنګېږي. حساب ته اړتیا نشته." },
   ],
   locale: 'ps_AF', navLabel: 'ژبه وټاکئ',
   titel: 'BehördenKlar – د آلمان رسمي لیکونه پوه شئ',
@@ -1116,7 +1116,7 @@ TEXTE.ti = {
   faq: [
     { f: "ክንደይ ይኸፍል?", a: "እቶም ቀዳሞት 3 ደብዳበታት ብነጻ እዮም (ብናይ ምጽባይ ዝርዝር ኮድ 5)። ድሕሪኡ ክሬዲት ትገዝእ፦ 5 መጽናዕቲ ብ2,99 € ወይ 15 ብ6,99 €። ዝኾነ ምዝገባ ወይ ኣካውንት ኣየድልን።" },
     { f: "ኣየኖት ደብዳበታት ከብርህ ይኽእል?", a: "ካብ Jobcenter፣ ቤት ጽሕፈት ወጻእተኛታት፣ ውሕስነት ጡረታ፣ ውሕስነት ጥዕና፣ ስድራቤታዊ ካሳ (Kindergeld)፣ ቤት ጽሕፈት ግብሪ ወይ ቤት ጽሕፈት መቕጻዕቲ ዝመጹ ደብዳበታት — ብሓጺሩ ኩሉ ወግዓዊ ደብዳበ ማለት እዩ።" },
-    { f: "ብዛዕባ ዳታይ እንታይ ይኸውን?", a: "ደብዳበታትካ ኣብ ናትካ መሳርሒ ተመስጢሮም ይጸንሑ። ንመጽናዕቲ እቲ ስእሊ ሓንሳብ ብውሑስ መንገዲ ናብ AI ይለኣኽ፣ ኣብኡ ድማ ዝበዝሐ ድሕሪ 30 መዓልቲ ይድምሰስ። ኣካውንት ኣየድልየካን።" },
+    { f: "ብዛዕባ ዳታይ እንታይ ይኸውን?", a: "ደብዳበታትካ ኣብ ናትካ መሳርሒ ተመስጢሮም ይጸንሑ። ንመጽናዕቲ እቲ ስእሊ ሓንሳብ ብውሑስ መንገዲ ናብ AI ይለኣኽ፣ ኣብኡ ድማ ብልሙድ ድሕሪ 30 መዓልቲ ይድምሰስ። ኣካውንት ኣየድልየካን።" },
   ],
   locale: 'ti_ER', navLabel: 'ቋንቋ ምረጽ',
   titel: 'BehördenKlar – ናይ ጀርመን ወግዓዊ ደብዳበ ተረዳእ',
@@ -1160,7 +1160,7 @@ TEXTE.so = {
   faq: [
     { f: "Intee ayey ku kacaysaa?", a: "3-da warqadood ee ugu horreeya waa bilaash (5 haddii aad haysato koodhka liiska sugitaanka). Kadib waxaad iibsanaysaa rasiid: 5 falanqayn 2,99 € ama 15 falanqayn 6,99 €. Rukun ma jiro, koonto looma baahna." },
     { f: "Warqadaha noocee ah ayuu sharxi karaa?", a: "Warqadaha ka yimid Jobcenter, Xafiiska Ajaanibta, caymiska hawlgabka, caymiska caafimaadka, sanduuqa qoyska (Kindergeld), xafiiska canshuuraha ama xafiiska ganaaxyada — kooban: ku dhawaad warqad kasta oo rasmi ah." },
-    { f: "Maxaa ku dhacaya xogtayda?", a: "Warqadahaagu waxay ku hadhayaan qalabkaaga iyagoo sir ah. Falanqaynta awgeed sawirka hal mar ayaa si ammaan ah loogu diraa AI-ga, halkaasna waxaa laga tirtiraa ugu badnaan 30 maalmood gudahood. Koonto uma baahnid." },
+    { f: "Maxaa ku dhacaya xogtayda?", a: "Warqadahaagu waxay ku hadhayaan qalabkaaga iyagoo sir ah. Falanqaynta awgeed sawirka hal mar ayaa si ammaan ah loogu diraa AI-ga, halkaasna waxaa laga tirtiraa inta badan 30 maalmood kadib. Koonto uma baahnid." },
   ],
   locale: 'so_SO', navLabel: 'Dooro luqadda',
   titel: 'BehördenKlar – faham warqadda hay’adaha Jarmalka',
@@ -1204,7 +1204,7 @@ TEXTE.zh = {
   faq: [
     { f: "收费多少？", a: "前 3 封信免费（用等候名单的兑换码则是 5 封）。之后购买额度：5 次分析 2,99 €，15 次 6,99 €。无订阅，无需注册账号。" },
     { f: "能解释哪些信件？", a: "来自劳动介绍所（Jobcenter）、外管局、养老保险、医疗保险、家庭金库（Kindergeld）、税务局或罚款机关的信件——简而言之，几乎任何官方信件。" },
-    { f: "我的数据会怎样？", a: "您的信件以加密方式保存在您自己的设备上。分析时照片会安全地发送给人工智能一次，并最迟在 30 天后在那里删除。您不需要账号。" },
+    { f: "我的数据会怎样？", a: "您的信件以加密方式保存在您自己的设备上。分析时照片会安全地发送给人工智能一次，并通常在 30 天后在那里删除。您不需要账号。" },
   ],
   locale: 'zh_CN', navLabel: '选择语言',
   titel: 'BehördenKlar – 看懂德国政府部门的信件',
