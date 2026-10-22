@@ -20,39 +20,59 @@ selbst ausprobieren. Das überzeugt mehr als jedes PDF.
 | **MBE Donnersberg** (Migrationsberatung, Kirchheimbolanden) | mbe@fid-donnersberg.de | 06352 7897955 | Erstmail 17.07. · Nachfass: ____ | ____ | |
 | **Diakonie Donnersbergkreis** (Soziale Lebensberatung, Kirchheimbolanden) | slb.kibo@diakonie-pfalz.de | *auf diakonie-pfalz.de nachsehen* | ____ | ____ | |
 | **Caritas-Zentrum Kaiserslautern** (Migrationsberatung, Engelsgasse 1) | Migration.Kaiserslautern@caritas-speyer.de | 0631 36120-222 | ____ | ____ | |
+| **DRK Kaiserslautern-Stadt** (Migrationsberatung, Barbarossastraße 27) — Birgit Steinmann, Leitung · nutzt schon mbeon | b.steinmann@kv-kls.drk.de | 0631 80093-140 | ____ | ____ | |
 
 ---
 
 ## Mail 1 — MBE Donnersberg *(Nachfass-Mail — die haben im Juli schon eine bekommen)*
 
+**Von:** justin@webklar.com *(direkt aus dem Webklar-Postfach senden)*
 **An:** mbe@fid-donnersberg.de
-**Betreff:** Nachtrag zu meiner Mail vom Juli: BehördenKlar jetzt im Browser nutzbar
+**Betreff:** Nachtrag zu meiner Mail vom Juli: BehördenKlar jetzt ausprobierbar
+
+> Bewusst kürzer als die Erstmail. Die Juli-Mail nannte noch „iPhone-App", ein Abo
+> (2,99 €/Monat) und Anhänge — beides stimmt so nicht mehr, deshalb Preis ehrlich
+> korrigieren (Pakete statt Abo). Nach Absenden: ANRUFEN (06352 7897955), die Mail
+> ist schon 2½ Monate her.
 
 Sehr geehrtes Team der Migrationsberatung,
 
-im Juli hatte ich Ihnen von BehördenKlar geschrieben, einem Werkzeug, das
-Behördenbriefe in einfacher Sprache erklärt. Seitdem hat sich viel getan, deshalb
-melde ich mich noch einmal kurz.
+im Juli hatte ich Ihnen von BehördenKlar geschrieben. Seitdem hat sich viel getan,
+deshalb melde ich mich noch einmal kurz.
 
-Man kann es jetzt direkt im Browser nutzen — auf jedem Handy, ohne App und ohne Konto:
-**https://behoerdenklar.de/demo**
+Schwierige Briefe vom Amt kenne ich von klein auf: Meine Mutter ist selbst nach
+Deutschland gekommen, und solche Briefe gehörten bei uns zum Alltag. Deshalb arbeite
+ich an einer App, die Behördenbriefe in einfacher Sprache erklärt, auf Wunsch in
+einer von 27 Sprachen, darunter Arabisch, Farsi, Paschtu, Kurdisch, Tigrinya, Türkisch
+und Ukrainisch.
 
-- Brief fotografieren → Erklärung in einfachem Deutsch **oder in einer von 27
-  Sprachen**, u. a. Arabisch, Farsi, Kurdisch, Tigrinya und Ukrainisch. Die deutschen
-  Fachbegriffe bleiben stehen, damit man sie im Brief wiederfindet.
-- **Frist und Termin mit einem Tipp in den Handy-Kalender**, mit Erinnerung vorher.
-- **Anruf-Hilfe:** Telefonnummer und Aktenzeichen aus dem Brief, dazu ein kurzer
-  Spickzettel, was man am Telefon sagen kann.
+Die App ist noch in Arbeit, aber die Browser-Version läuft schon, auf jedem Handy,
+ohne Konto und ohne Installation: https://behoerdenklar.de/demo
 
-Es soll Ihre Beratung nicht ersetzen — eher dafür sorgen, dass Menschen vorbereitet
-zu Ihnen kommen und keine Frist verpassen.
+- Die deutschen Fachbegriffe bleiben sichtbar, damit man sie im Brief wiederfindet.
+- Fristen und Termine kommen mit einem Tipp in den Handy-Kalender, damit keine Frist
+  untergeht.
+- Für Anrufe beim Amt gibt es einen Spickzettel mit der Bedeutung in der eigenen
+  Sprache.
 
-Dürfte ich es Ihnen einmal 10 Minuten zeigen? Gern bei Ihnen in Kirchheimbolanden
-oder am Telefon — ich richte mich nach Ihrer Zeit.
+Es soll Ihre Beratung nicht ersetzen, sondern dafür sorgen, dass Menschen vorbereitet
+zu Ihnen kommen.
+
+Eine Korrektur zu meiner Juli-Mail: Es wird kein Abo geben. Zwei Briefe sind gratis,
+danach gibt es kleine Pakete ab 2,99 €, weil die KI pro Brief Geld kostet. Für
+Beratungsstellen möchte ich eine eigene, deutlich günstigere Lösung anbieten, bei der
+die Ratsuchenden selbst nichts bezahlen. Ums große Geld geht es mir dabei nicht. Wie
+das für Sie aussehen könnte, würde ich gern gemeinsam mit Ihnen überlegen.
+
+Dürfte ich es Ihnen 10 Minuten zeigen, gern bei Ihnen in Kirchheimbolanden oder am
+Telefon? Mich interessiert vor allem Ihre ehrliche Einschätzung, solange die App noch
+entsteht: Was würde Ihren Ratsuchenden wirklich helfen, und was fehlt noch?
 
 Mit freundlichen Grüßen
 Justin Klein
-Webklar GbR · Winnweiler · behoerdenbriefhelfer@gmail.com
+Webklar GbR · Winnweiler
+Tel. 0170 4969375
+justin@webklar.com
 
 ---
 
@@ -92,35 +112,136 @@ Webklar GbR · Winnweiler · behoerdenbriefhelfer@gmail.com
 
 ## Mail 3 — Caritas Kaiserslautern *(Erstmail)*
 
+**Von:** justin@webklar.com *(direkt aus dem Webklar-Postfach senden)*
 **An:** Migration.Kaiserslautern@caritas-speyer.de
-**Betreff:** Behördenbriefe in 27 Sprachen erklärt — 10 Minuten für Ihre Einschätzung?
+**Betreff:** Behördenbriefe in 27 Sprachen erklärt – als Ergänzung zu Ihrer Beratung
+
+> Aufbau wie Mail 4 (DRK). Kein mbeon-Absatz, weil unbekannt ist, ob Caritas es nutzt.
+> Steht auf caritas.de oder der Zentrum-Seite ein Name der Leitung: Anrede
+> persönlich machen („Sehr geehrte Frau …") — wirkt deutlich besser als „Team".
 
 Sehr geehrtes Team der Migrationsberatung,
 
-mein Name ist Justin Klein, ich komme aus Winnweiler. Ich habe BehördenKlar
-entwickelt: eine Webseite, die Behördenbriefe in einfacher Sprache erklärt — auf
-Wunsch in einer von 27 Sprachen, darunter Arabisch, Farsi/Dari, Paschtu, Kurdisch,
-Tigrinya, Somali und Ukrainisch.
+mein Name ist Justin Klein, ich komme aus Winnweiler. Schwierige Briefe vom Amt kenne
+ich von klein auf: Meine Mutter ist selbst nach Deutschland gekommen, und solche
+Briefe gehörten bei uns zum Alltag. Ich weiß, wie viel Sorge ein Brief machen kann,
+den man nicht versteht.
 
-Sie funktioniert direkt im Browser, auf jedem Handy, ohne App und ohne Konto:
-**https://behoerdenklar.de/demo**
+Deshalb arbeite ich an BehördenKlar: einer App, die Behördenbriefe in einfacher
+Sprache erklärt, auf Wunsch in einer von 27 Sprachen, darunter Arabisch,
+Farsi, Paschtu, Kurdisch, Tigrinya, Türkisch und Ukrainisch.
 
-- Brief fotografieren → Erklärung in der eigenen Sprache. Die **deutschen
-  Fachbegriffe bleiben sichtbar**, damit man sie im Brief wiederfindet.
-- **Frist und Termin mit einem Tipp in den Handy-Kalender**, mit Erinnerung vorher.
-- **Anruf-Hilfe:** Telefonnummer und Aktenzeichen aus dem Brief und ein Spickzettel
-  für das Telefonat — jeder Satz auf Deutsch, darunter die Bedeutung in der eigenen
-  Sprache.
+Ich habe mir dabei viele Gedanken gemacht, was den Menschen, die zu Ihnen kommen,
+wirklich hilft:
 
-Es ersetzt Ihre Beratung nicht. Es soll helfen, dass Ihre Klientinnen und Klienten
-vorbereitet zu Ihnen kommen und zwischen den Terminen keine Frist verpassen.
+- Es braucht kein Konto, damit niemand schon an einer Anmeldung scheitert, und die
+  Browser-Version auch keine Installation.
+- Die deutschen Fachbegriffe bleiben sichtbar, damit man sie im Brief wiederfindet
+  und gezielt nachfragen kann.
+- Fristen und Termine kommen mit einem Tipp in den Handy-Kalender, damit keine Frist
+  untergeht.
+- Für Anrufe beim Amt gibt es einen Spickzettel: jeder Satz auf Deutsch, darunter die
+  Bedeutung in der eigenen Sprache.
+- Unter jeder Erklärung steht der Hinweis, dass bei wichtigen Entscheidungen eine
+  Beratungsstelle hilft.
+- Die Briefe werden nicht dauerhaft gespeichert.
+
+Die App ist noch in Arbeit, aber die Browser-Version können Sie schon jetzt direkt
+selbst ausprobieren: https://behoerdenklar.de/demo
+
+BehördenKlar soll Ihre Beratung nicht ersetzen, sondern davor ansetzen: Wer einen
+Brief bekommt, versteht sofort, worum es geht und ob es eilt, auch abends oder am
+Wochenende. Mit den wichtigen Fragen kommt man dann vorbereitet zu Ihnen und
+verpasst zwischen den Terminen keine Frist.
+
+Ums große Geld geht es mir dabei nicht, aber die KI, die die Briefe erklärt, kostet
+mich pro Brief Geld. Deshalb ist die Browser-Version für Privatleute nicht ganz kostenlos: Zwei
+Briefe sind gratis, danach gibt es kleine Pakete ab 2,99 €. Für Beratungsstellen
+möchte ich eine eigene, deutlich günstigere Lösung anbieten, bei der die Ratsuchenden
+selbst nichts bezahlen. Wie das für Sie aussehen könnte, würde ich gern gemeinsam mit
+Ihnen überlegen.
 
 Dürfte ich es Ihnen 10 Minuten zeigen, gern bei Ihnen in der Engelsgasse oder am
-Telefon? Ich richte mich nach Ihrer Zeit.
+Telefon? Mich interessiert vor allem Ihre ehrliche Einschätzung, solange die App noch
+entsteht: Was würde Ihren Ratsuchenden wirklich helfen, und was fehlt noch?
 
 Mit freundlichen Grüßen
 Justin Klein
-Webklar GbR · Winnweiler · behoerdenbriefhelfer@gmail.com
+Webklar GbR · Winnweiler
+Tel. 0170 4969375
+justin@webklar.com
+
+---
+
+## Mail 4 — DRK Kaiserslautern-Stadt *(Erstmail, persönlich an die Leitung)*
+
+**Von:** justin@webklar.com *(direkt aus dem Webklar-Postfach senden, nicht über
+Gmail „Senden als" — webklar.com hat DMARC `p=quarantine`, sonst droht Spam-Ordner)*
+**An:** b.steinmann@kv-kls.drk.de
+**Betreff:** Behördenbriefe in 27 Sprachen erklärt – als Ergänzung zu mbeon
+
+> Hintergrund: Das DRK KL berät schon über **mbeon** (Online-Beratung der MBE, für
+> Ratsuchende kostenlos). Deshalb als *Ergänzung* positionieren, nie als Konkurrenz.
+> Ton: helfend, persönlich (Mutter), Gedanken zeigen statt behaupten (jeder Punkt
+> mit „damit …"). „Ums große Geld geht es mir nicht" nur EINMAL — öfter wirkt es wie
+> das Gegenteil. Preise: Webseite = Privatleute, Beratungsstellen deutlich günstiger,
+> Ratsuchende zahlen nichts, KEINE Zahlen (siehe „Preise für Beratungsstellen").
+> Alle Funktions-Aussagen am 30.09. gegen demo.html + Demo-Prompt geprüft.
+> KI + Datenschutz MÜSSEN in der Mail stehen (kurz, Details erst im Gespräch): Die Demo-Seite nennt vor dem Hochladen
+> „KI-Dienst Anthropic (USA)" — fehlt das in der Mail, wirkt es verschwiegen.
+> Fragt sie „Was kostet Sie ein Brief?": ehrlich antworten (ein paar Cent KI +
+> Zahlungsgebühren + Server + Arbeitszeit), nicht ausweichen.
+
+Sehr geehrte Frau Steinmann,
+
+mein Name ist Justin Klein, ich komme aus Winnweiler. Schwierige Briefe vom Amt kenne
+ich von klein auf: Meine Mutter ist selbst nach Deutschland gekommen, und solche
+Briefe gehörten bei uns zum Alltag. Ich weiß, wie viel Sorge ein Brief machen kann,
+den man nicht versteht.
+
+Deshalb arbeite ich an BehördenKlar: einer App, die Behördenbriefe in einfacher
+Sprache erklärt, auf Wunsch in einer von 27 Sprachen, darunter Arabisch,
+Farsi, Paschtu, Kurdisch, Tigrinya, Türkisch und Ukrainisch.
+
+Ich habe mir dabei viele Gedanken gemacht, was den Menschen, die zu Ihnen kommen,
+wirklich hilft:
+
+- Es braucht kein Konto, damit niemand schon an einer Anmeldung scheitert, und die
+  Browser-Version auch keine Installation.
+- Die deutschen Fachbegriffe bleiben sichtbar, damit man sie im Brief wiederfindet
+  und gezielt nachfragen kann.
+- Fristen und Termine kommen mit einem Tipp in den Handy-Kalender, damit keine Frist
+  untergeht.
+- Für Anrufe beim Amt gibt es einen Spickzettel: jeder Satz auf Deutsch, darunter die
+  Bedeutung in der eigenen Sprache.
+- Unter jeder Erklärung steht der Hinweis, dass bei wichtigen Entscheidungen eine
+  Beratungsstelle hilft.
+- Die Briefe werden nicht dauerhaft gespeichert.
+
+Die App ist noch in Arbeit, aber die Browser-Version können Sie schon jetzt direkt
+selbst ausprobieren: https://behoerdenklar.de/demo
+
+Ich habe gesehen, dass Sie auch über mbeon beraten. BehördenKlar soll das nicht
+ersetzen, sondern davor ansetzen: Wer einen Brief bekommt, versteht sofort, worum es
+geht und ob es eilt, auch abends oder am Wochenende. Mit den wirklich wichtigen
+Fragen kommt man dann vorbereitet zu Ihnen, persönlich oder über mbeon.
+
+Ums große Geld geht es mir dabei nicht, aber die KI, die die Briefe erklärt, kostet
+mich pro Brief Geld.
+Deshalb ist die Browser-Version für Privatleute nicht ganz kostenlos: Zwei Briefe sind gratis,
+danach gibt es kleine Pakete ab 2,99 €. Für Beratungsstellen möchte ich eine eigene,
+deutlich günstigere Lösung anbieten, bei der die Ratsuchenden selbst nichts bezahlen.
+Wie das für Sie aussehen könnte, würde ich gern gemeinsam mit Ihnen überlegen.
+
+Dürfte ich es Ihnen 10 Minuten zeigen, gern bei Ihnen in der Barbarossastraße oder am
+Telefon? Mich interessiert vor allem Ihre ehrliche Einschätzung, solange die App noch
+entsteht: Was würde Ihren Ratsuchenden wirklich helfen, und was fehlt noch?
+
+Mit freundlichen Grüßen
+Justin Klein
+Webklar GbR · Winnweiler
+Tel. 0170 4969375
+justin@webklar.com
 
 ---
 
@@ -164,9 +285,10 @@ fehlt noch" ist für dich schon ein Erfolg.
 > erfinden wir nicht: Steht nichts im Brief, sagen wir das.
 
 **„Was kostet das für unsere Klienten?"**
-> Zwei Briefe sind kostenlos. Danach 2,99 € für fünf Briefe oder 6,99 € für
-> fünfzehn — kein Abo. Wenn Sie eine Idee haben, wie das für Ihre Einrichtung
-> einfacher geht, bin ich offen dafür.
+> Für Privatleute: zwei Briefe kostenlos, danach 2,99 € für fünf oder 6,99 € für
+> fünfzehn — kein Abo. Für Beratungsstellen soll es anders laufen: Die Einrichtung
+> bekommt ein Briefkontingent zu einem deutlich günstigeren Preis, und die
+> Ratsuchenden zahlen gar nichts. *(Zahlen: siehe „Preise für Beratungsstellen".)*
 
 **„Ersetzt das unsere Beratung?"**
 > Nein. Bei rechtlich wichtigen Entscheidungen verweisen wir ausdrücklich auf
@@ -187,6 +309,27 @@ fehlt noch" ist für dich schon ein Erfolg.
 4. Darf ich Ihre Stelle auf meiner Seite als Beratungsstelle nennen?
    *(Und umgekehrt: Würden Sie auf BehördenKlar verlinken? — Das hilft enorm bei Google.)*
 
-**Nicht in die Mail, erst im Gespräch:** die Idee eines Guthabens, das die
-Einrichtung für ihre Klienten bereitstellt. Das gibt es technisch noch nicht —
-also nichts versprechen, nur fragen, ob das interessant wäre.
+---
+
+## Preise für Beratungsstellen — nur im Gespräch, nie in die Mail *(Vorschlag 30.09.)*
+
+**Grundidee:** Die Einrichtung bezahlt, die Ratsuchenden zahlen nichts. Die
+Einrichtung kauft vorher ein **Briefkontingent** — jeder Brief ist bezahlt, bevor er
+genutzt wird. Mehr Nutzer heißt mehr Einnahmen, nie mehr Verlust.
+
+| | Preis | pro Brief |
+|---|---|---|
+| Deine Kosten (eigene Rechnung ~2,5 ct, mit Puffer für fremde Sprachen) | — | ~5 ct |
+| Privatleute (Webseite) | 2,99 € für 5 · 6,99 € für 15 | 47–60 ct |
+| **Test** für eine Beratungsstelle, 3 Monate | bis 100 Briefe gratis | kostet dich max. ~5 € |
+| **Kleines Paket** | 100 Briefe · 20 € | 20 ct |
+| **Großes Paket** | 500 Briefe · 75 € | 15 ct |
+| **Untergrenze beim Verhandeln** | — | 10 ct |
+
+- **Nie „unbegrenzt"** anbieten — immer eine feste Briefzahl. Wenn sie „Lizenz"
+  sagen: „Jahreslizenz mit X Briefen" ist dasselbe.
+- **Keine Mehrwertsteuer** (Kleinunternehmer §19) — der Preis ist der Endpreis.
+- Echte Kosten einmal in der Anthropic-Konsole unter „Usage" nachsehen, dann ist
+  die Untergrenze sicher.
+- Den **Einrichtungs-Code gibt es technisch noch nicht** — nichts mit Datum
+  versprechen. Bauen, sobald eine Stelle ernsthaft Ja sagt.
