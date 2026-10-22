@@ -208,6 +208,25 @@
       background: linear-gradient(104deg, transparent 1%, var(--marker) 3%, var(--marker) 97%, transparent 99%);
       font-size: 16px;
     }
+    /* Handy <-> PC */
+    .cta-zwei { background: #fff; color: var(--amtsblau); font-size: 16.5px; padding: 13px 20px; margin-top: 12px; }
+    .verbunden {
+      display: none; margin-bottom: 16px; padding: 12px 16px;
+      background: #eaf1fa; border: 2px solid var(--amtsblau); font-size: 16px;
+    }
+    .qr-box { display: none; margin-top: 16px; padding: 18px; background: #fff; border: 2px dashed var(--amtsblau); text-align: center; }
+    .qr-box .qr { width: 220px; height: 220px; margin: 10px auto; }
+    .qr-box .qr svg { width: 100%; height: 100%; display: block; }
+    .qr-box ol { text-align: start; margin: 8px auto 0; max-width: 420px; padding-inline-start: 22px; font-size: 15.5px; }
+    .qr-box .zustand { margin-top: 12px; font-weight: 700; font-size: 16.5px; }
+    .qr-box .abbrechen { margin-top: 10px; background: none; border: none; color: var(--grau); text-decoration: underline; font-family: inherit; font-size: 14.5px; cursor: pointer; }
+    .umschalter { display: none; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+    .umschalter button {
+      font-family: inherit; font-size: 15px; padding: 6px 14px; cursor: pointer;
+      border: 1.5px solid var(--tinte); background: #fff; color: var(--tinte);
+    }
+    .umschalter button[aria-pressed="true"] { background: var(--tinte); color: var(--papier); }
+    .link-knopf { background: none; border: none; color: var(--amtsblau); font-family: inherit; font-size: inherit; text-decoration: underline; cursor: pointer; padding: 0; }
     footer { margin-top: 48px; font-size: 14.5px; color: var(--grau); }
     footer a { color: var(--grau); }
   </style>
@@ -264,13 +283,21 @@
       <div class="antrag">
         <p class="formular-kopf">Antrag auf Klartext · 2 Gratis-Analysen</p>
 
+        <p class="verbunden" id="verbundenBanner"></p>
+
         <div id="eingabe">
           <p id="kaufOk" style="display: none; background: #e7f4ea; border: 1px solid #b7dfc1; color: #1a7f37; padding: 12px 14px; border-radius: 8px; margin-bottom: 14px; font-weight: 600;">
             ✅ Kauf erfolgreich! Ihr Guthaben wurde aktiviert.
           </p>
           <p id="guthabenBanner" class="bonus-zeile" style="display: none;">
-            💳 Ihr Guthaben: <strong id="guthabenZahl">0</strong> Analysen — laden Sie den nächsten Brief hoch.
+            <span id="guthabenText">💳 Ihr Guthaben:</span> <strong id="guthabenZahl">0</strong> Analysen — laden Sie den nächsten Brief hoch.
+            <br><button type="button" class="link-knopf" id="guthabenHandyKnopf" style="font-size: 14.5px;">📱 Auch auf dem Handy nutzen</button>
           </p>
+          <div class="qr-box" id="guthabenQrBox">
+            <strong>Guthaben aufs Handy holen</strong>
+            <div class="qr" id="guthabenQr"></div>
+            <p class="klein" style="margin-top: 0;">Mit der Handy-Kamera scannen. Danach können Sie Briefe auch direkt am Handy erklären lassen.</p>
+          </div>
           <p style="margin-bottom: 14px; font-size: 15.5px;">
             🌐 <label for="sprachWahl">Erklärung in dieser Sprache:</label>
             <select id="sprachWahl" style="font-family: inherit; font-size: 15.5px; padding: 5px 8px; border: 1.5px solid var(--tinte); background: #fff; margin-inline-start: 6px;"></select>
@@ -303,8 +330,31 @@
 
           <input type="file" id="datei" accept="image/jpeg,image/png,application/pdf" style="display: none;">
           <button class="cta" id="startKnopf" disabled>📷 Brief auswählen &amp; erklären lassen</button>
+          <button class="cta cta-zwei" id="handyKnopf" type="button" style="display: none;">📱 Lieber mit dem Handy fotografieren</button>
+          <div class="qr-box" id="handyBox">
+            <strong>Mit dem Handy fotografieren</strong>
+            <div class="qr" id="handyQr"></div>
+            <ol>
+              <li>Handy-Kamera auf den Code richten und den Link öffnen.</li>
+              <li>Am Handy den Brief fotografieren.</li>
+              <li>Die Erklärung erscheint hier <em>und</em> auf dem Handy.</li>
+            </ol>
+            <label class="konsens" id="handyDeutschZeile" style="justify-content: center; margin: 14px 0 0;">
+              <input type="checkbox" id="handyDeutsch" checked>
+              <span>Hier am Bildschirm auf Deutsch zeigen, am Handy in der gewählten Sprache</span>
+            </label>
+            <p class="zustand" id="handyZustand">⏳ Warte auf das Handy …</p>
+            <p class="klein" style="margin-top: 6px;">Verschlüsselt: Den Schlüssel kennt nur dieser QR-Code. Der Code gilt 15 Minuten.</p>
+            <button type="button" class="abbrechen" id="handyAbbrechen">Abbrechen</button>
+          </div>
 
           <div class="cf-turnstile" data-sitekey="0x4AAAAAAESi2p41B915R4hW" data-action="turnstile-spin-v1" style="margin-top: 14px;"></div>
+          <script>
+            // Lokaler Test (wrangler dev): offizieller Turnstile-Testschlüssel, der immer durchlässt
+            if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
+              document.querySelector('.cf-turnstile').setAttribute('data-sitekey', '1x00000000000000000000AA');
+            }
+          </script>
 
           <p class="klein">
             Geht mit Foto (JPG/PNG) oder PDF, max. 5 MB. Tipp: gutes Licht,
@@ -318,6 +368,13 @@
             Ihrem Handy, nicht von uns:</strong> Diese Seite greift weder auf
             Kamera noch auf Mikrofon zu.
           </p>
+
+          <details id="codeTeil" style="margin-top: 14px; border-top: 1px solid rgba(33, 33, 29, 0.2);">
+            <summary>🤝 Sie haben einen Code von einer Beratungsstelle?</summary>
+            <p>Dann ist BehördenKlar für Sie kostenlos. Geben Sie den Code hier ein:</p>
+            <input class="wl-input" id="codeFeld" placeholder="z. B. MBE-K7QX" autocapitalize="characters" autocomplete="off" spellcheck="false" style="margin-top: 10px; text-transform: uppercase;">
+            <button class="cta" id="codeKnopf" type="button">Code einlösen</button>
+          </details>
         </div>
 
         <div class="status" id="status">
@@ -377,6 +434,7 @@
 
     <section id="ergebnis">
       <h2><span class="nr">§ 3</span> Ihr Brief in Klartext</h2>
+      <div class="umschalter" id="sprachUmschalter" role="group" aria-label="Sprache der Erklärung"></div>
 
       <div class="brief-karte">
         <span class="karten-label neutral" id="ergBrieftyp">Brief</span>
@@ -413,6 +471,15 @@
       <div class="brief-karte" id="ergBegriffeKarte" style="display: none;">
         <span class="karten-label neutral">Schwere Wörter erklärt</span>
         <div id="ergBegriffe"></div>
+      </div>
+
+      <div id="mitnehmenTeil" style="display: none; margin-top: 22px;">
+        <button class="cta cta-zwei" id="mitnehmenKnopf" type="button">📱 Ergebnis aufs Handy mitnehmen</button>
+        <div class="qr-box" id="mitnehmenBox">
+          <strong>Ergebnis aufs Handy</strong>
+          <div class="qr" id="mitnehmenQr"></div>
+          <p class="klein" style="margin-top: 0;">Mit der Handy-Kamera scannen. Dort gibt es den Kalender-Eintrag und die Anruf-Hilfe. Verschlüsselt, der Code gilt 15 Minuten.</p>
+        </div>
       </div>
 
       <p class="hinweis-recht">
@@ -465,10 +532,14 @@
   </div>
 
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <script src="qrcode.js"></script>
+  <script src="uebergabe.js"></script>
   <script>
   (function () {
     'use strict';
-    var BASIS = 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
+    var BASIS = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+      ? 'http://localhost:8799' // lokaler Test mit `wrangler dev`
+      : 'https://behoerdenklar-proxy.behoerdenbrief.workers.dev';
     var ENDPUNKT = BASIS + '/demo';
     var KAUFEN_ENDPUNKT = BASIS + '/kaufen';
     var STATUS_ENDPUNKT = BASIS + '/kauf-status';
@@ -508,6 +579,10 @@
     var werbung = document.getElementById('werbung');
     var guthabenBanner = document.getElementById('guthabenBanner');
     var guthabenZahl = document.getElementById('guthabenZahl');
+    var guthabenText = document.getElementById('guthabenText');
+    var codeTeil = document.getElementById('codeTeil');
+    var codeFeld = document.getElementById('codeFeld');
+    var codeKnopf = document.getElementById('codeKnopf');
     var kaufOk = document.getElementById('kaufOk');
     var paketListe = document.getElementById('paketListe');
     var kaufKonsens = document.getElementById('kaufKonsens');
@@ -521,6 +596,32 @@
     function guthaben() { return parseInt(localStorage.getItem(GUTHABEN_SCHLUESSEL) || '0', 10); }
     function setzeGuthaben(n) { localStorage.setItem(GUTHABEN_SCHLUESSEL, String(Math.max(0, n | 0))); }
     function hatGuthaben() { return !!walletToken() && guthaben() > 0; }
+    // Einrichtungs-Code: Name der Beratungsstelle, über die das Guthaben läuft
+    var EINRICHTUNG_SCHLUESSEL = 'bk_einrichtung';
+    function einrichtung() { return localStorage.getItem(EINRICHTUNG_SCHLUESSEL) || ''; }
+    function setzeEinrichtung(name) {
+      if (name) localStorage.setItem(EINRICHTUNG_SCHLUESSEL, name);
+      else localStorage.removeItem(EINRICHTUNG_SCHLUESSEL);
+    }
+    // Handy ↔ PC: Ist dieses Gerät gerade das Handy, das für einen PC
+    // fotografiert? Ein Guthaben aus dem QR-Code (w) gilt nur für diese
+    // Sitzung und wird hier NICHT gespeichert.
+    var handyModus = null;
+    var leseModus = false; // Ergebnis vom PC übernommen, nur anzeigen
+    var istPc = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    function walletFuerAnalyse() {
+      if (handyModus && handyModus.w) return handyModus.w;
+      return hatGuthaben() ? walletToken() : '';
+    }
+    function meldeAnPc(daten, fach) {
+      if (!handyModus) return Promise.resolve();
+      return BKUebergabe.senden(handyModus.ue, fach || 'status', daten).catch(function () {});
+    }
+    function zeigeGuthabenBanner(n) {
+      guthabenText.textContent = einrichtung() ? '🤝 Kostenlos über ' + einrichtung() + ':' : '💳 Ihr Guthaben:';
+      guthabenZahl.textContent = n;
+      guthabenBanner.style.display = 'block';
+    }
 
     // Schlüsselname bewusst 'v2': setzt evtl. falsch gezählte Stände (aus der
     // Testphase) bei bestehenden Besuchern automatisch einmalig zurück.
@@ -529,17 +630,27 @@
     function setzeBenutzt(n) { localStorage.setItem(SPEICHER_SCHLUESSEL, String(n)); }
 
     function zeigeStand() {
-      // Bezahlter Modus: Eingabe offen, Guthaben-Stand zeigen, Gratis-Sperre egal
-      if (hatGuthaben()) {
+      if (handyModus && handyModus.w) {
         eingabe.style.display = 'block';
-        guthabenBanner.style.display = 'block';
-        guthabenZahl.textContent = guthaben();
+        guthabenBanner.style.display = 'none';
         emailTeil.style.display = 'none';
         fehlerBox.style.display = 'none';
         kaufBlock.style.display = 'none';
+        codeTeil.style.display = 'none';
+        return;
+      }
+      // Bezahlter Modus: Eingabe offen, Guthaben-Stand zeigen, Gratis-Sperre egal
+      if (hatGuthaben()) {
+        eingabe.style.display = 'block';
+        zeigeGuthabenBanner(guthaben());
+        emailTeil.style.display = 'none';
+        fehlerBox.style.display = 'none';
+        kaufBlock.style.display = 'none';
+        codeTeil.style.display = 'none';
         return;
       }
       guthabenBanner.style.display = 'none';
+      codeTeil.style.display = 'block';
       // Kauf ist IMMER möglich — auch sofort, ohne die Gratis-Analysen zu nutzen.
       kaufBlock.style.display = 'block';
       // 2. Versuch: E-Mail-Feld einblenden; alles verbraucht: Gratis-Weg sperren
@@ -556,7 +667,7 @@
     konsens.addEventListener('change', function () { startKnopf.disabled = !konsens.checked; });
     startKnopf.addEventListener('click', function () {
       fehlerBox.style.display = 'none';
-      if (!hatGuthaben() && benutzt() >= 1 && !emailFeld.value.trim()) {
+      if (!walletFuerAnalyse() && benutzt() >= 1 && !emailFeld.value.trim()) {
         emailTeil.style.display = 'block';
         emailFeld.focus();
         zeigeFehler('Bitte geben Sie zuerst Ihre E-Mail-Adresse ein — dann wählen Sie den Brief aus.');
@@ -625,7 +736,8 @@
       try {
         var istPdf = datei.type === 'application/pdf';
         var base64 = istPdf ? await pdfAlsBase64(datei) : await bildVerkleinern(datei);
-        var bezahlt = hatGuthaben();
+        var wallet = walletFuerAnalyse();
+        var bezahlt = !!wallet;
         var body = {
           bild: base64,
           mimeType: istPdf ? 'application/pdf' : 'image/jpeg',
@@ -633,8 +745,10 @@
         };
         var email = emailFeld.value.trim();
         body.zielsprache = zielsprache();
-        if (bezahlt) body.walletToken = walletToken();
+        if (bezahlt) body.walletToken = wallet;
         else if (benutzt() >= 1 && email) body.email = email;
+        if (handyModus && handyModus.d) body.auchDeutsch = true;
+        meldeAnPc({ schritt: 'analyse' });
 
         var antwort = await fetch(ENDPUNKT, {
           method: 'POST',
@@ -647,6 +761,12 @@
           status.style.display = 'none';
           eingabe.style.display = 'block';
           if (window.turnstile) window.turnstile.reset();
+          meldeAnPc({ schritt: 'fehler', meldung: daten.meldung || '' });
+          // Guthaben vom PC: Fehler nur anzeigen, am Handy nichts umstellen
+          if (handyModus && handyModus.w) {
+            zeigeFehler(daten.meldung || 'Etwas ist schiefgelaufen. Bitte erneut versuchen.');
+            return;
+          }
           if (daten.code === 'email_noetig') {
             // Nur das E-Mail-Feld zeigen — NICHT als verbraucht markieren.
             // (Sonst würde ein serverseitiges "E-Mail nötig", z. B. bei
@@ -658,6 +778,14 @@
           if (daten.code === 'aufgebraucht') {
             setzeBenutzt(2);
             zeigeStand();
+            return;
+          }
+          if (daten.code === 'kontingent_leer' || daten.code === 'kontingent_abgelaufen') {
+            setzeWallet('');
+            setzeGuthaben(0);
+            setzeEinrichtung(null);
+            zeigeStand();
+            zeigeFehler(daten.meldung);
             return;
           }
           if (daten.code === 'kein_guthaben') {
@@ -674,15 +802,29 @@
         // Token erneuern — sonst würde die nächste Analyse ein "Seite neu laden" verlangen
         if (window.turnstile) window.turnstile.reset();
 
+        // Handy fotografiert für den PC: Ergebnis verschlüsselt hinüberschicken
+        await meldeAnPc({
+          analyse: daten.analyse, analyse_de: daten.analyse_de, sprache: daten.sprache,
+          guthaben: daten.guthaben, einrichtung: daten.einrichtung,
+        }, 'ergebnis');
+        var analyse = bereiteVersionen(daten, false);
+
+        if (handyModus && handyModus.w) {
+          zeigeAnalyse(analyse);
+          eingabe.style.display = 'block';
+          document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+
         if (daten.versuch === 'bezahlt' || typeof daten.guthaben === 'number') {
           setzeGuthaben(daten.guthaben);
-          zeigeErgebnis(daten.analyse, null, daten.guthaben);
+          zeigeErgebnis(analyse, null, daten.guthaben);
           return;
         }
 
         setzeBenutzt(Math.max(benutzt(), daten.versuch));
         if (email) document.getElementById('wlEmail').value = email;
-        zeigeErgebnis(daten.analyse, daten.versuch);
+        zeigeErgebnis(analyse, daten.versuch);
       } catch (e) {
         status.style.display = 'none';
         eingabe.style.display = 'block';
@@ -708,7 +850,33 @@
       return { farbe: farbe, text: punkt + ' ' + text };
     }
 
-    function zeigeErgebnis(analyse, versuch, guthabenRest) {
+    // Eine Analyse kann in zwei Sprachen vorliegen (PC Deutsch, Handy Muttersprache).
+    var versionen = [];
+    var aktiveVersion = 0;
+    var letzteDaten = null; // { analyse, analyse_de, sprache } — für „Mitnehmen"
+    function bereiteVersionen(d, deutschZuerst) {
+      letzteDaten = { analyse: d.analyse, analyse_de: d.analyse_de, sprache: d.sprache || 'de' };
+      versionen = [{ code: letzteDaten.sprache, analyse: d.analyse }];
+      if (d.analyse_de) versionen[deutschZuerst ? 'unshift' : 'push']({ code: 'de', analyse: d.analyse_de });
+      aktiveVersion = 0;
+      return versionen[0].analyse;
+    }
+    function zeichneUmschalter() {
+      var box = document.getElementById('sprachUmschalter');
+      box.innerHTML = '';
+      box.style.display = versionen.length > 1 ? 'flex' : 'none';
+      versionen.forEach(function (v, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = SPRACH_NAMEN[v.code] || v.code;
+        b.setAttribute('aria-pressed', i === aktiveVersion ? 'true' : 'false');
+        b.addEventListener('click', function () { aktiveVersion = i; zeigeAnalyse(v.analyse); });
+        box.appendChild(b);
+      });
+    }
+
+    /** Nur die Anzeige einer Analyse — ohne Guthaben/Gratis-Ablauf. */
+    function zeigeAnalyse(analyse) {
       status.style.display = 'none';
       // Optionale Karten zuruecksetzen. Sonst bleibt beim zweiten Brief z. B.
       // die Checkliste des ERSTEN Briefs stehen — zwei Briefe vermischt.
@@ -751,8 +919,15 @@
 
       zeigeKalender(analyse);
       zeigeAnruf(analyse);
+      zeichneUmschalter();
+      document.getElementById('mitnehmenTeil').style.display = istPc && !handyModus && !leseModus ? 'block' : 'none';
+      document.getElementById('mitnehmenBox').style.display = 'none';
 
       document.getElementById('ergebnis').style.display = 'block';
+    }
+
+    function zeigeErgebnis(analyse, versuch, guthabenRest) {
+      zeigeAnalyse(analyse);
 
       // Bezahlter Modus: Guthaben-Stand zeigen, Eingabe für den nächsten Brief öffnen
       if (typeof guthabenRest === 'number') {
@@ -760,8 +935,7 @@
         kaufOk.style.display = 'none';
         if (guthabenRest > 0) {
           eingabe.style.display = 'block';
-          guthabenBanner.style.display = 'block';
-          guthabenZahl.textContent = guthabenRest;
+          zeigeGuthabenBanner(guthabenRest);
           emailTeil.style.display = 'none';
           kaufBlock.style.display = 'none';
         } else {
@@ -1039,6 +1213,7 @@
           if (res.ok && res.d && res.d.token) {
             setzeWallet(res.d.token);
             setzeGuthaben(res.d.guthaben);
+            setzeEinrichtung(null);
             status.style.display = 'none';
             kaufOk.style.display = 'block';
             zeigeStand();
@@ -1055,10 +1230,241 @@
         });
     }
 
+    // ---- Einrichtungs-Code einlösen ------------------------------------
+    function loeseCodeEin(code) {
+      code = String(code || '').trim().toUpperCase();
+      if (!code) { codeFeld.focus(); return; }
+      if (walletToken() && guthaben() > 0 && !einrichtung() &&
+          !window.confirm('Sie haben noch gekauftes Guthaben. Wenn Sie den Code einlösen, nutzt diese Seite den Code. Ihr gekauftes Guthaben bleibt über den Link in Ihrer Kauf-E-Mail erhalten. Weiter?')) {
+        return;
+      }
+      codeKnopf.disabled = true;
+      fehlerBox.style.display = 'none';
+      fetch(BASIS + '/code', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ code: code }),
+      })
+        .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+        .then(function (res) {
+          codeKnopf.disabled = false;
+          if (!res.ok || !res.d.token) {
+            codeTeil.open = true;
+            codeFeld.value = code;
+            zeigeFehler(res.d.meldung || 'Der Code konnte nicht eingelöst werden.');
+            return;
+          }
+          setzeWallet(res.d.token);
+          setzeGuthaben(res.d.guthaben);
+          setzeEinrichtung(res.d.einrichtung);
+          zeigeStand();
+          if (res.d.guthaben <= 0) {
+            zeigeFehler('Die Analysen von ' + res.d.einrichtung + ' sind aufgebraucht. Bitte fragen Sie dort nach.');
+            return;
+          }
+          kaufOk.textContent = '✅ Code eingelöst. BehördenKlar ist für Sie kostenlos, über ' + res.d.einrichtung + '.';
+          kaufOk.style.display = 'block';
+        })
+        .catch(function () {
+          codeKnopf.disabled = false;
+          zeigeFehler('Verbindung fehlgeschlagen. Bitte prüfen Sie Ihr Internet und versuchen Sie es erneut.');
+        });
+    }
+    codeKnopf.addEventListener('click', function () { loeseCodeEin(codeFeld.value); });
+    codeFeld.addEventListener('keydown', function (e) { if (e.key === 'Enter') loeseCodeEin(codeFeld.value); });
+
+    // ---- Handy ↔ PC ------------------------------------------------------
+    var verbundenBanner = document.getElementById('verbundenBanner');
+    var handyKnopf = document.getElementById('handyKnopf');
+    var handyBox = document.getElementById('handyBox');
+    var handyQr = document.getElementById('handyQr');
+    var handyZustand = document.getElementById('handyZustand');
+    var handyDeutsch = document.getElementById('handyDeutsch');
+    var handyDeutschZeile = document.getElementById('handyDeutschZeile');
+    var UEBERGABE_MS = BKUebergabe.LEBENSDAUER_MIN * 60 * 1000;
+
+    function zeigeQr(el, adresse) {
+      el.innerHTML = BKUebergabe.qrSvg(adresse);
+      el.setAttribute('data-link', adresse); // zum Testen ohne Kamera
+    }
+
+    // PC: QR-Code zeigen und warten, bis das Handy fotografiert hat
+    var pcWarten = null; // { ue, bis, timer }
+    var pruefeLaeuft = false;
+    function zeichneHandyQr() {
+      if (!pcWarten) return;
+      var sprache = zielsprache();
+      handyDeutschZeile.style.display = sprache === 'de' ? 'none' : 'flex';
+      zeigeQr(handyQr, BKUebergabe.adresse({
+        a: 'k', s: pcWarten.ue.id, k: pcWarten.ue.k, l: sprache,
+        d: sprache !== 'de' && handyDeutsch.checked ? '1' : '',
+        w: hatGuthaben() ? walletToken() : '',
+      }));
+    }
+    function stoppeWarten() {
+      if (pcWarten && pcWarten.timer) clearInterval(pcWarten.timer);
+      pcWarten = null;
+    }
+    function schliesseHandyBox() {
+      handyBox.style.display = 'none';
+      handyKnopf.style.display = istPc ? 'block' : 'none';
+    }
+    handyKnopf.addEventListener('click', async function () {
+      stoppeWarten();
+      fehlerBox.style.display = 'none';
+      try {
+        pcWarten = { ue: await BKUebergabe.neu(), bis: Date.now() + UEBERGABE_MS };
+      } catch (e) {
+        zeigeFehler('Dieser Browser kann die verschlüsselte Übergabe nicht. Bitte einen aktuellen Browser verwenden.');
+        return;
+      }
+      zeichneHandyQr();
+      handyZustand.textContent = '⏳ Warte auf das Handy …';
+      handyKnopf.style.display = 'none';
+      handyBox.style.display = 'block';
+      handyBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      pcWarten.timer = setInterval(pruefeHandy, 1500);
+    });
+    handyDeutsch.addEventListener('change', zeichneHandyQr);
+    document.getElementById('handyAbbrechen').addEventListener('click', function () {
+      if (pcWarten) BKUebergabe.loeschen(pcWarten.ue);
+      stoppeWarten();
+      schliesseHandyBox();
+    });
+
+    async function pruefeHandy() {
+      if (!pcWarten || pruefeLaeuft) return;
+      if (Date.now() > pcWarten.bis) {
+        stoppeWarten();
+        schliesseHandyBox();
+        zeigeFehler('Der QR-Code ist abgelaufen. Tippen Sie noch einmal auf „Lieber mit dem Handy fotografieren".');
+        return;
+      }
+      pruefeLaeuft = true;
+      try {
+        var ue = pcWarten.ue;
+        var f = await BKUebergabe.holen(ue);
+        if (!pcWarten || pcWarten.ue !== ue) return; // inzwischen abgebrochen
+        if (f.ergebnis) {
+          stoppeWarten();
+          BKUebergabe.loeschen(ue);
+          schliesseHandyBox();
+          zeigeVomHandy(f.ergebnis);
+        } else if (f.status) {
+          handyZustand.textContent =
+            f.status.schritt === 'analyse' ? '⏳ Das Handy hat fotografiert. Der Brief wird erklärt …' :
+            f.status.schritt === 'fehler' ? '⚠️ Am Handy hat es nicht geklappt: ' + (f.status.meldung || '') + ' Bitte dort noch einmal versuchen.' :
+            '✅ Handy verbunden. Jetzt am Handy den Brief fotografieren.';
+        }
+      } catch (e) {
+        // kurz keine Verbindung — beim nächsten Durchlauf erneut versuchen
+      } finally {
+        pruefeLaeuft = false;
+      }
+    }
+
+    function zeigeVomHandy(e) {
+      // Hat das Handy das Guthaben dieses PCs benutzt, den neuen Stand übernehmen
+      if (typeof e.guthaben === 'number' && hatGuthaben()) setzeGuthaben(e.guthaben);
+      zeigeAnalyse(bereiteVersionen(e, true));
+      werbung.style.display = 'none';
+      zeigeStand();
+      document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // PC: Ergebnis per QR-Code aufs Handy mitgeben
+    document.getElementById('mitnehmenKnopf').addEventListener('click', async function () {
+      var knopf = this;
+      if (!letzteDaten) return;
+      knopf.disabled = true;
+      try {
+        var ue = await BKUebergabe.neu();
+        await BKUebergabe.senden(ue, 'ergebnis', letzteDaten);
+        zeigeQr(document.getElementById('mitnehmenQr'), BKUebergabe.adresse({ a: 'm', s: ue.id, k: ue.k }));
+        document.getElementById('mitnehmenBox').style.display = 'block';
+      } catch (e) {
+        zeigeFehler('Das Ergebnis konnte nicht vorbereitet werden. Bitte prüfen Sie die Internetverbindung.');
+      }
+      knopf.disabled = false;
+    });
+
+    // PC: Guthaben bzw. Zugang der Beratungsstelle aufs Handy holen
+    document.getElementById('guthabenHandyKnopf').addEventListener('click', function () {
+      var box = document.getElementById('guthabenQrBox');
+      if (box.style.display === 'block') { box.style.display = 'none'; return; }
+      zeigeQr(document.getElementById('guthabenQr'), BKUebergabe.adresse({
+        a: 'g', w: walletToken(), n: guthaben(), e: einrichtung(),
+      }));
+      box.style.display = 'block';
+    });
+
+    /** Handy: Seite wurde über einen QR-Code vom PC geöffnet. */
+    async function pruefeUebergabe(h) {
+      if (!h || !h.a) return;
+      if (h.a === 'g') { uebernehmeGuthaben(h); return; }
+      var ue = await BKUebergabe.oeffne(h.s, h.k).catch(function () { return null; });
+      if (!ue) {
+        zeigeFehler('Dieser QR-Code ist ungültig. Bitte am Computer einen neuen erzeugen.');
+        return;
+      }
+
+      if (h.a === 'k') {
+        handyModus = { ue: ue, w: h.w || '', d: h.d === '1' };
+        if (h.l && SPRACH_NAMEN[h.l]) {
+          try { localStorage.setItem(SPRACH_SCHLUESSEL, h.l); } catch (e) {}
+          document.getElementById('sprachWahl').value = h.l;
+        }
+        verbundenBanner.textContent = '🔗 Mit dem Computer verbunden. Fotografieren Sie jetzt Ihren Brief. Die Erklärung erscheint hier und auf dem Bildschirm.';
+        verbundenBanner.style.display = 'block';
+        handyKnopf.style.display = 'none';
+        zeigeStand();
+        meldeAnPc({ schritt: 'verbunden' });
+        return;
+      }
+
+      if (h.a === 'm') {
+        leseModus = true;
+        eingabe.style.display = 'none';
+        kaufBlock.style.display = 'none';
+        status.querySelector('.gross').textContent = 'Das Ergebnis wird geladen …';
+        status.style.display = 'block';
+        var f = null;
+        try { f = await BKUebergabe.holen(ue); } catch (e) {}
+        status.style.display = 'none';
+        if (!f || !f.ergebnis) {
+          leseModus = false;
+          zeigeStand();
+          zeigeFehler('Dieser QR-Code ist abgelaufen oder wurde schon benutzt (er gilt ' + BKUebergabe.LEBENSDAUER_MIN + ' Minuten und nur einmal). Bitte am Computer einen neuen erzeugen.');
+          return;
+        }
+        BKUebergabe.loeschen(ue);
+        verbundenBanner.textContent = '📱 Vom Computer übernommen. Tragen Sie die Frist gleich in Ihren Kalender ein, dann vergessen Sie nichts.';
+        verbundenBanner.style.display = 'block';
+        zeigeAnalyse(bereiteVersionen(f.ergebnis, false));
+        document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function uebernehmeGuthaben(h) {
+      if (!h.w) return;
+      if (walletToken() && walletToken() !== h.w && guthaben() > 0 &&
+          !window.confirm('Auf diesem Handy ist schon Guthaben gespeichert. Durch das vom Computer ersetzen? Ihr bisheriges Guthaben bleibt über den Link in Ihrer Kauf-E-Mail erhalten.')) {
+        return;
+      }
+      setzeWallet(h.w);
+      setzeGuthaben(parseInt(h.n, 10) || 1);
+      setzeEinrichtung(h.e || null);
+      kaufOk.textContent = h.e ? '✅ Übernommen. BehördenKlar ist für Sie kostenlos, über ' + h.e + '.' : '✅ Guthaben übernommen.';
+      kaufOk.style.display = 'block';
+      zeigeStand();
+    }
+
     function pruefeRueckkehr() {
       var p = new URLSearchParams(window.location.search);
       var w = p.get('wallet');
-      if (w) { setzeWallet(w); setzeGuthaben(Math.max(guthaben(), 1)); reinigeUrl(); return; }
+      if (w) { setzeWallet(w); setzeGuthaben(Math.max(guthaben(), 1)); setzeEinrichtung(null); reinigeUrl(); return; }
+      var c = p.get('code');
+      if (c) { reinigeUrl(); loeseCodeEin(c); return; }
       var kauf = p.get('kauf');
       if (kauf === 'abbruch') {
         reinigeUrl();
@@ -1093,12 +1499,21 @@
       });
       feld.addEventListener('change', function () {
         try { localStorage.setItem(SPRACH_SCHLUESSEL, feld.value); } catch (e) {}
+        zeichneHandyQr();
       });
     })();
 
     rendrePakete();
+    var startHash = BKUebergabe.ausAdresse();
+    if (startHash && window.history.replaceState) {
+      // Schlüssel nicht im Browser-Verlauf stehen lassen
+      window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
+    }
     pruefeRueckkehr();
     zeigeStand();
+    handyKnopf.style.display = istPc ? 'block' : 'none';
+    document.getElementById('guthabenHandyKnopf').style.display = istPc ? '' : 'none';
+    pruefeUebergabe(startHash);
   })();
   </script>
   <!-- Cloudflare Web Analytics: cookielose Reichweitenmessung, keine Nutzer-Profile -->
