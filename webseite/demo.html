@@ -68,6 +68,17 @@
     }
     .mono { font-family: 'Courier New', ui-monospace, monospace; letter-spacing: 0.02em; }
     .wrap { max-width: 720px; margin: 0 auto; padding: 0 20px 72px; }
+    /* Schriften mit verbundenen Buchstaben (Arabisch, Devanagari …): kein
+       Buchstabenabstand und keine Schreibmaschine — sonst reißen Wörter auseinander */
+    html.verbundene-schrift .formular-kopf, html.verbundene-schrift .betreff-label,
+    html.verbundene-schrift h2, html.verbundene-schrift .karten-label {
+      font-family: inherit; letter-spacing: 0; text-transform: none;
+    }
+    @media (max-width: 420px) {
+      /* Cloudflare-Prüfung ist fest 300 px breit — sonst ragt sie aus dem Kasten */
+      .wrap { padding: 0 14px 56px; }
+      .antrag { padding: 22px 14px; }
+    }
 
     .briefkopf {
       display: flex; justify-content: space-between; align-items: baseline;
@@ -265,23 +276,23 @@
 
     <div class="briefkopf">
       <span class="absender"><a href="index.html">📬 BehördenKlar</a> <span style="font-weight:400;font-size:.62em;opacity:.6;letter-spacing:.04em;">by Webklar</span></span>
-      <span class="az mono">Formular D-01 · Gratis-Demo</span>
+      <span class="az mono" id="kopfAz">Formular D-01 · Gratis-Demo</span>
     </div>
 
     <header>
-      <p class="betreff-label">Betreff</p>
-      <h1>Probieren Sie es aus —<br><span class="markiert">mit Ihrem eigenen Brief.</span></h1>
+      <p class="betreff-label" data-t="betreff">Betreff</p>
+      <h1><span data-t="titel1">Probieren Sie es aus —</span><br><span class="markiert" data-t="titel2">mit Ihrem eigenen Brief.</span></h1>
       <p class="anrede">
-        Kein Konto. Keine App-Installation. Laden Sie ein Foto Ihres
-        Behördenbriefs hoch — in etwa einer Minute lesen Sie ihn in einfacher
-        Sprache. <strong>2 Analysen gratis.</strong>
+        <span data-t="anrede">Kein Konto. Keine App-Installation. Laden Sie ein Foto Ihres
+        Behördenbriefs hoch — nach ein bis zwei Minuten lesen Sie ihn in einfacher
+        Sprache.</span> <strong id="anredeAngebot" data-t="anredeGratis">2 Analysen gratis.</strong>
       </p>
     </header>
 
     <section id="demo">
-      <h2><span class="nr">§ 1</span> Brief hochladen</h2>
+      <h2><span class="nr">§ 1</span> <span data-t="abschnittHochladen">Brief hochladen</span></h2>
       <div class="antrag">
-        <p class="formular-kopf">Antrag auf Klartext · 2 Gratis-Analysen</p>
+        <p class="formular-kopf" data-t="formKopfGratis">Brief erklären lassen · 2 kostenlose Analysen</p>
 
         <p class="verbunden" id="verbundenBanner"></p>
 
@@ -290,7 +301,7 @@
             ✅ Kauf erfolgreich! Ihr Guthaben wurde aktiviert.
           </p>
           <p id="guthabenBanner" class="bonus-zeile" style="display: none;">
-            <span id="guthabenText">💳 Ihr Guthaben:</span> <strong id="guthabenZahl">0</strong> Analysen — laden Sie den nächsten Brief hoch.
+            <span id="guthabenText">💳 Ihr Guthaben:</span> <strong id="guthabenZahl">0</strong> <span data-t="bannerRest">Analysen — laden Sie den nächsten Brief hoch.</span>
             <br><button type="button" class="link-knopf" id="guthabenHandyKnopf" style="font-size: 14.5px;">📱 Auch auf dem Handy nutzen</button>
           </p>
           <div class="qr-box" id="guthabenQrBox">
@@ -299,20 +310,20 @@
             <p class="klein" style="margin-top: 0;">Mit der Handy-Kamera scannen. Danach können Sie Briefe auch direkt am Handy erklären lassen.</p>
           </div>
           <p style="margin-bottom: 14px; font-size: 15.5px;">
-            🌐 <label for="sprachWahl">Erklärung in dieser Sprache:</label>
+            🌐 <label for="sprachWahl" data-t="spracheLabel">Erklärung in dieser Sprache:</label>
             <select id="sprachWahl" style="font-family: inherit; font-size: 15.5px; padding: 5px 8px; border: 1.5px solid var(--tinte); background: #fff; margin-inline-start: 6px;"></select>
           </p>
 
           <label class="konsens">
             <input type="checkbox" id="konsens">
             <span>
-              Ich bin einverstanden, dass das Foto dieses Briefs zur Erklärung
+              <span data-t="konsens">Ich bin einverstanden, dass das Foto dieses Briefs zur Erklärung
               an den Server von BehördenKlar und an den KI-Dienst Anthropic
               (USA) geschickt wird. Briefe können sehr persönliche Angaben
               enthalten, zum Beispiel zu Gesundheit, Herkunft oder Aufenthalt.
               BehördenKlar speichert den Brief nicht. Anthropic löscht ihn in
-              der Regel nach 30 Tagen und nutzt ihn nicht zum Training.
-              <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>
+              der Regel nach 30 Tagen und nutzt ihn nicht zum Training.</span>
+              <a href="datenschutz.html" target="_blank" data-t="datenschutzLink">Datenschutzerklärung</a>
             </span>
           </label>
 
@@ -330,7 +341,7 @@
           </div>
 
           <input type="file" id="datei" accept="image/jpeg,image/png,application/pdf" style="display: none;">
-          <button class="cta" id="startKnopf">📷 Brief auswählen &amp; erklären lassen</button>
+          <button class="cta" id="startKnopf" data-t="startKnopf">📷 Brief auswählen &amp; erklären lassen</button>
           <button class="cta cta-zwei" id="handyKnopf" type="button" style="display: none;">📱 Lieber mit dem Handy fotografieren</button>
           <div class="qr-box" id="handyBox">
             <strong>Mit dem Handy fotografieren</strong>
@@ -355,36 +366,38 @@
             if (/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) {
               document.querySelector('.cf-turnstile').setAttribute('data-sitekey', '1x00000000000000000000AA');
             }
+            // Sehr schmale Handys (< 350 px): kompakte Cloudflare-Prüfung
+            if (window.innerWidth < 350) document.querySelector('.cf-turnstile').setAttribute('data-size', 'compact');
           </script>
 
-          <p class="klein">
+          <p class="klein" data-t="tippFoto">
             Geht mit Foto (JPG/PNG) oder PDF, max. 5 MB. Tipp: gutes Licht,
             Brief von oben, ganzer Text im Bild.
           </p>
           <p class="klein">
-            📱 <strong>Am Handy:</strong> Wählen Sie „Galerie" oder „Dateien",
+            <strong data-t="tippHandyTitel">📱 Am Handy:</strong> <span data-t="tippHandy">Wählen Sie „Galerie" oder „Dateien",
             wenn Sie den Brief schon fotografiert haben. Tippen Sie auf
             „Kamera", öffnet sich die Kamera-App Ihres Handys — und die fragt
-            nach ihren eigenen Berechtigungen. <strong>Diese Abfrage kommt von
-            Ihrem Handy, nicht von uns:</strong> Diese Seite greift weder auf
-            Kamera noch auf Mikrofon zu.
+            nach ihren eigenen Berechtigungen. Diese Abfrage kommt von
+            Ihrem Handy, nicht von uns: Diese Seite greift weder auf
+            Kamera noch auf Mikrofon zu.</span>
           </p>
 
         </div>
 
         <div class="status" id="status">
           <span class="sanduhr">⏳</span>
-          <p class="gross">Ihr Brief wird analysiert…</p>
-          <p class="sub">Das dauert bis zu einer Minute. Bitte lassen Sie die Seite geöffnet.</p>
+          <p class="gross">Ihr Brief wird erklärt …</p>
+          <p class="sub" data-t="statusDauer">Das dauert ein bis zwei Minuten. Bitte lassen Sie die Seite geöffnet.</p>
         </div>
 
         <div class="fehlerbox" id="fehler"></div>
 
         <details id="codeTeil" style="margin-top: 16px; border-top: 1px solid rgba(33, 33, 29, 0.2);">
-          <summary>🤝 Sie haben einen Code von einer Beratungsstelle?</summary>
-          <p>Dann ist BehördenKlar für Sie kostenlos. Geben Sie den Code hier ein:</p>
+          <summary data-t="codeFrage">🤝 Sie haben einen Code von einer Beratungsstelle?</summary>
+          <p data-t="codeText">Dann ist BehördenKlar für Sie kostenlos. Geben Sie den Code hier ein:</p>
           <input class="wl-input" id="codeFeld" placeholder="z. B. MBE-K7QX" autocapitalize="characters" autocomplete="off" spellcheck="false" style="margin-top: 10px; text-transform: uppercase;">
-          <button class="cta" id="codeKnopf" type="button">Code einlösen</button>
+          <button class="cta" id="codeKnopf" type="button" data-t="codeKnopf">Code einlösen</button>
         </details>
       </div>
     </section>
@@ -435,7 +448,7 @@
     </section>
 
     <section id="ergebnis">
-      <h2><span class="nr">§ 3</span> Ihr Brief in Klartext</h2>
+      <h2><span class="nr">§ 3</span> <span data-t="ergebnisTitel">Ihr Brief in Klartext</span></h2>
       <div class="umschalter" id="sprachUmschalter" role="group" aria-label="Sprache der Erklärung"></div>
 
       <div class="brief-karte">
@@ -447,31 +460,31 @@
       <div class="brief-karte" id="ergKalenderKarte" style="display: none;">
         <span class="karten-label" id="ergKalenderLabel">Nicht vergessen</span>
         <div id="ergKalenderText" style="margin-top: 6px;"></div>
-        <button class="cta" id="kalenderKnopf" type="button" style="margin-top: 12px;">📅 In meinen Kalender eintragen</button>
-        <p class="klein" id="ergKalenderHinweis">
-          Ihr Handy erinnert Sie <strong>3 Tage</strong> und <strong>1 Tag</strong> vorher.
+        <button class="cta" id="kalenderKnopf" type="button" style="margin-top: 12px;" data-t="kalenderKnopf">📅 In meinen Kalender eintragen</button>
+        <p class="klein" id="ergKalenderHinweis" data-t="kalenderHinweis">
+          Ihr Handy erinnert Sie 3 Tage und 1 Tag vorher.
           Der Eintrag landet nur in Ihrem eigenen Kalender — wir speichern nichts.
         </p>
       </div>
 
       <div class="brief-karte">
-        <span class="karten-label">Einfach erklärt</span>
+        <span class="karten-label" data-t="labelEinfach">Einfach erklärt</span>
         <p id="ergErklaerung" dir="auto" style="white-space: pre-line;"></p>
       </div>
 
       <div class="brief-karte" id="ergChecklisteKarte" style="display: none;">
-        <span class="karten-label neutral">Das müssen Sie tun</span>
+        <span class="karten-label neutral" data-t="labelTun">Das müssen Sie tun</span>
         <div id="ergCheckliste"></div>
       </div>
 
       <div class="brief-karte" id="ergAnrufKarte" style="display: none;">
-        <span class="karten-label neutral">Anrufen</span>
+        <span class="karten-label neutral" data-t="labelAnrufen">Anrufen</span>
         <div id="ergAnrufKontakt" style="margin-top: 6px;"></div>
         <div id="ergAnrufSaetze"></div>
       </div>
 
       <div class="brief-karte" id="ergBegriffeKarte" style="display: none;">
-        <span class="karten-label neutral">Schwere Wörter erklärt</span>
+        <span class="karten-label neutral" data-t="labelWoerter">Schwere Wörter erklärt</span>
         <div id="ergBegriffe"></div>
       </div>
 
@@ -484,9 +497,9 @@
         </div>
       </div>
 
-      <p class="hinweis-recht">
+      <p class="hinweis-recht" data-t="rechtHinweis">
         ⚖️ BehördenKlar erklärt Briefe, ersetzt aber keine Rechtsberatung. Bei
-        wichtigen Entscheidungen hilft eine Beratungsstelle oder ein Anwalt.
+        wichtigen Entscheidungen hilft eine Beratungsstelle oder eine Anwältin bzw. ein Anwalt.
       </p>
     </section>
 
@@ -536,6 +549,7 @@
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
   <script src="qrcode.js"></script>
   <script src="uebergabe.js"></script>
+  <script src="ui-texte.js"></script>
   <script>
   (function () {
     'use strict';
@@ -639,6 +653,42 @@
       if (name) speicher.set(EINRICHTUNG_SCHLUESSEL, name);
       else { speicher.remove(EINRICHTUNG_SCHLUESSEL); speicher.remove(ABLAUF_SCHLUESSEL); speicher.remove(CODE_SCHLUESSEL); }
     }
+    // ── Bediensprache ─────────────────────────────────────────────────
+    // Am PC (Beratung) bleibt alles deutsch. Am Handy richtet sich die
+    // Bedienung nach der gewählten Erklärungssprache (Texte: ui-texte.js).
+    var UI = window.BK_UI_TEXTE || { de: {} };
+    var RTL = { ar: 1, fa: 1, ur: 1, ps: 1 };
+    var VERBUNDEN = { ar: 1, fa: 1, ur: 1, ps: 1, hi: 1, ti: 1, zh: 1 };
+    var uiSprache = 'de';
+    function t(schluessel, werte) {
+      var text = (UI[uiSprache] && UI[uiSprache][schluessel]) || (UI.de && UI.de[schluessel]) || schluessel;
+      if (werte) for (var k in werte) text = text.split('{' + k + '}').join(werte[k]);
+      return text;
+    }
+    function wendeUiSpracheAn() {
+      var amPc = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      var gewuenscht = amPc ? 'de' : zielsprache();
+      uiSprache = UI[gewuenscht] ? gewuenscht : 'de';
+      document.documentElement.lang = uiSprache;
+      document.documentElement.dir = RTL[uiSprache] ? 'rtl' : 'ltr';
+      document.documentElement.classList.toggle('verbundene-schrift', !!VERBUNDEN[uiSprache]);
+      var elemente = document.querySelectorAll('[data-t]');
+      for (var i = 0; i < elemente.length; i++) {
+        var el = elemente[i], key = el.getAttribute('data-t');
+        if (UI.de && UI.de[key]) el.textContent = t(key);
+      }
+      // Was gerade dynamisch angezeigt wird, in der neuen Sprache neu setzen
+      var stelle = (typeof handyModus !== 'undefined' && handyModus && handyModus.e) || (einrichtung() && hatGuthaben() ? einrichtung() : '');
+      if (stelle) zeigeEinrichtungImKopf(stelle);
+      if (typeof handyModus !== 'undefined' && handyModus && !handyModus.fertig) verbundenBanner.textContent = t('verbunden');
+    }
+    /** Meldung des Servers: am Handy in der Bediensprache, sonst die genaue deutsche. */
+    function serverMeldung(daten) {
+      var zuordnung = { turnstile: 'srvTurnstile', ki: 'srvKi', ki_konfig: 'srvDienst', dienst: 'srvDienst', datei: 'srvDatei', inhalt: 'srvInhalt', aufgebraucht: 'srvAufgebraucht' };
+      if (uiSprache !== 'de' && zuordnung[daten.code]) return t(zuordnung[daten.code]);
+      return daten.meldung || t('srvKi');
+    }
+
     // Handy ↔ PC: Ist dieses Gerät gerade das Handy, das für einen PC
     // fotografiert? Ein Guthaben aus dem QR-Code (w) gilt nur für diese
     // Sitzung und wird hier NICHT gespeichert.
@@ -665,8 +715,11 @@
     }
     function zeigeGuthabenBanner(n) {
       var bis = einrichtungBis();
+      document.getElementById('guthabenHandyKnopf').textContent = einrichtung()
+        ? '🔑 Zugang dauerhaft auf ein Handy geben (nur für Mitarbeitende)'
+        : '📱 Auch auf dem Handy nutzen';
       guthabenText.textContent = einrichtung()
-        ? '🤝 Kostenlos über ' + einrichtung() + (bis ? ' (bis ' + deDatum(bis) + ')' : '') + ':'
+        ? t('bannerKostenlos', { name: einrichtung() + (bis ? ' ' + t('bannerBis', { datum: deDatum(bis) }) : '') })
         : '💳 Ihr Guthaben:';
       guthabenZahl.textContent = n;
       guthabenBanner.style.display = 'block';
@@ -678,8 +731,19 @@
     function benutzt() { return parseInt(speicher.get(SPEICHER_SCHLUESSEL) || '0', 10); }
     function setzeBenutzt(n) { speicher.set(SPEICHER_SCHLUESSEL, String(n)); }
 
-    var LEER_HINWEIS = 'Die kostenlosen Analysen sind aufgebraucht oder abgelaufen. Ratsuchende: Bitte fragen Sie bei Ihrer Beratungsstelle nach. Beratungsstelle: Ein Anruf genügt, Justin Klein, 0170 4969375. Nach dem Aufladen einfach diese Seite neu laden oder den Code unten noch einmal eingeben.';
-    var KEIN_ZUGANG_HANDY = 'Auf diesem Handy sind die kostenlosen Analysen verbraucht. Bitte am Computer den Code der Beratungsstelle einlösen und dann einen neuen QR-Code erzeugen.';
+    /** Text mit {name}: der Name kommt in ein <bdi>, damit „(Test)." in arabischem Text richtig steht. */
+    function mitName(el, vorlage, name) {
+      var teile = vorlage.split('{name}');
+      el.textContent = teile[0];
+      var b = document.createElement('bdi'); b.textContent = name; el.appendChild(b);
+      if (teile[1]) el.appendChild(document.createTextNode(teile[1]));
+    }
+    /** Einrichtungs-Zugang: oben nicht mehr „2 Analysen gratis" anpreisen. */
+    function zeigeEinrichtungImKopf(name) {
+      mitName(document.querySelector('#demo .formular-kopf'), t('formKopfKostenlos'), name);
+      mitName(document.getElementById('anredeAngebot'), t('anredeKostenlos'), name);
+      document.getElementById('kopfAz').textContent = 'Formular D-01 · ' + name;
+    }
     function zeigeStand() {
       if (handyModus && handyModus.fertig) return;
       // Handy-Modus: nie Kaufangebot oder Code-Feld (die Beratung ist dabei)
@@ -690,7 +754,7 @@
         if (benutzt() >= 2) {
           eingabe.style.display = 'none';
           fehlerBox.style.display = 'block';
-          fehlerBox.textContent = KEIN_ZUGANG_HANDY;
+          fehlerBox.textContent = t('keinZugangHandy');
           meldeAnPc({ schritt: 'fehler', code: 'kein_zugang', meldung: 'Am Handy sind die kostenlosen Analysen verbraucht.' });
         } else {
           eingabe.style.display = 'block';
@@ -706,12 +770,10 @@
         kaufBlock.style.display = 'none';
         codeTeil.style.display = 'block';
         fehlerBox.style.display = 'block';
-        fehlerBox.textContent = LEER_HINWEIS;
+        fehlerBox.textContent = t('leerHinweis');
         return;
       }
-      if (einrichtung() && hatGuthaben()) {
-        document.querySelector('#demo .formular-kopf').textContent = 'Antrag auf Klartext · kostenlos über ' + einrichtung();
-      }
+      if (einrichtung() && hatGuthaben()) zeigeEinrichtungImKopf(einrichtung());
       if (handyModus && handyModus.w) {
         eingabe.style.display = 'block';
         guthabenBanner.style.display = 'none';
@@ -752,7 +814,7 @@
     startKnopf.addEventListener('click', function () {
       fehlerBox.style.display = 'none';
       if (!konsens.checked) {
-        zeigeFehler('Bitte zuerst oben das Häkchen bei der Einwilligung setzen.');
+        zeigeFehler(t('fehlerKonsens'));
         fehlerBox.dataset.art = 'konsens';
         konsens.closest('label').scrollIntoView({ behavior: 'smooth', block: 'center' });
         konsens.focus();
@@ -781,16 +843,14 @@
 
     function zeigeFertigBanner(angekommen, ohneUebersetzung, paket) {
       verbundenBanner.innerHTML = '';
-      verbundenBanner.appendChild(document.createTextNode(angekommen
-        ? '✅ Fertig. Die Erklärung steht hier und auf dem Computer. Für einen weiteren Brief tippt die Beratung am Computer noch einmal auf „Lieber mit dem Handy fotografieren".'
-        : '⚠️ Die Erklärung steht hier, ist aber am Computer nicht angekommen.'));
-      if (ohneUebersetzung) verbundenBanner.appendChild(document.createTextNode(' Die Übersetzung hat diesmal nicht geklappt, deshalb steht die Erklärung auf Deutsch.'));
+      verbundenBanner.appendChild(document.createTextNode(angekommen ? t('fertig') : t('nichtAngekommen')));
+      if (ohneUebersetzung) verbundenBanner.appendChild(document.createTextNode(' ' + t('ohneUebersetzung')));
       if (!angekommen) {
         var knopf = document.createElement('button');
         knopf.type = 'button'; knopf.className = 'cta cta-zwei';
-        knopf.textContent = '🔁 Noch einmal an den Computer senden';
+        knopf.textContent = t('nochmalSenden');
         knopf.addEventListener('click', async function () {
-          knopf.disabled = true; knopf.textContent = 'Wird gesendet …';
+          knopf.disabled = true; knopf.textContent = t('wirdGesendet');
           var ok = await ergebnisAnPc(paket);
           zeigeFertigBanner(ok, ohneUebersetzung, paket);
         });
@@ -840,17 +900,17 @@
     async function starteAnalyse(datei) {
       fehlerBox.style.display = 'none';
       if (datei.size > 5 * 1024 * 1024 && datei.type === 'application/pdf') {
-        zeigeFehler('Die PDF-Datei ist zu groß (max. 5 MB). Tipp: Fotografieren Sie den Brief stattdessen.');
+        zeigeFehler(t('fehlerPdfGross'));
         return;
       }
       var token = turnstileToken();
       if (!token) {
-        zeigeFehler('Die Sicherheitsprüfung lädt noch — bitte warten Sie 2 Sekunden und versuchen Sie es erneut.');
+        zeigeFehler(t('fehlerTurnstileLaedt'));
         return;
       }
 
       eingabe.style.display = 'none';
-      status.querySelector('.gross').textContent = 'Ihr Brief wird analysiert…';
+      status.querySelector('.gross').textContent = t('statusLaeuft');
       status.style.display = 'block';
 
       try {
@@ -884,7 +944,7 @@
           meldeAnPc({ schritt: 'fehler', code: daten.code || '', meldung: daten.meldung || '' });
           // Guthaben vom PC: Fehler nur anzeigen, am Handy nichts umstellen
           if (handyModus && handyModus.w) {
-            zeigeFehler(daten.meldung || 'Etwas ist schiefgelaufen. Bitte erneut versuchen.');
+            zeigeFehler(serverMeldung(daten));
             return;
           }
           // Handy ohne Zugang vom PC: Kontingent-Fehler nicht als Kaufangebot zeigen
@@ -892,7 +952,7 @@
             if (daten.code === 'aufgebraucht') setzeBenutzt(2);
             eingabe.style.display = 'none';
             fehlerBox.style.display = 'block';
-            fehlerBox.textContent = KEIN_ZUGANG_HANDY;
+            fehlerBox.textContent = t('keinZugangHandy');
             meldeAnPc({ schritt: 'fehler', code: 'kein_zugang', meldung: 'Am Handy sind die kostenlosen Analysen verbraucht.' });
             return;
           }
@@ -922,7 +982,7 @@
             kaufBlock.scrollIntoView({ behavior: 'smooth' });
             return;
           }
-          zeigeFehler(daten.meldung || 'Etwas ist schiefgelaufen. Bitte erneut versuchen.');
+          zeigeFehler(serverMeldung(daten));
           return;
         }
 
@@ -972,7 +1032,7 @@
         eingabe.style.display = 'block';
         if (window.turnstile) window.turnstile.reset();
         meldeAnPc({ schritt: 'fehler', code: 'verbindung', meldung: 'Verbindung fehlgeschlagen.' });
-        zeigeFehler('Verbindung fehlgeschlagen. Bitte prüfen Sie Ihr Internet und versuchen Sie es erneut.');
+        zeigeFehler(t('fehlerVerbindung'));
       }
     }
 
@@ -1001,11 +1061,11 @@
       var farbe = tage <= 7 ? 'var(--rot)' : tage <= 21 ? 'var(--gelb)' : 'var(--gruen)';
       var punkt = tage <= 7 ? '🔴' : tage <= 21 ? '🟡' : '🟢';
       var datum = deDatum(erstes.iso);
-      var wann = erstes.art === 'Termin' ? 'Termin am ' + datum : 'Frist bis ' + datum;
-      var text = tage < 0 ? (erstes.art === 'Termin' ? 'Der Termin war am ' + datum + '!' : 'Die Frist ist womöglich schon vorbei (' + datum + ')!') :
-                 tage === 0 ? 'HEUTE: ' + wann + '!' :
-                 tage === 1 ? 'Morgen: ' + wann :
-                 'Noch ' + tage + ' Tage · ' + wann;
+      var wann = erstes.art === 'Termin' ? t('ampelTerminAm', { datum: datum }) : t('ampelFristBis', { datum: datum });
+      var text = tage < 0 ? (erstes.art === 'Termin' ? t('ampelTerminWar', { datum: datum }) : t('ampelFristVorbei', { datum: datum })) :
+                 tage === 0 ? t('ampelHeute') + ': ' + wann + '!' :
+                 tage === 1 ? t('ampelMorgen') + ': ' + wann :
+                 t('ampelNoch', { n: tage }) + ' · ' + wann;
       return { farbe: farbe, text: punkt + ' ' + text, istFrist: erstes.art === 'Frist' };
     }
 
@@ -1240,9 +1300,9 @@
         // oder bedingte Fristen ("bis zum 10. Tag nach jedem Vierteljahr"),
         // aus denen sich kein einzelnes Datum machen laesst. Ein Haekchen
         // wuerde dann "alles erledigt" signalisieren — gefaehrlich falsch.
-        label.textContent = 'Kalender';
-        zeile('ℹ️ Kein festes Datum zum Eintragen gefunden.');
-        zeile('Wichtig: Manche Fristen haben kein festes Datum, zum Beispiel „jedes Vierteljahr" oder nur unter bestimmten Bedingungen. Lesen Sie dazu die Erklärung oben.');
+        label.textContent = t('labelKalender');
+        zeile(t('keinDatum1'));
+        zeile(t('keinDatum2'));
         knopf.style.display = 'none';
         hinweis.style.display = 'none';
         karte.style.border = '';
@@ -1250,12 +1310,12 @@
         return;
       }
       letzteAnalyse = a;
-      label.textContent = 'Nicht vergessen';
+      label.textContent = t('labelNichtVergessen');
       knopf.style.display = '';
       hinweis.style.display = '';
       karte.style.border = '2px solid var(--amtsblau)';
-      if (frist) zeile('⚠️ Frist: ' + deDatum(frist.datum), frist.aktion);
-      if (termin) zeile('📅 Termin: ' + deDatum(termin.datum) + (termin.uhrzeit ? ', ' + termin.uhrzeit + ' Uhr' : ''), termin.ort);
+      if (frist) zeile(t('fristZeile', { datum: deDatum(frist.datum) }), frist.aktion);
+      if (termin) zeile(t('terminZeile', { datum: deDatum(termin.datum) }) + (termin.uhrzeit ? ', ' + t('uhrzeit', { zeit: termin.uhrzeit }) : ''), termin.ort);
       karte.style.display = 'block';
     }
 
@@ -1293,22 +1353,23 @@
         if (hervorheben) w.className = 'az-wert';
         p.appendChild(b); p.appendChild(w); box.appendChild(p);
       }
-      angabe('Ansprechpartner', k.ansprechpartner);
-      angabe('Erreichbar', k.sprechzeiten);
-      angabe('Danach werden Sie gefragt', k.aktenzeichen, true);
+      angabe(t('ansprechpartner'), k.ansprechpartner);
+      angabe(t('erreichbar'), k.sprechzeiten);
+      angabe(t('gefragt'), k.aktenzeichen, true);
 
       var liste = document.getElementById('ergAnrufSaetze');
       liste.innerHTML = '';
       if (saetze.length) {
         var kopf = document.createElement('p');
         kopf.style.marginTop = '12px';
-        kopf.innerHTML = '<strong>Das können Sie am Telefon sagen:</strong>';
+        var stark = document.createElement('strong'); stark.textContent = t('amTelefon'); kopf.appendChild(stark);
         liste.appendChild(kopf);
         var angezeigt = versionen.length ? versionen[aktiveVersion].code : zielsprache();
         var mitBedeutung = angezeigt !== 'de';
         saetze.forEach(function (s) {
           var d = document.createElement('div'); d.className = 'anruf-satz';
           var de = document.createElement('p'); de.className = 'anruf-de';
+          de.setAttribute('dir', 'ltr'); // wird auf Deutsch gesagt — auch auf arabischer Seite links-nach-rechts
           de.textContent = '„' + s.deutsch + '“';
           d.appendChild(de);
           if (mitBedeutung && s.bedeutung && s.bedeutung !== s.deutsch) {
@@ -1442,7 +1503,7 @@
           zeichneHandyQr();
           zeigeStand();
           if (res.d.guthaben <= 0) return; // zeigeStand zeigt den Leer-Hinweis mit Telefonnummer
-          kaufOk.textContent = '✅ Code eingelöst. BehördenKlar ist für Sie kostenlos, über ' + res.d.einrichtung + '.';
+          kaufOk.textContent = t('codeEingeloest', { name: res.d.einrichtung });
           kaufOk.style.display = 'block';
         })
         .catch(function () {
@@ -1625,7 +1686,7 @@
       if (h.a === 'g') { uebernehmeGuthaben(h); return; }
       var ue = await BKUebergabe.oeffne(h.s, h.k).catch(function () { return null; });
       if (!ue) {
-        zeigeFehler('Dieser QR-Code ist ungültig. Bitte am Computer einen neuen erzeugen.');
+        zeigeFehler(t('qrUngueltig'));
         return;
       }
 
@@ -1636,10 +1697,11 @@
           sitzungsSprache = h.l;
           document.getElementById('sprachWahl').value = h.l;
         }
-        verbundenBanner.textContent = '🔗 Mit dem Computer verbunden. Setzen Sie das Häkchen und fotografieren Sie Ihren Brief. Die Erklärung erscheint hier und auf dem Bildschirm.';
+        wendeUiSpracheAn();
+        verbundenBanner.textContent = t('verbunden');
         verbundenBanner.style.display = 'block';
         handyKnopf.style.display = 'none';
-        if (handyModus.e) document.querySelector('#demo .formular-kopf').textContent = 'Antrag auf Klartext · kostenlos über ' + handyModus.e;
+        if (handyModus.e) zeigeEinrichtungImKopf(handyModus.e);
         // „verbunden" zuerst melden — zeigeStand meldet danach ggf. „kein Zugang",
         // und das darf nicht von „verbunden" überschrieben werden
         await meldeAnPc({ schritt: 'verbunden' });
@@ -1653,7 +1715,7 @@
         leseModus = true;
         eingabe.style.display = 'none';
         kaufBlock.style.display = 'none';
-        status.querySelector('.gross').textContent = 'Das Ergebnis wird geladen …';
+        status.querySelector('.gross').textContent = t('statusLaden');
         status.style.display = 'block';
         var f = null;
         try { f = await BKUebergabe.holen(ue); } catch (e) {}
@@ -1661,13 +1723,13 @@
         if (!f || !f.ergebnis) {
           leseModus = false;
           zeigeStand();
-          zeigeFehler('Dieser QR-Code ist abgelaufen oder wurde schon benutzt (er gilt ' + BKUebergabe.LEBENSDAUER_MIN + ' Minuten und nur einmal). Bitte am Computer einen neuen erzeugen.');
+          zeigeFehler(t('qrAbgelaufen', { min: BKUebergabe.LEBENSDAUER_MIN }));
           return;
         }
         BKUebergabe.loeschen(ue);
         codeTeil.style.display = 'none';
         kaufBlock.style.display = 'none';
-        verbundenBanner.textContent = '📱 Vom Computer übernommen. Tragen Sie die Frist gleich in Ihren Kalender ein, dann vergessen Sie nichts.';
+        verbundenBanner.textContent = t('mitgenommen');
         verbundenBanner.style.display = 'block';
         zeigeAnalyse(bereiteVersionen(f.ergebnis, false));
         document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth' });
@@ -1683,7 +1745,7 @@
       setzeWallet(h.w);
       setzeGuthaben(parseInt(h.n, 10) || 1);
       setzeEinrichtung(h.e || null);
-      kaufOk.textContent = h.e ? '✅ Übernommen. BehördenKlar ist für Sie kostenlos, über ' + h.e + '.' : '✅ Guthaben übernommen.';
+      kaufOk.textContent = h.e ? t('uebernommen', { name: h.e }) : '✅ Guthaben übernommen.';
       kaufOk.style.display = 'block';
       zeigeStand();
     }
@@ -1731,6 +1793,8 @@
       feld.addEventListener('change', function () {
         speicher.set(SPRACH_SCHLUESSEL, feld.value);
         sitzungsSprache = null;
+        wendeUiSpracheAn();
+        zeigeStand();
         if (/[?&]sprache=/.test(window.location.search) && window.history.replaceState) {
           var u = new URL(window.location.href);
           u.searchParams.delete('sprache');
@@ -1741,6 +1805,7 @@
     })();
 
     rendrePakete();
+    wendeUiSpracheAn();
     var startHash = BKUebergabe.ausAdresse();
     var startSuche = window.location.search; // vor pruefeRueckkehr, das die Adresse aufräumt
     // Handy-Verbindung übersteht ein Neuladen (z. B. wenn Android den Tab beim
