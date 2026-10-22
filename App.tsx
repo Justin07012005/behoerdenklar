@@ -27,6 +27,7 @@ import { AnalyseScreen } from './src/screens/AnalyseScreen';
 import { AntwortScreen } from './src/screens/AntwortScreen';
 import { GlossarScreen } from './src/screens/GlossarScreen';
 import { EinstellungenScreen } from './src/screens/EinstellungenScreen';
+import { VerbindenScreen } from './src/screens/VerbindenScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator<HauptTabParamList>();
@@ -131,6 +132,7 @@ export default function App() {
           <Stack.Screen name="Antwort" component={AntwortScreen} options={{ title: 'Antwort erstellen' }} />
           <Stack.Screen name="Glossar" component={GlossarScreen} options={{ title: 'Behörden-Glossar' }} />
           <Stack.Screen name="Einstellungen" component={EinstellungenScreen} options={{ title: 'Einstellungen' }} />
+          <Stack.Screen name="Verbinden" component={VerbindenScreen} options={{ title: 'Verbinden' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </AppSchutz>

@@ -32,7 +32,9 @@ export type IkonenName =
   | 'archiv'
   | 'schloss'
   | 'lupe'
-  | 'pfeilLinks';
+  | 'pfeilLinks'
+  | 'computer'
+  | 'qrScannen';
 
 // `as const` hält die Namen als Literal-Typen — so prüft TypeScript gegen
 // die offizielle SF-Symbol-/Material-Namensliste von expo-symbols
@@ -62,6 +64,8 @@ const NAMEN = {
   schloss: { ios: 'lock.fill', android: 'lock' },
   lupe: { ios: 'magnifyingglass', android: 'search' },
   pfeilLinks: { ios: 'chevron.left', android: 'chevron_left' },
+  computer: { ios: 'desktopcomputer', android: 'computer' },
+  qrScannen: { ios: 'qrcode.viewfinder', android: 'qr_code_scanner' },
 } as const;
 
 interface Props {

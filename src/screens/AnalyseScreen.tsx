@@ -287,6 +287,16 @@ export function AnalyseScreen({ navigation, route }: Props) {
         </View>
       )}
 
+      {/* ── In der Beratung: Brief auf dem Bildschirm zeigen ── */}
+      <View style={{ marginTop: abstand.l }}>
+        <GrossButton
+          titel="Am Computer zeigen"
+          ikone="computer"
+          variante="sekundaer"
+          onPress={() => navigation.navigate('Verbinden', { modus: 'senden', briefId: brief.id })}
+        />
+      </View>
+
       {/* ── Datenschutz-Fuß + Löschen ── */}
       <View style={styles.schutzZeile}>
         <Ikone name="schloss" groesse={13} farbe={farben.textTertiaer} />

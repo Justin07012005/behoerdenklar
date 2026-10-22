@@ -145,4 +145,6 @@ export type RootStackParamList = {
   Antwort: { briefId: string };
   Glossar: undefined;
   Einstellungen: undefined;
+  /** QR-Code vom Beratungs-PC: Brief hinschicken oder Ergebnis übernehmen. */
+  Verbinden: { modus: 'senden'; briefId: string } | { modus: 'empfangen' };
 };

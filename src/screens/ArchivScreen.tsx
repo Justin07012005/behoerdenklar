@@ -12,6 +12,7 @@ import { useAppStore } from '../store/useAppStore';
 import { berechneAmpel } from '../utils/ampel';
 import { formatiereDatum } from '../services/erinnerungen';
 import { Ikone } from '../components/Ikone';
+import { GrossButton } from '../components/GrossButton';
 import { farben, schrift, abstand, TOUCH_TARGET } from '../theme';
 
 type Nav = NativeStackNavigationProp<RootStackParamList>;
@@ -144,6 +145,16 @@ export function ArchivScreen() {
           })}
         </View>
       )}
+
+      {/* Ergebnis vom Beratungs-PC per QR-Code übernehmen */}
+      <View style={{ marginTop: abstand.l }}>
+        <GrossButton
+          titel="Vom Computer übernehmen"
+          ikone="qrScannen"
+          variante="sekundaer"
+          onPress={() => navigation.navigate('Verbinden', { modus: 'empfangen' })}
+        />
+      </View>
     </ScrollView>
   );
 }
