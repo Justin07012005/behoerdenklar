@@ -245,7 +245,8 @@ async function uebersetzeAnalyse(env: Env, analyse: unknown, sprachName: string)
     if (d.stop_reason !== 'end_turn' || !text) return null;
     return JSON.parse(text);
   } catch (e) {
-    console.log('Übersetzung fehlgeschlagen', String(e));
+    // Nur den Fehlertyp loggen: JSON.parse-Meldungen zitieren Teile der Eingabe (= Briefinhalt)
+    console.log('Übersetzung fehlgeschlagen', e instanceof Error ? e.name : 'unbekannt');
     return null;
   }
 }
@@ -392,7 +393,9 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
       ? { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: bild } }
       : { type: 'image', source: { type: 'base64', media_type: mimeType, data: bild } };
 
-  const antwort = await fetch(ANTHROPIC_URL, {
+  let antwort: Response;
+  try {
+  antwort = await fetch(ANTHROPIC_URL, {
     method: 'POST',
     headers: {
       'content-type': 'application/json',
@@ -417,6 +420,10 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
       ],
     }),
   });
+  } catch (e) {
+    console.log('Demo-KI nicht erreichbar', String(e));
+    return demoFehler(503, 'ki', 'Der KI-Dienst ist gerade nicht erreichbar. Bitte versuchen Sie es in einer Minute erneut.', origin);
+  }
 
   if (!antwort.ok) {
     const status = antwort.status;
@@ -433,7 +440,13 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
     return demoFehler(502, 'ki', 'Die Analyse ist fehlgeschlagen. Bitte versuchen Sie es mit einem neuen, gut beleuchteten Foto.', origin);
   }
 
-  const daten = (await antwort.json()) as {
+  let datenRoh: unknown;
+  try {
+    datenRoh = await antwort.json();
+  } catch {
+    return demoFehler(502, 'ki', 'Die KI hat keine verwertbare Antwort geliefert. Bitte erneut versuchen.', origin);
+  }
+  const daten = datenRoh as {
     stop_reason?: string;
     content?: { type: string; text?: string }[];
   };
@@ -444,6 +457,17 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
   if (bezahlt) {
     // Bezahlte Analyse: Guthaben um 1 verringern (kein TTL — bleibt bestehen)
     await env.RATE_LIMIT.put(`wallet:${walletId}`, String(walletRest - 1));
+    if (einrichtungsName) {
+      // Für die Auswertung mit der Beratungsstelle: nur Datum und Sprache,
+      // kein Briefinhalt, kein Bezug zu einer Person. Ein Schlüssel pro
+      // Analyse, damit gleichzeitige Analysen sich nicht überschreiben.
+      // Lesen: node tools/einrichtungs-code.js stand <CODE>
+      await env.RATE_LIMIT.put(
+        `nutzung:${walletId}:${heute}:${sprachCode}:${crypto.randomUUID().slice(0, 8)}`,
+        '1',
+        { expirationTtl: 60 * 60 * 24 * 390 }, // < 13 Monate (siehe Datenschutzerklärung 9a)
+      );
+    }
   } else {
     const schreiben: Promise<void>[] = [
       env.RATE_LIMIT.put(tagKey, String(tagZahl + 1), { expirationTtl: TAG_TTL }),
@@ -476,11 +500,18 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
 
   let analyseDe: unknown = undefined;
   let ausgabeSprache = sprachCode;
+  let uebersetzungFehlgeschlagen = false;
   if (zweisprachig) {
-    analyseDe = analyse;
     const uebersetzt = await uebersetzeAnalyse(env, analyse, sprachName);
-    if (uebersetzt) analyse = uebersetzt;
-    else ausgabeSprache = 'de'; // lieber Deutsch als gar nichts
+    if (uebersetzt) {
+      analyseDe = analyse;
+      analyse = uebersetzt;
+    } else {
+      // lieber Deutsch als gar nichts — aber nur EINE Fassung schicken,
+      // sonst zeigt die Seite zwei Knöpfe „Deutsch | Deutsch"
+      ausgabeSprache = 'de';
+      uebersetzungFehlgeschlagen = true;
+    }
   }
 
   return Response.json(
@@ -491,6 +522,7 @@ async function demoHandler(request: Request, env: Env): Promise<Response> {
       guthaben: bezahlt ? walletRest - 1 : undefined,
       einrichtung: einrichtungsName ?? undefined,
       sprache: ausgabeSprache,
+      uebersetzung_fehlgeschlagen: uebersetzungFehlgeschlagen || undefined,
     },
     { headers: demoCorsHeaders(origin) }
   );
@@ -685,7 +717,15 @@ async function kaufStatusHandler(request: Request, env: Env): Promise<Response> 
 // Der zufällige Teil im Code macht Raten aussichtslos; zusätzlich sind
 // Fehlversuche pro IP und Tag begrenzt.
 
-const CODE_FEHLVERSUCHE_PRO_TAG = 10;
+// Großzügig, weil sich eine ganze Beratungsstelle eine IP teilt. Raten bleibt
+// trotzdem aussichtslos: 31^4 ≈ 920.000 Codes je Präfix.
+const CODE_FEHLVERSUCHE_PRO_TAG = 30;
+
+/** „mbe k7qx", „MBEK7QX", „MBE-K7QX" → „MBE-K7QX" (Bindestrich vor den letzten 4 Zeichen). */
+function normCode(eingabe: string): string {
+  const roh = eingabe.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  return roh.length > 4 ? `${roh.slice(0, -4)}-${roh.slice(-4)}` : roh;
+}
 
 interface Einrichtung {
   name: string;
@@ -716,7 +756,7 @@ async function codeHandler(request: Request, env: Env): Promise<Response> {
   } catch {
     return demoFehler(400, 'json', 'Ungültige Anfrage.', origin);
   }
-  const code = typeof body.code === 'string' ? body.code.trim().toUpperCase().replace(/\s+/g, '') : '';
+  const code = typeof body.code === 'string' ? normCode(body.code) : '';
 
   const ip = request.headers.get('cf-connecting-ip') ?? 'unbekannt';
   const heute = new Date().toISOString().slice(0, 10);
@@ -782,9 +822,8 @@ export class Uebergabe extends DurableObject<Env> {
     const zahl = (await this.ctx.storage.get<number>('zahl')) ?? 0;
     if (zahl >= UEBERGABE_MAX_SCHREIBVORGAENGE) return false;
     await this.ctx.storage.put({ [`fach:${fach}`]: wert, zahl: zahl + 1 });
-    if ((await this.ctx.storage.getAlarm()) === null) {
-      await this.ctx.storage.setAlarm(Date.now() + UEBERGABE_LEBENSDAUER_MS);
-    }
+    // gleitend: 15 Minuten nach dem LETZTEN Päckchen löschen, nicht nach dem ersten
+    await this.ctx.storage.setAlarm(Date.now() + UEBERGABE_LEBENSDAUER_MS);
     return true;
   }
 
@@ -896,7 +935,12 @@ export default {
     const pfad = new URL(request.url).pathname;
     lokalTest = env.LOKAL_TEST === '1';
     // Web-Demo + Bezahl-Routen haben eigene Regeln
-    if (pfad === '/demo') return demoHandler(request, env);
+    if (pfad === '/demo') {
+      return demoHandler(request, env).catch((e) => {
+        console.log('Demo-Fehler', e instanceof Error ? e.name : 'unbekannt');
+        return demoFehler(503, 'dienst', 'Der Dienst ist gerade nicht erreichbar. Bitte versuchen Sie es in einer Minute erneut.', request.headers.get('origin'));
+      });
+    }
     if (pfad === '/kaufen') return kaufenHandler(request, env);
     if (pfad === '/kauf-status') return kaufStatusHandler(request, env);
     if (pfad === '/code') return codeHandler(request, env);

@@ -2,6 +2,11 @@ name = "behoerdenklar-proxy"
 main = "src/index.ts"
 compatibility_date = "2026-07-01"
 
+# Worker-Logs im Cloudflare-Dashboard (und `npx wrangler tail`) — hilft,
+# wenn live etwas schiefgeht (z. B. die Übersetzung)
+[observability]
+enabled = true
+
 # Erlaubte Anfragen pro Tag: pro Gerät (normale Nutzung) und pro IP-Adresse
 # (dämmt Angreifer ein, die Geräte-IDs fälschen; höher, weil sich viele
 # Nutzer eine IP teilen können)

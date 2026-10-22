@@ -61,8 +61,9 @@
         <li>
           <strong>Anthropic PBC (USA)</strong> — den Betreiber des KI-Modells
           „Claude". Anthropic verarbeitet die Daten ausschließlich zur
-          Erstellung der Analyse, speichert sie maximal 30 Tage (zur
-          Missbrauchserkennung) und verwendet sie nicht zum Training der KI.
+          Erstellung der Analyse, löscht sie in der Regel nach 30 Tagen
+          (länger nur, wenn ein Verdacht auf Missbrauch geprüft werden muss)
+          und verwendet sie nicht zum Training der KI.
         </li>
       </ul>
       <p>
@@ -105,15 +106,16 @@
       <h2>4. Übermittlung in die USA</h2>
       <p>
         Anthropic PBC und Cloudflare, Inc. haben ihren Sitz in den USA. Die
-        Übermittlung stützt sich auf den Angemessenheitsbeschluss der
-        EU-Kommission zum EU-U.S. Data Privacy Framework bzw. auf
-        EU-Standardvertragsklauseln (Art. 46 DSGVO).
+        Übermittlung stützt sich auf EU-Standardvertragsklauseln (Art. 46
+        Abs. 2 lit. c DSGVO), die Bestandteil der
+        Auftragsverarbeitungsverträge beider Anbieter sind.
       </p>
 
       <h2>5. Speicherdauer</h2>
       <ul>
-        <li>Brieffotos bei Anthropic: maximal 30 Tage, danach automatische Löschung</li>
+        <li>Brieffotos bei Anthropic: in der Regel 30 Tage, danach automatische Löschung (länger nur bei Prüfung eines Missbrauchsverdachts)</li>
         <li>Anonyme Geräte-Kennung + Tageszähler auf unserem Server: maximal 48 Stunden</li>
+        <li>Technische Server-Protokolle (Cloudflare Workers Logs: Zeitpunkt, aufgerufene Adresse, Fehlerart, technische Metadaten, kein Briefinhalt) zur Fehlersuche: maximal 7 Tage (Art. 6 Abs. 1 lit. f DSGVO)</li>
         <li>Daten auf Ihrem Gerät: bis Sie sie löschen („Alle Daten löschen" in den Einstellungen oder Deinstallation der App)</li>
       </ul>
 
@@ -157,7 +159,7 @@
           (Häkchen vor dem Hochladen, Art. 6 Abs. 1 lit. a, Art. 9 Abs. 2
           lit. a DSGVO) — über unseren Server (Cloudflare) an Anthropic (USA)
           zur Analyse geschickt. Es wird auf unserem Server nicht gespeichert;
-          bei Anthropic wird es nach spätestens 30 Tagen gelöscht (wie in
+          bei Anthropic wird es in der Regel nach 30 Tagen gelöscht (wie in
           Abschnitt 3a beschrieben). Das Ergebnis sehen nur Sie in Ihrem
           Browser; wir speichern es nicht.
         </li>
@@ -222,9 +224,13 @@
         Guthaben der Einrichtung, das wie in Abschnitt 9 beschrieben unter
         einer zufälligen Kennung verwaltet wird. Wir erfahren dabei nicht, wer
         den Code nutzt, und die Beratungsstelle sieht keine Briefe oder
-        Ergebnisse, nur wie viele Analysen noch übrig sind. Gegen das Erraten
-        von Codes zählen wir falsche Eingaben pro IP-Adresse (Speicherung
-        max. 48 Stunden, Art. 6 Abs. 1 lit. f DSGVO).
+        Ergebnisse, nur Zahlen: wie viele Analysen noch übrig sind und wie
+        viele pro Woche und Sprache genutzt wurden. Für die Auswertung
+        mit der Beratungsstelle zählen wir pro Analyse über einen Code nur das
+        Datum und die gewählte Sprache, ohne Briefinhalt und ohne Bezug zu
+        einer Person (Speicherung max. 13 Monate). Gegen das Erraten von
+        Codes zählen wir falsche Eingaben pro IP-Adresse (Speicherung max.
+        48 Stunden). Rechtsgrundlage ist jeweils Art. 6 Abs. 1 lit. f DSGVO.
       </p>
 
       <h2>9b. Übergabe zwischen Handy und Computer</h2>

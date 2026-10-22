@@ -183,7 +183,7 @@
       font-size: 16px; font-weight: 700;
     }
     .todo { padding: 8px 0 8px 2px; border-bottom: 1px dotted rgba(33,33,29,0.3); font-size: 16.5px; }
-    .todo::before { content: '☐'; margin-right: 10px; color: var(--amtsblau); font-size: 18px; }
+    .todo::before { content: '☐'; margin-inline-end: 10px; color: var(--amtsblau); font-size: 18px; }
     details { border-bottom: 1px solid rgba(33, 33, 29, 0.2); padding: 12px 4px; }
     summary { font-weight: 700; cursor: pointer; font-size: 16.5px; list-style: none; }
     summary::-webkit-details-marker { display: none; }
@@ -215,7 +215,7 @@
       background: #eaf1fa; border: 2px solid var(--amtsblau); font-size: 16px;
     }
     .qr-box { display: none; margin-top: 16px; padding: 18px; background: #fff; border: 2px dashed var(--amtsblau); text-align: center; }
-    .qr-box .qr { width: 220px; height: 220px; margin: 10px auto; }
+    .qr-box .qr { width: 290px; max-width: 100%; aspect-ratio: 1; height: auto; margin: 10px auto; }
     .qr-box .qr svg { width: 100%; height: 100%; display: block; }
     .qr-box ol { text-align: start; margin: 8px auto 0; max-width: 420px; padding-inline-start: 22px; font-size: 15.5px; }
     .qr-box .zustand { margin-top: 12px; font-weight: 700; font-size: 16.5px; }
@@ -306,11 +306,12 @@
           <label class="konsens">
             <input type="checkbox" id="konsens">
             <span>
-              Ich bin einverstanden, dass mein Brief-Foto zur Analyse an den
-              Server von BehördenKlar und an den KI-Dienst Anthropic (USA)
-              geschickt wird. Es wird dort nicht dauerhaft gespeichert.
-              Behördenbriefe enthalten persönliche Daten — laden Sie nur hoch,
-              was Sie analysieren lassen möchten.
+              Ich bin einverstanden, dass das Foto dieses Briefs zur Erklärung
+              an den Server von BehördenKlar und an den KI-Dienst Anthropic
+              (USA) geschickt wird. Briefe können sehr persönliche Angaben
+              enthalten, zum Beispiel zu Gesundheit, Herkunft oder Aufenthalt.
+              BehördenKlar speichert den Brief nicht. Anthropic löscht ihn in
+              der Regel nach 30 Tagen und nutzt ihn nicht zum Training.
               <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>
             </span>
           </label>
@@ -329,7 +330,7 @@
           </div>
 
           <input type="file" id="datei" accept="image/jpeg,image/png,application/pdf" style="display: none;">
-          <button class="cta" id="startKnopf" disabled>📷 Brief auswählen &amp; erklären lassen</button>
+          <button class="cta" id="startKnopf">📷 Brief auswählen &amp; erklären lassen</button>
           <button class="cta cta-zwei" id="handyKnopf" type="button" style="display: none;">📱 Lieber mit dem Handy fotografieren</button>
           <div class="qr-box" id="handyBox">
             <strong>Mit dem Handy fotografieren</strong>
@@ -341,7 +342,7 @@
             </ol>
             <label class="konsens" id="handyDeutschZeile" style="justify-content: center; margin: 14px 0 0;">
               <input type="checkbox" id="handyDeutsch" checked>
-              <span>Hier am Bildschirm auf Deutsch zeigen, am Handy in der gewählten Sprache</span>
+              <span>Hier am Bildschirm immer auf Deutsch zeigen, am Handy in der Sprache der Person</span>
             </label>
             <p class="zustand" id="handyZustand">⏳ Warte auf das Handy …</p>
             <p class="klein" style="margin-top: 6px;">Verschlüsselt: Den Schlüssel kennt nur dieser QR-Code. Der Code gilt 15 Minuten.</p>
@@ -369,12 +370,6 @@
             Kamera noch auf Mikrofon zu.
           </p>
 
-          <details id="codeTeil" style="margin-top: 14px; border-top: 1px solid rgba(33, 33, 29, 0.2);">
-            <summary>🤝 Sie haben einen Code von einer Beratungsstelle?</summary>
-            <p>Dann ist BehördenKlar für Sie kostenlos. Geben Sie den Code hier ein:</p>
-            <input class="wl-input" id="codeFeld" placeholder="z. B. MBE-K7QX" autocapitalize="characters" autocomplete="off" spellcheck="false" style="margin-top: 10px; text-transform: uppercase;">
-            <button class="cta" id="codeKnopf" type="button">Code einlösen</button>
-          </details>
         </div>
 
         <div class="status" id="status">
@@ -384,6 +379,13 @@
         </div>
 
         <div class="fehlerbox" id="fehler"></div>
+
+        <details id="codeTeil" style="margin-top: 16px; border-top: 1px solid rgba(33, 33, 29, 0.2);">
+          <summary>🤝 Sie haben einen Code von einer Beratungsstelle?</summary>
+          <p>Dann ist BehördenKlar für Sie kostenlos. Geben Sie den Code hier ein:</p>
+          <input class="wl-input" id="codeFeld" placeholder="z. B. MBE-K7QX" autocapitalize="characters" autocomplete="off" spellcheck="false" style="margin-top: 10px; text-transform: uppercase;">
+          <button class="cta" id="codeKnopf" type="button">Code einlösen</button>
+        </details>
       </div>
     </section>
 
@@ -437,7 +439,7 @@
       <div class="umschalter" id="sprachUmschalter" role="group" aria-label="Sprache der Erklärung"></div>
 
       <div class="brief-karte">
-        <span class="karten-label neutral" id="ergBrieftyp">Brief</span>
+        <span class="karten-label neutral" id="ergBrieftyp" dir="auto" style="font-family: inherit; letter-spacing: 0; text-transform: none;">Brief</span>
         <p style="margin-top: 6px;"><strong id="ergKern" dir="auto"></strong></p>
         <p class="ampelzeile" id="ergAmpel" style="display: none;"></p>
       </div>
@@ -551,8 +553,27 @@
       { priceId: 'price_1U6BPRBsRA1AOdnemDUalzb8', titel: '15 Analysen', preis: '6,99 €', best: true },
     ];
 
+    // Browser-Speicher abgesichert: Manche Browser (Safari „Alle Cookies
+    // blockieren", App-interne Browser) werfen schon beim Zugriff einen Fehler.
+    // Dann merken wir uns die Werte nur, solange die Seite offen ist.
+    var speicher = (function () {
+      var ersatz = {};
+      return {
+        get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return k in ersatz ? ersatz[k] : null; } },
+        set: function (k, v) { try { window.localStorage.setItem(k, v); } catch (e) { ersatz[k] = String(v); } },
+        remove: function (k) { try { window.localStorage.removeItem(k); } catch (e) { delete ersatz[k]; } },
+      };
+    })();
+
     // Zielsprache: kommt als ?sprache=tr von den Sprachseiten, wird gemerkt.
     var SPRACH_SCHLUESSEL = 'bk_sprache';
+    var SPRACH_DEUTSCH = {
+      tr:'Türkisch', ar:'Arabisch', ru:'Russisch', uk:'Ukrainisch', pl:'Polnisch', ro:'Rumänisch',
+      en:'Englisch', fa:'Farsi/Dari', ku:'Kurdisch', bg:'Bulgarisch', hr:'Kroatisch', sr:'Serbisch',
+      bs:'Bosnisch', sq:'Albanisch', it:'Italienisch', el:'Griechisch', es:'Spanisch', pt:'Portugiesisch',
+      fr:'Französisch', hu:'Ungarisch', vi:'Vietnamesisch', hi:'Hindi', ur:'Urdu', ps:'Paschtu',
+      ti:'Tigrinya', so:'Somali', zh:'Chinesisch'
+    };
     var SPRACH_NAMEN = {
       de:'Deutsch', tr:'Türkçe', ar:'العربية', ru:'Русский', uk:'Українська', pl:'Polski',
       ro:'Română', en:'English', fa:'فارسی', ku:'Kurdî', bg:'Български', hr:'Hrvatski',
@@ -560,10 +581,21 @@
       pt:'Português', fr:'Français', hu:'Magyar', vi:'Tiếng Việt', hi:'हिन्दी', ur:'اردو',
       ps:'پښتو', ti:'ትግርኛ', so:'Soomaali', zh:'中文'
     };
+    var sitzungsSprache = null; // vom PC per QR vorgegeben — gilt nur, solange die Seite offen ist
     function zielsprache() {
+      if (sitzungsSprache) return sitzungsSprache;
       var p = new URLSearchParams(window.location.search).get('sprache');
-      if (p && SPRACH_NAMEN[p]) { try { localStorage.setItem(SPRACH_SCHLUESSEL, p); } catch (e) {} return p; }
-      try { var g = localStorage.getItem(SPRACH_SCHLUESSEL); if (g && SPRACH_NAMEN[g]) return g; } catch (e) {}
+      if (p && SPRACH_NAMEN[p]) { speicher.set(SPRACH_SCHLUESSEL, p); return p; }
+      var g = speicher.get(SPRACH_SCHLUESSEL); if (g && SPRACH_NAMEN[g]) return g;
+      // RA4: Sprache des HANDYS vorschlagen (nicht speichern — eine Auswahl von Hand gewinnt).
+      // Nicht am PC: Dort wählt die Beraterin die Sprache ihres Gegenübers.
+      var amPc = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      var liste = amPc ? [] : (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+      for (var i = 0; i < liste.length; i++) {
+        var kurz = String(liste[i] || '').toLowerCase().split('-')[0];
+        if (kurz === 'de') break;
+        if (SPRACH_NAMEN[kurz]) return kurz;
+      }
       return 'de';
     }
 
@@ -591,17 +623,21 @@
     // Wallet (passwortloses Guthaben) — Token + zuletzt bekannter Stand lokal.
     var WALLET_SCHLUESSEL = 'bk_wallet';
     var GUTHABEN_SCHLUESSEL = 'bk_guthaben';
-    function walletToken() { return localStorage.getItem(WALLET_SCHLUESSEL) || ''; }
-    function setzeWallet(t) { localStorage.setItem(WALLET_SCHLUESSEL, t); }
-    function guthaben() { return parseInt(localStorage.getItem(GUTHABEN_SCHLUESSEL) || '0', 10); }
-    function setzeGuthaben(n) { localStorage.setItem(GUTHABEN_SCHLUESSEL, String(Math.max(0, n | 0))); }
+    function walletToken() { return speicher.get(WALLET_SCHLUESSEL) || ''; }
+    function setzeWallet(t) { speicher.set(WALLET_SCHLUESSEL, t); }
+    function guthaben() { return parseInt(speicher.get(GUTHABEN_SCHLUESSEL) || '0', 10); }
+    function setzeGuthaben(n) { speicher.set(GUTHABEN_SCHLUESSEL, String(Math.max(0, n | 0))); }
     function hatGuthaben() { return !!walletToken() && guthaben() > 0; }
     // Einrichtungs-Code: Name der Beratungsstelle, über die das Guthaben läuft
     var EINRICHTUNG_SCHLUESSEL = 'bk_einrichtung';
-    function einrichtung() { return localStorage.getItem(EINRICHTUNG_SCHLUESSEL) || ''; }
+    function einrichtung() { return speicher.get(EINRICHTUNG_SCHLUESSEL) || ''; }
+    // BE3: Ablaufdatum des Einrichtungs-Zugangs (kommt beim Einlösen vom Server)
+    var ABLAUF_SCHLUESSEL = 'bk_einrichtung_bis';
+    var CODE_SCHLUESSEL = 'bk_einrichtung_code';
+    function einrichtungBis() { return speicher.get(ABLAUF_SCHLUESSEL) || ''; }
     function setzeEinrichtung(name) {
-      if (name) localStorage.setItem(EINRICHTUNG_SCHLUESSEL, name);
-      else localStorage.removeItem(EINRICHTUNG_SCHLUESSEL);
+      if (name) speicher.set(EINRICHTUNG_SCHLUESSEL, name);
+      else { speicher.remove(EINRICHTUNG_SCHLUESSEL); speicher.remove(ABLAUF_SCHLUESSEL); speicher.remove(CODE_SCHLUESSEL); }
     }
     // Handy ↔ PC: Ist dieses Gerät gerade das Handy, das für einen PC
     // fotografiert? Ein Guthaben aus dem QR-Code (w) gilt nur für diese
@@ -613,12 +649,25 @@
       if (handyModus && handyModus.w) return handyModus.w;
       return hatGuthaben() ? walletToken() : '';
     }
+    /** An den PC melden. Liefert true/false, ob es geklappt hat (Fehler werden nicht geworfen). */
     function meldeAnPc(daten, fach) {
-      if (!handyModus) return Promise.resolve();
-      return BKUebergabe.senden(handyModus.ue, fach || 'status', daten).catch(function () {});
+      if (!handyModus) return Promise.resolve(false);
+      return BKUebergabe.senden(handyModus.ue, fach || 'status', daten)
+        .then(function () { return true; }, function () { return false; });
+    }
+    /** Das Ergebnis ist das Wichtigste: bis zu 3 Versuche mit kurzer Pause. */
+    async function ergebnisAnPc(paket) {
+      for (var i = 0; i < 3; i++) {
+        if (await meldeAnPc(paket, 'ergebnis')) return true;
+        await new Promise(function (r) { setTimeout(r, 1500); });
+      }
+      return false;
     }
     function zeigeGuthabenBanner(n) {
-      guthabenText.textContent = einrichtung() ? '🤝 Kostenlos über ' + einrichtung() + ':' : '💳 Ihr Guthaben:';
+      var bis = einrichtungBis();
+      guthabenText.textContent = einrichtung()
+        ? '🤝 Kostenlos über ' + einrichtung() + (bis ? ' (bis ' + deDatum(bis) + ')' : '') + ':'
+        : '💳 Ihr Guthaben:';
       guthabenZahl.textContent = n;
       guthabenBanner.style.display = 'block';
     }
@@ -626,10 +675,43 @@
     // Schlüsselname bewusst 'v2': setzt evtl. falsch gezählte Stände (aus der
     // Testphase) bei bestehenden Besuchern automatisch einmalig zurück.
     var SPEICHER_SCHLUESSEL = 'bk_demo_v2';
-    function benutzt() { return parseInt(localStorage.getItem(SPEICHER_SCHLUESSEL) || '0', 10); }
-    function setzeBenutzt(n) { localStorage.setItem(SPEICHER_SCHLUESSEL, String(n)); }
+    function benutzt() { return parseInt(speicher.get(SPEICHER_SCHLUESSEL) || '0', 10); }
+    function setzeBenutzt(n) { speicher.set(SPEICHER_SCHLUESSEL, String(n)); }
 
+    var LEER_HINWEIS = 'Die kostenlosen Analysen sind aufgebraucht oder abgelaufen. Ratsuchende: Bitte fragen Sie bei Ihrer Beratungsstelle nach. Beratungsstelle: Ein Anruf genügt, Justin Klein, 0170 4969375. Nach dem Aufladen einfach diese Seite neu laden oder den Code unten noch einmal eingeben.';
+    var KEIN_ZUGANG_HANDY = 'Auf diesem Handy sind die kostenlosen Analysen verbraucht. Bitte am Computer den Code der Beratungsstelle einlösen und dann einen neuen QR-Code erzeugen.';
     function zeigeStand() {
+      if (handyModus && handyModus.fertig) return;
+      // Handy-Modus: nie Kaufangebot oder Code-Feld (die Beratung ist dabei)
+      if (handyModus && !handyModus.w) {
+        kaufBlock.style.display = 'none';
+        codeTeil.style.display = 'none';
+        guthabenBanner.style.display = 'none';
+        if (benutzt() >= 2) {
+          eingabe.style.display = 'none';
+          fehlerBox.style.display = 'block';
+          fehlerBox.textContent = KEIN_ZUGANG_HANDY;
+          meldeAnPc({ schritt: 'fehler', code: 'kein_zugang', meldung: 'Am Handy sind die kostenlosen Analysen verbraucht.' });
+        } else {
+          eingabe.style.display = 'block';
+          emailTeil.style.display = benutzt() === 1 ? 'block' : 'none';
+        }
+        return;
+      }
+      // Einrichtungs-Zugang leer: kein Kaufangebot (Ratsuchende zahlen nichts),
+      // Code-Feld bleibt, damit nach dem Aufladen ein neues Öffnen reicht
+      if (einrichtung() && walletToken() && guthaben() <= 0 && !(handyModus && handyModus.w)) {
+        eingabe.style.display = 'none';
+        guthabenBanner.style.display = 'none';
+        kaufBlock.style.display = 'none';
+        codeTeil.style.display = 'block';
+        fehlerBox.style.display = 'block';
+        fehlerBox.textContent = LEER_HINWEIS;
+        return;
+      }
+      if (einrichtung() && hatGuthaben()) {
+        document.querySelector('#demo .formular-kopf').textContent = 'Antrag auf Klartext · kostenlos über ' + einrichtung();
+      }
       if (handyModus && handyModus.w) {
         eingabe.style.display = 'block';
         guthabenBanner.style.display = 'none';
@@ -657,16 +739,25 @@
       if (benutzt() >= 2) {
         eingabe.style.display = 'none';
         fehlerBox.style.display = 'block';
-        fehlerBox.innerHTML = 'Ihre 2 Gratis-Analysen sind verbraucht. Kaufen Sie unten <strong>Guthaben</strong>, um hier direkt weiterzumachen — oder tragen Sie sich für die App ein.';
+        fehlerBox.innerHTML = 'Ihre 2 Gratis-Analysen sind verbraucht. Haben Sie einen <strong>Code von einer Beratungsstelle</strong>? Dann geben Sie ihn direkt hier unten ein. Sonst können Sie unten <strong>Guthaben</strong> kaufen.';
         werbung.style.display = 'block';
       } else if (benutzt() === 1) {
         emailTeil.style.display = 'block';
       }
     }
 
-    konsens.addEventListener('change', function () { startKnopf.disabled = !konsens.checked; });
+    konsens.addEventListener('change', function () {
+      if (konsens.checked && fehlerBox.dataset.art === 'konsens') fehlerBox.style.display = 'none';
+    });
     startKnopf.addEventListener('click', function () {
       fehlerBox.style.display = 'none';
+      if (!konsens.checked) {
+        zeigeFehler('Bitte zuerst oben das Häkchen bei der Einwilligung setzen.');
+        fehlerBox.dataset.art = 'konsens';
+        konsens.closest('label').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        konsens.focus();
+        return;
+      }
       if (!walletFuerAnalyse() && benutzt() >= 1 && !emailFeld.value.trim()) {
         emailTeil.style.display = 'block';
         emailFeld.focus();
@@ -676,10 +767,39 @@
       dateiFeld.click();
     });
     dateiFeld.addEventListener('change', function () {
-      if (dateiFeld.files && dateiFeld.files[0]) starteAnalyse(dateiFeld.files[0]);
+      var datei = dateiFeld.files && dateiFeld.files[0];
+      // Feld leeren: sonst meldet der Browser dieselbe Datei beim zweiten Versuch nicht
+      dateiFeld.value = '';
+      if (datei) starteAnalyse(datei);
     });
 
+    /** Freundlicher Hinweis (kein Fehler) — nutzt das Feld über dem Upload. */
+    function zeigeHinweis(text) {
+      kaufOk.textContent = 'ℹ️ ' + text;
+      kaufOk.style.display = 'block';
+    }
+
+    function zeigeFertigBanner(angekommen, ohneUebersetzung, paket) {
+      verbundenBanner.innerHTML = '';
+      verbundenBanner.appendChild(document.createTextNode(angekommen
+        ? '✅ Fertig. Die Erklärung steht hier und auf dem Computer. Für einen weiteren Brief tippt die Beratung am Computer noch einmal auf „Lieber mit dem Handy fotografieren".'
+        : '⚠️ Die Erklärung steht hier, ist aber am Computer nicht angekommen.'));
+      if (ohneUebersetzung) verbundenBanner.appendChild(document.createTextNode(' Die Übersetzung hat diesmal nicht geklappt, deshalb steht die Erklärung auf Deutsch.'));
+      if (!angekommen) {
+        var knopf = document.createElement('button');
+        knopf.type = 'button'; knopf.className = 'cta cta-zwei';
+        knopf.textContent = '🔁 Noch einmal an den Computer senden';
+        knopf.addEventListener('click', async function () {
+          knopf.disabled = true; knopf.textContent = 'Wird gesendet …';
+          var ok = await ergebnisAnPc(paket);
+          zeigeFertigBanner(ok, ohneUebersetzung, paket);
+        });
+        verbundenBanner.appendChild(knopf);
+      }
+    }
+
     function zeigeFehler(text) {
+      fehlerBox.dataset.art = '';
       fehlerBox.style.display = 'block';
       fehlerBox.textContent = text;
     }
@@ -761,10 +881,19 @@
           status.style.display = 'none';
           eingabe.style.display = 'block';
           if (window.turnstile) window.turnstile.reset();
-          meldeAnPc({ schritt: 'fehler', meldung: daten.meldung || '' });
+          meldeAnPc({ schritt: 'fehler', code: daten.code || '', meldung: daten.meldung || '' });
           // Guthaben vom PC: Fehler nur anzeigen, am Handy nichts umstellen
           if (handyModus && handyModus.w) {
             zeigeFehler(daten.meldung || 'Etwas ist schiefgelaufen. Bitte erneut versuchen.');
+            return;
+          }
+          // Handy ohne Zugang vom PC: Kontingent-Fehler nicht als Kaufangebot zeigen
+          if (handyModus && /^(aufgebraucht|kein_guthaben|budget)$/.test(daten.code || '')) {
+            if (daten.code === 'aufgebraucht') setzeBenutzt(2);
+            eingabe.style.display = 'none';
+            fehlerBox.style.display = 'block';
+            fehlerBox.textContent = KEIN_ZUGANG_HANDY;
+            meldeAnPc({ schritt: 'fehler', code: 'kein_zugang', meldung: 'Am Handy sind die kostenlosen Analysen verbraucht.' });
             return;
           }
           if (daten.code === 'email_noetig') {
@@ -781,11 +910,9 @@
             return;
           }
           if (daten.code === 'kontingent_leer' || daten.code === 'kontingent_abgelaufen') {
-            setzeWallet('');
+            vergissHandySitzung();
             setzeGuthaben(0);
-            setzeEinrichtung(null);
             zeigeStand();
-            zeigeFehler(daten.meldung);
             return;
           }
           if (daten.code === 'kein_guthaben') {
@@ -801,17 +928,32 @@
 
         // Token erneuern — sonst würde die nächste Analyse ein "Seite neu laden" verlangen
         if (window.turnstile) window.turnstile.reset();
+        // Die Einwilligung gilt für genau diesen Brief: für den nächsten neu fragen
+        konsens.checked = false;
 
         // Handy fotografiert für den PC: Ergebnis verschlüsselt hinüberschicken
-        await meldeAnPc({
+        var paketFuerPc = {
           analyse: daten.analyse, analyse_de: daten.analyse_de, sprache: daten.sprache,
           guthaben: daten.guthaben, einrichtung: daten.einrichtung,
-        }, 'ergebnis');
+        };
+        var amPcAngekommen = handyModus ? await ergebnisAnPc(paketFuerPc) : false;
         var analyse = bereiteVersionen(daten, false);
+        if (daten.uebersetzung_fehlgeschlagen) {
+          zeigeHinweis('Die Übersetzung hat diesmal nicht geklappt. Die Erklärung steht hier auf Deutsch.');
+        }
 
-        if (handyModus && handyModus.w) {
+        // Handy hat für den PC fotografiert: Verbindung ist damit erledigt.
+        // (Der PC wartet nicht mehr — ein zweiter Brief käme dort nie an.)
+        if (handyModus) {
+          if (!handyModus.w && typeof daten.versuch === 'number') setzeBenutzt(Math.max(benutzt(), daten.versuch));
+          handyModus.fertig = true;
           zeigeAnalyse(analyse);
-          eingabe.style.display = 'block';
+          eingabe.style.display = 'none';
+          kaufBlock.style.display = 'none';
+          codeTeil.style.display = 'none';
+          werbung.style.display = 'none';
+          vergissHandySitzung();
+          zeigeFertigBanner(amPcAngekommen, daten.uebersetzung_fehlgeschlagen, paketFuerPc);
           document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth' });
           return;
         }
@@ -829,25 +971,42 @@
         status.style.display = 'none';
         eingabe.style.display = 'block';
         if (window.turnstile) window.turnstile.reset();
+        meldeAnPc({ schritt: 'fehler', code: 'verbindung', meldung: 'Verbindung fehlgeschlagen.' });
         zeigeFehler('Verbindung fehlgeschlagen. Bitte prüfen Sie Ihr Internet und versuchen Sie es erneut.');
       }
     }
 
     /** Ampel wie in der App: rot ≤ 7 Tage, gelb ≤ 21, sonst grün. */
+    /** Ganze Kalendertage von heute bis zum ISO-Datum (wie tageBis() in der App).
+     *  Früher wurde bis 12 Uhr mittags gerechnet — dann zeigte ein Termin in
+     *  7 Tagen vormittags „8 Tage" und Gelb statt Rot. */
+    function kalenderTage(iso) {
+      var t = String(iso).split('-');
+      var heute = new Date();
+      var a = Date.UTC(heute.getFullYear(), heute.getMonth(), heute.getDate());
+      var b = Date.UTC(+t[0], +t[1] - 1, +t[2]);
+      return Math.round((b - a) / 86400000);
+    }
     function ampel(analyse) {
       var daten = [];
-      if (analyse.frist && analyse.frist.datum) daten.push(analyse.frist.datum);
-      if (analyse.termin && analyse.termin.datum) daten.push(analyse.termin.datum);
+      if (analyse.frist && isoGueltig(analyse.frist.datum)) daten.push({ iso: analyse.frist.datum, art: 'Frist' });
+      if (analyse.termin && isoGueltig(analyse.termin.datum)) daten.push({ iso: analyse.termin.datum, art: 'Termin' });
       if (!daten.length) return null;
-      daten.sort();
-      var tage = Math.ceil((new Date(daten[0] + 'T12:00:00') - new Date()) / 86400000);
+      daten.sort(function (x, y) { return x.iso < y.iso ? -1 : x.iso > y.iso ? 1 : 0; });
+      // Das nächste kommende Datum zählt; nur wenn alles vorbei ist, das zuletzt vergangene
+      var kommend = daten.filter(function (d) { return kalenderTage(d.iso) >= 0; });
+      var erstes = kommend.length ? kommend[0] : daten[daten.length - 1];
+      var tage = kalenderTage(erstes.iso);
       if (isNaN(tage)) return null;
       var farbe = tage <= 7 ? 'var(--rot)' : tage <= 21 ? 'var(--gelb)' : 'var(--gruen)';
       var punkt = tage <= 7 ? '🔴' : tage <= 21 ? '🟡' : '🟢';
-      var text = tage < 0 ? 'Die Frist ist womöglich schon vorbei!' :
-                 tage === 0 ? 'HEUTE ist der wichtige Tag!' :
-                 'Noch ' + tage + ' Tage Zeit (' + daten[0].split('-').reverse().join('.') + ')';
-      return { farbe: farbe, text: punkt + ' ' + text };
+      var datum = deDatum(erstes.iso);
+      var wann = erstes.art === 'Termin' ? 'Termin am ' + datum : 'Frist bis ' + datum;
+      var text = tage < 0 ? (erstes.art === 'Termin' ? 'Der Termin war am ' + datum + '!' : 'Die Frist ist womöglich schon vorbei (' + datum + ')!') :
+                 tage === 0 ? 'HEUTE: ' + wann + '!' :
+                 tage === 1 ? 'Morgen: ' + wann :
+                 'Noch ' + tage + ' Tage · ' + wann;
+      return { farbe: farbe, text: punkt + ' ' + text, istFrist: erstes.art === 'Frist' };
     }
 
     // Eine Analyse kann in zwei Sprachen vorliegen (PC Deutsch, Handy Muttersprache).
@@ -857,7 +1016,10 @@
     function bereiteVersionen(d, deutschZuerst) {
       letzteDaten = { analyse: d.analyse, analyse_de: d.analyse_de, sprache: d.sprache || 'de' };
       versionen = [{ code: letzteDaten.sprache, analyse: d.analyse }];
-      if (d.analyse_de) versionen[deutschZuerst ? 'unshift' : 'push']({ code: 'de', analyse: d.analyse_de });
+      // Zweite Fassung nur, wenn sie wirklich eine andere Sprache ist
+      if (d.analyse_de && letzteDaten.sprache !== 'de') {
+        versionen[deutschZuerst ? 'unshift' : 'push']({ code: 'de', analyse: d.analyse_de });
+      }
       aktiveVersion = 0;
       return versionen[0].analyse;
     }
@@ -891,9 +1053,14 @@
       if (a) {
         ampelEl.style.display = 'block';
         ampelEl.style.color = a.farbe;
-        var teile = [a.text];
-        if (analyse.frist && analyse.frist.aktion) teile.push(analyse.frist.aktion);
-        ampelEl.textContent = teile.join(' · ');
+        ampelEl.textContent = a.text;
+        // Die Aufgabe gehört zur Frist — nur anhängen, wenn die Frist das früheste Datum ist.
+        // KI-Text in eigenes <bdi>, damit Arabisch/Farsi richtig herum läuft.
+        if (a.istFrist && analyse.frist && analyse.frist.aktion) {
+          ampelEl.appendChild(document.createTextNode(' · '));
+          var bdi = document.createElement('bdi'); bdi.textContent = analyse.frist.aktion;
+          ampelEl.appendChild(bdi);
+        }
       }
 
       if (analyse.checkliste && analyse.checkliste.length) {
@@ -910,6 +1077,7 @@
             var sum = document.createElement('summary');
             sum.textContent = b.begriff;
             var p = document.createElement('p');
+            p.setAttribute('dir', 'auto');
             p.textContent = b.erklaerung;
             det.appendChild(sum); det.appendChild(p);
             return det.outerHTML;
@@ -938,6 +1106,8 @@
           zeigeGuthabenBanner(guthabenRest);
           emailTeil.style.display = 'none';
           kaufBlock.style.display = 'none';
+        } else if (einrichtung()) {
+          zeigeStand(); // Leer-Hinweis mit Telefonnummer — kein Kaufangebot für Ratsuchende
         } else {
           eingabe.style.display = 'none';
           guthabenBanner.style.display = 'none';
@@ -1055,7 +1225,11 @@
       var termin = a.termin && isoGueltig(a.termin.datum) ? a.termin : null;
       var box = document.getElementById('ergKalenderText');
       box.innerHTML = '';
-      function zeile(text) { var p = document.createElement('p'); p.setAttribute('dir', 'auto'); p.textContent = text; box.appendChild(p); }
+      function zeile(text, kiText) {
+        var p = document.createElement('p'); p.setAttribute('dir', 'auto'); p.textContent = text;
+        if (kiText) { p.appendChild(document.createTextNode(' — ')); var b = document.createElement('bdi'); b.textContent = kiText; p.appendChild(b); }
+        box.appendChild(p);
+      }
 
       // Kein Datum im Brief: trotzdem sichtbar sagen, dass gesucht wurde.
       // Sonst weiss niemand, ob nichts da ist oder etwas kaputt ist — und
@@ -1080,8 +1254,8 @@
       knopf.style.display = '';
       hinweis.style.display = '';
       karte.style.border = '2px solid var(--amtsblau)';
-      if (frist) zeile('⚠️ Frist: ' + deDatum(frist.datum) + (frist.aktion ? ' — ' + frist.aktion : ''));
-      if (termin) zeile('📅 Termin: ' + deDatum(termin.datum) + (termin.uhrzeit ? ', ' + termin.uhrzeit + ' Uhr' : '') + (termin.ort ? ' — ' + termin.ort : ''));
+      if (frist) zeile('⚠️ Frist: ' + deDatum(frist.datum), frist.aktion);
+      if (termin) zeile('📅 Termin: ' + deDatum(termin.datum) + (termin.uhrzeit ? ', ' + termin.uhrzeit + ' Uhr' : ''), termin.ort);
       karte.style.display = 'block';
     }
 
@@ -1130,7 +1304,8 @@
         kopf.style.marginTop = '12px';
         kopf.innerHTML = '<strong>Das können Sie am Telefon sagen:</strong>';
         liste.appendChild(kopf);
-        var mitBedeutung = zielsprache() !== 'de';
+        var angezeigt = versionen.length ? versionen[aktiveVersion].code : zielsprache();
+        var mitBedeutung = angezeigt !== 'de';
         saetze.forEach(function (s) {
           var d = document.createElement('div'); d.className = 'anruf-satz';
           var de = document.createElement('p'); de.className = 'anruf-de';
@@ -1231,8 +1406,13 @@
     }
 
     // ---- Einrichtungs-Code einlösen ------------------------------------
+    /** „mbe k7qx", „MBEK7QX", „MBE-K7QX" → „MBE-K7QX" (wie im Worker). */
+    function normCode(c) {
+      var roh = String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+      return roh.length > 4 ? roh.slice(0, -4) + '-' + roh.slice(-4) : roh;
+    }
     function loeseCodeEin(code) {
-      code = String(code || '').trim().toUpperCase();
+      code = normCode(code);
       if (!code) { codeFeld.focus(); return; }
       if (walletToken() && guthaben() > 0 && !einrichtung() &&
           !window.confirm('Sie haben noch gekauftes Guthaben. Wenn Sie den Code einlösen, nutzt diese Seite den Code. Ihr gekauftes Guthaben bleibt über den Link in Ihrer Kauf-E-Mail erhalten. Weiter?')) {
@@ -1257,11 +1437,11 @@
           setzeWallet(res.d.token);
           setzeGuthaben(res.d.guthaben);
           setzeEinrichtung(res.d.einrichtung);
+          if (res.d.ablauf) speicher.set(ABLAUF_SCHLUESSEL, res.d.ablauf);
+          speicher.set(CODE_SCHLUESSEL, code);
+          zeichneHandyQr();
           zeigeStand();
-          if (res.d.guthaben <= 0) {
-            zeigeFehler('Die Analysen von ' + res.d.einrichtung + ' sind aufgebraucht. Bitte fragen Sie dort nach.');
-            return;
-          }
+          if (res.d.guthaben <= 0) return; // zeigeStand zeigt den Leer-Hinweis mit Telefonnummer
           kaufOk.textContent = '✅ Code eingelöst. BehördenKlar ist für Sie kostenlos, über ' + res.d.einrichtung + '.';
           kaufOk.style.display = 'block';
         })
@@ -1294,13 +1474,19 @@
     function zeichneHandyQr() {
       if (!pcWarten) return;
       var sprache = zielsprache();
-      handyDeutschZeile.style.display = sprache === 'de' ? 'none' : 'flex';
+      // d=1 auch bei „Deutsch" am PC: Stellt die Person am Handy ihre eigene
+      // Sprache ein, bekommt die Beraterin trotzdem die deutsche Fassung.
       zeigeQr(handyQr, BKUebergabe.adresse({
-        a: 'k', s: pcWarten.ue.id, k: pcWarten.ue.k, l: sprache,
-        d: sprache !== 'de' && handyDeutsch.checked ? '1' : '',
+        // „Deutsch" am PC heißt nur: nichts vorgeben — dann erkennt das Handy seine Sprache selbst
+        a: 'k', s: pcWarten.ue.id, k: pcWarten.ue.k, l: sprache !== 'de' ? sprache : '',
+        d: handyDeutsch.checked ? '1' : '',
         w: hatGuthaben() ? walletToken() : '',
+        e: hatGuthaben() ? einrichtung() : '',
       }));
     }
+    window.addEventListener('beforeunload', function (ev) {
+      if (pcWarten) { ev.preventDefault(); ev.returnValue = ''; }
+    });
     function stoppeWarten() {
       if (pcWarten && pcWarten.timer) clearInterval(pcWarten.timer);
       pcWarten = null;
@@ -1345,19 +1531,54 @@
         var ue = pcWarten.ue;
         var f = await BKUebergabe.holen(ue);
         if (!pcWarten || pcWarten.ue !== ue) return; // inzwischen abgebrochen
+        if ((pcWarten.fehlversuche || 0) >= 5 && !f.status) handyZustand.textContent = '⏳ Warte auf das Handy …';
+        pcWarten.fehlversuche = 0;
+        // Jede neue Meldung vom Handy verlängert das Warten (nicht ab QR-Anzeige rechnen)
+        var schritt = f.status ? f.status.schritt + '|' + (f.status.meldung || '') : '';
+        if (schritt && schritt !== pcWarten.letzterSchritt) {
+          pcWarten.letzterSchritt = schritt;
+          // Verbunden: großzügiger warten (Gespräch vor dem Foto kann dauern)
+          pcWarten.bis = Date.now() + 3 * UEBERGABE_MS;
+          if (f.status.schritt === 'analyse') pcWarten.analyseSeit = Date.now();
+        }
+        if (f.status && f.status.schritt === 'fehler' && /^kontingent_/.test(f.status.code || '')) {
+          // Kontingent leer/abgelaufen: Warten ist sinnlos
+          stoppeWarten();
+          BKUebergabe.loeschen(ue);
+          schliesseHandyBox();
+          setzeGuthaben(0);
+          zeigeStand();
+          return;
+        }
+        if (f.status && f.status.schritt === 'fehler' && f.status.code === 'kein_zugang') {
+          stoppeWarten();
+          BKUebergabe.loeschen(ue);
+          schliesseHandyBox();
+          zeigeFehler('Am Handy sind die kostenlosen Analysen verbraucht. Bitte hier unten den Code der Beratungsstelle einlösen und dann noch einmal auf „Lieber mit dem Handy fotografieren" tippen.');
+          codeTeil.style.display = 'block';
+          codeTeil.open = true;
+          return;
+        }
         if (f.ergebnis) {
           stoppeWarten();
           BKUebergabe.loeschen(ue);
           schliesseHandyBox();
           zeigeVomHandy(f.ergebnis);
         } else if (f.status) {
+          var langsam = f.status.schritt === 'analyse' && pcWarten.analyseSeit && Date.now() - pcWarten.analyseSeit > 3 * 60 * 1000;
           handyZustand.textContent =
-            f.status.schritt === 'analyse' ? '⏳ Das Handy hat fotografiert. Der Brief wird erklärt …' :
+            langsam ? '⚠️ Das dauert ungewöhnlich lange. Bitte am Handy nachsehen: Steht die Erklärung dort schon, auf „Noch einmal an den Computer senden" tippen. Sonst hier abbrechen und neu verbinden.' :
+            f.status.schritt === 'analyse' ? '⏳ Das Handy hat fotografiert. Der Brief wird erklärt (ein bis zwei Minuten) …' :
             f.status.schritt === 'fehler' ? '⚠️ Am Handy hat es nicht geklappt: ' + (f.status.meldung || '') + ' Bitte dort noch einmal versuchen.' :
             '✅ Handy verbunden. Jetzt am Handy den Brief fotografieren.';
         }
       } catch (e) {
-        // kurz keine Verbindung — beim nächsten Durchlauf erneut versuchen
+        // kurz keine Verbindung — beim nächsten Durchlauf erneut versuchen,
+        // aber nach mehreren Fehlschlägen sichtbar sagen, woran es liegt
+        if (pcWarten) {
+          pcWarten.fehlversuche = (pcWarten.fehlversuche || 0) + 1;
+          if (pcWarten.fehlversuche >= 5) handyZustand.textContent = '⚠️ Keine Verbindung zum Server. Bitte das Internet dieses Computers prüfen.';
+        }
       } finally {
         pruefeLaeuft = false;
       }
@@ -1409,16 +1630,22 @@
       }
 
       if (h.a === 'k') {
-        handyModus = { ue: ue, w: h.w || '', d: h.d === '1' };
+        handyModus = { ue: ue, w: h.w || '', d: h.d === '1', e: h.e || '' };
         if (h.l && SPRACH_NAMEN[h.l]) {
-          try { localStorage.setItem(SPRACH_SCHLUESSEL, h.l); } catch (e) {}
+          // nicht dauerhaft speichern: Es ist das Handy der Person, nicht der Beratung
+          sitzungsSprache = h.l;
           document.getElementById('sprachWahl').value = h.l;
         }
-        verbundenBanner.textContent = '🔗 Mit dem Computer verbunden. Fotografieren Sie jetzt Ihren Brief. Die Erklärung erscheint hier und auf dem Bildschirm.';
+        verbundenBanner.textContent = '🔗 Mit dem Computer verbunden. Setzen Sie das Häkchen und fotografieren Sie Ihren Brief. Die Erklärung erscheint hier und auf dem Bildschirm.';
         verbundenBanner.style.display = 'block';
         handyKnopf.style.display = 'none';
+        if (handyModus.e) document.querySelector('#demo .formular-kopf').textContent = 'Antrag auf Klartext · kostenlos über ' + handyModus.e;
+        // „verbunden" zuerst melden — zeigeStand meldet danach ggf. „kein Zugang",
+        // und das darf nicht von „verbunden" überschrieben werden
+        await meldeAnPc({ schritt: 'verbunden' });
         zeigeStand();
-        meldeAnPc({ schritt: 'verbunden' });
+        if (handyModus.w) { kaufBlock.style.display = 'none'; codeTeil.style.display = 'none'; }
+        verbundenBanner.scrollIntoView({ behavior: 'smooth', block: 'start' });
         return;
       }
 
@@ -1438,6 +1665,8 @@
           return;
         }
         BKUebergabe.loeschen(ue);
+        codeTeil.style.display = 'none';
+        kaufBlock.style.display = 'none';
         verbundenBanner.textContent = '📱 Vom Computer übernommen. Tragen Sie die Frist gleich in Ihren Kalender ein, dann vergessen Sie nichts.';
         verbundenBanner.style.display = 'block';
         zeigeAnalyse(bereiteVersionen(f.ergebnis, false));
@@ -1458,6 +1687,8 @@
       kaufOk.style.display = 'block';
       zeigeStand();
     }
+
+    function vergissHandySitzung() { try { sessionStorage.removeItem('bk_handy'); } catch (e) {} }
 
     function pruefeRueckkehr() {
       var p = new URLSearchParams(window.location.search);
@@ -1493,24 +1724,43 @@
       var aktiv = zielsprache();
       Object.keys(SPRACH_NAMEN).forEach(function (c) {
         var o = document.createElement('option');
-        o.value = c; o.textContent = SPRACH_NAMEN[c];
+        o.value = c; o.textContent = SPRACH_NAMEN[c] + (SPRACH_DEUTSCH[c] ? ' – ' + SPRACH_DEUTSCH[c] : '');
         if (c === aktiv) o.selected = true;
         feld.appendChild(o);
       });
       feld.addEventListener('change', function () {
-        try { localStorage.setItem(SPRACH_SCHLUESSEL, feld.value); } catch (e) {}
+        speicher.set(SPRACH_SCHLUESSEL, feld.value);
+        sitzungsSprache = null;
+        if (/[?&]sprache=/.test(window.location.search) && window.history.replaceState) {
+          var u = new URL(window.location.href);
+          u.searchParams.delete('sprache');
+          window.history.replaceState(null, document.title, u.pathname + u.search + u.hash);
+        }
         zeichneHandyQr();
       });
     })();
 
     rendrePakete();
     var startHash = BKUebergabe.ausAdresse();
+    var startSuche = window.location.search; // vor pruefeRueckkehr, das die Adresse aufräumt
+    // Handy-Verbindung übersteht ein Neuladen (z. B. wenn Android den Tab beim
+    // Kamera-Wechsel neu lädt). sessionStorage gilt nur für diesen einen Tab.
+    try {
+      if (startHash && startHash.a === 'k') sessionStorage.setItem('bk_handy', JSON.stringify(startHash));
+      else if (!startHash) { var gemerkt = sessionStorage.getItem('bk_handy'); if (gemerkt) startHash = JSON.parse(gemerkt); }
+    } catch (e) {}
     if (startHash && window.history.replaceState) {
       // Schlüssel nicht im Browser-Verlauf stehen lassen
       window.history.replaceState(null, document.title, window.location.pathname + window.location.search);
     }
     pruefeRueckkehr();
     zeigeStand();
+    // Einrichtungs-Zugang leer? Einmal still nachfragen — vielleicht wurde
+    // inzwischen aufgeladen oder verlängert (genau ein Aufruf pro Seitenaufruf)
+    if (!startHash && einrichtung() && walletToken() && guthaben() <= 0 && speicher.get(CODE_SCHLUESSEL)
+        && !/[?&](code|wallet|kauf)=/.test(startSuche)) {
+      loeseCodeEin(speicher.get(CODE_SCHLUESSEL));
+    }
     handyKnopf.style.display = istPc ? 'block' : 'none';
     document.getElementById('guthabenHandyKnopf').style.display = istPc ? '' : 'none';
     pruefeUebergabe(startHash);

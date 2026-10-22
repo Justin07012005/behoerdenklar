@@ -1,8 +1,9 @@
 /**
  * Einrichtungs-Codes für Beratungsstellen anlegen und verwalten.
  *
+ *   node tools/einrichtungs-code.js neu "MBE Donnersberg" MBE --briefe 100 --bis 2026-12-18
  *   node tools/einrichtungs-code.js neu "MBE Donnersberg" MBE --briefe 100 --monate 1
- *   node tools/einrichtungs-code.js stand MBE-K7QX
+ *   node tools/einrichtungs-code.js stand MBE-K7QX       (mit Nutzung nach Woche und Sprache)
  *   node tools/einrichtungs-code.js aufladen MBE-K7QX 100
  *   node tools/einrichtungs-code.js verlaengern MBE-K7QX 2027-06-30
  *
@@ -49,8 +50,26 @@ function plusMonate(monate) {
   return d.toISOString().slice(0, 10);
 }
 
+/** Wie im Worker: „mbe k7qx" → „MBE-K7QX". */
+function normCode(c) {
+  const roh = String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  return roh.length > 4 ? `${roh.slice(0, -4)}-${roh.slice(-4)}` : roh;
+}
+
+/** Nutzung je Analyse (vom Worker: nutzung:<walletId>:<datum>:<sprache>:<zufall>). */
+function nutzung(walletId) {
+  let liste = [];
+  try {
+    liste = JSON.parse(kv('list', '--prefix', `nutzung:${walletId}:`));
+  } catch { return null; }
+  return liste.map((e) => {
+    const [, , datum, sprache] = e.name.split(':');
+    return { datum, sprache };
+  });
+}
+
 function ladeCode(code) {
-  code = String(code || '').toUpperCase();
+  code = normCode(code);
   const walletId = lies(`code:${code}`);
   if (!walletId) abbruch(`Code ${code} gibt es nicht.`);
   const einrichtung = JSON.parse(lies(`einrichtung:${walletId}`) || '{}');
@@ -58,14 +77,31 @@ function ladeCode(code) {
   return { code, walletId, einrichtung, rest };
 }
 
-function zeige({ code, einrichtung, rest }) {
+function zeige({ code, einrichtung, rest, walletId }) {
   const heute = new Date().toISOString().slice(0, 10);
+  const n = walletId ? nutzung(walletId) : null;
+  let auswertung = '';
+  if (n && n.length) {
+    const proWoche = {}, proSprache = {};
+    for (const { datum, sprache } of n) {
+      const d = new Date(`${datum}T00:00:00Z`);
+      const montag = new Date(d.getTime() - ((d.getUTCDay() + 6) % 7) * 86400000).toISOString().slice(0, 10);
+      proWoche[montag] = (proWoche[montag] || 0) + 1;
+      proSprache[sprache] = (proSprache[sprache] || 0) + 1;
+    }
+    auswertung = `
+  Genutzt:      ${n.length} Briefe
+  Pro Woche:    ${Object.keys(proWoche).sort().map((w) => `ab ${w}: ${proWoche[w]}`).join(' · ')}
+  Sprachen:     ${Object.entries(proSprache).sort((a, b) => b[1] - a[1]).map(([s, z]) => `${s} ${z}`).join(' · ')}`;
+  } else if (n) {
+    auswertung = '\n  Genutzt:      noch keine Briefe';
+  }
   console.log(`
   Einrichtung:  ${einrichtung.name}
   Code:         \x1b[1m${code}\x1b[0m
   Übrig:        ${rest} Briefe
   Gültig bis:   ${einrichtung.ablauf}${einrichtung.ablauf < heute ? '  \x1b[31m(abgelaufen)\x1b[0m' : ''}
-  Link:         https://behoerdenklar.de/demo?code=${code}
+  Link:         https://behoerdenklar.de/demo?code=${code}${auswertung}
 `);
 }
 
@@ -78,7 +114,10 @@ if (befehl === 'neu') {
     abbruch('So geht es: node tools/einrichtungs-code.js neu "MBE Donnersberg" MBE --briefe 100 --monate 1');
   }
   const briefe = parseInt(option('briefe', '100'), 10);
-  const ablauf = option('bis', plusMonate(parseInt(option('monate', '1'), 10)));
+  const monate = parseInt(option('monate', '1'), 10);
+  const ablauf = option('bis', Number.isFinite(monate) && monate > 0 ? plusMonate(monate) : '');
+  if (!(briefe > 0)) abbruch('--briefe braucht eine Zahl größer 0, z. B. --briefe 100');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(ablauf)) abbruch('--bis braucht ein Datum wie 2026-12-18 (oder --monate 1)');
   const code = `${praefix}-${zufall(4)}`;
   if (lies(`code:${code}`)) abbruch('Zufällig schon vergeben — einfach nochmal ausführen.');
   const walletId = crypto.randomUUID();
@@ -86,7 +125,7 @@ if (befehl === 'neu') {
   schreib(`einrichtung:${walletId}`, JSON.stringify({ name, ablauf }));
   schreib(`code:${code}`, walletId);
   console.log('\n  \x1b[32m✓ Code angelegt\x1b[0m');
-  zeige({ code, einrichtung: { name, ablauf }, rest: briefe });
+  zeige({ code, einrichtung: { name, ablauf }, rest: briefe, walletId });
 } else if (befehl === 'stand') {
   zeige(ladeCode(a));
 } else if (befehl === 'aufladen') {

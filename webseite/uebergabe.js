@@ -69,7 +69,9 @@
 
   /** Alle Fächer holen und entschlüsseln: { status: {...}, ergebnis: {...} }. */
   async function holen(ue) {
-    var r = await fetch(BASIS + ue.id, { cache: 'no-store' });
+    // Zeitlimit, damit eine hängende Anfrage die Abfrage am PC nicht blockiert
+    var signal = (w.AbortSignal && w.AbortSignal.timeout) ? w.AbortSignal.timeout(10000) : undefined;
+    var r = await fetch(BASIS + ue.id, { cache: 'no-store', signal: signal });
     if (!r.ok) throw new Error('Übergabe nicht erreichbar (' + r.status + ')');
     var faecher = (await r.json()).faecher || {};
     var aus = {};
