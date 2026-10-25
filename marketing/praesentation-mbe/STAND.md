@@ -94,7 +94,8 @@
   - Merke: **Arabisch muss am Laptop eingestellt sein, bevor** du auf „Lieber mit dem Handy fotografieren“ klickst.
   - Für den Spickzettel: „Das dauert etwa eine Minute“ (statt ein bis zwei).
 - ✅ ~~Mo 26.10. MBE anrufen~~: Entscheidung vom 22.10.: Träger und AVV klärst du **erst, wenn die MBE Interesse hat**, also im Termin oder danach. Den Satz dafür findest du im Spickzettel.
-- 👤 **Entscheiden: Testzeitraum.** „1 Monat“ (deine Wahl) oder ein festes Datum „bis 18.12.“ (mein Vorschlag, damit der Code nicht mitten in der Bestellung abläuft). Wichtig ist das erst beim Anlegen des Codes am Di 27.10.
+- ✅ **Testzeitraum entschieden (25.10.):** genau 1 Monat, der Code gilt **bis So 29.11.2026**. Will die MBE weitermachen, verlängere ich ihn mit einem Befehl.
+  Befehl für Di 27.10.: `node tools/einrichtungs-code.js neu "MBE Donnersberg" MBE --briefe 100 --bis 2026-11-29`
 - 👤 **Generalproben mitmachen** (mit deinem Handy und Laptop, siehe unten).
 - 👤 🔴 **Alten Anthropic-Schlüssel tauschen**, der im Juli im Chat gepostet wurde (console.anthropic.com → API Keys).
 
