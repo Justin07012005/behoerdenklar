@@ -92,13 +92,13 @@
   - Der Weg zu weiteren Stellen geht über Empfehlungen: FID Alzey → MBE-Stellen des Paritätischen in RLP → Referat Migration in Mainz → Paritätischer Gesamtverband. **Am 29.10. noch nicht ansprechen.**
   - Handzettel und Datenschutz-Blatt an den Faktencheck angepasst (keine Effizienz-Versprechen, „über Ihren Code“, keine Sprache muttersprachlich geprüft).
 - ✅ **Preis entschieden (So 25.10.):** Auf Nachfrage sagst du **„voraussichtlich 290 € im Jahr für bis zu 1.200 Briefe, Endpreis, Richtpreis, Angebot am 26.11.“**. Die alten Pakete (20 € / 75 €) sind zu billig und gestrichen. Bleibt übrig: ca. 160–260 € im Jahr pro Stelle, vor Steuern (geschätzt, noch nicht gemessen). Alles Weitere, auch das Pilot-Angebot für den 26.11. (190 € für 2027, Preisgarantie bis 2029, kostenlose Brücke bis Ende Dezember): **[preise-einrichtungen.md](../preise-einrichtungen.md)**.
-- 🔄 **Drei neue Funktionen für die Beratung (So 25.10., lokal fertig, noch NICHT live):**
+- ✅ **Drei neue Funktionen für die Beratung (So 25.10., live, Gesundheits-Check grün):**
   - **🖨️ Drucken oder als PDF** am PC: nur die Erklärung, mit Name der Stelle und Datum, Fachbegriffe aufgeklappt. Auf Arabisch umgeschaltet druckt man die Fassung für die Person.
   - **✅ Fertig, nächste Person** am PC: Erklärung weg, Sprache zurück auf Deutsch, Häkchen leer, Seite oben. Der Zugang der Stelle bleibt.
   - **🤝 „Noch Fragen zu diesem Brief? Ihre Beratungsstelle … hilft Ihnen gern weiter.“** am Handy unter jeder Erklärung, in 27 Sprachen (übersetzt und gegengelesen). Kommt auch beim „Mitnehmen“ mit. Botschaft für den Pitch: *BehördenKlar schickt die Leute zu Ihnen, nicht weg.*
   - Lokal getestet (PC, Druckansicht, Fertig, Handy Arabisch, Mitnehmen). Gegenprüfung: 19 mögliche Probleme untersucht, alle harmlos. Drei trotzdem abgesichert (Firefox-Häkchen, ?sprache= in der Adresse, Namenslänge). Skripte haben jetzt eine Versionsnummer gegen alten Browser-Speicher.
   - Material angepasst: Kurzanleitung (Schritt 6), Datenschutz-Blatt, Handzettel, Spickzettel, Übungsblatt.
-- ⏳ **Webseite:** In den Metadaten der Demo-Seite stand „WCAG 2.1 AA, Vorlesen“. Lokal korrigiert, **noch nicht veröffentlicht** (nur zusammen mit einem anderen Deploy bis Di, mit deinem OK).
+- ✅ **Webseite:** Metadaten der Demo-Seite ohne „WCAG 2.1 AA, Vorlesen“, live seit So 25.10.
 - ✅ **Entscheidungen (So 25.10.):** Handzettel-Code nur für Mitarbeitende. Anthropic-Schlüssel wird **erst am Fr 30.10.** getauscht (kein Risiko vor dem Termin).
 - ℹ️ Der Live-Test im automatisierten Browser ging nicht, weil Cloudflare ferngesteuerte Browser blockt. Deshalb ist der echte Test die **Generalprobe morgen mit deinen Geräten**.
 - ✅ **Sprach-Durchlauf (lokal, Handy-Größe 375 px):** alle 27 Sprachen nacheinander eingestellt. In jeder Sprache ist **kein deutscher Text mehr übrig**, **nichts ragt über den Rand**, die Schreibrichtung stimmt (Arabisch, Farsi, Urdu und Paschtu von rechts). Tigrinya und Hindi zusätzlich mit Bildschirmfoto angeschaut: Schrift sauber.
