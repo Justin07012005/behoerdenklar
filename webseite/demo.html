@@ -211,6 +211,28 @@
       margin-top: 18px; font-size: 14px; color: var(--grau);
       border-top: 1px dashed rgba(33,33,29,0.3); padding-top: 12px;
     }
+    /* Einrichtungs-Zugang: Hinweis auf die Beratungsstelle unter der Erklärung (nur am Handy) */
+    .stelle-hinweis {
+      margin-top: 18px; padding: 12px 14px; background: #fff;
+      border: 1.5px solid var(--tinte); border-inline-start: 6px solid var(--amtsblau); font-size: 16.5px;
+    }
+    /* PC: Drucken und „Fertig, nächste Person" */
+    .pc-aktionen { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
+    .pc-aktionen .cta { width: auto; flex: 1 1 230px; margin-top: 0; }
+    .nur-druck { display: none; }
+    @media print {
+      @page { margin: 14mm; }
+      body { background: #fff !important; }
+      .wrap { max-width: none; padding: 0; }
+      .wrap > *:not(#ergebnis):not(.briefkopf) { display: none !important; }
+      #sprachUmschalter, #kalenderKnopf, #ergKalenderHinweis, #mitnehmenTeil, .stelle-hinweis { display: none !important; }
+      .nur-druck { display: block !important; }
+      .brief-karte { break-inside: avoid; box-shadow: none !important; }
+      #ergAnrufKontakt .cta { background: none !important; color: var(--tinte) !important; border: none !important;
+        box-shadow: none !important; padding: 0 !important; font-size: 17px; }
+      details > summary { list-style: none; }
+      details > summary::-webkit-details-marker { display: none; }
+    }
 
     /* Warteliste-Formular (wie Startseite) */
     .wl-form { display: flex; flex-direction: column; gap: 12px; margin-top: 4px; }
@@ -449,6 +471,7 @@
 
     <section id="ergebnis">
       <h2><span class="nr">§ 3</span> <span data-t="ergebnisTitel">Ihr Brief in Klartext</span></h2>
+      <p class="nur-druck klein" id="druckDatum"></p>
       <div class="umschalter" id="sprachUmschalter" role="group" aria-label="Sprache der Erklärung"></div>
 
       <div class="brief-karte">
@@ -495,7 +518,13 @@
           <div class="qr" id="mitnehmenQr"></div>
           <p class="klein" style="margin-top: 0;">Mit der Handy-Kamera scannen. Dort gibt es den Kalender-Eintrag und die Anruf-Hilfe. Verschlüsselt, der Code gilt 15 Minuten.</p>
         </div>
+        <div class="pc-aktionen">
+          <button class="cta cta-zwei" id="druckKnopf" type="button">🖨️ Drucken oder als PDF</button>
+          <button class="cta cta-zwei" id="fertigKnopf" type="button">✅ Fertig, nächste Person</button>
+        </div>
       </div>
+
+      <p class="stelle-hinweis" id="ergStelle" style="display: none;"></p>
 
       <p class="hinweis-recht" data-t="rechtHinweis">
         ⚖️ BehördenKlar erklärt Briefe, ersetzt aber keine Rechtsberatung. Bei
@@ -547,9 +576,9 @@
   </div>
 
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-  <script src="qrcode.js"></script>
-  <script src="uebergabe.js"></script>
-  <script src="ui-texte.js"></script>
+  <script src="qrcode.js?v=2026-10-26"></script>
+  <script src="uebergabe.js?v=2026-10-26"></script>
+  <script src="ui-texte.js?v=2026-10-26"></script>
   <script>
   (function () {
     'use strict';
@@ -1147,6 +1176,7 @@
 
       zeigeKalender(analyse);
       zeigeAnruf(analyse);
+      zeigeStellenHinweis();
       zeichneUmschalter();
       document.getElementById('mitnehmenTeil').style.display = istPc && !handyModus && !leseModus ? 'block' : 'none';
       document.getElementById('mitnehmenBox').style.display = 'none';
@@ -1654,6 +1684,53 @@
       document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth' });
     }
 
+    // ---- Hinweis auf die Beratungsstelle (nur am Handy) --------------------
+    // Mit Einrichtungs-Code steht unter jeder Erklärung, wer weiterhilft. So
+    // schickt BehördenKlar die Leute zur Beratung zurück, nicht weg.
+    var mitgenommeneStelle = ''; // kommt beim „Mitnehmen" vom PC mit
+    function zeigeStellenHinweis() {
+      var el = document.getElementById('ergStelle');
+      var stelle = istPc ? '' :
+        ((typeof handyModus !== 'undefined' && handyModus && handyModus.e) || mitgenommeneStelle ||
+         (einrichtung() && hatGuthaben() ? einrichtung() : ''));
+      var vorlage = t('stelleHinweis');
+      // Alte ui-texte.js aus dem Browser-Speicher kennt den Text noch nicht: dann lieber nichts zeigen
+      if (!stelle || vorlage === 'stelleHinweis') { el.style.display = 'none'; return; }
+      mitName(el, vorlage, String(stelle).slice(0, 80));
+      el.style.display = 'block';
+    }
+
+    // ---- PC: Drucken und „Fertig, nächste Person" ------------------------
+    document.getElementById('druckKnopf').addEventListener('click', function () { window.print(); });
+    var zumDruckGeoeffnet = [];
+    window.addEventListener('beforeprint', function () {
+      document.getElementById('druckDatum').textContent = 'Erklärung von BehördenKlar, erstellt am ' +
+        new Date().toLocaleDateString('de-DE') + '. Maßgeblich ist immer der Originalbrief.';
+      // Schwere Wörter aufklappen, damit die Erklärungen mitgedruckt werden
+      zumDruckGeoeffnet = [];
+      document.querySelectorAll('#ergBegriffe details').forEach(function (d) {
+        if (!d.open) { d.open = true; zumDruckGeoeffnet.push(d); }
+      });
+    });
+    window.addEventListener('afterprint', function () {
+      zumDruckGeoeffnet.forEach(function (d) { d.open = false; });
+      zumDruckGeoeffnet = [];
+    });
+    // Alles weg für die nächste Person: Erklärung, Verbindung, Sprache zurück auf Deutsch
+    document.getElementById('fertigKnopf').addEventListener('click', function () {
+      stoppeWarten();
+      speicher.set(SPRACH_SCHLUESSEL, 'de');
+      // Firefox stellt Formularwerte beim Neuladen wieder her: Einwilligung und
+      // E-Mail der vorigen Person vorher leeren
+      document.querySelectorAll('#konsens, #kaufKonsens').forEach(function (c) { c.checked = false; });
+      document.querySelectorAll('#email, #wlEmail').forEach(function (f) { f.value = ''; });
+      // Nach dem Neuladen oben anfangen, nicht an der alten Stelle
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      window.scrollTo(0, 0);
+      // Ohne ?sprache= und #… neu öffnen, damit wirklich Deutsch voreingestellt ist
+      window.location.replace(window.location.pathname);
+    });
+
     // PC: Ergebnis per QR-Code aufs Handy mitgeben
     document.getElementById('mitnehmenKnopf').addEventListener('click', async function () {
       var knopf = this;
@@ -1661,7 +1738,8 @@
       knopf.disabled = true;
       try {
         var ue = await BKUebergabe.neu();
-        await BKUebergabe.senden(ue, 'ergebnis', letzteDaten);
+        // Name der Stelle mitgeben: Am Handy steht dann „Fragen dazu? Ihre Beratungsstelle …"
+        await BKUebergabe.senden(ue, 'ergebnis', Object.assign({}, letzteDaten, { e: einrichtung() && hatGuthaben() ? einrichtung() : '' }));
         zeigeQr(document.getElementById('mitnehmenQr'), BKUebergabe.adresse({ a: 'm', s: ue.id, k: ue.k }));
         document.getElementById('mitnehmenBox').style.display = 'block';
       } catch (e) {
@@ -1731,6 +1809,7 @@
         kaufBlock.style.display = 'none';
         verbundenBanner.textContent = t('mitgenommen');
         verbundenBanner.style.display = 'block';
+        mitgenommeneStelle = typeof f.ergebnis.e === 'string' ? f.ergebnis.e.slice(0, 80) : '';
         zeigeAnalyse(bereiteVersionen(f.ergebnis, false));
         document.getElementById('ergebnis').scrollIntoView({ behavior: 'smooth' });
       }
