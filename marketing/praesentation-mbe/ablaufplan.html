@@ -1,160 +1,198 @@
 <!DOCTYPE html>
 <!--
-  Ablaufplan / Spickzettel für die Präsentation bei der MBE Kirchheimbolanden
-  (Do 29.10.2026). Nur für Justin, nicht zum Dalassen. 2 Seiten A4.
-  PDF: "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
+  Spickzettel für die Präsentation bei der MBE Kirchheimbolanden (Do 29.10.2026).
+  Nur für Justin, nicht zum Dalassen. 2 Seiten A4.
+  Grundlage: Pitch-Workflow vom 25.10. (3 Entwürfe, 3 Bewertungen, Faktencheck mit 22 Korrekturen).
+  Den vollen Wortlaut zum Üben enthält pitch-zum-ueben.html.
+  PDF (im Ordner marketing/praesentation-mbe):
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu \
     --no-pdf-header-footer --print-to-pdf=ablaufplan.pdf "file://$PWD/ablaufplan.html"
 -->
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Ablaufplan Präsentation MBE</title>
+<title>Spickzettel Präsentation MBE</title>
 <style>
   @page { size: A4; margin: 0; }
-  :root { --papier: #faf7f0; --tinte: #21211d; --grau: #6b675e; --amtsblau: #1d4e89; --rot: #b3372b; --marker: #ffe66b; --gruen: #2e7d4f; }
+  :root { --papier: #faf7f0; --tinte: #21211d; --grau: #6b675e; --amtsblau: #1d4e89; --rot: #b3372b; --marker: #ffe66b; }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   body { font-family: Georgia, 'Times New Roman', serif; color: var(--tinte); }
-  .seite { width: 210mm; height: 297mm; padding: 11mm 14mm; background: var(--papier); overflow: hidden; position: relative; page-break-after: always; font-size: 9.3pt; line-height: 1.34; }
+  .seite { width: 210mm; height: 297mm; padding: 8.5mm 13mm; background: var(--papier); overflow: hidden; position: relative;
+           page-break-after: always; font-size: 8.6pt; line-height: 1.28; }
   .seite:last-child { page-break-after: auto; }
-  .mono { font-family: 'Courier New', monospace; }
-  .kopf { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.6mm solid var(--tinte); padding-bottom: 2mm; }
-  .kopf b { font-size: 12.5pt; }
-  .kopf span { font-family: 'Courier New', monospace; font-size: 8pt; color: var(--grau); }
-  h1 { font-size: 18pt; line-height: 1.15; margin-top: 3mm; }
-  .markiert { background: linear-gradient(104deg, transparent 2%, var(--marker) 4%, var(--marker) 96%, transparent 98%); padding: 0 1.5mm; }
-  .unter { color: var(--grau); margin-top: 1.5mm; font-size: 9.5pt; }
-  h2 { font-family: 'Courier New', monospace; font-weight: 400; font-size: 8pt; text-transform: uppercase; letter-spacing: .14em; color: var(--grau);
-       margin: 5mm 0 2.5mm; display: flex; gap: 3mm; align-items: center; }
+  .kopf { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.6mm solid var(--tinte); padding-bottom: 1.8mm; }
+  .kopf b { font-size: 12pt; }
+  .kopf span { font-family: 'Courier New', monospace; font-size: 7.8pt; color: var(--grau); }
+  h1 { font-size: 16.5pt; line-height: 1.15; margin-top: 2.6mm; }
+  .markiert { background: linear-gradient(104deg, transparent 2%, var(--marker) 4%, var(--marker) 96%, transparent 98%); padding: 0 1.2mm; }
+  .kern { margin-top: 2mm; font-size: 9.6pt; }
+  .kern b { color: var(--amtsblau); }
+  h2 { font-family: 'Courier New', monospace; font-weight: 400; font-size: 7.6pt; text-transform: uppercase; letter-spacing: .14em; color: var(--grau);
+       margin: 2.8mm 0 1.2mm; display: flex; gap: 3mm; align-items: center; }
   h2::after { content: ''; flex: 1; border-top: 0.25mm solid rgba(33,33,29,.25); }
-  .schritt { display: grid; grid-template-columns: 17mm 1fr; gap: 3mm; padding: 1.6mm 0; border-bottom: 0.25mm dotted rgba(33,33,29,.35); }
-  .zeit { font-family: 'Courier New', monospace; font-weight: 700; color: var(--amtsblau); font-size: 9pt; }
-  .schritt h3 { font-size: 10.5pt; margin-bottom: .8mm; }
-  .sag { border-left: 0.8mm solid var(--amtsblau); background: #fff; padding: 1mm 2.5mm; margin: 0.8mm 0; font-style: italic; }
-  ol, ul { padding-left: 5mm; }
-  li { margin-bottom: .6mm; }
-  .ziel { margin-top: 3mm; border: 0.6mm solid var(--tinte); box-shadow: 1.5mm 1.8mm 0 rgba(33,33,29,.9); background: #fff; padding: 3mm 4mm; }
-  .ziel b { color: var(--rot); }
-  .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
-  .kasten { background: #fff; border: 0.3mm solid rgba(33,33,29,.3); padding: 2.5mm 3.5mm; }
-  .check li { list-style: none; position: relative; padding-left: 5mm; }
-  .check li::before { content: '☐'; position: absolute; left: 0; color: var(--amtsblau); }
-  .frage { margin-bottom: 2mm; }
+
+  .schritt { display: grid; grid-template-columns: 13mm 1fr; gap: 2.5mm; padding: 1mm 0; border-bottom: 0.25mm dotted rgba(33,33,29,.35); }
+  .zeit { font-family: 'Courier New', monospace; font-weight: 700; color: var(--amtsblau); font-size: 8.6pt; padding-top: .3mm; }
+  .schritt h3 { font-size: 9.8pt; margin-bottom: .5mm; }
+  .sag { border-left: 0.8mm solid var(--amtsblau); background: #fff; padding: .5mm 2mm; margin: .45mm 0; font-style: italic; }
+  .tun { color: #3d3a33; }
+  .tun b { font-style: normal; }
+  .drei { font-weight: 700; font-style: normal; color: var(--amtsblau); }
+  .kurz { margin-top: 2.2mm; border: 0.5mm solid var(--rot); background: #fff; padding: 1.8mm 3mm; font-size: 8.6pt; }
+  .kurz b { color: var(--rot); }
+
+  .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 4.5mm; }
+  .kasten { background: #fff; border: 0.3mm solid rgba(33,33,29,.3); padding: 2.2mm 3mm; }
+  ul { list-style: none; }
+  li { position: relative; padding-left: 3.6mm; margin-bottom: .7mm; }
+  li::before { content: '›'; position: absolute; left: 0; color: var(--amtsblau); font-weight: 700; }
+  .check li::before { content: '☐'; font-weight: 400; }
+  .frage { margin-bottom: 1.2mm; }
   .frage b { display: block; }
-  .nicht { border-left: 0.8mm solid var(--rot); background: #fdf1ef; padding: 1.5mm 2.5mm; }
-  .klein { font-size: 8.3pt; color: var(--grau); }
+  .nicht li::before { content: '✗'; color: var(--rot); }
+  .nicht { border-left: 0.8mm solid var(--rot); background: #fdf1ef; padding: 1.8mm 2.5mm; }
+  .wissen { border-left: 0.8mm solid var(--amtsblau); background: #fff; padding: 1.8mm 2.5mm; }
+  .klein { font-size: 8pt; color: var(--grau); }
 </style>
 </head>
 <body>
 
+<!-- ================= Seite 1: Ablauf ================= -->
 <div class="seite">
-  <div class="kopf"><b>📬 BehördenKlar · Ablaufplan</b><span>MBE Kirchheimbolanden · Do 29.10.2026 · nur für mich</span></div>
-  <h1>10–15 Minuten. <span class="markiert">Zeigen, zuhören, Testzugang dalassen.</span></h1>
-  <p class="unter">Die Webseite ist die Präsentation. Alles läuft im Browser, ohne App. Die App nur kurz erwähnen.</p>
+  <div class="kopf"><b>📬 BehördenKlar · Spickzettel</b><span>MBE Kirchheimbolanden (FID) · Do 29.10.2026 · nur für mich</span></div>
+  <h1>13 Minuten: <span class="markiert">fragen, zeigen, ehrlich sein, bitten.</span></h1>
+  <p class="kern">Leitbild <b>Hilfe zur Selbsthilfe</b>, nie „Zeit sparen“. Ziel: <b>Code übergeben</b> und <b>26.11. mit Uhrzeit</b> im Kalender.</p>
 
   <h2>Ablauf</h2>
 
-  <div class="schritt"><span class="zeit">0–1'</span><div>
-    <h3>Begrüßung und wer ich bin</h3>
-    <p class="sag">„Ich bin Justin Klein aus Winnweiler. Meine Mutter ist selbst nach Deutschland gekommen. Briefe vom Amt kenne ich von klein auf, deshalb habe ich BehördenKlar gebaut.“</p>
+  <div class="schritt"><span class="zeit">0:00</span><div>
+    <h3>Begrüßung (langsam, Blickkontakt reihum)</h3>
+    <p class="sag">„Ich bin Justin Klein aus Winnweiler, fast von nebenan. Schwierige Briefe vom Amt kenne ich von klein auf, meine Mutter ist selbst nach Deutschland gekommen. Deshalb habe ich BehördenKlar gebaut. Eine Viertelstunde, passt das? … Sie kennen die Menschen, ich kenne nur die Technik. Heute geht es nicht um einen Vertrag, am Ende habe ich eine Bitte. Darf ich Sie zuerst etwas fragen?“</p>
   </div></div>
 
-  <div class="schritt"><span class="zeit">1–3'</span><div>
-    <h3>Das Problem aus ihrer Sicht: erst fragen, dann zuhören</h3>
-    <p class="sag">„Wie oft kommt jemand zu Ihnen, bei dem die Frist schon fast vorbei ist? Oder bei dem der Termin erst mal nur fürs Vorlesen draufgeht?“</p>
-    <p>Kurz zuhören und ihre Antwort aufgreifen. Das ist der Aufhänger für alles Weitere.</p>
+  <div class="schritt"><span class="zeit">1:00</span><div>
+    <h3>Erst fragen, dann zeigen</h3>
+    <p class="sag">„Wenn jemand mit einem Brief zu Ihnen kommt: Was passiert dann als Erstes?“ · „Wie oft sind Termin oder Frist dann schon knapp?“</p>
+    <p class="tun"><b>Still sein, bis fünf zählen, ihre Wörter mitschreiben.</b> Bleibt es still: „Was war der letzte Brief, der hier lag?“</p>
   </div></div>
 
-  <div class="schritt"><span class="zeit">3–8'</span><div>
-    <h3>Live-Vorführung mit dem Musterbrief</h3>
-    <ol>
-      <li>Laptop: <b>behoerdenklar.de/demo</b> ist schon offen, Sprache <b>Arabisch</b> gewählt, Vorführ-Code eingelöst.</li>
-      <li>„Lieber mit dem Handy fotografieren“ erst jetzt antippen (QR gilt 15 Min.), mit dem Handy scannen. Am Handy: Häkchen, „Brief auswählen“, Foto, „Foto verwenden“.</li>
-      <li>Ausgedruckten Musterbrief fotografieren. <i>„Das dauert ein bis zwei Minuten.“</i> In der Wartezeit den Datenschutz-Teil erzählen.</li>
-      <li>Laptop zeigt die Erklärung <b>auf Deutsch</b>, das Handy <b>auf Arabisch</b>. Kurz umschalten.</li>
-      <li>Zeigen: <b>rote Ampel</b> (Termin nächste Woche), <b>„In meinen Kalender“</b>, <b>Anruf-Hilfe</b> mit Aktenzeichen, Fachbegriff „Fiktionsbescheinigung“ bleibt deutsch.</li>
-      <li>„Ergebnis aufs Handy mitnehmen“: eine Beraterin mit <b>ihrem</b> Handy scannen lassen. Den Kalender-Eintrag am Handy zeigen, nicht am Laptop.</li>
-    </ol>
-    <p class="sag">„Alles, was Sie sehen, geht ohne App, im Browser, auf jedem Handy, ohne Konto. Eine App kommt später dazu, zum Beispiel für Erinnerungen.“</p>
+  <div class="schritt"><span class="zeit">2:30</span><div>
+    <h3>Der Gedanke dahinter, Musterbrief Nr. 1 ans Team</h3>
+    <p class="sag">„Der Brief ist nicht erledigt, wenn die Person aus Ihrer Tür geht. Bei Ihnen heißt das Hilfe zur Selbsthilfe, oder? Genau da soll BehördenKlar helfen. … Ein erfundener Brief einer Ausländerbehörde. Sie haben das Original, am Ende schauen Sie bitte, ob alles stimmt.“</p>
   </div></div>
 
-  <div class="schritt"><span class="zeit">8–9'</span><div>
-    <h3>Datenschutz ehrlich (bevor sie fragen)</h3>
-    <p class="sag">„Kein Konto, wir speichern keine Briefe. Zwischen PC und Handy ist alles Ende-zu-Ende verschlüsselt. Die Erklärung macht ein KI-Dienst in den USA, Anthropic. Der löscht in der Regel nach 30 Tagen und trainiert nicht damit. Das steht vor dem Hochladen auf der Seite, und die Person willigt für jeden Brief einzeln ein.“</p>
+  <div class="schritt"><span class="zeit">3:30</span><div>
+    <h3>Vorführung: „Herr Beispiel“ fotografiert mit seinem Handy</h3>
+    <p class="tun">Erst jetzt <b>„📱 Lieber mit dem Handy fotografieren“</b> → scannen → <b>„✅ Handy verbunden“</b> zeigen → Handy hochhalten → Häkchen → Cloudflare abwarten → <b>📷</b> → <b>„Foto aufnehmen“</b> → Musterbrief Nr. 2 → „Foto verwenden“.</p>
+    <p class="sag">„Das ist das Handy von Herrn Beispiel. Keine App, kein Konto. Die Seite ist auf Arabisch, auch die Einwilligung. Sie können das nicht lesen. Er kann es. Darum geht es.“</p>
   </div></div>
 
-  <div class="schritt"><span class="zeit">9–11'</span><div>
-    <h3>Das Angebot: Handzettel übergeben</h3>
-    <p class="sag">„Ich möchte Ihnen einen Testzugang dalassen: einen Monat, bis zu 100 Briefe, kostenlos. Ihre Ratsuchenden zahlen nichts. Der Code steht hier auf dem Zettel.“</p>
-    <p><b>Wenn Interesse da ist:</b> „Zu welchem Träger gehören Sie, und gibt es bei Ihnen eine Datenschutzbeauftragte? Dann schicke ich ihr unser Datenschutz-Blatt und auf Wunsch einen AVV.“</p>
-    <p><b>Gleich den Auswertungstermin ausmachen:</b> „Darf ich in vier Wochen wiederkommen, am <b>Do 26.11.</b>, und hören, was es gebracht hat?“</p>
+  <div class="schritt"><span class="zeit">4:30</span><div>
+    <h3>Wartezeit, etwa eine Minute: kurz Datenschutz, dann fragen</h3>
+    <p class="sag">„Das Foto geht verschlüsselt an unseren Server bei Cloudflare, dann an den KI-Dienst Anthropic, beide USA. Bei uns nicht gespeichert, Anthropic löscht in der Regel nach 30 Tagen, kein Training. Wer nicht einwilligt, wird ganz normal beraten. … Wenn Herr Beispiel mit diesem Brief zu Ihnen käme: Was müsste er unbedingt verstehen?“ <span class="tun">→ Liste mitschreiben.</span></p>
   </div></div>
 
-  <div class="schritt" style="border-bottom: none;"><span class="zeit">11–15'</span><div>
-    <h3>Zuhören (das ist der eigentliche Gewinn)</h3>
-    <ol>
-      <li>Welche Briefe bringen Ihre Ratsuchenden am häufigsten mit?</li>
-      <li>Was fehlt in dem, was ich gezeigt habe?</li>
-      <li>Würden Sie es empfehlen? Wenn nicht, warum nicht?</li>
-      <li>Darf ich Ihre Stelle auf meiner Seite nennen, und würden Sie auf BehördenKlar verlinken?</li>
-    </ol>
+  <div class="schritt"><span class="zeit">5:30</span><div>
+    <h3>Erstens: Er versteht seinen Brief</h3>
+    <p class="sag"><span class="tun">Laptop zum Team, ihre Liste abhaken, nur vorlesen, was dasteht, Fachbegriff aufklappen.</span> „Sie haben das Original. Stimmt das so? Stimmen Termin und Frist?“ · Bei Fehler: <b>„Gut, dass er damit bei Ihnen sitzt.“</b></p>
   </div></div>
 
-  <div class="ziel">
-    <b>Ziel des Termins:</b> Code übergeben <i>und</i> Termin am 26.11. im Kalender. Ein ehrliches „das fehlt noch“ ist auch ein Erfolg. Mitschreiben!
-  </div>
+  <div class="schritt"><span class="zeit">7:00</span><div>
+    <h3>Zweitens, drittens: Termin, Frist, ein nötiger Anruf. Dann das, was nur sie können</h3>
+    <p class="tun">Ampel (rot). Am Handy <b>📅</b> → Vorschau → abbrechen (nie am PC). Am PC oben <b>„العربية“</b>: bei „Anrufen“ Satz deutsch, darunter arabisch. Zurück auf <b>„Deutsch“</b>.</p>
+    <p class="sag">„Mit wenigen Tipps in seinem Kalender, mit Erinnerung. Der Eintrag liegt nur bei ihm. … Muss er absagen: oben deutsch, so sagt er es. Darunter arabisch, damit er weiß, was er sagt.“</p>
+    <p class="sag"><span class="drei">„Er versteht seinen Brief. Er denkt leichter an Termin und Frist. Er ist vorbereitet, wenn ein Anruf nötig ist.</span> Und dann bleibt, was nur Sie können: Was heißt das für seinen Aufenthalt? Das kann keine KI. Das sind Sie. Selbstständig heißt nicht allein.“</p>
+  </div></div>
+
+  <div class="schritt"><span class="zeit">8:30</span><div>
+    <h3>Ehrlich: was es nicht kann (vor der Bitte!)</h3>
+    <p class="sag">„Lieber jetzt als in vier Wochen: Eine KI kann sich irren, Fristen am Original prüfen. Keine Rechtsberatung. Ein Foto pro Erklärung. Kein Druck-Knopf, kein Vorlesen, für Menschen, die nicht lesen können, nur eine halbe Hilfe. Die Erklärung bleibt nur, solange die Seite offen ist. Keine Sprache ist von Muttersprachlern geprüft.“</p>
+  </div></div>
+
+  <div class="schritt"><span class="zeit">9:30</span><div>
+    <h3>Die zwei Bitten. Erst jetzt die Mappe öffnen</h3>
+    <p class="sag">„Erstens ein Testzugang: ein Monat bis 29. November, bis zu 100 Briefe, kostenlos. Über Ihren Code zahlen auch Ihre Ratsuchenden nichts. Nur für Mitarbeitende, im Test nur übers Handy der Person. … Sie gehören zur Förderinitiative Donnersberg, richtig? Wer macht dort den Datenschutz?“ <span class="tun">→ Namen notieren.</span></p>
+    <p class="sag">„Zweitens: Darf ich am Donnerstag, 26. November, wiederkommen? Welche Uhrzeit passt Ihnen?“ <span class="tun">→ <b>schweigen</b>, eintragen, laut wiederholen.</span></p>
+  </div></div>
+
+  <div class="schritt"><span class="zeit">11:00</span><div>
+    <h3>Zuhören, dann Abschluss und aufstehen</h3>
+    <p class="sag">„Was müsste bis zum 26. November passiert sein, damit Sie sagen, das hat Ihren Ratsuchenden geholfen?“ · „Und was müsste passieren, damit Sie sagen: Das lassen wir lieber?“ <span class="tun">→ mitschreiben, nichts verteidigen.</span></p>
+    <p class="sag">„Code bis 29. November, das Blatt schicke ich [Name] heute als PDF, am 26. um [Uhrzeit] komme ich wieder. Rufen Sie an, auch bei Kleinigkeiten. Auch wenn es heißt: So brauchen wir das nicht. Das hilft mir genauso.“</p>
+  </div></div>
 </div>
 
+<!-- ================= Seite 2: Vorbereitung, Plan B, Einwände ================= -->
 <div class="seite">
-  <div class="kopf"><b>📬 BehördenKlar · Vorbereitung &amp; Fragen</b><span>Seite 2</span></div>
+  <div class="kopf"><b>📬 BehördenKlar · Spickzettel</b><span>Vorbereitung · Plan B · Einwände · Seite 2</span></div>
 
-  <div class="zwei" style="margin-top: 4mm;">
+  <div class="kurz" style="margin-top: 3mm;"><b>Nur 10 Minuten?</b> Keine Studien-Zahl, Grenzen in drei Sätzen (KI kann sich irren, keine Rechtsberatung, kein Vorlesen und Drucken), nur eine Zuhör-Frage. <b>Die Bitte (Code + 26.11.) nie streichen.</b> &nbsp;·&nbsp; <b>Zögert das Team:</b> „Sie müssen heute nichts entscheiden. Darf ich mich Anfang nächster Woche melden?“</div>
+  <div class="zwei" style="margin-top: 3mm;">
     <div>
-      <h2 style="margin-top: 0;">Am Vorabend</h2>
-      <ul class="check kasten">
-        <li><b>Deploy erledigt</b>, <span class="mono">npm run pruefung</span> alles grün</li>
-        <li>MBE-Code angelegt, im Handzettel eingetragen</li>
-        <li>Handzettel <b>5×</b> gedruckt, Musterbrief <b>2×</b> gedruckt</li>
-        <li>Einmal komplett durchgespielt, mit Stoppuhr (Ampel erst ab Di 27.10. rot, vorher Gelb ist richtig)</li>
-        <li>Screenshots und kurzes Video als Notfall offline auf dem Laptop</li>
-        <li>Laptop und Handy laden, Ladekabel einpacken</li>
-      </ul>
-      <h2>Kurz vor dem Termin</h2>
-      <ul class="check kasten">
-        <li><b>Eigener Handy-Hotspot</b> an (nicht ihr WLAN)</li>
-        <li>Demo-Seite offen, <b>Vorführ-Code</b> eingelöst, Arabisch gewählt</li>
-        <li>Handy: Automatische Sperre „Nie“, Stromsparmodus aus, Ton aus</li>
-        <li>Mac wach halten: im Terminal <span class="mono">caffeinate -d</span></li>
-        <li>Oben steht „Kostenlos über MBE Donnersberg (Vorführung)“</li>
-        <li>Notizblock und Stift</li>
-      </ul>
-      <h2>Notfallplan</h2>
+      <h2 style="margin-top: 0;">Vorher</h2>
+      <div class="kasten check">
+        <ul>
+          <li><b>Mi:</b> Generalprobe 3, Bildschirmfotos und Video mit roter Ampel offline. VORF-2EDF: mindestens 10 Briefe übrig</li>
+          <li>Mappe: 2× Musterbrief, 5× Handzettel, 5× Kurzanleitung (beide mit MBE-Code), 2× Datenschutz-Blatt, Block und Stift</li>
+          <li><b>MBE-Code nie am eigenen Laptop einlösen</b>, vorgeführt wird nur mit VORF-2EDF</li>
+          <li>Im Auto: <b>Hotspot an</b>, Seite offen, „🤝 Kostenlos über MBE Donnersberg (Vorführung)“ sichtbar, <b>Arabisch eingestellt</b>. Noch nicht auf „Lieber mit dem Handy“ klicken (QR gilt 15 Min.)</li>
+          <li>Laptop: <span style="font-family: 'Courier New', monospace;">caffeinate -d</span>, Ton aus, Ladekabel, Zoom 125 %. Handy: Akku voll, Sperre „Nie“, lautlos</li>
+          <li>Drinnen: Namen mit Sitzskizze notieren, Bildschirm zum Team, eigenes Internet</li>
+          <li>Nach dem Klick prüfen: Häkchen „Hier am Bildschirm immer auf Deutsch …“ ist gesetzt</li>
+        </ul>
+      </div>
+
+      <h2>Plan B</h2>
       <div class="kasten">
-        <p><b>Kein Internet:</b> Hotspot. Wenn das auch nicht geht: Screenshots zeigen, <i>„Ich lasse Ihnen den Link da, probieren Sie es selbst.“</i></p>
-        <p style="margin-top: 1.5mm;"><b>Die KI braucht lange:</b> ruhig weitererzählen (Datenschutz-Teil vorziehen).</p>
-        <p style="margin-top: 1.5mm;"><b>Fehlermeldung:</b> nicht nervös werden, zweiten Musterbrief nehmen oder Screenshots.</p>
-        <p style="margin-top: 1.5mm;"><b>Laptop hängt, Handy hat das Ergebnis:</b> einfach das Handy zeigen, dort auf Deutsch umschalten.</p>
-        <p style="margin-top: 1.5mm;"><b>„Deutsch | Arabisch“ fehlt:</b> „Hier hat die Übersetzung gehakt“, Screenshots zeigen.</p>
+        <ul>
+          <li><b>Kein Internet:</b> Hotspot neu verbinden, sonst Bildschirmfotos. „Den Zugang lasse ich Ihnen da, dann sehen Sie es im Test selbst.“</li>
+          <li><b>Dauert lange:</b> nach 2 Min. aufs Handy schauen. Rechnet es noch: weiterreden, <b>nichts neu laden</b>. Warnung am PC kommt erst nach 3 Min. Steht die Erklärung am Handy: Knopf mit 🔁. Sonst am PC „Abbrechen“ und neu.</li>
+          <li><b>Laptop hängt, Handy hat das Ergebnis:</b> das Handy zeigen, dort auf Deutsch umschalten.</li>
+          <li><b>Kein Umschalter „Deutsch | العربية“:</b> „Hier hat die Übersetzung gehakt“, Bildschirmfotos.</li>
+          <li><b>Fehlermeldung:</b> ruhig bleiben. „Das kann im Alltag auch passieren, gut, dass Sie es sehen.“ Zweiter Versuch.</li>
+          <li class="klein">Jede fertige Erklärung kostet einen Vorführ-Brief, Fehlversuche ohne Ergebnis nicht.</li>
+        </ul>
+      </div>
+
+      <h2>Gut zu wissen</h2>
+      <div class="wissen">
+        <ul>
+          <li><b>Träger: Förderinitiative Donnersberg e.V. (FID)</b>, nicht kirchlich, im Paritätischen, also DSGVO. Eigene Datenschutzbeauftragung.</li>
+          <li>Kontakt MBE laut FID-Seite: <b>Herr v. Bose</b>. Also „Beraterinnen und Berater“, „Kolleginnen und Kollegen“.</li>
+          <li>Heißt heute „Migrationsberatung für erwachsene <b>Zugewanderte</b>“.</li>
+          <li>FID macht Alphabetisierungskurse: „kein Vorlesen“ ehrlich sagen.</li>
+          <li>Ausländerbehörde: bittet, nicht nach dem Stand zu fragen. Termine vereinbart und sagt man per Telefon oder Mail.</li>
+          <li><b>Nur auf Nachfrage:</b> MBE gibt es an rund 900 Stellen. „Sie wären die erste Stelle mit eigenem Testzugang.“</li>
+        </ul>
+      </div>
+      <h2>Nicht sagen</h2>
+      <div class="nicht">
+        <ul>
+          <li>„Zeit sparen“, „effizient“, „ersetzt“, „verpasst keinen Termin“, „erfindet nie“</li>
+          <li>„Zahlen nie etwas“ (immer „über Ihren Code“), „DSGVO-konform“, „Server in der EU“</li>
+          <li>Ein Datum für App oder neue Funktionen. „Ganz Deutschland“, Verbände, Kürzungen</li>
+        </ul>
       </div>
     </div>
 
     <div>
-      <h2 style="margin-top: 0;">Typische Fragen</h2>
-      <div class="frage"><b>„Was passiert mit den Daten?“</b>Kein Konto. Wir speichern den Brief nicht. Den Brief muss die KI lesen (Anthropic, USA): in der Regel nach 30 Tagen gelöscht, kein Training. Die Übergabe PC ↔ Handy ist zusätzlich Ende-zu-Ende verschlüsselt. Einen AVV bekommt Ihr Datenschutzbeauftragter von mir.</div>
-      <div class="frage"><b>„Ist das nicht einfach ChatGPT?“</b>ChatGPT braucht ein Konto und eine gute Frage, und danach ist der Brief vergessen. Hier reicht ein Foto: Frist in den Kalender, Spickzettel fürs Telefon. Wir erfinden keine Nummern oder Daten.</div>
-      <div class="frage"><b>„Ersetzt das unsere Beratung?“</b>Nein. Jede Erklärung verweist bei wichtigen Entscheidungen auf eine Beratungsstelle. Die einfachen Fälle werden abgefangen, die schweren kommen vorbereitet.</div>
-      <div class="frage"><b>„Was kostet das nach dem Test?“</b>Ein festes Briefkontingent für die Einrichtung, Ratsuchende zahlen nichts. <span class="klein">Nur auf Nachfrage Zahlen: 100 Briefe 20 €, 500 Briefe 75 €. Untergrenze 10 ct pro Brief. Keine USt. (§ 19).</span></div>
-      <div class="frage"><b>„Was kostet Sie ein Brief?“</b>Ehrlich: ein paar Cent für die KI, dazu Server, Zahlungsgebühren und Arbeitszeit.</div>
-      <div class="frage"><b>„Gibt es eine App?“</b>Sie ist in Arbeit. Alles Gezeigte geht ohne App. <i>Keinen Termin versprechen.</i></div>
-      <div class="frage"><b>„Mehrseitige Briefe?“</b>Zurzeit ein Foto pro Erklärung: die Seite mit Betreff und Frist. Ein Scanner-PDF am PC geht mehrseitig.</div>
-      <div class="frage"><b>„Die Bedienung ist ja Deutsch?“</b>Die Erklärung kommt in der Muttersprache. Die Knöpfe übersetze ich als Nächstes, gern mit Ihrer Hilfe beim Gegenlesen.</div>
-      <div class="frage"><b>„Kann man das ausdrucken?“</b>Kommt als Nächstes. Bis dahin: Kalender-Eintrag und „Mitnehmen“ aufs Handy.</div>
-      <div class="frage"><b>„Wer steckt dahinter?“</b>Ich, mit der Webklar GbR in Winnweiler. Aus dem Donnersbergkreis.</div>
-
-      <h2>Nicht sagen</h2>
-      <div class="nicht">
-        <p>✗ „Alles bleibt auf dem Handy“: Das stimmt für die Webseite nicht.</p>
-        <p>✗ „Unbegrenzt“: immer eine feste Briefzahl.</p>
-        <p>✗ Ein Datum für die App oder neue Funktionen versprechen.</p>
+      <h2 style="margin-top: 0;">Einwände (kurz, ehrlich)</h2>
+      <div class="kasten">
+        <div class="frage"><b>„Wohin gehen die Daten? USA?“</b>Ja: Server bei Cloudflare, KI von Anthropic, beide USA, mit EU-Standardvertragsklauseln. Bei uns nicht gespeichert, Anthropic in der Regel 30 Tage, kein Training. Einwilligung pro Brief, in ihrer Sprache. Wer nicht will, wird normal beraten.</div>
+        <div class="frage"><b>„Das muss unsere Datenschutzstelle freigeben.“</b>Ja, bitte fragen, das Blatt ist für sie. AVV-Entwurf und TOMs kommen vor dem ersten Brief am Dienst-PC. Rollen und Folgenabschätzung kläre ich mit ihr, sie entscheidet.</div>
+        <div class="frage"><b>„Ist das nicht einfach ChatGPT?“</b>Auch eine KI, Claude von Anthropic. Dort bekommt man einen Text. Hier Kalender-Eintrag und Anruf-Hilfe, deutsche Fachbegriffe, und Sie lesen am PC Deutsch.</div>
+        <div class="frage"><b>„Ersetzt das unsere Beratung?“</b>Nein. Es erklärt den Brief. Was die Person dann tut, ist Beratung, und die bleibt bei Ihnen.</div>
+        <div class="frage"><b>„Und wenn die KI sich irrt?“</b>Kann passieren. Feste Regeln: unsicheres Datum bleibt leer, Nummern nur aus dem Brief. Fristen am Original prüfen. Haftungsfragen beantworte ich der Leitung schriftlich.</div>
+        <div class="frage"><b>„Was kostet das danach?“</b>Über Ihren Code zahlen die Ratsuchenden auch danach nichts. Die Stelle kauft ein festes Paket, kein Abo. Zahlen am liebsten am 26.11. <span class="klein">Nur wenn gefragt: 100 Briefe 20 €, 500 Briefe 75 €, Endpreise, keine USt.</span></div>
+        <div class="frage"><b>„Zu Hause nutzen?“</b>Ohne Code zwei Briefe gratis, dann kostet es. Ihr Code ist für die Beratung.</div>
+        <div class="frage"><b>„Wie viel Arbeit macht das?“</b>Einmal ein Lesezeichen, dann Sprache, QR-Code, warten. Die Auswertung mache ich. Kostet es Zeit statt zu helfen, ist das auch ein Ergebnis.</div>
+        <div class="frage"><b>„Rechtlich geprüft? Die Leitung muss entscheiden.“</b>Von einem Anwalt noch nicht, ehrlich. Der Test kostet nichts, kein Vertrag. Ich komme gern zur Leitung.</div>
+        <div class="frage"><b>„Kurdisch? Dari?“</b>Kurdisch ist Kurmandschi, Sorani noch nicht. Dari: Farsi wählen. Was fehlt Ihnen?</div>
+        <div class="frage"><b>„Viele können kaum lesen.“</b>Echte Grenze, kein Vorlesen. Ampel und Kalender helfen trotzdem, und Sie sehen am PC Deutsch.</div>
+        <div class="frage"><b>„Mehrere Seiten? Drucken?“</b>Ein Foto pro Erklärung, die Seite mit Betreff und Frist. Mehrere Seiten nur als PDF. Kein Druck-Knopf. Wäre das wichtig? Schreibe ich auf.</div>
+        <div class="frage"><b>„Sehen Sie, wer was hochlädt?“</b>Nein, nur Zahlen pro Woche und Sprache. Dazu Protokolle ohne Briefinhalt, höchstens 7 Tage.</div>
+        <div class="frage"><b>„Wer steckt dahinter?“</b>Webklar GbR, Kenso Grimm und ich. Im Test bindet Sie nichts.</div>
+        <div class="frage"><b>„Wir haben doch mbeon.“</b>Das ergänzt sich: mbeon ist der Weg zu Ihnen, BehördenKlar erklärt den Brief auf dem Tisch.</div>
       </div>
     </div>
   </div>
