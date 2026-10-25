@@ -98,7 +98,7 @@ function zeige({ code, einrichtung, rest, walletId }) {
       proSprache[sprache] = (proSprache[sprache] || 0) + 1;
     }
     auswertung = `
-  Genutzt:      ${n.length} Briefe
+  Genutzt:      ${n.length} ${n.length === 1 ? 'Brief' : 'Briefe'}
   Pro Woche:    ${Object.keys(proWoche).sort().map((w) => `ab ${w}: ${proWoche[w]}`).join(' · ')}
   Sprachen:     ${Object.entries(proSprache).sort((a, b) => b[1] - a[1]).map(([s, z]) => `${s} ${z}`).join(' · ')}`;
   } else if (n) {

@@ -5,14 +5,14 @@
 >
 > Ausführlicher Prüfbericht mit allen 61 Funden: [plan-bis-29-10.md](plan-bis-29-10.md)
 
-**Zuletzt aktualisiert:** Do 22.10.2026, nachts: **alles live**, inklusive Handy-Bedienung in 27 Sprachen. Nächster Schritt: deine Generalprobe.
+**Zuletzt aktualisiert:** So 25.10.2026: **Generalprobe 1 bestanden** (Laptop Deutsch + Handy Arabisch, echte KI, keine Fehler). Als Nächstes: Plan für So–Mi und neuer Pitch.
 
 ---
 
 ## Wo wir stehen (in einem Satz)
 
 **Live auf behoerdenklar.de** (Gesundheits-Check 10/10 grün). Dein Vorführ-Code: **`VORF-2EDF`**
-(30 Briefe, bis 30.11.). Morgen: Generalprobe 1 mit deinem Laptop und Handy.
+(30 Briefe, bis 30.11.; 2 davon in der Generalprobe verbraucht).
 
 ---
 
@@ -79,6 +79,7 @@
 - ✅ **[Datenschutz-Blatt](datenschutz-blatt.pdf)** für die Datenschutzbeauftragte des Trägers (2 Seiten, gegen den Code geprüft).
 - ✅ **[Kurzanleitung](kurzanleitung-beratung.pdf)** für Beraterinnen (1 Seite). Der Code wird am Di 27.10. eingetragen.
 - ✅ **Webseite veröffentlicht**, Gesundheits-Check 12/12 grün.
+- ✅ **Code-Werkzeug repariert (25.10.):** Ein kurzer Netzwerkfehler meldete fälschlich „Code gibt es nicht“; „aufladen“/„verlaengern“ hätten dabei Guthaben oder Namen überschreiben können. Jetzt bricht es ab, ohne etwas zu ändern.
 - ℹ️ Der Live-Test im automatisierten Browser ging nicht, weil Cloudflare ferngesteuerte Browser blockt. Deshalb ist der echte Test die **Generalprobe morgen mit deinen Geräten**.
 - ✅ **Sprach-Durchlauf (lokal, Handy-Größe 375 px):** alle 27 Sprachen nacheinander eingestellt. In jeder Sprache ist **kein deutscher Text mehr übrig**, **nichts ragt über den Rand**, die Schreibrichtung stimmt (Arabisch, Farsi, Urdu und Paschtu von rechts). Tigrinya und Hindi zusätzlich mit Bildschirmfoto angeschaut: Schrift sauber.
   - Noch offen: die **echte KI-Erklärung** in den Sprachen (kommt erst mit der Generalprobe) und eine Prüfung durch Muttersprachler für Tigrinya, Somali, Paschtu und Kurdisch (nach dem Termin).
@@ -86,7 +87,12 @@
 ## 3. Was du tun musst
 
 - ✅ ~~„deploy“ schreiben~~: erledigt, live seit Do 22.10. abends.
-- 👤 **Fr 23.10.: Generalprobe 1** mit Laptop und Handy: `behoerdenklar.de/demo?code=VORF-2EDF`, Arabisch, Musterbrief (Ampel noch gelb = richtig).
+- ✅ **Generalprobe 1** (So 25.10., statt Fr 23.10.) mit Laptop und Handy, Musterbrief:
+  - Durchgang Deutsch: 27 Sekunden, Ergebnis am PC.
+  - Durchgang **Arabisch** (Laptop Deutsch, Handy Arabisch): **50 Sekunden**, Übersetzung ohne Fehler. Damit ist der zweisprachige Weg zum ersten Mal live mit echter KI getestet.
+  - Laut dir passt alles: Umschalten Deutsch/Arabisch, Telefon-Sätze deutsch mit arabischer Bedeutung, Fachbegriff bleibt deutsch, Ampel gelb (richtig bis Mo), Kalender, Mitnehmen.
+  - Merke: **Arabisch muss am Laptop eingestellt sein, bevor** du auf „Lieber mit dem Handy fotografieren“ klickst.
+  - Für den Spickzettel: „Das dauert etwa eine Minute“ (statt ein bis zwei).
 - ✅ ~~Mo 26.10. MBE anrufen~~: Entscheidung vom 22.10.: Träger und AVV klärst du **erst, wenn die MBE Interesse hat**, also im Termin oder danach. Den Satz dafür findest du im Spickzettel.
 - 👤 **Entscheiden: Testzeitraum.** „1 Monat“ (deine Wahl) oder ein festes Datum „bis 18.12.“ (mein Vorschlag, damit der Code nicht mitten in der Bestellung abläuft). Wichtig ist das erst beim Anlegen des Codes am Di 27.10.
 - 👤 **Generalproben mitmachen** (mit deinem Handy und Laptop, siehe unten).
