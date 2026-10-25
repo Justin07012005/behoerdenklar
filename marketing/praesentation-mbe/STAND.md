@@ -82,7 +82,7 @@
 - ✅ **Code-Werkzeug repariert (25.10.):** Ein kurzer Netzwerkfehler meldete fälschlich „Code gibt es nicht“; „aufladen“/„verlaengern“ hätten dabei Guthaben oder Namen überschreiben können. Jetzt bricht es ab, ohne etwas zu ändern.
 - ✅ **Material korrigiert (So 25.10.)** nach der Prüfung der Vorbereitung (68 Funde, 28 bestätigt):
   - **Datenschutz-Blatt:** Einwilligung steht jetzt richtig „in der Sprache der Person“ (vorher fälschlich „nur Deutsch“), dazu „Freiwillig: Wer nicht einwilligt, wird ganz normal beraten“.
-  - **Kurzanleitung:** im Test nur übers Handy der Person; Frist immer am Originalbrief prüfen; Sprache *vor* dem Klick wählen (Dari = Farsi); keine Ausweise fotografieren; „etwa eine Minute“; Handy-Bildschirm anlassen; was bei der 3-Minuten-Warnung zu tun ist; Adressen für die IT; „ohne www“. Passt weiter auf 1 Seite.
+  - **Kurzanleitung** (danach auf Wunsch aufgeräumt: vorne Ablauf in 6 Schritten + 3 Regeln, hinten „Wenn etwas hakt“, ein Blatt beidseitig): im Test nur übers Handy der Person; Frist immer am Originalbrief prüfen; Sprache *vor* dem Klick wählen (Dari = Farsi); keine Ausweise fotografieren; „etwa eine Minute“; Handy-Bildschirm anlassen; was bei der 3-Minuten-Warnung zu tun ist; Adressen für die IT; „ohne www“.
   - **Handzettel:** neue Überschrift „… verstehen ihren Brief, in ihrer eigenen Sprache“; „nur für Mitarbeitende, bitte nicht aushängen“; Test endet am 29.11.2026; „Rät nicht“ statt „Erfindet nichts“; ChatGPT-Vergleich ohne das wackelige Konto-Argument.
 - ✅ **Entscheidungen (So 25.10.):** Handzettel-Code nur für Mitarbeitende. Anthropic-Schlüssel wird **erst am Fr 30.10.** getauscht (kein Risiko vor dem Termin).
 - ℹ️ Der Live-Test im automatisierten Browser ging nicht, weil Cloudflare ferngesteuerte Browser blockt. Deshalb ist der echte Test die **Generalprobe morgen mit deinen Geräten**.
@@ -115,7 +115,7 @@
 | **Fr 23. / Sa 24.** | **Generalprobe 1 mit echter KI:** Musterbrief, Arabisch **und** Farsi, mit Stoppuhr, Bildschirmfotos für den Notfall | du und Claude |
 | **So 25.** | Fehler aus der Probe beheben. (Datenschutz-Blatt und Kurzanleitung sind schon fertig ✅) | Claude |
 | **Mo 26.** | **Generalprobe 2.** Spätester Tag für Code-Änderungen am Worker. | du und Claude |
-| **Di 27.** | **MBE-Code anlegen**, in den Handzettel eintragen, gedruckten QR mit dem Handy testen, alles drucken (Handzettel 5×, Musterbrief 2×, Kurzanleitung 5×, Datenschutz-Blatt 2×). Ab abends **nichts mehr am Code ändern.** | du und Claude |
+| **Di 27.** | **MBE-Code anlegen**, in den Handzettel eintragen, gedruckten QR mit dem Handy testen, alles drucken (Handzettel 5×, Musterbrief 2×, Kurzanleitung 5× **beidseitig**, Datenschutz-Blatt 2× beidseitig, Spickzettel 1×). Ab abends **nichts mehr am Code ändern.** | du und Claude |
 | **Mi 28.** | **Generalprobe 3**, genau wie am Termin. Geräte laden, Checkliste vom Spickzettel. | du |
 | **Do 29.** | **Termin.** Ziel: Code übergeben und Auswertungstermin am 26.11. ausmachen. | du |
 
