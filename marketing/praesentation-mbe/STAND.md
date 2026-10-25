@@ -80,6 +80,11 @@
 - ✅ **[Kurzanleitung](kurzanleitung-beratung.pdf)** für Beraterinnen (1 Seite). Der Code wird am Di 27.10. eingetragen.
 - ✅ **Webseite veröffentlicht**, Gesundheits-Check 12/12 grün.
 - ✅ **Code-Werkzeug repariert (25.10.):** Ein kurzer Netzwerkfehler meldete fälschlich „Code gibt es nicht“; „aufladen“/„verlaengern“ hätten dabei Guthaben oder Namen überschreiben können. Jetzt bricht es ab, ohne etwas zu ändern.
+- ✅ **Material korrigiert (So 25.10.)** nach der Prüfung der Vorbereitung (68 Funde, 28 bestätigt):
+  - **Datenschutz-Blatt:** Einwilligung steht jetzt richtig „in der Sprache der Person“ (vorher fälschlich „nur Deutsch“), dazu „Freiwillig: Wer nicht einwilligt, wird ganz normal beraten“.
+  - **Kurzanleitung:** im Test nur übers Handy der Person; Frist immer am Originalbrief prüfen; Sprache *vor* dem Klick wählen (Dari = Farsi); keine Ausweise fotografieren; „etwa eine Minute“; Handy-Bildschirm anlassen; was bei der 3-Minuten-Warnung zu tun ist; Adressen für die IT; „ohne www“. Passt weiter auf 1 Seite.
+  - **Handzettel:** neue Überschrift „… verstehen ihren Brief, in ihrer eigenen Sprache“; „nur für Mitarbeitende, bitte nicht aushängen“; Test endet am 29.11.2026; „Rät nicht“ statt „Erfindet nichts“; ChatGPT-Vergleich ohne das wackelige Konto-Argument.
+- ✅ **Entscheidungen (So 25.10.):** Handzettel-Code nur für Mitarbeitende. Anthropic-Schlüssel wird **erst am Fr 30.10.** getauscht (kein Risiko vor dem Termin).
 - ℹ️ Der Live-Test im automatisierten Browser ging nicht, weil Cloudflare ferngesteuerte Browser blockt. Deshalb ist der echte Test die **Generalprobe morgen mit deinen Geräten**.
 - ✅ **Sprach-Durchlauf (lokal, Handy-Größe 375 px):** alle 27 Sprachen nacheinander eingestellt. In jeder Sprache ist **kein deutscher Text mehr übrig**, **nichts ragt über den Rand**, die Schreibrichtung stimmt (Arabisch, Farsi, Urdu und Paschtu von rechts). Tigrinya und Hindi zusätzlich mit Bildschirmfoto angeschaut: Schrift sauber.
   - Noch offen: die **echte KI-Erklärung** in den Sprachen (kommt erst mit der Generalprobe) und eine Prüfung durch Muttersprachler für Tigrinya, Somali, Paschtu und Kurdisch (nach dem Termin).
@@ -97,7 +102,7 @@
 - ✅ **Testzeitraum entschieden (25.10.):** genau 1 Monat, der Code gilt **bis So 29.11.2026**. Will die MBE weitermachen, verlängere ich ihn mit einem Befehl.
   Befehl für Di 27.10.: `node tools/einrichtungs-code.js neu "MBE Donnersberg" MBE --briefe 100 --bis 2026-11-29`
 - 👤 **Generalproben mitmachen** (mit deinem Handy und Laptop, siehe unten).
-- 👤 🔴 **Alten Anthropic-Schlüssel tauschen**, der im Juli im Chat gepostet wurde (console.anthropic.com → API Keys).
+- 👤 🔴 **Alten Anthropic-Schlüssel tauschen: Fr 30.10.** (nach dem Termin). console.anthropic.com → neuen Schlüssel → selbst `cd proxy && npx wrangler secret put ANTHROPIC_API_KEY` → `npm run pruefung` + echte Probe mit Foto → erst dann alten Schlüssel löschen. Dabei Monatslimit im Konto setzen.
 
 ---
 

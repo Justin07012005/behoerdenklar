@@ -7,7 +7,7 @@
     --allow-file-access-from-files --no-pdf-header-footer \
     --print-to-pdf=kurzanleitung-beratung.pdf "file://$PWD/kurzanleitung-beratung.html"
   Knopf- und Meldungstexte stammen wörtlich aus webseite/demo.html, „Der Zugang über …
-  ist abgelaufen“ aus proxy/src/index.ts (Stand 22.10.2026).
+  ist abgelaufen“ aus proxy/src/index.ts (Stand 25.10.2026).
 -->
 <html lang="de">
 <head>
@@ -48,12 +48,12 @@
   .kasten .label { position: absolute; top: -2.6mm; left: 3.5mm; font-family: 'Courier New', monospace; font-size: 7.5pt;
        text-transform: uppercase; letter-spacing: .1em; background: var(--tinte); color: var(--papier); padding: .4mm 2mm; }
 
-  .einmalig { margin-top: 4.4mm; display: grid; grid-template-columns: 1fr 27mm; gap: 5mm; align-items: start; }
-  .einmalig p { font-size: 10.6pt; line-height: 1.34; }
+  .einmalig { margin-top: 3.8mm; display: grid; grid-template-columns: 1fr 27mm; gap: 5mm; align-items: start; }
+  .einmalig p { font-size: 10.2pt; line-height: 1.3; }
   .adresse { font-family: 'Courier New', monospace; font-weight: 700; font-size: 12.5pt; color: var(--amtsblau);
              background: var(--marker); display: inline-block; padding: .4mm 2mm; margin: 1.2mm 0 1.6mm; word-break: break-all; }
   .luecke { display: inline-block; width: 26mm; border-bottom: 0.35mm solid var(--amtsblau); height: 4.2mm; vertical-align: -0.6mm; }
-  .einmalig ul { list-style: none; font-size: 10pt; line-height: 1.32; }
+  .einmalig ul { list-style: none; font-size: 9.6pt; line-height: 1.28; }
   .einmalig li { padding-left: 4mm; position: relative; margin-top: .9mm; }
   .einmalig li::before { content: '›'; position: absolute; left: .5mm; color: var(--amtsblau); font-weight: 700; }
   .qrteil { text-align: center; }
@@ -71,15 +71,15 @@
   .schritte li { display: grid; grid-template-columns: 9mm 1fr; gap: 1.5mm; padding: 0.8mm 0; border-bottom: 0.25mm dashed rgba(33,33,29,.22); }
   .schritte li:last-child { border-bottom: none; }
   .nr { font-family: 'Courier New', monospace; font-weight: 700; font-size: 17pt; line-height: 1; color: var(--amtsblau); padding-top: .4mm; }
-  .schritte b.t { font-size: 11.6pt; }
-  .schritte p { font-size: 11pt; line-height: 1.34; }
-  .schritte .zusatz { font-size: 9.6pt; color: #3a3833; margin-top: .4mm; }
+  .schritte b.t { font-size: 11pt; }
+  .schritte p { font-size: 10.3pt; line-height: 1.3; }
+  .schritte .zusatz { font-size: 9.1pt; color: #3a3833; margin-top: .3mm; }
 
-  .wichtig { margin-top: 3.8mm; border-color: var(--stempelrot); border-width: 0.6mm; }
+  .wichtig { margin-top: 3.2mm; border-color: var(--stempelrot); border-width: 0.6mm; }
   .wichtig .label { background: var(--stempelrot); }
-  .wichtig > p { font-size: 10.4pt; line-height: 1.33; padding-left: 4.5mm; position: relative; margin-bottom: .8mm; }
+  .wichtig > p { font-size: 9.8pt; line-height: 1.28; padding-left: 4.5mm; position: relative; margin-bottom: .8mm; }
   .wichtig > p::before { content: '!'; position: absolute; left: .6mm; color: var(--stempelrot); font-weight: 700; }
-  .meldungen { width: 100%; border-collapse: collapse; margin-top: 1.4mm; font-size: 9.6pt; line-height: 1.28; }
+  .meldungen { width: 100%; border-collapse: collapse; margin-top: 1mm; font-size: 9pt; line-height: 1.24; }
   .meldungen caption { text-align: left; font-family: 'Courier New', monospace; font-size: 7.5pt; text-transform: uppercase; letter-spacing: .1em; color: var(--grau); padding-bottom: .8mm; }
   .meldungen td { padding: .4mm 0; vertical-align: top; border-top: 0.25mm solid rgba(33,33,29,.15); }
   .meldungen td:first-child { width: 39%; padding-right: 3mm; }
@@ -115,7 +115,7 @@
       <p>Diese Adresse am Beratungs-PC als Lesezeichen speichern, genau so, mit Code:</p>
       <p><span class="adresse" id="adresseText"></span></p>
       <ul>
-        <li><b>Lesezeichen von Hand anlegen</b> und die Adresse eintragen. Nicht nur den Stern ☆ klicken: Nach dem Öffnen ist der Code aus der Adresszeile verschwunden.</li>
+        <li><b>Lesezeichen von Hand anlegen</b> und die Adresse eintragen (mit „oe“, ohne „www“). Nicht nur den Stern ☆ klicken: Nach dem Öffnen ist der Code aus der Adresszeile verschwunden.</li>
         <li>Ihr Code: <span class="code" id="codeText"></span> Nur für die Beratungsstelle: nicht an Ratsuchende weitergeben, Blatt nicht offen auslegen.</li>
       </ul>
     </div>
@@ -132,8 +132,8 @@
       <p class="zusatz">Fehlt das? Unten <span class="k">🤝 Sie haben einen Code von einer Beratungsstelle?</span> öffnen und den Code einlösen.</p>
     </div></li>
     <li><span class="nr">2</span><div>
-      <p><b class="t">Sprache wählen.</b> Bei <span class="m">„🌐 Erklärung in dieser Sprache:“</span> die Sprache der Person einstellen.
-      Oder <span class="m">„Deutsch“</span> lassen: Dann erkennt das Handy seine Sprache selbst.</p>
+      <p><b class="t">Sprache wählen.</b> Bei <span class="m">„🌐 Erklärung in dieser Sprache:“</span> die Sprache der Person einstellen,
+      <b>bevor</b> Sie in Schritt 3 klicken. Dari: „Farsi“ wählen.</p>
     </div></li>
     <li><span class="nr">3</span><div>
       <p><b class="t">QR-Code zeigen.</b> <span class="k">📱 Lieber mit dem Handy fotografieren</span> klicken. Die Person scannt den QR-Code mit der Handy-Kamera.
@@ -142,12 +142,13 @@
     </div></li>
     <li><span class="nr">4</span><div>
       <p><b class="t">Am Handy: Häkchen und Foto.</b> Das Häkchen setzt <b>die Person selbst</b>. Es ist ihre Einwilligung: Das Foto geht an BehördenKlar und an den KI-Dienst Anthropic (USA).
-      Dann tippt sie auf <span class="k">📷 Brief auswählen &amp; erklären lassen</span> und fotografiert den Brief.</p>
-      <p class="zusatz">Häkchen-Text unklar? Kurz erklären. Ein Foto pro Brief, bei mehreren Seiten die mit Betreff und Frist.</p>
+      Dann tippt sie auf den großen Knopf mit 📷 und fotografiert den Brief. Am Handy steht alles in ihrer Sprache.</p>
+      <p class="zusatz">Ein Foto pro Brief, bei mehreren Seiten die mit Betreff und Frist. Nur den Brief fotografieren, keine Ausweise.</p>
     </div></li>
     <li><span class="nr">5</span><div>
-      <p><b class="t">1 bis 2 Minuten warten.</b> Dann steht die Erklärung am PC auf Deutsch und am Handy in der Sprache der Person.
+      <p><b class="t">Etwa eine Minute warten.</b> Dann steht die Erklärung am PC auf Deutsch und am Handy in der Sprache der Person.
       Umschalten über dem Ergebnis, z. B. <span class="k">Deutsch</span> <span class="k">العربية</span></p>
+      <p class="zusatz">Solange es rechnet: Handy-Bildschirm anlassen, keine andere App öffnen.</p>
     </div></li>
     <li><span class="nr">6</span><div>
       <p><b class="t">Kalender am Handy.</b> Die Person tippt am Handy auf <span class="k">📅 In meinen Kalender eintragen</span>. Nicht am PC, sonst landet die Datei auf dem Dienst-PC.</p>
@@ -160,14 +161,14 @@
 
   <div class="kasten wichtig">
     <span class="label">Wichtig</span>
-    <p><b>Beim Warten nicht neu laden.</b> Falls doch: Das Ergebnis steht am Handy, dort <span class="k">Deutsch</span> tippen.</p>
-    <p><b>Ein QR-Code gilt für einen Brief.</b> Nächster Brief: ab Schritt 3.</p>
+    <p><b>Im Test nur übers Handy der Person,</b> nicht selbst am Dienst-PC hochladen (dafür erst ein AVV). <b>Frist immer am Originalbrief prüfen,</b> Fristen „ab Zustellung“ selbst nachrechnen.</p>
+    <p><b>Beim Warten nicht neu laden.</b> Falls doch: Ergebnis steht am Handy, dort <span class="k">Deutsch</span> tippen. <b>Ein QR-Code gilt für einen Brief.</b></p>
     <table class="meldungen">
       <caption>Meldungen am PC und was sie bedeuten</caption>
       <tr><td><span class="m">„⚠️ Am Handy hat es nicht geklappt: …“</span></td><td>Am Handy steht, warum. Dort neu fotografieren.</td></tr>
-      <tr><td><span class="m">„⚠️ Das dauert ungewöhnlich lange …“</span></td><td>Am Handy: <span class="k">🔁 Noch einmal an den Computer senden</span><br>Kein Knopf da? Am PC <span class="k">Abbrechen</span>, dann ab Schritt 3.</td></tr>
+      <tr><td><span class="m">„⚠️ Das dauert ungewöhnlich lange …“</span></td><td>Erst aufs Handy schauen: Rechnet es noch, warten. Sonst dort den Knopf mit 🔁 tippen oder am PC <span class="k">Abbrechen</span>, ab Schritt 3.</td></tr>
       <tr><td><span class="m">„Der QR-Code ist abgelaufen …“</span></td><td>Schritt 3 wiederholen.</td></tr>
-      <tr><td><span class="m">„⚠️ Keine Verbindung zum Server …“</span></td><td>Internet am PC prüfen, sonst Ihre IT fragen.</td></tr>
+      <tr><td><span class="m">„⚠️ Keine Verbindung zum Server …“</span></td><td>Internet prüfen. Sonst IT: behoerdenklar.de, *.workers.dev und challenges.cloudflare.com freigeben.</td></tr>
       <tr class="leer"><td><span class="m">„Die kostenlosen Analysen sind aufgebraucht oder abgelaufen …“</span><br><span class="m">„Der Zugang über … ist abgelaufen …“</span></td><td><b>Kontingent leer oder Test zu Ende: Justin anrufen, <span style="white-space: nowrap;">0170 4969375</span>.</b> Danach das Lesezeichen neu öffnen.</td></tr>
     </table>
   </div>

@@ -2,7 +2,7 @@
 <!--
   Handzettel für Beratungsstellen (DIN A4, zum Dalassen nach der Präsentation).
   CODE unten eintragen, sobald der Einrichtungs-Code angelegt ist
-  (node tools/einrichtungs-code.js neu "MBE Donnersberg" MBE --briefe 100 --monate 1),
+  (node tools/einrichtungs-code.js neu "MBE Donnersberg" MBE --briefe 100 --bis 2026-11-29),
   dann neu als PDF ausgeben:
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
     --no-pdf-header-footer --print-to-pdf=handzettel.pdf "file://$PWD/handzettel.html"
@@ -91,7 +91,7 @@
   </div>
 
   <p class="betreff">Für Beratungsstellen · Migrationsberatung · Soziale Beratung</p>
-  <h1>Ihre Ratsuchenden verstehen den Brief, <span class="markiert">bevor sie zu Ihnen kommen.</span></h1>
+  <h1>Ihre Ratsuchenden verstehen ihren Brief, <span class="markiert">in ihrer eigenen Sprache.</span></h1>
   <p class="anrede">
     BehördenKlar erklärt schwierige Post in einfacher Sprache, auf Wunsch in 27 Sprachen:
     von Ausländerbehörde, Jobcenter, Finanzamt, Krankenkasse, Vermieter oder Inkasso.
@@ -116,7 +116,7 @@
     </div></div>
     <div class="punkt"><span class="ik">📅</span><div>
       <h3>Frist und Termin in den Handy-Kalender</h3>
-      <p>Ein Tipp genügt, das Handy erinnert 3 Tage und 1 Tag vorher. Keine Frist geht zwischen zwei Beratungsterminen unter.</p>
+      <p>Mit wenigen Tipps eingetragen, das Handy erinnert 3 Tage und 1 Tag vorher. Keine Frist geht zwischen zwei Beratungsterminen unter.</p>
     </div></div>
     <div class="punkt"><span class="ik">📞</span><div>
       <h3>Anruf-Hilfe fürs Amt</h3>
@@ -131,7 +131,7 @@
       <p>Per QR-Code wandert die Erklärung vom Beratungs-PC aufs Handy der Ratsuchenden, mit Kalender und Anruf-Hilfe.</p>
     </div></div>
     <div class="punkt"><span class="ik">🔎</span><div>
-      <h3>Erfindet nichts</h3>
+      <h3>Rät nicht</h3>
       <p>Steht keine Telefonnummer oder kein Datum im Brief, sagt BehördenKlar das, statt zu raten.</p>
     </div></div>
     <div class="punkt"><span class="ik">⚖️</span><div>
@@ -153,27 +153,27 @@
         </ul>
       </div>
       <p class="chatgpt">
-        <b>„Ist das nicht einfach ChatGPT?“</b> Dort braucht man ein Konto und eine gut
-        formulierte Frage, und danach ist der Brief vergessen. Bei BehördenKlar macht man
+        <b>„Ist das nicht einfach ChatGPT?“</b> Dort braucht man eine gut formulierte
+        Frage, und danach ist der Brief vergessen. Bei BehördenKlar macht man
         ein Foto. Frist, Termin und Telefonnummer werden zu Kalender-Eintrag und
         Anruf-Hilfe, und deutsche Fachbegriffe bleiben erkennbar.
       </p>
       <p class="chatgpt">
-        <b>Und nach dem Test?</b> Ihre Einrichtung bekommt ein festes Briefkontingent zu
-        einem Preis für Beratungsstellen. Die Ratsuchenden zahlen weiterhin nichts. Ohne
-        Abo-Falle: Nach vier Wochen schauen wir gemeinsam, was es gebracht hat.
+        <b>Und nach dem Test?</b> Nach vier Wochen schauen wir gemeinsam, was es gebracht
+        hat. Wenn Sie weitermachen möchten, bekommen Sie ein Angebot für Beratungsstellen.
+        Die Ratsuchenden zahlen weiterhin nichts. Kein Abo, keine automatische Verlängerung.
       </p>
     </div>
 
     <div class="angebot">
       <p class="kopf">Ihr Testzugang</p>
       <p class="gross">1 Monat · bis 100 Briefe<br><span class="markiert">kostenlos</span></p>
-      <p class="klein">Ratsuchende zahlen nichts. Kein Vertrag, endet von selbst, verlängerbar.</p>
+      <p class="klein">Ratsuchende zahlen nichts. Kein Vertrag, endet am 29.11.2026 von selbst, verlängerbar.</p>
       <div id="qr"></div>
-      <p class="klein">Ihr Zugangscode für den Beratungs-PC:</p>
+      <p class="klein">Ihr Code, <b>nur für Mitarbeitende</b>, bitte nicht aushängen:</p>
       <p><span class="code" id="codeText"></span></p>
       <p class="link" id="linkText"></p>
-      <p class="klein" style="margin-top: 1.5mm;">Einmal am Beratungs-PC öffnen, dann ist auch „Mit dem Handy fotografieren“ für Ihre Ratsuchenden kostenlos.</p>
+      <p class="klein" style="margin-top: 1.5mm;">Die Adresse einmal am Beratungs-PC eintippen, dann ist auch „Lieber mit dem Handy fotografieren“ für Ihre Ratsuchenden kostenlos.</p>
     </div>
   </div>
 
