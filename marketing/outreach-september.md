@@ -317,6 +317,9 @@ fehlt noch" ist für dich schon ein Erfolg.
 Einrichtung kauft vorher ein **Briefkontingent** — jeder Brief ist bezahlt, bevor er
 genutzt wird. Mehr Nutzer heißt mehr Einnahmen, nie mehr Verlust.
 
+> ⚠️ **Überholt am 25.10.2026:** Die Pakete unten (20 € / 75 €) sind zu billig. Neue Preise:
+> [preise-einrichtungen.md](preise-einrichtungen.md) (Jahrespaket, Standard 290 € für 1.200 Briefe).
+
 | | Preis | pro Brief |
 |---|---|---|
 | Deine Kosten (eigene Rechnung ~2,5 ct, mit Puffer für fremde Sprachen) | — | ~5 ct |

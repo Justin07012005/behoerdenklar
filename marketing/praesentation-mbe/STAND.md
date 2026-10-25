@@ -91,6 +91,7 @@
   - **Träger ist die Förderinitiative Donnersberg e.V. (FID):** nicht kirchlich, im Paritätischen, also DSGVO, mit eigener Datenschutzbeauftragung. Kontakt MBE laut FID-Seite: Herr v. Bose, also „Beraterinnen und Berater“ sagen.
   - Der Weg zu weiteren Stellen geht über Empfehlungen: FID Alzey → MBE-Stellen des Paritätischen in RLP → Referat Migration in Mainz → Paritätischer Gesamtverband. **Am 29.10. noch nicht ansprechen.**
   - Handzettel und Datenschutz-Blatt an den Faktencheck angepasst (keine Effizienz-Versprechen, „über Ihren Code“, keine Sprache muttersprachlich geprüft).
+- ✅ **Preis entschieden (So 25.10.):** Auf Nachfrage sagst du **„voraussichtlich 290 € im Jahr für bis zu 1.200 Briefe, Endpreis, Richtpreis, Angebot am 26.11.“**. Die alten Pakete (20 € / 75 €) sind zu billig und gestrichen. Bleibt übrig: ca. 160–260 € im Jahr pro Stelle, vor Steuern (geschätzt, noch nicht gemessen). Alles Weitere, auch das Pilot-Angebot für den 26.11. (190 € für 2027, Preisgarantie bis 2029, kostenlose Brücke bis Ende Dezember): **[preise-einrichtungen.md](../preise-einrichtungen.md)**.
 - ⏳ **Webseite:** In den Metadaten der Demo-Seite stand „WCAG 2.1 AA, Vorlesen“. Lokal korrigiert, **noch nicht veröffentlicht** (nur zusammen mit einem anderen Deploy bis Di, mit deinem OK).
 - ✅ **Entscheidungen (So 25.10.):** Handzettel-Code nur für Mitarbeitende. Anthropic-Schlüssel wird **erst am Fr 30.10.** getauscht (kein Risiko vor dem Termin).
 - ℹ️ Der Live-Test im automatisierten Browser ging nicht, weil Cloudflare ferngesteuerte Browser blockt. Deshalb ist der echte Test die **Generalprobe morgen mit deinen Geräten**.
@@ -144,7 +145,7 @@
 - 💤 Knopf **„Fertig, nächste Person“** für den Beratungs-PC.
 - 💤 Verbindung PC ↔ Handy übersteht ein Neuladen der Seite.
 - 💤 Wöchentliche Stand-Mail an die MBE, Erinnerung 7 Tage vor Testende.
-- 💤 Angebot und Rechnung (§ 19 UStG) bis zum 26.11.
+- 💤 Angebot und Rechnung (§ 19 UStG) bis zum 26.11.: echte KI-Kosten messen, Angebots- und Rechnungsvorlage, Bedingungen für Einrichtungen, Steuerberater (25.000-€-Grenze der ganzen GbR). Liste in [preise-einrichtungen.md](../preise-einrichtungen.md).
 - 💤 App: Haiku 5.5 statt 4.5 prüfen (laut Preisliste ca. 10× günstiger).
 
 ---
