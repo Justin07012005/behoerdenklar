@@ -84,6 +84,14 @@
   - **Datenschutz-Blatt:** Einwilligung steht jetzt richtig „in der Sprache der Person“ (vorher fälschlich „nur Deutsch“), dazu „Freiwillig: Wer nicht einwilligt, wird ganz normal beraten“.
   - **Kurzanleitung** (danach auf Wunsch aufgeräumt: vorne Ablauf in 6 Schritten + 3 Regeln, hinten „Wenn etwas hakt“, ein Blatt beidseitig): im Test nur übers Handy der Person; Frist immer am Originalbrief prüfen; Sprache *vor* dem Klick wählen (Dari = Farsi); keine Ausweise fotografieren; „etwa eine Minute“; Handy-Bildschirm anlassen; was bei der 3-Minuten-Warnung zu tun ist; Adressen für die IT; „ohne www“.
   - **Handzettel:** neue Überschrift „… verstehen ihren Brief, in ihrer eigenen Sprache“; „nur für Mitarbeitende, bitte nicht aushängen“; Test endet am 29.11.2026; „Rät nicht“ statt „Erfindet nichts“; ChatGPT-Vergleich ohne das wackelige Konto-Argument.
+- ✅ **Neuer Pitch (So 25.10.)**: Recherche (MBE bundesweit, Träger vor Ort), 3 Entwürfe, bewertet aus Sicht einer Beraterin, einer Träger-Leitung und eines Pitch-Coachs, Faktencheck mit 22 Korrekturen.
+  - **[Spickzettel](ablaufplan.pdf)** (2 Seiten, zum Mitnehmen): 13-Minuten-Ablauf, Plan B, Einwände, Hintergrund.
+  - **[Pitch zum Üben](pitch-zum-ueben.pdf)** (voller Wortlaut, nur zu Hause).
+  - Leitbild **„Hilfe zur Selbsthilfe“**. Nie „Zeit sparen“ oder „effizient“, weil um die MBE gerade eine Kürzungsdebatte läuft.
+  - **Träger ist die Förderinitiative Donnersberg e.V. (FID):** nicht kirchlich, im Paritätischen, also DSGVO, mit eigener Datenschutzbeauftragung. Kontakt MBE laut FID-Seite: Herr v. Bose, also „Beraterinnen und Berater“ sagen.
+  - Der Weg zu weiteren Stellen geht über Empfehlungen: FID Alzey → MBE-Stellen des Paritätischen in RLP → Referat Migration in Mainz → Paritätischer Gesamtverband. **Am 29.10. noch nicht ansprechen.**
+  - Handzettel und Datenschutz-Blatt an den Faktencheck angepasst (keine Effizienz-Versprechen, „über Ihren Code“, keine Sprache muttersprachlich geprüft).
+- ⏳ **Webseite:** In den Metadaten der Demo-Seite stand „WCAG 2.1 AA, Vorlesen“. Lokal korrigiert, **noch nicht veröffentlicht** (nur zusammen mit einem anderen Deploy bis Di, mit deinem OK).
 - ✅ **Entscheidungen (So 25.10.):** Handzettel-Code nur für Mitarbeitende. Anthropic-Schlüssel wird **erst am Fr 30.10.** getauscht (kein Risiko vor dem Termin).
 - ℹ️ Der Live-Test im automatisierten Browser ging nicht, weil Cloudflare ferngesteuerte Browser blockt. Deshalb ist der echte Test die **Generalprobe morgen mit deinen Geräten**.
 - ✅ **Sprach-Durchlauf (lokal, Handy-Größe 375 px):** alle 27 Sprachen nacheinander eingestellt. In jeder Sprache ist **kein deutscher Text mehr übrig**, **nichts ragt über den Rand**, die Schreibrichtung stimmt (Arabisch, Farsi, Urdu und Paschtu von rechts). Tigrinya und Hindi zusätzlich mit Bildschirmfoto angeschaut: Schrift sauber.
