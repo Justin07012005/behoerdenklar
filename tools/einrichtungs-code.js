@@ -27,8 +27,16 @@ function kv(...args) {
   return execFileSync('npx', ['wrangler', 'kv', 'key', ...args, '--namespace-id', KV_ID, '--remote'],
     { cwd: PROXY, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
 }
+/** null nur, wenn es den Schlüssel wirklich nicht gibt (404). Jeder andere Fehler bricht ab —
+ *  sonst würden „aufladen"/„verlaengern" nach einem Wackler im Netz Guthaben oder Namen überschreiben. */
 function lies(schluessel) {
-  try { return kv('get', schluessel, '--text'); } catch { return null; }
+  try { return kv('get', schluessel, '--text'); } catch (e) {
+    const meldung = String((e && e.stderr) || (e && e.message) || '');
+    if (/404|not found/i.test(meldung)) return null;
+    abbruch(`Keine Verbindung zu Cloudflare (beim Lesen von ${schluessel.split(':')[0]}). Nichts wurde geändert.\n` +
+      'Einfach nochmal ausführen. Hilft das nicht: im Ordner proxy „npx wrangler login“ ausführen.\n\n' +
+      meldung.split('\n').filter((z) => z.trim()).slice(0, 3).join('\n'));
+  }
 }
 function schreib(schluessel, wert) { kv('put', schluessel, wert); }
 
@@ -95,6 +103,8 @@ function zeige({ code, einrichtung, rest, walletId }) {
   Sprachen:     ${Object.entries(proSprache).sort((a, b) => b[1] - a[1]).map(([s, z]) => `${s} ${z}`).join(' · ')}`;
   } else if (n) {
     auswertung = '\n  Genutzt:      noch keine Briefe';
+  } else if (walletId) {
+    auswertung = '\n  Genutzt:      konnte gerade nicht geladen werden (nochmal ausführen)';
   }
   console.log(`
   Einrichtung:  ${einrichtung.name}
