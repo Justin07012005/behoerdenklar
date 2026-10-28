@@ -107,7 +107,8 @@
 ## 2c. Mi 28.10.: Code, Druckfassung, Ablauf-Prüfung
 
 - ✅ **MBE-Code angelegt** (MBE Donnersberg, 100 Briefe, gültig bis 29.11.2026). Live geprüft, auch klein und mit Leerzeichen getippt. **Der Code steht absichtlich nicht hier:** Das Repository ist öffentlich. Er liegt nur lokal in `code.local.js` und in den Druck-PDFs (beides von Git ignoriert). Nachsehen: im Ordner `druck/` oder bei Claude fragen.
-- ✅ **Druckfertig im Ordner [druck/](druck/)** (nur lokal): `handzettel-MBE.pdf` (5×), `kurzanleitung-beratung-MBE.pdf` (5× beidseitig), `datenschutz-blatt.pdf` (2× beidseitig), `musterbrief.pdf` (2×), `spickzettel.pdf` (1×), **`zugangskarte.jpg` 5× als Fotodruck 10 × 15 cm** (eine Karte pro Beraterin, für den Bildschirm).
+- ✅ **Druckfertig im Ordner [druck/](druck/)** (nur lokal): `handzettel.pdf` (5×, **ohne Code**, mit „Warum nicht einfach ChatGPT?“), `kurzanleitung-beratung-MBE.pdf` (5× beidseitig), `datenschutz-blatt.pdf` (2× beidseitig), `musterbrief.pdf` (2×), `spickzettel.pdf` (1×), **`zugangskarte.jpg` 5× als Fotodruck 10 × 15 cm** (eine Karte pro Beraterin, für den Bildschirm).
+- ✅ **Code nur noch auf Zugangskarte, Kurzanleitung und in der Dankes-Mail** (Entscheidung 28.10.): Der Handzettel darf frei weitergegeben werden.
 - ✅ **Handzettel entschlackt** (Hinweis vom Vater: zu viel Text): nur noch Überschrift, 3 Schritte, 5 kurze Punkte, Testzugang mit QR, zwei Sätze zu Datenschutz und 26.11. Der Rest kommt mündlich und im Datenschutz-Blatt.
 - ✅ **Spickzettel:** Sitzen an der Tischecke (Laptop bis 3:30 zu dir gedreht), Arabisch über den Umschalter am Laptop zeigen, Google-Lens-Tipp für die Übergabe, „Drucken: Überschriften noch deutsch“, Antwort auf „Und der zweite Brief?“.
 - ✅ **Ablauf-Prüfung „glatt wie Apple“** (Handy, PC, gefühlte Geschwindigkeit): Handy 6 Taps bis zum Foto, PC 5 Klicks pro Person, ca. 50 s Warten. Wegen Code-Freeze **vor dem Termin keine Code-Änderung mehr**, die Verbesserungen kommen danach (Abschnitt 6).

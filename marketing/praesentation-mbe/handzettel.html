@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <!--
   Handzettel für Beratungsstellen (DIN A4, zum Dalassen nach der Präsentation).
-  CODE unten eintragen, sobald der Einrichtungs-Code angelegt ist
-  (node tools/einrichtungs-code.js neu "MBE Donnersberg" MBE --briefe 100 --bis 2026-11-29),
-  dann neu als PDF ausgeben:
+  Bewusst OHNE Zugangscode: Der Handzettel darf weitergegeben werden (z. B. an die Leitung).
+  Der Code steht nur auf der Zugangskarte, in der Kurzanleitung und in der Dankes-Mail.
+  PDF ausgeben:
   "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new \
     --no-pdf-header-footer --print-to-pdf=handzettel.pdf "file://$PWD/handzettel.html"
 -->
@@ -11,9 +11,6 @@
 <head>
 <meta charset="UTF-8">
 <title>BehördenKlar für Beratungsstellen</title>
-<script src="../../webseite/qrcode.js"></script>
-<!-- Code kommt aus code.local.js (nicht im Git, das Repository ist öffentlich) -->
-<script src="code.local.js"></script>
 <style>
   @page { size: A4; margin: 0; }
   :root {
@@ -51,12 +48,19 @@
   .angebot .gross { font-size: 15pt; font-weight: 700; line-height: 1.25; margin: 2mm 0 1mm; }
   .angebot .gross .markiert { padding: 0 1mm; }
   .angebot .klein { font-size: 8.5pt; color: var(--grau); line-height: 1.4; }
-  #qr { width: 36mm; height: 36mm; margin: 4mm auto 2mm; }
+  .schluessel { font-size: 30pt; margin: 6mm 0 2mm; }
+  .wo { font-size: 11.5pt; line-height: 1.4; }
   #qr svg { width: 100%; height: 100%; display: block; }
   .code { font-family: 'Courier New', monospace; font-weight: 700; font-size: 15pt; letter-spacing: .08em; background: var(--marker); display: inline-block; padding: .4mm 3mm; margin-top: 1mm; }
   .link { font-family: 'Courier New', monospace; font-size: 7.5pt; color: var(--amtsblau); word-break: break-all; margin-top: 1.5mm; }
   .intern { margin-top: 3mm; font-size: 8.5pt; color: var(--stempelrot); font-weight: 700; }
 
+  .vergleich { margin-top: 7mm; }
+  .vergleich h2 { font-size: 13pt; text-transform: none; letter-spacing: 0; color: var(--tinte); font-weight: 700; margin-bottom: 1mm; }
+  .vergleich .unter { font-size: 10pt; color: var(--grau); margin-bottom: 3.5mm; }
+  .vorteile { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 2.2mm 8mm; }
+  .vorteile li { display: grid; grid-template-columns: 8mm 1fr; font-size: 10.3pt; line-height: 1.32; }
+  .vorteile .ik { font-size: 12pt; }
   .leise { margin-top: 5mm; font-size: 10pt; color: #3a3833; border-top: 0.25mm solid rgba(33,33,29,.25); padding-top: 4mm; }
   .leise p { margin-bottom: 1.5mm; }
 
@@ -88,34 +92,36 @@
         <li><span class="nr">2</span><span>Die Person fotografiert den Brief mit ihrem Handy.</span></li>
         <li><span class="nr">3</span><span>Sie lesen Deutsch, die Person ihre Sprache.</span></li>
       </ol>
-
-      <h2 style="margin-top: 7mm;">Was es kann</h2>
-      <ul class="kann">
-        <li><span class="ik">🌐</span><span>27 Sprachen, Fachbegriffe bleiben deutsch</span></li>
-        <li><span class="ik">🚦</span><span>Frist erkannt, Ampel zeigt, wie dringend</span></li>
-        <li><span class="ik">☑️</span><span>Checkliste: was tun, was mitbringen</span></li>
-        <li><span class="ik">📅</span><span>Frist und Termin in den Handy-Kalender</span></li>
-        <li><span class="ik">📞</span><span>Anruf-Hilfe mit Sätzen auf Deutsch</span></li>
-        <li><span class="ik">📱</span><span>Ergebnis per QR-Code aufs Handy mitnehmen</span></li>
-        <li><span class="ik">🖨️</span><span>Drucken oder als PDF speichern</span></li>
-        <li><span class="ik">🔎</span><span>Rät nicht: Unsicheres bleibt leer</span></li>
-        <li><span class="ik">🤝</span><span>Bei jeder Erklärung: „Ihre Beratungsstelle hilft weiter“</span></li>
-      </ul>
     </div>
 
     <div class="angebot">
       <p class="kopf">Ihr Testzugang</p>
       <p class="gross">1 Monat<br>bis 100 Briefe<br><span class="markiert">kostenlos</span></p>
-      <p class="klein">Für Ihre Ratsuchenden kostenlos. Kein Vertrag, endet am 29.11.2026 von selbst.</p>
-      <div id="qr"></div>
-      <p><span class="code" id="codeText"></span></p>
-      <p class="link" id="linkText"></p>
-      <p class="intern">Nur für Mitarbeitende, bitte nicht aushängen.</p>
+      <p class="klein">Für Ihre Ratsuchenden kostenlos. Kein Vertrag, endet am 29.11.2026 von selbst. Den Code finden Sie auf Ihrer Zugangskarte.</p>
     </div>
   </div>
 
+  <div class="vergleich">
+    <h2>Warum nicht einfach ChatGPT?</h2>
+    <p class="unter">Auch hier arbeitet eine KI. Der Unterschied ist, was drumherum passiert:</p>
+    <ul class="vorteile">
+      <li><span class="ik">📷</span><span>Foto statt Frage: nichts eintippen, nichts formulieren</span></li>
+      <li><span class="ik">🖥️</span><span>Zwei Bildschirme, zwei Sprachen: Sie Deutsch, die Person ihre</span></li>
+      <li><span class="ik">🔤</span><span>Fachbegriffe bleiben deutsch, im Brief wiederzufinden</span></li>
+      <li><span class="ik">🚦</span><span>Frist erkannt, die Ampel zeigt, wie dringend</span></li>
+      <li><span class="ik">☑️</span><span>Checkliste: was tun, was mitbringen</span></li>
+      <li><span class="ik">📅</span><span>Frist und Termin in den Handy-Kalender</span></li>
+      <li><span class="ik">📞</span><span>Anruf-Hilfe mit Sätzen auf Deutsch</span></li>
+      <li><span class="ik">🔎</span><span>Rät nicht: Unsicheres bleibt leer</span></li>
+      <li><span class="ik">🖨️</span><span>Mitnehmen per QR-Code oder drucken</span></li>
+      <li><span class="ik">🤝</span><span>Verweist zurück an Ihre Beratungsstelle</span></li>
+      <li><span class="ik">🔒</span><span>Einwilligung pro Brief, Datenschutz-Blatt und AVV</span></li>
+      <li><span class="ik">🎟️</span><span>Kein Konto, für Ratsuchende kostenlos</span></li>
+    </ul>
+  </div>
+
   <div class="leise">
-    <p><b>Datenschutz:</b> Kein Konto. Die Person willigt für jeden Brief selbst ein. Alles Weitere steht im Datenschutz-Blatt.</p>
+    <p><b>Datenschutz:</b> Alles Wichtige steht im Datenschutz-Blatt für Ihre Datenschutzbeauftragte.</p>
     <p><b>Und danach?</b> Am 26. November schauen wir gemeinsam, was es gebracht hat.</p>
   </div>
 
@@ -128,18 +134,6 @@
   </div>
 </div>
 
-<script>
-  // Einrichtungs-Code hier eintragen, sobald er angelegt ist (z. B. 'MBE-K7QX').
-  var CODE = window.BK_EINRICHTUNGS_CODE || '';
-  var url = CODE ? 'https://behoerdenklar.de/demo?code=' + CODE : 'https://behoerdenklar.de/demo';
-  var qr = qrcode(0, 'M');
-  qr.addData(url);
-  qr.make();
-  document.getElementById('qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
-  var codeEl = document.getElementById('codeText');
-  codeEl.textContent = CODE || 'wird beim Termin eingetragen';
-  if (!CODE) { codeEl.style.fontSize = '9pt'; codeEl.style.letterSpacing = '0'; }
-  document.getElementById('linkText').textContent = url.replace('https://', '');
-</script>
+
 </body>
 </html>
