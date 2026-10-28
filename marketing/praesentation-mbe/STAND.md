@@ -115,6 +115,7 @@
 - ⚠️ **Repository ist öffentlich:** Der Vorführ-Code VORF-2EDF steht seit 22.10. in älteren Fassungen dieser Datei. Bisher nur von uns genutzt. **Do früh `stand VORF-2EDF` prüfen** (mindestens 10 übrig), **nach dem Termin sperren** (`verlaengern VORF-2EDF 2026-10-29`).
 - ⚠️ **Anthropic-Guthaben war leer** (Mi 28.10. nachmittags, vom Gesundheits-Check gefunden). Du hast es sofort aufgeladen, danach Check grün. **Auto-Reload im Anthropic-Konto einschalten**, sonst passiert das im Testmonat wieder.
 - ✅ **Laptop zweisprachig** (Mi 28.10., live): Mit Einrichtungs-Code und fremder Sprache zeigt auch das Hochladen am Laptop Deutsch zuerst plus Umschalter auf die Sprache der Person. Damit ist auch Plan B (Handy hakt → Brief am Laptop hochladen) zweisprachig.
+- ✅ **„Beides“ am PC live** (Mi 28.10. abends): Umschalter „Deutsch | Sprache | Beides“, Zeile für Zeile nebeneinander, zweisprachig drucken. Gegenprüfung: 10 Funde, 2 bestätigt und behoben, Handy-Weg nachweislich unverändert. Gesundheits-Check grün.
 - ⚠️ Generalprobe 2 (Mo) hat nicht stattgefunden. **Die Generalprobe heute ist der einzige echte Lauf vor dem Termin.**
 
 ## 2d. Do 29.10.: Termin um 12:00 Uhr (Bestätigungs-Mail ans Team ist raus)
@@ -185,7 +186,7 @@
 - 💤 Drucken komplett in der Sprache der Person (auch Überschriften).
 
 - ✅ ~~Ohne Handy: PC zweisprachig~~ (erledigt am 28.10.).
-- 💤 **„Beides nebeneinander“ am PC** (Idee vom 28.10.): dritte Wahl im Umschalter „Deutsch | العربية | Beides“, links Deutsch, rechts die Sprache der Person (mit richtiger Schreibrichtung), auch als **zweisprachiger Ausdruck** zum Mitnehmen. Am Handy bleibt eine Sprache. Im Termin das Team fragen, ob es hilft.
+- ✅ ~~„Beides nebeneinander“ am PC~~ (live seit 28.10.).
 - 💤 Kurzer Verbindungs-Code zum Eintippen als Ersatz, wenn die Handy-Kamera keinen QR-Code liest.
 
 **Zweite Welle (mit eigener Probe):**
