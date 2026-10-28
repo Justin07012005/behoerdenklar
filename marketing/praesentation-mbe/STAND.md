@@ -113,6 +113,18 @@
 - ⚠️ **Repository ist öffentlich:** Der Vorführ-Code VORF-2EDF steht seit 22.10. in älteren Fassungen dieser Datei. Bisher nur von uns genutzt. **Do früh `stand VORF-2EDF` prüfen** (mindestens 10 übrig), **nach dem Termin sperren** (`verlaengern VORF-2EDF 2026-10-29`).
 - ⚠️ Generalprobe 2 (Mo) hat nicht stattgefunden. **Die Generalprobe heute ist der einzige echte Lauf vor dem Termin.**
 
+## 2d. Do 29.10.: Termin um 12:00 Uhr (Bestätigungs-Mail ans Team ist raus)
+
+| Uhrzeit | Was | Wer |
+|---|---|---|
+| ab 10:00 | Gesundheits-Check der Seite und Stand des Vorführ-Codes (mind. 10 Briefe) | Claude, wenn du Bescheid gibst |
+| ca. 10:30 | Ein kurzer Lauf auf Arabisch, damit der erste Lauf des Tages nicht vor Publikum ist | du |
+| ca. 11:15 | Losfahren (Winnweiler → Kirchheimbolanden), Mappe, Ladekabel, Powerbank | du |
+| ca. 11:40 | Im Auto: Hotspot an, Seite offen, „Kostenlos über MBE Donnersberg (Vorführung)“ sichtbar, Arabisch eingestellt, `caffeinate -d` | du |
+| 11:45 | Ankommen, Hände schütteln, an die Tischecke setzen | du |
+| **12:00** | **Termin** | du |
+| danach | Dankes-Mail mit Code und Datenschutz-Blatt, Notizen an Claude | du |
+
 ## 3. Was du tun musst
 
 - ✅ ~~„deploy“ schreiben~~: erledigt, live seit Do 22.10. abends.
