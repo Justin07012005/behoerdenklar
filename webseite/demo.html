@@ -226,6 +226,8 @@
     .beides-zeile > div { white-space: pre-line; }
     .beides-zeile > div[dir="rtl"] { text-align: right; }
     .beides-voll { padding: 6px 0 10px; border-bottom: 1px dashed rgba(33,33,29,0.25); }
+    .beides-paar { padding: 4px 0 6px; border-bottom: 1px dotted rgba(33,33,29,0.18); }
+    .beides-paar .todo { border-bottom: none; padding: 2px 0; }
     .versteckt-beides { display: none !important; }
     /* PC: Drucken und „Fertig, nächste Person" */
     .pc-aktionen { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
@@ -1066,6 +1068,10 @@
         if (daten.versuch === 'bezahlt' || typeof daten.guthaben === 'number') {
           setzeGuthaben(daten.guthaben);
           zeigeErgebnis(analyse, null, daten.guthaben);
+          // zeigeErgebnis blendet die Hinweis-Zeile im bezahlten Zweig aus: danach wieder zeigen
+          if (daten.uebersetzung_fehlgeschlagen) {
+            zeigeHinweis('Die Übersetzung hat diesmal nicht geklappt. Die Erklärung steht hier auf Deutsch.');
+          }
           return;
         }
 
@@ -1212,22 +1218,34 @@
       abschnitt('Worum geht es', zelle(a.kernaussage, 'de'), zelle(b.kernaussage, fremdV.code));
       if (datumZeilen(a)) abschnitt('Frist und Termin', zelle(datumZeilen(a), 'de'), zelle(datumZeilen(b), fremdV.code));
       abschnitt(t('labelEinfach'), zelle(a.erklaerung_einfach, 'de'), zelle(b.erklaerung_einfach, fremdV.code));
-      if (a.checkliste && a.checkliste.length) abschnitt(t('labelTun'), zelle(a.checkliste, 'de', true), zelle(b.checkliste, fremdV.code, true));
+      // Listen Zeile für Zeile, damit Satz und Übersetzung auf gleicher Höhe stehen
+      function paare(label, links, rechts, alsListe) {
+        var n = Math.max(links.length, rechts.length);
+        if (!n) return;
+        var l = document.createElement('div'); l.className = 'beides-label'; l.textContent = label; box.appendChild(l);
+        for (var i = 0; i < n; i++) {
+          var r = document.createElement('div'); r.className = 'beides-zeile beides-paar';
+          r.appendChild(zelle(alsListe ? (links[i] != null ? [links[i]] : []) : (links[i] || ''), 'de', alsListe));
+          r.appendChild(zelle(alsListe ? (rechts[i] != null ? [rechts[i]] : []) : (rechts[i] || ''), fremdV.code, alsListe));
+          box.appendChild(r);
+        }
+      }
+      paare(t('labelTun'), a.checkliste || [], b.checkliste || [], true);
       var k = a.kontakt || {};
       var saetzeDe = (a.anruf || []).map(function (x) { return '„' + x.deutsch + '“'; });
       var saetzeFremd = (b.anruf || []).map(function (x) { return x.bedeutung || x.deutsch; });
       if (k.telefon || saetzeDe.length) {
         var l = document.createElement('div'); l.className = 'beides-label'; l.textContent = t('labelAnrufen'); box.appendChild(l);
         if (k.telefon || k.aktenzeichen) voll((k.telefon ? '📞 ' + k.telefon : '') + (k.telefon && k.aktenzeichen ? ' · ' : '') + (k.aktenzeichen ? 'Aktenzeichen: ' + k.aktenzeichen : ''));
-        if (saetzeDe.length) {
-          var r = document.createElement('div'); r.className = 'beides-zeile';
-          r.appendChild(zelle(saetzeDe.join('\n'), 'de')); r.appendChild(zelle(saetzeFremd.join('\n'), fremdV.code)); box.appendChild(r);
+        for (var si = 0; si < saetzeDe.length; si++) {
+          var rs = document.createElement('div'); rs.className = 'beides-zeile beides-paar';
+          rs.appendChild(zelle(saetzeDe[si], 'de')); rs.appendChild(zelle(saetzeFremd[si] || '', fremdV.code)); box.appendChild(rs);
         }
       }
       if (a.fachbegriffe && a.fachbegriffe.length) {
         var begriffeDe = a.fachbegriffe.map(function (x) { return x.begriff + ': ' + x.erklaerung; });
         var begriffeFremd = (b.fachbegriffe || []).map(function (x) { return iso(x.begriff) + ': ' + x.erklaerung; });
-        abschnitt(t('labelWoerter'), zelle(begriffeDe.join('\n\n'), 'de'), zelle(begriffeFremd.join('\n\n'), fremdV.code));
+        paare(t('labelWoerter'), begriffeDe, begriffeFremd, false);
       }
     }
 
