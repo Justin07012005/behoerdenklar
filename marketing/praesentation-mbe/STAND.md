@@ -113,6 +113,8 @@
 - ✅ **Spickzettel:** Sitzen an der Tischecke (Laptop bis 3:30 zu dir gedreht), Arabisch über den Umschalter am Laptop zeigen, Google-Lens-Tipp für die Übergabe, „Drucken: Überschriften noch deutsch“, Antwort auf „Und der zweite Brief?“.
 - ✅ **Ablauf-Prüfung „glatt wie Apple“** (Handy, PC, gefühlte Geschwindigkeit): Handy 6 Taps bis zum Foto, PC 5 Klicks pro Person, ca. 50 s Warten. Wegen Code-Freeze **vor dem Termin keine Code-Änderung mehr**, die Verbesserungen kommen danach (Abschnitt 6).
 - ⚠️ **Repository ist öffentlich:** Der Vorführ-Code VORF-2EDF steht seit 22.10. in älteren Fassungen dieser Datei. Bisher nur von uns genutzt. **Do früh `stand VORF-2EDF` prüfen** (mindestens 10 übrig), **nach dem Termin sperren** (`verlaengern VORF-2EDF 2026-10-29`).
+- ⚠️ **Anthropic-Guthaben war leer** (Mi 28.10. nachmittags, vom Gesundheits-Check gefunden). Du hast es sofort aufgeladen, danach Check grün. **Auto-Reload im Anthropic-Konto einschalten**, sonst passiert das im Testmonat wieder.
+- ✅ **Laptop zweisprachig** (Mi 28.10., live): Mit Einrichtungs-Code und fremder Sprache zeigt auch das Hochladen am Laptop Deutsch zuerst plus Umschalter auf die Sprache der Person. Damit ist auch Plan B (Handy hakt → Brief am Laptop hochladen) zweisprachig.
 - ⚠️ Generalprobe 2 (Mo) hat nicht stattgefunden. **Die Generalprobe heute ist der einzige echte Lauf vor dem Termin.**
 
 ## 2d. Do 29.10.: Termin um 12:00 Uhr (Bestätigungs-Mail ans Team ist raus)
@@ -182,7 +184,7 @@
 - 💤 PC: Kalender-Knopf nur am Handy, „Nächster Brief“ unter dem Ergebnis, Sprache „Tigrinya – ትግርኛ“ auffindbar, Hinweis bei gescheiterter Übersetzung.
 - 💤 Drucken komplett in der Sprache der Person (auch Überschriften).
 
-- 💤 **Ohne Handy (Fall B, nach dem AVV):** Am PC hochladen liefert bei fremder Sprache heute NUR diese Sprache. Ändern: auch am PC Deutsch + Sprache der Person (auchDeutsch), umschalten, Fassung der Person ausdrucken. Für Menschen ohne Smartphone der einfachste Weg.
+- ✅ ~~Ohne Handy: PC zweisprachig~~ (erledigt am 28.10.).
 - 💤 Kurzer Verbindungs-Code zum Eintippen als Ersatz, wenn die Handy-Kamera keinen QR-Code liest.
 
 **Zweite Welle (mit eigener Probe):**
