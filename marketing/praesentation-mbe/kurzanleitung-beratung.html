@@ -15,6 +15,8 @@
 <meta charset="UTF-8">
 <title>So geht's am Beratungs-PC</title>
 <script src="../../webseite/qrcode.js"></script>
+<!-- Code kommt aus code.local.js (nicht im Git, das Repository ist öffentlich) -->
+<script src="code.local.js"></script>
 <style>
   @page { size: A4; margin: 0; }
   :root {
@@ -219,7 +221,7 @@
 
 <script>
   // Einrichtungs-Code hier eintragen, sobald er angelegt ist (z. B. 'MBE-K7QX').
-  var CODE = '';
+  var CODE = window.BK_EINRICHTUNGS_CODE || '';
   // Name der Einrichtung, so wie er beim Anlegen des Codes vergeben wurde (steht oben auf der Seite).
   var STELLE = 'MBE Donnersberg';
   var url = CODE ? 'https://behoerdenklar.de/demo?code=' + CODE : 'https://behoerdenklar.de/demo';

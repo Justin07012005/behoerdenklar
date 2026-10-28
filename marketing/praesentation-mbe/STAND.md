@@ -5,7 +5,7 @@
 >
 > Ausführlicher Prüfbericht mit allen 61 Funden: [plan-bis-29-10.md](plan-bis-29-10.md)
 
-**Zuletzt aktualisiert:** So 25.10.2026: **Generalprobe 1 bestanden** (Laptop Deutsch + Handy Arabisch, echte KI, keine Fehler). Als Nächstes: Plan für So–Mi und neuer Pitch.
+**Zuletzt aktualisiert:** Mi 28.10.2026: **MBE-Code angelegt** und in die Druckfassungen eingetragen (Ordner `druck/`). Heute: drucken, gedruckten QR testen, Generalprobe (die einzige echte vor dem Termin).
 
 ---
 
@@ -104,6 +104,15 @@
 - ✅ **Sprach-Durchlauf (lokal, Handy-Größe 375 px):** alle 27 Sprachen nacheinander eingestellt. In jeder Sprache ist **kein deutscher Text mehr übrig**, **nichts ragt über den Rand**, die Schreibrichtung stimmt (Arabisch, Farsi, Urdu und Paschtu von rechts). Tigrinya und Hindi zusätzlich mit Bildschirmfoto angeschaut: Schrift sauber.
   - Noch offen: die **echte KI-Erklärung** in den Sprachen (kommt erst mit der Generalprobe) und eine Prüfung durch Muttersprachler für Tigrinya, Somali, Paschtu und Kurdisch (nach dem Termin).
 
+## 2c. Mi 28.10.: Code, Druckfassung, Ablauf-Prüfung
+
+- ✅ **MBE-Code angelegt** (MBE Donnersberg, 100 Briefe, gültig bis 29.11.2026). Live geprüft, auch klein und mit Leerzeichen getippt. **Der Code steht absichtlich nicht hier:** Das Repository ist öffentlich. Er liegt nur lokal in `code.local.js` und in den Druck-PDFs (beides von Git ignoriert). Nachsehen: im Ordner `druck/` oder bei Claude fragen.
+- ✅ **Druckfertig im Ordner [druck/](druck/)** (nur lokal): `handzettel-MBE.pdf` (5×), `kurzanleitung-beratung-MBE.pdf` (5× beidseitig), `datenschutz-blatt.pdf` (2× beidseitig), `musterbrief.pdf` (2×), `spickzettel.pdf` (1×).
+- ✅ **Spickzettel:** Sitzen an der Tischecke (Laptop bis 3:30 zu dir gedreht), Arabisch über den Umschalter am Laptop zeigen, Google-Lens-Tipp für die Übergabe, „Drucken: Überschriften noch deutsch“, Antwort auf „Und der zweite Brief?“.
+- ✅ **Ablauf-Prüfung „glatt wie Apple“** (Handy, PC, gefühlte Geschwindigkeit): Handy 6 Taps bis zum Foto, PC 5 Klicks pro Person, ca. 50 s Warten. Wegen Code-Freeze **vor dem Termin keine Code-Änderung mehr**, die Verbesserungen kommen danach (Abschnitt 6).
+- ⚠️ **Repository ist öffentlich:** Der Vorführ-Code VORF-2EDF steht seit 22.10. in älteren Fassungen dieser Datei. Bisher nur von uns genutzt. **Do früh `stand VORF-2EDF` prüfen** (mindestens 10 übrig), **nach dem Termin sperren** (`verlaengern VORF-2EDF 2026-10-29`).
+- ⚠️ Generalprobe 2 (Mo) hat nicht stattgefunden. **Die Generalprobe heute ist der einzige echte Lauf vor dem Termin.**
+
 ## 3. Was du tun musst
 
 - ✅ ~~„deploy“ schreiben~~: erledigt, live seit Do 22.10. abends.
@@ -144,6 +153,21 @@
 ---
 
 ## 6. Nach dem Termin
+
+- 💤 **VORF-2EDF sperren** (stand im öffentlichen Repository): `node tools/einrichtungs-code.js verlaengern VORF-2EDF 2026-10-29`.
+
+**Erste Welle „glatter Ablauf“ (ab Fr 30.10., nur Webseite, je mit Probe auf iPhone und Android):**
+- 💤 PC: „Lieber mit dem Handy fotografieren“ und Sprachwahl ganz nach oben, Werbe-Kopf weg (mit Code).
+- 💤 PC: Wartebildschirm mit mitlaufender Zeit statt stehendem QR-Code.
+- 💤 Handy: Kamera direkt öffnen (`capture`), 1 Tap weniger.
+- 💤 Handy: Bildschirm in der Wartezeit wach halten (Wake Lock), Fehlermeldungen in den Blick holen, kein Sprung beim Start.
+- 💤 PC: Kalender-Knopf nur am Handy, „Nächster Brief“ unter dem Ergebnis, Sprache „Tigrinya – ትግርኛ“ auffindbar, Hinweis bei gescheiterter Übersetzung.
+- 💤 Drucken komplett in der Sprache der Person (auch Überschriften).
+
+**Zweite Welle (mit eigener Probe):**
+- 💤 Worker: Deutsch nach ca. 27 s an den PC, Übersetzung kommt nach.
+- 💤 Mehrere Briefe ohne neuen Scan.
+- 💤 Worker-Tempo messen und straffen (Übersetzung nur Textfelder; effort erst nach Messreihe).
 
 - 💤 **AVV-Entwurf**, TOMs und Eintrag für das Verarbeitungsverzeichnis, bevor die MBE echte Briefe hochlädt.
 - 💤 **Mehrere Fotos pro Brief** (mehrseitige Briefe).

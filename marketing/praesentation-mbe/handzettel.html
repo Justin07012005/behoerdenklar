@@ -12,6 +12,8 @@
 <meta charset="UTF-8">
 <title>BehördenKlar für Beratungsstellen</title>
 <script src="../../webseite/qrcode.js"></script>
+<!-- Code kommt aus code.local.js (nicht im Git, das Repository ist öffentlich) -->
+<script src="code.local.js"></script>
 <style>
   @page { size: A4; margin: 0; }
   :root {
@@ -136,7 +138,7 @@
     </div></div>
     <div class="punkt"><span class="ik">⚖️</span><div>
       <h3>Ergänzung, kein Ersatz</h3>
-      <p>Unter jeder Erklärung steht in der Sprache der Person: „Noch Fragen? Ihre Beratungsstelle hilft Ihnen gern weiter.“</p>
+      <p>Unter jeder Erklärung steht: „Noch Fragen? Ihre Beratungsstelle hilft weiter.“</p>
     </div></div>
   </div>
 
@@ -169,12 +171,12 @@
     <div class="angebot">
       <p class="kopf">Ihr Testzugang</p>
       <p class="gross">1 Monat · bis 100 Briefe<br><span class="markiert">kostenlos</span></p>
-      <p class="klein">Über Ihren Code zahlen Ihre Ratsuchenden nichts. Kein Vertrag, endet am 29.11.2026 von selbst, verlängerbar.</p>
+      <p class="klein">Über Ihren Code kostenlos für Ratsuchende. Kein Vertrag, endet am 29.11.2026 von selbst.</p>
       <div id="qr"></div>
       <p class="klein">Ihr Code, <b>nur für Mitarbeitende</b>, bitte nicht aushängen:</p>
       <p><span class="code" id="codeText"></span></p>
       <p class="link" id="linkText"></p>
-      <p class="klein" style="margin-top: 1.5mm;">Die Adresse einmal am Beratungs-PC eintippen, dann ist auch „Lieber mit dem Handy fotografieren“ für Ihre Ratsuchenden kostenlos.</p>
+      <p class="klein" style="margin-top: 1.5mm;">Einmal am Beratungs-PC als Lesezeichen anlegen. Anleitung: Kurzanleitung.</p>
     </div>
   </div>
 
@@ -189,7 +191,7 @@
 
 <script>
   // Einrichtungs-Code hier eintragen, sobald er angelegt ist (z. B. 'MBE-K7QX').
-  var CODE = '';
+  var CODE = window.BK_EINRICHTUNGS_CODE || '';
   var url = CODE ? 'https://behoerdenklar.de/demo?code=' + CODE : 'https://behoerdenklar.de/demo';
   var qr = qrcode(0, 'M');
   qr.addData(url);

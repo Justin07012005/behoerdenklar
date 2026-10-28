@@ -49,3 +49,7 @@ yarn-error.*
 
 # Word-Sperrdateien
 ~$*
+
+# Einrichtungs-Codes und Druckfassungen mit Code: nie ins (öffentliche) Repository
+marketing/praesentation-mbe/code.local.js
+marketing/praesentation-mbe/druck/
