@@ -182,6 +182,9 @@
 - 💤 PC: Kalender-Knopf nur am Handy, „Nächster Brief“ unter dem Ergebnis, Sprache „Tigrinya – ትግርኛ“ auffindbar, Hinweis bei gescheiterter Übersetzung.
 - 💤 Drucken komplett in der Sprache der Person (auch Überschriften).
 
+- 💤 **Ohne Handy (Fall B, nach dem AVV):** Am PC hochladen liefert bei fremder Sprache heute NUR diese Sprache. Ändern: auch am PC Deutsch + Sprache der Person (auchDeutsch), umschalten, Fassung der Person ausdrucken. Für Menschen ohne Smartphone der einfachste Weg.
+- 💤 Kurzer Verbindungs-Code zum Eintippen als Ersatz, wenn die Handy-Kamera keinen QR-Code liest.
+
 **Zweite Welle (mit eigener Probe):**
 - 💤 Worker: Deutsch nach ca. 27 s an den PC, Übersetzung kommt nach.
 - 💤 Mehrere Briefe ohne neuen Scan.
