@@ -185,6 +185,7 @@
 - 💤 Drucken komplett in der Sprache der Person (auch Überschriften).
 
 - ✅ ~~Ohne Handy: PC zweisprachig~~ (erledigt am 28.10.).
+- 💤 **„Beides nebeneinander“ am PC** (Idee vom 28.10.): dritte Wahl im Umschalter „Deutsch | العربية | Beides“, links Deutsch, rechts die Sprache der Person (mit richtiger Schreibrichtung), auch als **zweisprachiger Ausdruck** zum Mitnehmen. Am Handy bleibt eine Sprache. Im Termin das Team fragen, ob es hilft.
 - 💤 Kurzer Verbindungs-Code zum Eintippen als Ersatz, wenn die Handy-Kamera keinen QR-Code liest.
 
 **Zweite Welle (mit eigener Probe):**
