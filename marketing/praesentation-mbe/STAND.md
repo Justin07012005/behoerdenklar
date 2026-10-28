@@ -168,6 +168,10 @@
 
 ## 6. Nach dem Termin
 
+- ✅ **Entwürfe für den Träger fertig (Mi 28.10.)** in [rechtliches/einrichtungen/](../../rechtliches/einrichtungen/README.md): AVV mit Anlage TOMs und Unterauftragsverarbeitern, Bausteine für Folgenabschätzung und Verzeichnis, Angebots- und Rechnungsvorlage, Bedingungen für Einrichtungen. Je geprüft gegen Gesetz und Programm-Code, untereinander abgeglichen. **Alles Entwürfe**: vor dem Einsatz Anwalt/DSB, Steuerberater. Offene Punkte stehen im README.
+- 💤 **Webseite angleichen:** datenschutz.html 9a sagt noch „Beratungsstellen können ihren Ratsuchenden einen Code geben“ (jetzt: nur Mitarbeitende); eine Kontakt-Adresse überall (Gmail vs. justin@webklar.com); FEATURES.md 30 statt 10 Fehlversuche.
+- 💤 **Rolle in Fall A** mit der DSB der FID klären und im AVV § 1 Abs. 3 ankreuzen.
+
 - 💤 **VORF-2EDF sperren** (stand im öffentlichen Repository): `node tools/einrichtungs-code.js verlaengern VORF-2EDF 2026-10-29`.
 
 **Erste Welle „glatter Ablauf“ (ab Fr 30.10., nur Webseite, je mit Probe auf iPhone und Android):**
@@ -183,7 +187,6 @@
 - 💤 Mehrere Briefe ohne neuen Scan.
 - 💤 Worker-Tempo messen und straffen (Übersetzung nur Textfelder; effort erst nach Messreihe).
 
-- 💤 **AVV-Entwurf**, TOMs und Eintrag für das Verarbeitungsverzeichnis, bevor die MBE echte Briefe hochlädt.
 - 💤 **Mehrere Fotos pro Brief** (mehrseitige Briefe).
 - 💤 Verbindung PC ↔ Handy übersteht ein Neuladen der Seite.
 - 💤 **Empfehlungsprogramm für Privatleute:** „Empfiehl BehördenKlar weiter, ihr bekommt beide 2 Gratis-Briefe“ (persönlicher Link, ohne Konto). Nicht über den MBE-Code und nicht am 29.10. ansprechen.
