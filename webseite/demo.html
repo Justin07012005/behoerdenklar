@@ -216,6 +216,17 @@
       margin-top: 18px; padding: 12px 14px; background: #fff;
       border: 1.5px solid var(--tinte); border-inline-start: 6px solid var(--amtsblau); font-size: 16.5px;
     }
+    /* PC: „Beides" – Deutsch und die Sprache der Person nebeneinander */
+    #ergBeides { display: none; margin-top: 10px; }
+    .beides-kopf { font-weight: 700; font-size: 17px; border-bottom: 2px solid var(--tinte); padding-bottom: 6px; }
+    .beides-label { margin-top: 16px; font-family: 'Courier New', monospace; font-size: 12px; letter-spacing: .1em;
+                    text-transform: uppercase; color: var(--grau); }
+    .beides-zeile { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding: 6px 0 10px;
+                    border-bottom: 1px dashed rgba(33,33,29,0.25); break-inside: avoid; }
+    .beides-zeile > div { white-space: pre-line; }
+    .beides-zeile > div[dir="rtl"] { text-align: right; }
+    .beides-voll { padding: 6px 0 10px; border-bottom: 1px dashed rgba(33,33,29,0.25); }
+    .versteckt-beides { display: none !important; }
     /* PC: Drucken und „Fertig, nächste Person" */
     .pc-aktionen { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 12px; }
     .pc-aktionen .cta { width: auto; flex: 1 1 230px; margin-top: 0; }
@@ -473,6 +484,7 @@
       <h2><span class="nr">§ 3</span> <span data-t="ergebnisTitel">Ihr Brief in Klartext</span></h2>
       <p class="nur-druck klein" id="druckDatum"></p>
       <div class="umschalter" id="sprachUmschalter" role="group" aria-label="Sprache der Erklärung"></div>
+      <div id="ergBeides"></div>
 
       <div class="brief-karte">
         <span class="karten-label neutral" id="ergBrieftyp" dir="auto" style="font-family: inherit; letter-spacing: 0; text-transform: none;">Brief</span>
@@ -1114,6 +1126,7 @@
         versionen[deutschZuerst ? 'unshift' : 'push']({ code: 'de', analyse: d.analyse_de });
       }
       aktiveVersion = 0;
+      nebeneinander = false; // neuer Brief: wieder eine Sprache
       return versionen[0].analyse;
     }
     function zeichneUmschalter() {
@@ -1124,10 +1137,98 @@
         var b = document.createElement('button');
         b.type = 'button';
         b.textContent = SPRACH_NAMEN[v.code] || v.code;
-        b.setAttribute('aria-pressed', i === aktiveVersion ? 'true' : 'false');
-        b.addEventListener('click', function () { aktiveVersion = i; zeigeAnalyse(v.analyse); });
+        b.setAttribute('aria-pressed', !nebeneinander && i === aktiveVersion ? 'true' : 'false');
+        b.addEventListener('click', function () { nebeneinander = false; aktiveVersion = i; zeigeAnalyse(v.analyse); });
         box.appendChild(b);
       });
+      // Am PC zusätzlich: beide Sprachen nebeneinander (gemeinsam lesen, zweisprachig drucken)
+      if (istPc && versionen.length > 1) {
+        var beides = document.createElement('button');
+        beides.type = 'button';
+        beides.textContent = 'Beides';
+        beides.setAttribute('aria-pressed', nebeneinander ? 'true' : 'false');
+        beides.addEventListener('click', function () {
+          nebeneinander = true;
+          var deVersion = versionen.filter(function (v) { return v.code === 'de'; })[0] || versionen[0];
+          zeigeAnalyse(deVersion.analyse);
+        });
+        box.appendChild(beides);
+      }
+    }
+
+    // ---- „Beides": Deutsch links, Sprache der Person rechts ---------------
+    // Baut eine eigene Ansicht aus beiden Fassungen; die normalen Karten werden
+    // solange ausgeblendet. Nur textContent, kein HTML aus der KI-Antwort.
+    var nebeneinander = false;
+    function aktualisiereBeides() {
+      var box = document.getElementById('ergBeides');
+      var deV = null, fremdV = null;
+      versionen.forEach(function (v) { if (v.code === 'de') deV = v; else fremdV = v; });
+      var an = !!(nebeneinander && istPc && deV && fremdV);
+      document.querySelectorAll('#ergebnis > .brief-karte').forEach(function (k) { k.classList.toggle('versteckt-beides', an); });
+      box.innerHTML = '';
+      box.style.display = an ? 'block' : 'none';
+      if (!an) return;
+      var a = deV.analyse || {}, b = fremdV.analyse || {};
+      var richtung = RTL[fremdV.code] ? 'rtl' : 'ltr';
+      function zelle(inhalt, sprache, alsListe) {
+        var z = document.createElement('div');
+        z.setAttribute('lang', sprache);
+        z.setAttribute('dir', sprache === 'de' ? 'ltr' : richtung);
+        if (alsListe) {
+          (inhalt || []).forEach(function (text) {
+            var d = document.createElement('div'); d.className = 'todo'; d.textContent = text; z.appendChild(d);
+          });
+        } else {
+          z.textContent = inhalt || '';
+        }
+        return z;
+      }
+      function abschnitt(label, links, rechts) {
+        var l = document.createElement('div'); l.className = 'beides-label'; l.textContent = label; box.appendChild(l);
+        var r = document.createElement('div'); r.className = 'beides-zeile';
+        r.appendChild(links); r.appendChild(rechts); box.appendChild(r);
+      }
+      function voll(text) {
+        var d = document.createElement('div'); d.className = 'beides-voll'; d.textContent = text; box.appendChild(d);
+      }
+      // Unicode-Isolation: Daten und deutsche Wörter behalten in arabischer Schrift ihre Reihenfolge
+      function iso(text) { return '\u2068' + text + '\u2069'; }
+      function datumZeilen(x) {
+        var z = [];
+        if (x.frist && x.frist.datum) z.push('⚠️ ' + iso(deDatum(x.frist.datum)) + (x.frist.aktion ? ' — ' + x.frist.aktion : ''));
+        if (x.termin && x.termin.datum) z.push('📅 ' + iso(deDatum(x.termin.datum) + (x.termin.uhrzeit ? ', ' + x.termin.uhrzeit : '')) + (x.termin.ort ? ' — ' + iso(x.termin.ort) : ''));
+        return z.join('\n');
+      }
+      var kopf = document.createElement('div'); kopf.className = 'beides-zeile beides-kopf';
+      kopf.appendChild(zelle(SPRACH_NAMEN.de || 'Deutsch', 'de'));
+      kopf.appendChild(zelle(SPRACH_NAMEN[fremdV.code] || fremdV.code, fremdV.code));
+      box.appendChild(kopf);
+      var amp = ampel(a);
+      if (amp) {
+        var ap = document.createElement('p'); ap.className = 'ampelzeile'; ap.style.color = amp.farbe; ap.style.marginTop = '10px';
+        ap.textContent = amp.text; box.appendChild(ap);
+      }
+      abschnitt('Worum geht es', zelle(a.kernaussage, 'de'), zelle(b.kernaussage, fremdV.code));
+      if (datumZeilen(a)) abschnitt('Frist und Termin', zelle(datumZeilen(a), 'de'), zelle(datumZeilen(b), fremdV.code));
+      abschnitt(t('labelEinfach'), zelle(a.erklaerung_einfach, 'de'), zelle(b.erklaerung_einfach, fremdV.code));
+      if (a.checkliste && a.checkliste.length) abschnitt(t('labelTun'), zelle(a.checkliste, 'de', true), zelle(b.checkliste, fremdV.code, true));
+      var k = a.kontakt || {};
+      var saetzeDe = (a.anruf || []).map(function (x) { return '„' + x.deutsch + '“'; });
+      var saetzeFremd = (b.anruf || []).map(function (x) { return x.bedeutung || x.deutsch; });
+      if (k.telefon || saetzeDe.length) {
+        var l = document.createElement('div'); l.className = 'beides-label'; l.textContent = t('labelAnrufen'); box.appendChild(l);
+        if (k.telefon || k.aktenzeichen) voll((k.telefon ? '📞 ' + k.telefon : '') + (k.telefon && k.aktenzeichen ? ' · ' : '') + (k.aktenzeichen ? 'Aktenzeichen: ' + k.aktenzeichen : ''));
+        if (saetzeDe.length) {
+          var r = document.createElement('div'); r.className = 'beides-zeile';
+          r.appendChild(zelle(saetzeDe.join('\n'), 'de')); r.appendChild(zelle(saetzeFremd.join('\n'), fremdV.code)); box.appendChild(r);
+        }
+      }
+      if (a.fachbegriffe && a.fachbegriffe.length) {
+        var begriffeDe = a.fachbegriffe.map(function (x) { return x.begriff + ': ' + x.erklaerung; });
+        var begriffeFremd = (b.fachbegriffe || []).map(function (x) { return iso(x.begriff) + ': ' + x.erklaerung; });
+        abschnitt(t('labelWoerter'), zelle(begriffeDe.join('\n\n'), 'de'), zelle(begriffeFremd.join('\n\n'), fremdV.code));
+      }
     }
 
     /** Nur die Anzeige einer Analyse — ohne Guthaben/Gratis-Ablauf. */
@@ -1182,6 +1283,7 @@
       zeigeAnruf(analyse);
       zeigeStellenHinweis();
       zeichneUmschalter();
+      aktualisiereBeides();
       document.getElementById('mitnehmenTeil').style.display = istPc && !handyModus && !leseModus ? 'block' : 'none';
       document.getElementById('mitnehmenBox').style.display = 'none';
 
