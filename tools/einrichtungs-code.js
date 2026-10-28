@@ -6,6 +6,8 @@
  *   node tools/einrichtungs-code.js stand MBE-K7QX       (mit Nutzung nach Woche und Sprache)
  *   node tools/einrichtungs-code.js aufladen MBE-K7QX 100
  *   node tools/einrichtungs-code.js verlaengern MBE-K7QX 2027-06-30
+ *   node tools/einrichtungs-code.js setzen MBE-K7QX 1200    (Rest GENAU auf 1200, z. B. am Jahreswechsel)
+ *   node tools/einrichtungs-code.js sperren MBE-K7QX        (sofort ungültig, Daten bleiben)
  *
  * Ein Code ist ein Guthaben wie beim Kauf, das allen gehört, die den Code
  * kennen. Die Ratsuchenden zahlen nichts, die Einrichtung zahlt (oder testet
@@ -145,6 +147,25 @@ if (befehl === 'neu') {
   schreib(`wallet:${c.walletId}`, String(c.rest + dazu));
   console.log(`\n  \x1b[32m✓ ${dazu} Briefe dazu\x1b[0m`);
   zeige({ ...c, rest: c.rest + dazu });
+} else if (befehl === 'setzen') {
+  // Anders als „aufladen“ (zählt zum Rest dazu): setzt den Rest genau auf die Zahl,
+  // z. B. am 1. Januar auf das neue Jahrespaket, oder beim Wechsel auf ein kleineres Paket.
+  const neu = parseInt(b, 10);
+  if (!a || !(neu >= 0) || String(neu) !== String(b).trim()) abbruch('So geht es: node tools/einrichtungs-code.js setzen MBE-K7QX 1200');
+  const c = ladeCode(a);
+  schreib(`wallet:${c.walletId}`, String(neu));
+  console.log(`\n  \x1b[32m✓ Rest von ${c.rest} auf ${neu} Briefe gesetzt\x1b[0m`);
+  zeige({ ...c, rest: neu });
+} else if (befehl === 'sperren') {
+  // Ablaufdatum auf gestern: Der Worker lehnt den Code sofort ab (ablauf < heute).
+  // Rückgängig mit „verlaengern“.
+  if (!a) abbruch('So geht es: node tools/einrichtungs-code.js sperren MBE-K7QX');
+  const c = ladeCode(a);
+  const gestern = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+  const einrichtung = { ...c.einrichtung, ablauf: gestern };
+  schreib(`einrichtung:${c.walletId}`, JSON.stringify(einrichtung));
+  console.log(`\n  \x1b[32m✓ gesperrt\x1b[0m (rückgängig: verlaengern ${c.code} <DATUM>)`);
+  zeige({ ...c, einrichtung });
 } else if (befehl === 'verlaengern') {
   const c = ladeCode(a);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(b || '')) abbruch('So geht es: node tools/einrichtungs-code.js verlaengern MBE-K7QX 2027-06-30');
