@@ -957,6 +957,10 @@
         if (bezahlt) body.walletToken = wallet;
         else if (benutzt() >= 1 && email) body.email = email;
         if (handyModus && handyModus.d) body.auchDeutsch = true;
+        // Beratungs-PC mit Einrichtungs-Code: Auch beim Hochladen am PC beide Sprachen holen,
+        // Deutsch zuerst für die Beraterin, die Fassung der Person per Umschalter zeigen oder drucken
+        var beratungsPc = istPc && !handyModus && !!einrichtung() && bezahlt;
+        if (beratungsPc && body.zielsprache !== 'de') body.auchDeutsch = true;
         meldeAnPc({ schritt: 'analyse' });
 
         var antwort = await fetch(ENDPUNKT, {
@@ -1026,7 +1030,7 @@
           guthaben: daten.guthaben, einrichtung: daten.einrichtung,
         };
         var amPcAngekommen = handyModus ? await ergebnisAnPc(paketFuerPc) : false;
-        var analyse = bereiteVersionen(daten, false);
+        var analyse = bereiteVersionen(daten, beratungsPc);
         if (daten.uebersetzung_fehlgeschlagen) {
           zeigeHinweis('Die Übersetzung hat diesmal nicht geklappt. Die Erklärung steht hier auf Deutsch.');
         }
