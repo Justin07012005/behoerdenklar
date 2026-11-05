@@ -53,3 +53,7 @@ yarn-error.*
 # Einrichtungs-Codes und Druckfassungen mit Code: nie ins (öffentliche) Repository
 marketing/praesentation-mbe/code.local.js
 marketing/praesentation-mbe/druck/
+
+# Flyer: optionaler Flyer-Code und Druckdateien (Repository ist öffentlich)
+marketing/flyer/flyer.local.js
+marketing/flyer/druck/

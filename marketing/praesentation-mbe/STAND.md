@@ -5,7 +5,23 @@
 >
 > Ausführlicher Prüfbericht mit allen 61 Funden: [plan-bis-29-10.md](plan-bis-29-10.md)
 
-**Zuletzt aktualisiert:** Mi 28.10.2026: **MBE-Code angelegt** und in die Druckfassungen eingetragen (Ordner `druck/`). Heute: drucken, gedruckten QR testen, Generalprobe (die einzige echte vor dem Termin).
+**Zuletzt aktualisiert:** Do 05.11.2026: Termin gelaufen, **Ergebnis und nächste Schritte in Abschnitt 0** (ganz oben).
+
+---
+
+## 0. Ergebnis des Termins und nächste Schritte (Stand 05.11.)
+
+**Ergebnis 29.10.:** Das Gespräch war gut. Die MBE will **erst einmal Flyer**, um BehördenKlar ihren Ratsuchenden zu empfehlen. Kein Kauf. Die Beraterinnen und Berater entscheiden nicht über Geld, das macht der Träger (FID). Die FID sucht gerade selbst Förderung (der Bund kürzt die MBE 2027 um etwa 4 Mio. €).
+
+- ✅ **Flyer fertig** (05.11.): A6, 4 Stück pro A4-Blatt, vorne Deutsch, hinten Arabisch, Dari, Paschtu, Türkisch, Russisch, Tigrinya, Somali mit je eigenem QR-Code. Stempelfeld für die Beratungsstelle. Dateien: [`marketing/flyer/`](../flyer/flyer.html), Druck-PDFs in `marketing/flyer/druck/`. Übersetzungen zweimal geprüft.
+- ✅ Entscheidung: **kein Flyer-Code**. Wer über den Flyer kommt, hat 2 Briefe gratis, danach Kauf mit Karte.
+- 👤 QR-Codes auf dem Flyer mit dem Handy testen (PDF am Bildschirm scannen).
+- 👤 MBE fragen, ob jemand Dari, Paschtu, Tigrinya oder Somali gegenlesen kann.
+- 👤 Flyer drucken (A4, farbig, beidseitig, lange Kante) und **persönlich vorbeibringen**. Dabei: neuen Termin für die Auswertung ausmachen (26.11. ist unklar) und um Kontakt zur **FID-Geschäftsführung** bitten.
+- ⏳ Projektskizze (1 Seite) für einen gemeinsamen Förderantrag mit der FID, wenn gewünscht.
+- 🔄 Förder-Recherche läuft in eigener Sitzung, Ergebnis: [`marketing/foerderung-recherche.md`](../foerderung-recherche.md). Wichtigste Funde: Die neue MBE-Richtlinie (2027 bis 2029) nennt in Ziff. 5.3.1 d ausdrücklich „IT-Dienstleistungen … (z. B. Onlineberatung, KI)“; die Sachkostenpauschale (ca. 7.000 € pro Vollzeitstelle und Jahr, ohne Einzelnachweis) deckt 290 € locker; unter 10.000 € reichen Angebot und Preisvergleich.
+- 👤 🔴 **Anthropic-Schlüssel tauschen** (war für 30.10. geplant, noch offen). Vorher `npx wrangler login` im Ordner `proxy`, die Anmeldung ist abgelaufen.
+- ⏳ Danach: den Vorführ-Code sperren (braucht die Cloudflare-Anmeldung).
 
 ---
 

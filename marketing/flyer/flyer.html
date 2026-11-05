@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<!--
+  Flyer für Ratsuchende, DIN A6 (Postkarte), beidseitig. Die Beratung erklärt ihn im Gespräch,
+  der Flyer selbst bleibt ganz einfach: vorne Deutsch mit großem QR-Code und 3 Schritten,
+  hinten 7 Sprachen mit je einem eigenen QR-Code (öffnet die Demo gleich in dieser Sprache).
+  Stempelfeld vorne für die Adresse der Beratungsstelle.
+  Texte der Sprachen: flyer-texte.js. Optionaler Flyer-Code: flyer.local.js (nicht im Git).
+
+  PDF ausgeben (im Ordner marketing/flyer):
+  4 Flyer auf A4 (Bürodrucker oder Copyshop; beidseitig, lange Kante; dann an den Linien schneiden):
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --disable-gpu \
+      --allow-file-access-from-files --no-pdf-header-footer --print-to-pdf=druck/flyer-4-auf-a4.pdf "file://$PWD/flyer.html#a4"
+  Einzeln in A6 (Druckerei):
+    ... --print-to-pdf=druck/flyer-a6.pdf "file://$PWD/flyer.html"
+-->
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>BehördenKlar Flyer für Ratsuchende</title>
+<script src="../../webseite/qrcode.js"></script>
+<script src="flyer-texte.js"></script>
+<script src="flyer.local.js"></script>
+<style>
+  @page { size: 105mm 148mm; margin: 0; }
+  :root { --papier: #faf7f0; --tinte: #21211d; --grau: #6b675e; --amtsblau: #1d4e89; --rot: #b3372b; --marker: #ffe66b; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: Georgia, 'Times New Roman', serif; color: var(--tinte); background: #fff; }
+
+  .seite { width: 105mm; height: 148mm; overflow: hidden; position: relative; background: var(--papier);
+           padding: 6mm 6.5mm 0; page-break-after: always; font-size: 8pt; line-height: 1.35; }
+  .seite:last-child { page-break-after: auto; }
+  .markiert { background: linear-gradient(104deg, transparent 2%, var(--marker) 4%, var(--marker) 96%, transparent 98%); padding: 0 1mm; }
+
+  .kopf { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 0.4mm solid var(--tinte); padding-bottom: 1.2mm; }
+  .absender { font-weight: 700; font-size: 9.5pt; }
+  .etikett { font-family: 'Courier New', monospace; font-size: 6pt; color: var(--grau); text-transform: uppercase; letter-spacing: .1em; }
+
+  /* Vorderseite */
+  h1 { font-size: 21pt; line-height: 1.05; margin-top: 4mm; }
+  .unter { font-size: 11pt; line-height: 1.25; margin-top: 1.5mm; font-weight: 700; }
+  .haupt { display: grid; grid-template-columns: 1fr 35mm; gap: 3.5mm; margin-top: 5mm; align-items: center; }
+  .schritte { list-style: none; }
+  .schritte li { display: grid; grid-template-columns: 6.5mm 6mm 1fr; align-items: center; margin-bottom: 3.2mm; font-size: 9.5pt; font-weight: 700; line-height: 1.15; }
+  .schritte li:last-child { margin-bottom: 0; }
+  .nr { width: 5mm; height: 5mm; border-radius: 50%; background: var(--amtsblau); color: #fff; font-family: 'Courier New', monospace;
+        font-size: 8pt; line-height: 5mm; text-align: center; }
+  .ik { font-size: 10pt; }
+  .qrbox { text-align: center; }
+  .qr-gross { width: 35mm; height: 35mm; background: #fff; padding: 2mm; border: 0.5mm solid var(--tinte); box-shadow: 1mm 1.1mm 0 var(--tinte); }
+  .qr-gross svg, .qr-klein svg { width: 100%; height: 100%; display: block; }
+  .qrtext { font-family: 'Courier New', monospace; font-weight: 700; font-size: 6.5pt; color: var(--amtsblau); margin-top: 2mm; }
+  .chips { display: flex; justify-content: space-between; gap: 1.5mm; margin-top: 6mm; }
+  .chips span { background: #fff; border: 0.25mm solid rgba(33,33,29,.3); border-radius: 1mm; padding: 1mm 1.6mm; font-size: 7pt; white-space: nowrap; }
+  .gratis { margin-top: 5mm; font-size: 9pt; font-weight: 700; text-align: center; }
+
+  .stempel-feld { position: absolute; left: 6.5mm; right: 6.5mm; bottom: 14mm; height: 23mm; border: 0.3mm dashed var(--grau);
+                  padding: 1.2mm 2mm; font-size: 6.5pt; color: var(--grau); }
+  .fuss { position: absolute; left: 6.5mm; right: 6.5mm; bottom: 4.5mm; font-size: 5.6pt; line-height: 1.35; color: var(--grau);
+          border-top: 0.25mm solid rgba(33,33,29,.3); padding-top: 1.2mm; }
+
+  /* Rückseite */
+  .anleitung { margin-top: 1.8mm; font-size: 6.8pt; color: #3a3833; }
+  .sprachen { margin-top: 1mm; }
+  .zeile { display: grid; grid-template-columns: 1fr 14mm; gap: 2.5mm; align-items: center; padding: 1.25mm 0;
+           border-bottom: 0.2mm dotted rgba(33,33,29,.35); }
+  .zeile:last-child { border-bottom: none; }
+  .zeile .name { font-weight: 700; font-size: 8pt; color: var(--amtsblau); line-height: 1.2; }
+  .zeile .kern { font-size: 7pt; line-height: 1.3; }
+  .zeile[dir="rtl"] .name { font-size: 9pt; }
+  .zeile[dir="rtl"] .kern { font-size: 7.8pt; line-height: 1.4; }
+  .zeile.ethi .kern { font-size: 7.4pt; }
+  .qr-klein { width: 14mm; height: 14mm; background: #fff; padding: 0.9mm; border: 0.3mm solid var(--tinte); }
+  .weitere { position: absolute; left: 6.5mm; right: 6.5mm; bottom: 4.5mm; font-size: 5.8pt; line-height: 1.35; color: var(--grau);
+             border-top: 0.25mm solid rgba(33,33,29,.3); padding-top: 1.2mm; }
+
+  /* 4 Flyer auf A4 hoch: 2 × 2, Schnittlinien gestrichelt */
+  body.a4 .bogen { width: 210mm; height: 296mm; display: grid; grid-template-columns: 105mm 105mm; grid-template-rows: 148mm 148mm;
+                   page-break-after: always; position: relative; overflow: hidden; }
+  body.a4 .bogen:last-child { page-break-after: auto; }
+  body.a4 .bogen .seite { page-break-after: auto; }
+  body.a4 .bogen::before, body.a4 .bogen::after { content: ''; position: absolute; z-index: 2; }
+  body.a4 .bogen::before { left: 105mm; top: 0; bottom: 0; border-left: 0.2mm dashed #b9b2a2; }
+  body.a4 .bogen::after { top: 148mm; left: 0; right: 0; border-top: 0.2mm dashed #b9b2a2; }
+</style>
+</head>
+<body>
+
+<div id="vorne" class="seite">
+  <div class="kopf">
+    <span class="absender">📬 BehördenKlar</span>
+    <span class="etikett">27 Sprachen</span>
+  </div>
+
+  <h1>Post vom Amt?</h1>
+  <p class="unter">Wir erklären Ihren Brief, <span class="markiert">in Ihrer Sprache.</span></p>
+
+  <div class="haupt">
+    <ol class="schritte">
+      <li><span class="nr">1</span><span class="ik">📱</span><span>Code scannen</span></li>
+      <li><span class="nr">2</span><span class="ik">🌍</span><span>Sprache wählen</span></li>
+      <li><span class="nr">3</span><span class="ik">📷</span><span>Brief fotografieren</span></li>
+    </ol>
+    <div class="qrbox">
+      <div class="qr-gross" id="qrVorne"></div>
+      <p class="qrtext">behoerdenklar.de</p>
+    </div>
+  </div>
+
+  <div class="chips">
+    <span>🚦 Wie dringend?</span><span>📅 Frist in den Kalender</span><span>☑️ Was tun?</span>
+  </div>
+
+  <p class="gratis"><span class="markiert">Kostenlos ausprobieren</span> · ohne Anmeldung</p>
+
+  <div class="stempel-feld">Fragen? Ihre Beratungsstelle hilft gern:</div>
+
+  <p class="fuss">Eine KI erklärt den Brief und kann sich irren. Fristen bitte im Original prüfen. Keine Rechtsberatung.
+    Webklar GbR, Winnweiler · Andere Sprachen: Rückseite</p>
+</div>
+
+<div id="hinten" class="seite">
+  <div class="kopf">
+    <span class="absender">📬 BehördenKlar</span>
+    <span class="etikett">In Ihrer Sprache</span>
+  </div>
+  <p class="anleitung">Scannen Sie den Code neben Ihrer Sprache.</p>
+  <div class="sprachen" id="sprachen"></div>
+  <p class="weitere">Andere Sprachen (z. B. Українська, Kurdî, English): den großen Code vorne scannen.</p>
+</div>
+
+<script>
+  var BASIS = 'https://behoerdenklar.de/demo';
+  var CODE = window.BK_FLYER_CODE || '';
+  function adresse(sprache) {
+    var p = [];
+    if (CODE) p.push('code=' + encodeURIComponent(CODE));
+    if (sprache) p.push('sprache=' + sprache);
+    return BASIS + (p.length ? '?' + p.join('&') : '');
+  }
+  function qr(ziel, url) {
+    var q = qrcode(0, 'M'); q.addData(url); q.make();
+    ziel.innerHTML = q.createSvgTag({ cellSize: 4, margin: 0, scalable: true });
+  }
+  qr(document.getElementById('qrVorne'), adresse(''));
+
+  // Rückseite: Reihenfolge, Sprache in der Demo, Schreibrichtung
+  var REIHE = [
+    { schluessel: 'ar',  sprache: 'ar', rtl: true },
+    { schluessel: 'prs', sprache: 'fa', rtl: true },   // Dari: heißt in der Demo „فارسی“
+    { schluessel: 'ps',  sprache: 'ps', rtl: true },
+    { schluessel: 'tr',  sprache: 'tr' },
+    { schluessel: 'ru',  sprache: 'ru' },
+    { schluessel: 'ti',  sprache: 'ti', ethi: true },
+    { schluessel: 'so',  sprache: 'so' },
+  ];
+  var T = window.BK_FLYER_TEXTE || {};
+  var box = document.getElementById('sprachen');
+  REIHE.forEach(function (r) {
+    var t = T[r.schluessel]; if (!t) return;
+    var zeile = document.createElement('div');
+    zeile.className = 'zeile' + (r.ethi ? ' ethi' : '');
+    zeile.lang = r.schluessel === 'prs' ? 'fa-AF' : r.schluessel;
+    if (r.rtl) zeile.dir = 'rtl';
+    var text = document.createElement('div');
+    var name = document.createElement('p'); name.className = 'name'; name.textContent = t.name;
+    var kern = document.createElement('p'); kern.className = 'kern';
+    var fett = document.createElement('b'); fett.textContent = t.frage + ' ' + t.titel;
+    kern.appendChild(fett); kern.appendChild(document.createTextNode(' ' + t.kostenlos));
+    text.appendChild(name); text.appendChild(kern);
+    var code = document.createElement('div'); code.className = 'qr-klein';
+    qr(code, adresse(r.sprache));
+    zeile.appendChild(text); zeile.appendChild(code);
+    box.appendChild(zeile);
+  });
+
+  // 4 Flyer auf ein A4-Blatt: Seite 1 = 4× vorne, Seite 2 = 4× hinten
+  if (location.hash === '#a4') {
+    document.body.classList.add('a4');
+    var st = document.createElement('style'); st.textContent = '@page { size: 210mm 297mm; margin: 0; }';
+    document.head.appendChild(st);
+    ['vorne', 'hinten'].forEach(function (id) {
+      var s = document.getElementById(id);
+      var bogen = document.createElement('div'); bogen.className = 'bogen';
+      s.parentNode.insertBefore(bogen, s);
+      bogen.appendChild(s);
+      for (var i = 0; i < 3; i++) bogen.appendChild(s.cloneNode(true));
+    });
+  }
+</script>
+</body>
+</html>
