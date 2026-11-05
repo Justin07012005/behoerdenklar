@@ -11,6 +11,7 @@
  *   - ungültige strukturierte Daten (Google meldete "Fehlerhafter Aufbau")
  *   - tote Verweise auf Dateien, die es nicht gibt (manifest.json lieferte HTML)
  *   - Bezahlung, KI-Analyse und Webhook — die drei Dinge, an denen Geld hängt
+ *   - Google-Bestätigung (ging dreimal verloren) und www-Adresse (zeigte auf Porkbun)
  *
  * Rückgabewert 0 = alles in Ordnung, 1 = mindestens ein Problem.
  * Nach jedem Deploy ausführen. Dauert etwa 30 Sekunden.
@@ -175,6 +176,34 @@ titel('10. Bot-Schutz auf der Demo-Seite');
   const s = hole(BASIS + '/demo');
   if (s.includes('cf-turnstile') && s.includes('data-sitekey="0x')) ok('Turnstile eingebunden');
   else schlecht('Turnstile fehlt — Missbrauch auf deine Kosten möglich');
+}
+
+titel('11. Google-Bestätigung und Adressen');
+{
+  // Die Search Console hat die Inhaberschaft schon dreimal verloren. Dauerhaft hält nur
+  // ein TXT-Eintrag im DNS (Domain-Property); der Meta-Tag auf der Startseite ist die Reserve.
+  const tag = /<meta name="google-site-verification" content="[^"]+"/;
+  const lokal = tag.test(fs.readFileSync(path.join(WEB, 'index.html'), 'utf8'));
+  const live = tag.test(hole(BASIS + '/'));
+  let dns = false;
+  try {
+    const antwort = JSON.parse(hole('https://cloudflare-dns.com/dns-query?name=behoerdenklar.de&type=TXT',
+      ['-H', 'accept: application/dns-json']) || '{}');
+    dns = (antwort.Answer || []).some((a) => String(a.data).includes('google-site-verification='));
+  } catch { /* DNS-Abfrage gescheitert: zählt als „nicht gefunden“ */ }
+
+  if (dns) ok('Google über DNS bestätigt (bleibt auch nach jedem Deploy)');
+  if (live && lokal) ok('Google-Meta-Tag auf der Startseite (Reserve)');
+  else if (!live && !dns) schlecht('Google-Bestätigung fehlt ganz — Search Console verliert die Inhaberschaft');
+  else if (!lokal) warnung('Google-Meta-Tag fehlt in webseite/index.html — nach dem nächsten Deploy wäre er auch live weg');
+  else warnung('Google-Meta-Tag fehlt auf der Live-Seite' + (dns ? ' (DNS hält die Bestätigung noch)' : ''));
+  if (!dns && live) warnung('Google nur per Meta-Tag bestätigt — TXT-Eintrag im DNS fehlt (Domain-Property in der Search Console anlegen)');
+
+  for (const adresse of ['https://www.behoerdenklar.de/', 'http://behoerdenklar.de/']) {
+    const s = status(adresse);
+    if (s === '200' || s === '301' || s === '308') ok(`${adresse.replace(/\/$/, '')} erreichbar`);
+    else schlecht(`${adresse} antwortet mit ${s} — DNS-Eintrag prüfen (www muss auf behoerdenklar.pages.dev zeigen)`);
+  }
 }
 
 // ─────────────────────────────────────────────────────────────

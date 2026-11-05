@@ -296,9 +296,10 @@ schon einmal verwechselt, die Google-Verifizierung lag wochenlang nur im Git.
 `git push origin main && git push gitea main`
 
 ### `npm run pruefung`
-Prüft in ~30 Sekunden zehn Bereiche — jeder war schon einmal **still** kaputt:
+Prüft in ~30 Sekunden elf Bereiche — jeder war schon einmal **still** kaputt:
 abgeschnittene Zeilen `[...]`, Warteliste-Formular, JSON-LD, tote Dateiverweise,
-Preis-IDs, Sitemap-Adressen, Kauf, Webhook-Secret, KI-Schlüssel, Turnstile.
+Preis-IDs, Sitemap-Adressen, Kauf, Webhook-Secret, KI-Schlüssel, Turnstile,
+Google-Bestätigung (DNS + Meta-Tag) und www-Adresse.
 
 Hintergrund: Das Warteliste-Formular war **sechs Wochen** kaputt, ohne dass
 etwas Alarm geschlagen hätte.
