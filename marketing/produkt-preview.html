@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Statische Designvorschau für eine BehördenKlar-Briefansicht. Keine KI-Funktionen.">
+  <title>BehördenKlar – Produktvorschau</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #18312d;
+      --muted: #64736e;
+      --green: #176b54;
+      --green-dark: #10513f;
+      --green-pale: #eaf4ef;
+      --paper: #fffefa;
+      --canvas: #f3f5f1;
+      --line: #e3e9e3;
+      --amber: #8a5700;
+      --amber-pale: #fff3d8;
+      --blue-pale: #eef4fa;
+      --shadow: 0 18px 55px rgba(27, 52, 43, .11);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--canvas);
+      min-height: 100vh;
+    }
+    button { font: inherit; }
+    .topbar {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 max(24px, calc((100% - 1120px) / 2));
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 750; letter-spacing: -.03em; }
+    .brand-mark {
+      width: 34px; height: 34px; display: grid; place-items: center;
+      border-radius: 11px; color: white; background: var(--green); font-size: 19px;
+    }
+    .demo-tag { color: var(--muted); font-size: 13px; }
+    .layout { width: min(1120px, calc(100% - 40px)); margin: 34px auto 60px; }
+    .intro { margin-bottom: 22px; }
+    .eyebrow { color: var(--green); font-weight: 750; font-size: 12px; letter-spacing: .11em; text-transform: uppercase; }
+    h1 { margin: 8px 0 7px; font-size: clamp(25px, 4vw, 34px); letter-spacing: -.045em; }
+    .intro p { margin: 0; color: var(--muted); font-size: 15px; }
+
+    .app-frame {
+      display: grid;
+      grid-template-columns: 220px minmax(0, 1fr);
+      min-height: 720px;
+      overflow: hidden;
+      background: var(--paper);
+      border: 1px solid #e6ebe5;
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+    .sidebar { padding: 25px 16px; background: #f8faf7; border-right: 1px solid var(--line); }
+    .side-caption { padding: 0 12px; margin: 0 0 12px; color: #89958f; font-size: 10px; font-weight: 750; letter-spacing: .12em; }
+    .nav-item {
+      display: flex; align-items: center; gap: 12px; padding: 12px;
+      margin: 4px 0; border-radius: 11px; color: #53635d; font-size: 14px;
+    }
+    .nav-item.active { color: var(--green-dark); background: var(--green-pale); font-weight: 700; }
+    .nav-icon { width: 20px; text-align: center; font-size: 17px; }
+    .sidebar-note { margin: 34px 8px 0; padding: 15px; border: 1px solid var(--line); border-radius: 14px; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .sidebar-note strong { display: block; color: var(--ink); margin-bottom: 4px; }
+
+    .content { width: min(760px, 100%); margin: 0 auto; padding: 30px clamp(20px, 5vw, 56px) 42px; }
+    .back { border: 0; padding: 0; background: transparent; color: var(--green); font-size: 13px; font-weight: 700; }
+    .doc-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin: 26px 0 20px; }
+    .doc-heading h2 { margin: 4px 0 5px; font-size: 23px; letter-spacing: -.035em; }
+    .doc-heading p { margin: 0; color: var(--muted); font-size: 13px; }
+    .doc-icon { display: grid; place-items: center; flex: 0 0 48px; height: 48px; border-radius: 14px; background: var(--green-pale); font-size: 23px; }
+    .section-label { margin: 0 0 10px; color: #63716b; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .next-card {
+      padding: 19px 20px; border-radius: 16px; border: 1px solid #cfe4d8;
+      background: linear-gradient(120deg, #f0f8f2, #f8fbf7);
+    }
+    .next-title { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; color: var(--green-dark); font-size: 13px; font-weight: 750; }
+    .check { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #d7ecdf; font-size: 13px; }
+    .next-card h3 { margin: 0 0 6px; font-size: 20px; letter-spacing: -.025em; }
+    .next-card p { margin: 0; color: #53645c; font-size: 14px; line-height: 1.5; }
+    .deadline {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      margin: 13px 0 19px; padding: 14px 16px; border: 1px solid #f0dfb8;
+      border-radius: 14px; background: var(--amber-pale);
+    }
+    .deadline-left { display: flex; align-items: center; gap: 11px; }
+    .deadline-symbol { font-size: 21px; }
+    .deadline small { display: block; color: #806b43; font-size: 11px; }
+    .deadline strong { display: block; color: #684500; margin-top: 2px; font-size: 15px; }
+    .status { padding: 6px 9px; border-radius: 999px; background: #ffe6ad; color: #704900; font-size: 11px; font-weight: 750; white-space: nowrap; }
+    .notice { margin: -8px 0 22px; color: #727d77; font-size: 11px; }
+
+    .unclear-card { padding: 17px 18px; margin-bottom: 20px; border: 1px solid var(--line); border-radius: 15px; background: white; }
+    .unclear-head { display: flex; align-items: flex-start; gap: 11px; }
+    .question-mark { flex: 0 0 25px; width: 25px; height: 25px; display: grid; place-items: center; border-radius: 50%; background: var(--blue-pale); color: #355a78; font-weight: 800; }
+    .unclear-card h3 { margin: 1px 0 5px; font-size: 14px; }
+    .unclear-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .quote-card { margin-bottom: 20px; padding: 17px 18px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
+    .quote-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 11px; }
+    .quote-top h3 { margin: 0; font-size: 14px; }
+    .text-link { border: 0; padding: 0; color: var(--green); background: transparent; font-size: 12px; font-weight: 700; }
+    blockquote { margin: 0; padding: 12px 14px; border-left: 3px solid #9bbda8; border-radius: 0 9px 9px 0; background: #f7f9f6; color: #34443d; font-size: 13px; line-height: 1.55; }
+    .actions-title { margin: 0 0 10px; font-size: 14px; }
+    .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .action {
+      min-height: 46px; padding: 11px 13px; border: 1px solid #cbd9d0; border-radius: 11px;
+      color: var(--green-dark); background: white; font-size: 13px; font-weight: 700; text-align: left;
+    }
+    .action.primary { border-color: var(--green); color: white; background: var(--green); text-align: center; }
+    .action span { margin-right: 6px; }
+    .disclaimer { margin: 17px 0 0; color: #7a8580; font-size: 11px; line-height: 1.5; }
+
+    @media (max-width: 700px) {
+      .topbar { height: 58px; padding: 0 18px; }
+      .demo-tag { font-size: 11px; }
+      .layout { width: 100%; margin: 0 auto 30px; }
+      .intro { padding: 22px 20px 4px; }
+      .intro p { line-height: 1.5; }
+      .app-frame { display: block; min-height: auto; border: 0; border-radius: 0; box-shadow: none; }
+      .sidebar { display: none; }
+      .content { padding: 20px 20px 34px; }
+      .doc-heading { margin-top: 23px; }
+      .doc-heading h2 { font-size: 20px; }
+      .actions { grid-template-columns: 1fr; }
+      .action.primary { grid-row: 1; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="brand-mark">✓</span> BehördenKlar</div>
+    <span class="demo-tag">Statische Designvorschau</span>
+  </header>
+
+  <main class="layout">
+    <section class="intro">
+      <div class="eyebrow">Ein möglicher Aufbau</div>
+      <h1>Vom Brief zum nächsten Schritt</h1>
+      <p>Nur ein visuelles Beispiel – keine Analyse, keine KI und keine echten Briefdaten.</p>
+    </section>
+
+    <section class="app-frame" aria-label="Vorschau einer Briefdetailseite">
+      <aside class="sidebar" aria-label="Beispielnavigation">
+        <p class="side-caption">MENÜ</p>
+        <div class="nav-item active"><span class="nav-icon">◷</span> Fristen</div>
+        <div class="nav-item"><span class="nav-icon">＋</span> Brief scannen</div>
+        <div class="nav-item"><span class="nav-icon">▤</span> Archiv</div>
+        <div class="sidebar-note"><strong>Deine Briefe bleiben privat</strong>Diese Vorschau speichert oder sendet keine Daten.</div>
+      </aside>
+
+      <div class="content">
+        <button class="back" type="button">← Zurück zu deinen Briefen</button>
+        <div class="doc-heading">
+          <div>
+            <div class="eyebrow">Briefdetail · Beispiel</div>
+            <h2>Schreiben vom Jobcenter</h2>
+            <p>Beispielbrief · erhalten am 4. November</p>
+          </div>
+          <div class="doc-icon" aria-hidden="true">▤</div>
+        </div>
+
+        <p class="section-label">Dein nächster Schritt</p>
+        <section class="next-card">
+          <div class="next-title"><span class="check">✓</span> Im Brief steht</div>
+          <h3>Nachweise einreichen</h3>
+          <p>Der Brief bittet um geeignete Nachweise. Welche genau gemeint sind, wird hier nicht näher erklärt.</p>
+        </section>
+
+        <section class="deadline" aria-label="Beispielhafte Frist">
+          <div class="deadline-left">
+            <span class="deadline-symbol" aria-hidden="true">◷</span>
+            <div><small>Frist im Beispielbrief</small><strong>18. November</strong></div>
+          </div>
+          <span class="status">Bitte prüfen</span>
+        </section>
+        <p class="notice">Beispieldatum – im echten Produkt immer am Originalbrief kontrollieren.</p>
+
+        <section class="unclear-card">
+          <div class="unclear-head">
+            <span class="question-mark">?</span>
+            <div>
+              <h3>Was noch unklar ist</h3>
+              <p>Der Brief nennt keine konkreten Unterlagen. Wir zeigen deshalb keine erfundene Liste an.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="quote-card">
+          <div class="quote-top">
+            <h3>Warum zeigt die App das?</h3>
+            <button type="button" class="text-link">Briefstelle ansehen ↑</button>
+          </div>
+          <blockquote>„Bitte reichen Sie geeignete Nachweise ein.“</blockquote>
+        </section>
+
+        <h3 class="actions-title">Mögliche nächste Schritte</h3>
+        <div class="actions">
+          <button type="button" class="action primary">Frage an die Behörde vorbereiten</button>
+          <button type="button" class="action"><span>▤</span>Älteren Brief hinzufügen</button>
+          <button type="button" class="action"><span>♡</span>Beratungsstelle finden</button>
+        </div>
+        <p class="disclaimer">Nur eine Designidee. Die Schaltflächen sind nicht aktiv. Keine Rechtsberatung und keine automatische Entscheidung.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
