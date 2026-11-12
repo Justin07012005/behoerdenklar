@@ -152,6 +152,18 @@
     details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
     summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
     summary::-webkit-details-marker { display: none; }
+
+    .sprachliste { margin-top: 40px; font-size: 14.5px; line-height: 2.1; color: var(--grau); }
+    .sprachliste a { color: var(--grau); white-space: nowrap; }
+    /* Unsichtbares Anti-Spam-Feld: bei Rechts-nach-links nach rechts schieben,
+       sonst wird die Seite am Handy 5000 px breit und scrollt seitlich. */
+    [dir="rtl"] input[name="email_address_check"] { left: auto !important; right: -5000px; }
+    .rg-liste { list-style: none; margin: 8px 0 0; }
+    .rg-liste li { margin-bottom: 12px; }
+    .rg-liste a { display: block; background: #fff; border: 1.5px solid var(--tinte); padding: 14px 18px; text-decoration: none; color: var(--tinte); }
+    .rg-liste b { display: block; color: var(--amtsblau); font-size: 18px; }
+    .rg-liste span { font-size: 15px; color: var(--grau); }
+    .rg-liste .de { font-weight: 700; }
     summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
     details[open] summary::after { content: '–'; }
     details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
@@ -370,6 +382,11 @@
         <p>Scrisorile tale rămân criptate pe dispozitivul tău. Pentru analiză, fotografia este trimisă o singură dată în siguranță către IA și este ștearsă acolo de regulă după 30 de zile. Nu ai nevoie de cont.</p>
       </details>
     </section>
+
+    <!-- sprachliste:start (gepflegt von tools/sprachseiten/build.js) -->
+    <p class="sprachliste">🌐 <a href="/" hreflang="de" lang="de">Deutsch</a> · <a href="/tr" hreflang="tr" lang="tr">Türkçe</a> · <a href="/ar" hreflang="ar" lang="ar" dir="rtl">العربية</a> · <a href="/ru" hreflang="ru" lang="ru">Русский</a> · <a href="/uk" hreflang="uk" lang="uk">Українська</a> · <a href="/pl" hreflang="pl" lang="pl">Polski</a> · <a href="/en" hreflang="en" lang="en">English</a> · <a href="/fa" hreflang="fa" lang="fa" dir="rtl">فارسی</a> · <a href="/ku" hreflang="ku" lang="ku">Kurdî</a> · <a href="/bg" hreflang="bg" lang="bg">Български</a> · <a href="/hr" hreflang="hr" lang="hr">Hrvatski</a> · <a href="/sr" hreflang="sr" lang="sr">Српски</a> · <a href="/bs" hreflang="bs" lang="bs">Bosanski</a> · <a href="/sq" hreflang="sq" lang="sq">Shqip</a> · <a href="/it" hreflang="it" lang="it">Italiano</a> · <a href="/el" hreflang="el" lang="el">Ελληνικά</a> · <a href="/es" hreflang="es" lang="es">Español</a> · <a href="/pt" hreflang="pt" lang="pt">Português</a> · <a href="/fr" hreflang="fr" lang="fr">Français</a> · <a href="/hu" hreflang="hu" lang="hu">Magyar</a> · <a href="/vi" hreflang="vi" lang="vi">Tiếng Việt</a> · <a href="/hi" hreflang="hi" lang="hi">हिन्दी</a> · <a href="/ur" hreflang="ur" lang="ur" dir="rtl">اردو</a> · <a href="/ps" hreflang="ps" lang="ps" dir="rtl">پښتو</a> · <a href="/ti" hreflang="ti" lang="ti">ትግርኛ</a> · <a href="/so" hreflang="so" lang="so">Soomaali</a> · <a href="/zh" hreflang="zh" lang="zh">中文</a></p>
+    <!-- sprachliste:ende -->
+
 
     <footer>
       Ai întrebări? 📧 <a href="mailto:behoerdenbriefhelfer@gmail.com">behoerdenbriefhelfer@gmail.com</a>

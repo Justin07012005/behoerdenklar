@@ -15,9 +15,14 @@ const fs = require('fs');
 const path = require('path');
 
 const { SPRACHEN, TEXTE } = require('./texte.js');
+const ratgeber = require('./ratgeber/bauen.js');
+const querverweise = require('./ratgeber/querverweise.js');
 const AUS = path.join(__dirname, '..', '..', 'webseite');
 const BASIS = 'https://behoerdenklar.de';
 const BREVO = 'https://86550585.sibforms.com/serve/MUIFAAvOQCpFg148k-xD2Ze2PDVKKaFEIaLECCCMe9fGKd_uIurPljyn_IhTrkR0EkM_pQp_8VBzcHZ6N9sKDX5GBZi9elYKN6isXGPUUxcAgO37OKhTFZyMlJiC9ikRmPI8Q2tU2GvqP6esJ5ReGfv1htZV_OfXRIgW59P6pkeUsYKxqdXA7nWOaWxNTYz4MzzoGg7czJMJ2fxuEg==';
+
+/** Übersetzte Ratgeber (ratgeber/texte-<code>.js) — siehe ratgeber/bauen.js. */
+const RATGEBER = ratgeber.laden(SPRACHEN, TEXTE);
 
 /** Alle Sprachen inkl. Deutsch, in der Reihenfolge aus texte.js. */
 const ALLE = [{ code: 'de', eigenname: 'Deutsch', datei: 'index.html', pfad: '/' }].concat(
@@ -49,6 +54,25 @@ ${optionen}
       </select>
     </nav>`;
 }
+
+/**
+ * Echte Links zu allen Sprachfassungen, zusätzlich zum Auswahlfeld: Google folgt
+ * <option> nicht, ohne <a> hatten die Sprachseiten keinen einzigen internen Link
+ * (Search Console: „Gefunden – zurzeit nicht indexiert“). Sprachnamen in eigener
+ * Schrift, deshalb ohne Beschriftung in einer bestimmten Sprache.
+ */
+function sprachListe(aktiv, einzug) {
+  const links = ALLE.filter((s) => s.code !== aktiv).map(
+    (s) => `<a href="${s.pfad}" hreflang="${s.code}" lang="${s.code}"${s.rtl ? ' dir="rtl"' : ''}>${s.eigenname}</a>`
+  ).join(' · ');
+  return `${einzug}<!-- sprachliste:start (gepflegt von tools/sprachseiten/build.js) -->\n` +
+    `${einzug}<p class="sprachliste">🌐 ${links}</p>\n` +
+    `${einzug}<!-- sprachliste:ende -->`;
+}
+
+const SPRACHLISTE_CSS = `
+    .sprachliste { margin-top: 40px; font-size: 14.5px; line-height: 2.1; color: var(--grau); }
+    .sprachliste a { color: var(--grau); white-space: nowrap; }`;
 
 const WAEHLER_CSS = `
     .sprachwahl {
@@ -89,9 +113,15 @@ function sitemapSchreiben() {
   const pfad = path.join(AUS, 'sitemap.xml');
   const heute = new Date().toISOString().slice(0, 10);
   const alt = fs.existsSync(pfad) ? fs.readFileSync(pfad, 'utf8') : '';
-  const andere = (alt.match(/<url>.*?<\/url>/gs) || []).filter(
-    (u) => /\/(demo|ratgeber)/.test(u)
-  );
+  // Ratgeber mit Übersetzungen (und alle /<code>/ratgeber/…) schreibt der
+  // Ratgeber-Baustein neu, damit die Sprach-Alternativen stimmen.
+  const rg = ratgeber.sitemapBloecke(RATGEBER, heute);
+  const rgLocs = new Set(rg.map((b) => b.loc));
+  const andere = (alt.match(/<url>.*?<\/url>/gs) || []).filter((u) => {
+    const loc = (u.match(/<loc>\s*([^<\s]+)\s*<\/loc>/) || [])[1] || '';
+    if (rgLocs.has(loc) || /^https:\/\/[^/]+\/[a-z]{2}\/ratgeber\//.test(loc)) return false;
+    return /\/(demo|ratgeber)/.test(u);
+  });
 
   const sprachLinks = ALLE.map(
     (x) => `    <xhtml:link rel="alternate" hreflang="${x.code}" href="${BASIS}${x.pfad}"/>`
@@ -107,10 +137,11 @@ function sitemapSchreiben() {
     '        xmlns:xhtml="http://www.w3.org/1999/xhtml">',
     ...bloecke,
     ...andere.map((u) => '  ' + u.replace(/\s+/g, ' ')),
+    ...rg.map((b) => b.xml),
     '</urlset>',
   ].join('\n');
   fs.writeFileSync(pfad, xml + '\n', 'utf8');
-  return ALLE.length + andere.length;
+  return ALLE.length + andere.length + rg.length;
 }
 
 /** Sichtbare Fragen — Google verlangt, dass das Schema sichtbaren Text spiegelt. */
@@ -154,6 +185,7 @@ function seite(s) {
     .replace(/\{\{SCHEMA\}\}/g, schemaBlock(s, t))
     .replace(/\{\{S4_TITEL\}\}/g, t.s4Titel || 'FAQ')
     .replace(/\{\{FAQ_HTML\}\}/g, faqHtml(t))
+    .replace(/\{\{RATGEBER\}\}\n/g, () => ratgeber.abschnittSprachseite(s.code, RATGEBER))
     .replace(/\{\{CTA_DEMO\}\}/g, t.ctaDemo)
     .replace(/\{\{CTA_KAUF\}\}/g, t.ctaKauf)
     .replace(/\{\{DEMO_HINWEIS\}\}/g, t.demoHinweis)
@@ -168,6 +200,8 @@ function seite(s) {
     .replace(/\{\{KAUF_FEHLER_HAKEN\}\}/g, t.kaufFehlerHaken)
     .replace(/\{\{KAUF_FEHLER_ALLG\}\}/g, t.kaufFehlerAllg)
     .replace(/\{\{WAEHLER\}\}/g, waehlerBlock(s.code, t.navLabel))
+    .replace(/\{\{SPRACHLISTE\}\}/g, () => sprachListe(s.code, '    '))
+    .replace(/\{\{SPRACHLISTE_CSS\}\}/g, SPRACHLISTE_CSS)
     .replace(/\{\{H1_A\}\}/g, t.h1a)
     .replace(/\{\{H1_B\}\}/g, t.h1b)
     .replace(/\{\{INTRO\}\}/g, t.intro)
@@ -217,7 +251,20 @@ idx = idx.replace(
 if (!idx.includes('.sprachwahl {')) {
   idx = idx.replace('  </style>', WAEHLER_CSS + '\n  </style>');
 }
+if (!idx.includes('.sprachliste {')) {
+  idx = idx.replace('  </style>', SPRACHLISTE_CSS + '\n  </style>');
+}
+if (idx.includes('<!-- sprachliste:start')) {
+  idx = idx.replace(/ *<!-- sprachliste:start[\s\S]*?<!-- sprachliste:ende -->/, sprachListe('de', '      '));
+} else {
+  idx = idx.replace(/( *)<div class="anlage">/, (m, einzug) => sprachListe('de', einzug) + '\n' + m);
+}
+if (!idx.includes('<!-- sprachliste:start')) throw new Error('index.html: Stelle für die Sprachliste nicht gefunden');
 fs.writeFileSync(idxPfad, idx, 'utf8');
 
+const rgSeiten = ratgeber.bauen(AUS, RATGEBER);
+const qvSeiten = querverweise.pflegen(AUS);
 const urls = sitemapSchreiben();
 console.log(`${n} Sprachseiten erzeugt + index.html aktualisiert (${ALLE.length} Sprachen) + sitemap.xml mit ${urls} URLs`);
+console.log(`${rgSeiten} übersetzte Ratgeber erzeugt (${RATGEBER.map((x) => x.code).join(', ') || 'keine'})`);
+console.log(`${qvSeiten} deutsche Ratgeber mit Kasten „Passt auch zu Ihrem Brief“`);

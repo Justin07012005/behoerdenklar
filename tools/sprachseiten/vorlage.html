@@ -119,6 +119,16 @@
     details { border-bottom: 1px solid rgba(33,33,29,.28); padding: 14px 4px; }
     summary { font-weight: 700; cursor: pointer; font-size: 17px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
     summary::-webkit-details-marker { display: none; }
+{{SPRACHLISTE_CSS}}
+    /* Unsichtbares Anti-Spam-Feld: bei Rechts-nach-links nach rechts schieben,
+       sonst wird die Seite am Handy 5000 px breit und scrollt seitlich. */
+    [dir="rtl"] input[name="email_address_check"] { left: auto !important; right: -5000px; }
+    .rg-liste { list-style: none; margin: 8px 0 0; }
+    .rg-liste li { margin-bottom: 12px; }
+    .rg-liste a { display: block; background: #fff; border: 1.5px solid var(--tinte); padding: 14px 18px; text-decoration: none; color: var(--tinte); }
+    .rg-liste b { display: block; color: var(--amtsblau); font-size: 18px; }
+    .rg-liste span { font-size: 15px; color: var(--grau); }
+    .rg-liste .de { font-weight: 700; }
     summary::after { content: '+'; font-family: 'Courier New', ui-monospace, monospace; font-size: 22px; color: var(--amtsblau); }
     details[open] summary::after { content: '–'; }
     details p { margin-top: 10px; color: var(--grau); font-size: 16px; }
@@ -215,6 +225,10 @@
       <h2>§ 5 &nbsp;{{S4_TITEL}}</h2>
 {{FAQ_HTML}}
     </section>
+{{RATGEBER}}
+
+{{SPRACHLISTE}}
+
 
     <footer>
       {{FUSS_FRAGE}} 📧 <a href="mailto:behoerdenbriefhelfer@gmail.com">behoerdenbriefhelfer@gmail.com</a>

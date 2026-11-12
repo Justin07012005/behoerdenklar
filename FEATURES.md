@@ -203,6 +203,10 @@ Getrennt, weil die Analyse Qualität braucht und der Rest nicht — spart etwa
 - **13 Ratgeber** unter `/ratgeber/` — Jobcenter, Finanzamt, Ausländerbehörde,
   Widerspruch, Nebenkosten, Versicherung, Inkasso, Bußgeld, Kündigung u. a.
   Jeder mit FAQ-Schema und Musterbrief.
+- **Ratgeber in 5 Sprachen** (seit 12.11.): `/<code>/ratgeber/<slug>` für ar, tr,
+  uk, ru, fa — je „Behördenbrief verstehen“, „Jobcenter Mitwirkungsaufforderung“,
+  „Ausländerbehörde Termin“. hreflang zur deutschen Fassung, verlinkt von den
+  Sprachseiten (§ 6) und von `/ratgeber/`. Erzeugt vom Sprachseiten-Generator.
 - **4 Rechtsseiten:** AGB, Widerruf, Impressum, Datenschutz (alle `noindex`)
 - **Warteliste** über Brevo (Double-Opt-in)
 
@@ -216,6 +220,15 @@ und Sprachwähler in der handgemachten `index.html` nach und schreibt die
 
 **Einzelne Sprachdateien niemals direkt bearbeiten** — sie werden überschrieben.
 Änderungen gehören in `vorlage.html` (Aufbau) oder `texte.js` (Texte).
+
+Derselbe Befehl baut die **übersetzten Ratgeber** aus `ratgeber/vorlage.html` +
+`ratgeber/texte-<code>.js` (Fakten und Regeln: `ratgeber/QUELLE.md`). Er pflegt
+dazu hreflang und Sprach-Links in den drei deutschen Ratgebern und den Kasten
+„Ratgeber in Ihrer Sprache“ in `ratgeber/index.html` (jeweils zwischen
+`<!-- …:start -->`/`<!-- …:ende -->`). Neue Sprache = neue `texte-<code>.js`.
+Außerdem pflegt er den Kasten **„Passt auch zu Ihrem Brief“** (3 Querverweise)
+unter allen 13 deutschen Ratgebern — Zuordnung in `ratgeber/querverweise.js`,
+Linktext = H1 des Zielratgebers. Neuer deutscher Ratgeber → dort eintragen.
 
 > Die Übersetzungen stammen von Claude. Bei Tigrinya, Somali, Paschtu und
 > Kurdisch sollte vor größerer Werbung jemand mit Muttersprache gegenlesen.
