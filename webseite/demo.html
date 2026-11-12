@@ -144,6 +144,17 @@
 
     .klein { font-size: 13.5px; color: var(--grau); margin-top: 12px; }
     .klein a { color: var(--grau); }
+    .konsens-liste { margin: 6px 0 4px; padding-inline-start: 18px; }
+    .konsens-liste li { margin-bottom: 3px; }
+    .gratis-hinweis { margin: -4px 0 14px; font-size: 14.5px; color: var(--tinte); }
+    .beispiel { margin: 0 0 18px; border: 1.5px dashed rgba(33,33,29,.35); background: #fff; padding: 10px 14px; }
+    .beispiel summary { cursor: pointer; font-weight: 700; color: var(--amtsblau); font-size: 15.5px; }
+    .beispiel-karte { border: 1.5px solid var(--tinte); padding: 10px 14px; margin-top: 12px; font-size: 15px; }
+    .beispiel-karte p { margin-bottom: 6px; }
+    .beispiel-karte .karten-label { position: static; display: inline-block; margin-bottom: 8px; font-style: normal; }
+    .beispiel-vorher { background: #f3efe6; }
+    .beispiel-vorher p { font-style: italic; }
+    .beispiel-vorher .karten-label { background: var(--tinte); }
 
     .status { text-align: center; padding: 26px 10px; display: none; }
     .status .gross { font-size: 20px; font-weight: 700; }
@@ -328,6 +339,22 @@
       <h2><span class="nr">§ 1</span> <span data-t="abschnittHochladen">Brief hochladen</span></h2>
       <div class="antrag">
         <p class="formular-kopf" data-t="formKopfGratis">Brief erklären lassen · 2 kostenlose Analysen</p>
+        <p class="klein gratis-hinweis" id="gratisHinweis" data-t="gratisHinweis" style="display: none;">Die erste Analyse startet sofort. Für die zweite fragen wir nach Ihrer E-Mail-Adresse, damit jeder genau 2 bekommt. Werbung bekommen Sie dadurch nicht.</p>
+
+        <details class="beispiel" id="beispielBox">
+          <summary>👀 <span data-t="beispielTitel">Beispiel ansehen: So sieht eine Erklärung aus</span></summary>
+          <div class="beispiel-karte beispiel-vorher">
+            <span class="karten-label" data-t="beispielBriefLabel">Beispielbrief (erfunden) · Satz aus einem Steuerbescheid</span>
+            <p lang="de" dir="ltr">„Die Festsetzung erfolgt gemäß § 164 AO unter dem Vorbehalt der Nachprüfung. Der Nachzahlungsbetrag in Höhe von 480,00 € ist binnen eines Monats nach Bekanntgabe fällig.“</p>
+          </div>
+          <div class="beispiel-karte beispiel-nachher">
+            <span class="karten-label" data-t="beispielErklaerungLabel">Die Erklärung</span>
+            <p data-t="beispielKern">Sie müssen 480 € Steuern nachzahlen, innerhalb eines Monats. Das Finanzamt kann den Bescheid später noch ändern. Wenn etwas falsch ist, können Sie Einspruch einlegen.</p>
+            <p>📅 <span data-t="beispielFrist">Frist: 1 Monat nach Erhalt des Briefs. Sie können sie in Ihren Kalender eintragen.</span></p>
+            <p>☑️ <span data-t="beispielTun">Was tun: Den Betrag bis zur Frist überweisen. Wenn etwas falsch ist, rechtzeitig Einspruch einlegen.</span></p>
+          </div>
+          <p class="klein" data-t="beispielHinweis">Das ist nur ein Beispiel. Ihre eigene Erklärung passt genau zu Ihrem Brief.</p>
+        </details>
 
         <p class="verbunden" id="verbundenBanner"></p>
 
@@ -364,15 +391,11 @@
 
           <div id="emailTeil" class="email-teil">
             <p style="margin-bottom: 10px;">
-              🎉 <strong>Ihre erste Analyse ist verbraucht.</strong> Für die
-              zweite geben Sie bitte Ihre E-Mail-Adresse ein — so stellen wir
-              sicher, dass jeder genau 2 Gratis-Analysen bekommt.
+              🎉 <strong data-t="emailTitel">Ihre erste Analyse ist verbraucht.</strong>
+              <span data-t="emailText">Für die zweite geben Sie bitte Ihre E-Mail-Adresse ein. So stellen wir sicher, dass jeder genau 2 Gratis-Analysen bekommt.</span>
             </p>
             <input class="wl-input" type="email" id="email" placeholder="Ihre E-Mail-Adresse" autocomplete="email">
-            <p class="klein" style="margin: 0 0 12px;">
-              Die Adresse wird nur verschlüsselt (als Prüfsumme) gespeichert,
-              um mitzuzählen — Sie bekommen dadurch keine E-Mails von uns.
-            </p>
+            <p class="klein" style="margin: 0 0 12px;" data-t="emailHinweis">Die Adresse wird nur verschlüsselt (als Prüfsumme) gespeichert, um mitzuzählen. Sie bekommen dadurch keine E-Mails von uns.</p>
           </div>
 
           <input type="file" id="datei" accept="image/jpeg,image/png,application/pdf" style="display: none;">
@@ -448,7 +471,8 @@
           bleibt gespeichert und verfällt nicht.
         </p>
 
-        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 18px;"></div>
+        <p style="margin-top: 14px; font-weight: 700;">Einmal bezahlen, kein Abo.</p>
+        <div id="paketListe" style="display: flex; flex-direction: column; gap: 12px; margin-top: 12px;"></div>
         <p style="margin-top: 16px; background: #eef4fb; border-inline-start: 4px solid var(--amtsblau); padding: 12px 14px; font-size: 15.5px;">
           📧 <strong>Bitte geben Sie beim Bezahlen Ihre E-Mail-Adresse an.</strong>
           Sie bekommen danach einen persönlichen Zugangs-Link — damit nutzen Sie
@@ -467,6 +491,10 @@
             gelesen.
           </span>
         </label>
+        <p class="klein" style="margin-top: -6px;">
+          <strong>Kurz gesagt:</strong> Sie können Ihr Guthaben sofort nutzen. Deshalb
+          können Sie den Kauf danach nicht mehr widerrufen.
+        </p>
 
         <div class="fehlerbox" id="kaufFehler" style="display: none; margin-top: 12px;"></div>
 
@@ -719,11 +747,29 @@
       for (var i = 0; i < elemente.length; i++) {
         var el = elemente[i], key = el.getAttribute('data-t');
         if (UI.de && UI.de[key]) el.textContent = t(key);
+        if (key === 'konsens') gliedereKonsens(el);
       }
+      var mailFeld = document.getElementById('email');
+      if (mailFeld && UI.de && UI.de.emailPlatzhalter) mailFeld.placeholder = t('emailPlatzhalter');
       // Was gerade dynamisch angezeigt wird, in der neuen Sprache neu setzen
       var stelle = (typeof handyModus !== 'undefined' && handyModus && handyModus.e) || (einrichtung() && hatGuthaben() ? einrichtung() : '');
       if (stelle) zeigeEinrichtungImKopf(stelle);
       if (typeof handyModus !== 'undefined' && handyModus && !handyModus.fertig) verbundenBanner.textContent = t('verbunden');
+    }
+    /** Einwilligung lesbar machen: erster Satz = die Zustimmung, der Rest als kurze Liste
+     *  (was gesendet wird, wer es bekommt, was gespeichert wird). Der Wortlaut bleibt gleich.
+     *  Nur wenn die Sprache genau 4 Sätze ergibt; sonst bleibt es ein Absatz (z. B. „EE. UU.“). */
+    function gliedereKonsens(el) {
+      var saetze = (el.textContent.match(/[^.。।።!?؟۔]+(?:[.。।።!?؟۔]+|$)\s*/g) || [])
+        .map(function (x) { return x.trim(); }).filter(Boolean);
+      if (saetze.length !== 4) return;
+      el.textContent = saetze[0] + ' ';
+      var liste = document.createElement('ul');
+      liste.className = 'konsens-liste';
+      for (var i = 1; i < saetze.length; i++) {
+        var li = document.createElement('li'); li.textContent = saetze[i]; liste.appendChild(li);
+      }
+      el.appendChild(liste);
     }
     /** Meldung des Servers: am Handy in der Bediensprache, sonst die genaue deutsche. */
     function serverMeldung(daten) {
@@ -789,6 +835,8 @@
     }
     function zeigeStand() {
       if (handyModus && handyModus.fertig) return;
+      var gratisHinweis = document.getElementById('gratisHinweis');
+      gratisHinweis.style.display = 'none';
       // Handy-Modus: nie Kaufangebot oder Code-Feld (die Beratung ist dabei)
       if (handyModus && !handyModus.w) {
         kaufBlock.style.display = 'none';
@@ -848,6 +896,8 @@
         werbung.style.display = 'block';
       } else if (benutzt() === 1) {
         emailTeil.style.display = 'block';
+      } else if (!einrichtung()) {
+        gratisHinweis.style.display = 'block';
       }
     }
 
@@ -866,7 +916,7 @@
       if (!walletFuerAnalyse() && benutzt() >= 1 && !emailFeld.value.trim()) {
         emailTeil.style.display = 'block';
         emailFeld.focus();
-        zeigeFehler('Bitte geben Sie zuerst Ihre E-Mail-Adresse ein — dann wählen Sie den Brief aus.');
+        zeigeFehler(t('fehlerEmailZuerst'));
         return;
       }
       dateiFeld.click();
@@ -1547,14 +1597,11 @@
         b.type = 'button';
         b.style.width = '100%';
         b.style.display = 'flex';
-        b.style.justifyContent = 'space-between';
+        b.style.justifyContent = 'center';
         b.style.alignItems = 'center';
         var links = document.createElement('span');
-        links.textContent = (p.best ? '⭐ ' : '') + p.titel;
-        var rechts = document.createElement('strong');
-        rechts.textContent = p.preis;
+        links.textContent = (p.best ? '⭐ ' : '') + p.titel + ' für ' + p.preis.replace(' ', '\u00a0') + ' kaufen';
         b.appendChild(links);
-        b.appendChild(rechts);
         b.addEventListener('click', function () { starteKauf(p.priceId, b); });
         paketListe.appendChild(b);
       });
