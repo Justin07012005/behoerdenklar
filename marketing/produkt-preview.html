@@ -80,6 +80,15 @@
     .doc-heading p { margin: 0; color: var(--muted); font-size: 13px; }
     .doc-icon { display: grid; place-items: center; flex: 0 0 48px; height: 48px; border-radius: 14px; background: var(--green-pale); font-size: 23px; }
     .section-label { margin: 0 0 10px; color: #63716b; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+
+    .trust-row {
+      display: flex; align-items: center; gap: 10px; padding: 12px 14px; margin: 0 0 18px;
+      border: 1px solid #d7e4d9; border-radius: 12px; background: linear-gradient(120deg, #f2fbf4, #f7faf8);
+      color: var(--green-dark); font-size: 12px; line-height: 1.5;
+    }
+    .trust-row .lock { font-size: 16px; }
+    .trust-row strong { font-size: 12px; }
+
     .next-card {
       padding: 19px 20px; border-radius: 16px; border: 1px solid #cfe4d8;
       background: linear-gradient(120deg, #f0f8f2, #f8fbf7);
@@ -88,6 +97,7 @@
     .check { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: #d7ecdf; font-size: 13px; }
     .next-card h3 { margin: 0 0 6px; font-size: 20px; letter-spacing: -.025em; }
     .next-card p { margin: 0; color: #53645c; font-size: 14px; line-height: 1.5; }
+
     .deadline {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       margin: 13px 0 19px; padding: 14px 16px; border: 1px solid #f0dfb8;
@@ -100,16 +110,20 @@
     .status { padding: 6px 9px; border-radius: 999px; background: #ffe6ad; color: #704900; font-size: 11px; font-weight: 750; white-space: nowrap; }
     .notice { margin: -8px 0 22px; color: #727d77; font-size: 11px; }
 
-    .unclear-card { padding: 17px 18px; margin-bottom: 20px; border: 1px solid var(--line); border-radius: 15px; background: white; }
-    .unclear-head { display: flex; align-items: flex-start; gap: 11px; }
-    .question-mark { flex: 0 0 25px; width: 25px; height: 25px; display: grid; place-items: center; border-radius: 50%; background: var(--blue-pale); color: #355a78; font-weight: 800; }
-    .unclear-card h3 { margin: 1px 0 5px; font-size: 14px; }
-    .unclear-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .context-card {
+      margin-bottom: 20px; padding: 17px 18px; border: 1px solid var(--line); border-radius: 15px; background: #fff;
+    }
+    .context-head { display: flex; align-items: flex-start; gap: 11px; }
+    .context-mark { flex: 0 0 25px; width: 25px; height: 25px; display: grid; place-items: center; border-radius: 50%; background: var(--blue-pale); color: #355a78; font-weight: 800; }
+    .context-card h3 { margin: 1px 0 5px; font-size: 14px; }
+    .context-card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
+
     .quote-card { margin-bottom: 20px; padding: 17px 18px; border: 1px solid var(--line); border-radius: 15px; background: #fff; }
     .quote-top { display: flex; justify-content: space-between; gap: 12px; align-items: center; margin-bottom: 11px; }
     .quote-top h3 { margin: 0; font-size: 14px; }
     .text-link { border: 0; padding: 0; color: var(--green); background: transparent; font-size: 12px; font-weight: 700; }
     blockquote { margin: 0; padding: 12px 14px; border-left: 3px solid #9bbda8; border-radius: 0 9px 9px 0; background: #f7f9f6; color: #34443d; font-size: 13px; line-height: 1.55; }
+
     .actions-title { margin: 0 0 10px; font-size: 14px; }
     .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .action {
@@ -144,18 +158,18 @@
 
   <main class="layout">
     <section class="intro">
-      <div class="eyebrow">Ein möglicher Aufbau</div>
-      <h1>Vom Brief zum nächsten Schritt</h1>
-      <p>Nur ein visuelles Beispiel – keine Analyse, keine KI und keine echten Briefdaten.</p>
+      <div class="eyebrow">Einfacher Weg</div>
+      <h1>Von der Post zum klaren nächsten Schritt</h1>
+      <p>Nur ein visuelles Beispiel – keine echte Analyse und keine echten Briefdaten.</p>
     </section>
 
     <section class="app-frame" aria-label="Vorschau einer Briefdetailseite">
       <aside class="sidebar" aria-label="Beispielnavigation">
         <p class="side-caption">MENÜ</p>
         <div class="nav-item active"><span class="nav-icon">◷</span> Fristen</div>
-        <div class="nav-item"><span class="nav-icon">＋</span> Brief scannen</div>
-        <div class="nav-item"><span class="nav-icon">▤</span> Archiv</div>
-        <div class="sidebar-note"><strong>Deine Briefe bleiben privat</strong>Diese Vorschau speichert oder sendet keine Daten.</div>
+        <div class="nav-item"><span class="nav-icon">＋</span> Verstehen</div>
+        <div class="nav-item"><span class="nav-icon">▤</span> Erinnerungen</div>
+        <div class="sidebar-note"><strong>Privat & kontrolliert</strong>Du entscheidest, ob ältere Briefe als Kontext genutzt werden. Keine automatische Verbindung ohne deinen Klick.</div>
       </aside>
 
       <div class="content">
@@ -164,16 +178,21 @@
           <div>
             <div class="eyebrow">Briefdetail · Beispiel</div>
             <h2>Schreiben vom Jobcenter</h2>
-            <p>Beispielbrief · erhalten am 4. November</p>
+            <p>Erhalten am 4. November · nur für diese Prüfung</p>
           </div>
           <div class="doc-icon" aria-hidden="true">▤</div>
+        </div>
+
+        <div class="trust-row" role="status" aria-live="polite">
+          <span class="lock" aria-hidden="true">🔒</span>
+          <span><strong>Privat:</strong> Der Brief bleibt auf deinem Gerät. Wenn du möchtest, kannst du ältere Briefe später als Kontext speichern.</span>
         </div>
 
         <p class="section-label">Dein nächster Schritt</p>
         <section class="next-card">
           <div class="next-title"><span class="check">✓</span> Im Brief steht</div>
           <h3>Nachweise einreichen</h3>
-          <p>Der Brief bittet um geeignete Nachweise. Welche genau gemeint sind, wird hier nicht näher erklärt.</p>
+          <p>Der Brief fordert passende Nachweise. Welche Unterlagen genau gemeint sind, wird hier bewusst nicht erfindungsgemäß ergänzt.</p>
         </section>
 
         <section class="deadline" aria-label="Beispielhafte Frist">
@@ -185,12 +204,12 @@
         </section>
         <p class="notice">Beispieldatum – im echten Produkt immer am Originalbrief kontrollieren.</p>
 
-        <section class="unclear-card">
-          <div class="unclear-head">
-            <span class="question-mark">?</span>
+        <section class="context-card">
+          <div class="context-head">
+            <span class="context-mark">?</span>
             <div>
-              <h3>Was noch unklar ist</h3>
-              <p>Der Brief nennt keine konkreten Unterlagen. Wir zeigen deshalb keine erfundene Liste an.</p>
+              <h3>Zusammenhänge verständlich machen</h3>
+              <p>Wenn du ältere Briefe oder passende E-Mails speicherst, kann die App später ähnliche Hinweise leichter erkennen – aber nur, wenn du das aktiv zugelassen hast.</p>
             </div>
           </div>
         </section>
@@ -206,10 +225,10 @@
         <h3 class="actions-title">Mögliche nächste Schritte</h3>
         <div class="actions">
           <button type="button" class="action primary">Frage an die Behörde vorbereiten</button>
-          <button type="button" class="action"><span>▤</span>Älteren Brief hinzufügen</button>
-          <button type="button" class="action"><span>♡</span>Beratungsstelle finden</button>
+          <button type="button" class="action"><span>▤</span>Älteren Brief ansehen</button>
+          <button type="button" class="action"><span>◔</span>Erinnerung aktivieren</button>
         </div>
-        <p class="disclaimer">Nur eine Designidee. Die Schaltflächen sind nicht aktiv. Keine Rechtsberatung und keine automatische Entscheidung.</p>
+        <p class="disclaimer">Nur eine Designidee. Die Schaltflächen sind nicht aktiv. Keine Rechtsberatung und keine automatische Entscheidung. Du kannst entscheiden, was als Kontext genutzt werden soll.</p>
       </div>
     </section>
   </main>
