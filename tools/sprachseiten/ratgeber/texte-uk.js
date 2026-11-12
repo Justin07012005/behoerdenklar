@@ -18,6 +18,8 @@ module.exports = {
     mehrTitel: 'Інші поради українською',
     andereSprachen: 'Цей текст іншими мовами:',
     ratgeberTitel: 'Поради: листи з німецьких установ',
+    alleSprache: 'Усі поради українською',
+    alleDeutsch: 'Усі поради німецькою',
   },
 
   artikel: {

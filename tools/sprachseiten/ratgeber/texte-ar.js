@@ -19,6 +19,8 @@ module.exports = {
     mehrTitel: 'أدلة أخرى بالعربية',
     andereSprachen: 'هذا النص بلغات أخرى:',
     ratgeberTitel: 'دليل الرسائل الرسمية الألمانية',
+    alleSprache: 'كل الأدلة بالعربية',
+    alleDeutsch: 'كل الأدلة بالألمانية',
   },
 
   artikel: {

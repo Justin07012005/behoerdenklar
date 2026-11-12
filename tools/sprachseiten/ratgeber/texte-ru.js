@@ -16,6 +16,8 @@ module.exports = {
     mehrTitel: 'Другие советы на русском',
     andereSprachen: 'Этот текст на других языках:',
     ratgeberTitel: 'Советы: письма из немецких ведомств',
+    alleSprache: 'Все советы на русском',
+    alleDeutsch: 'Все советы на немецком',
   },
 
   artikel: {

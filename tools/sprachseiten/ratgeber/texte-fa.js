@@ -19,6 +19,8 @@ module.exports = {
     mehrTitel: 'راهنماهای دیگر به فارسی',
     andereSprachen: 'این متن به زبان‌های دیگر:',
     ratgeberTitel: 'راهنما: نامه‌های اداری آلمان',
+    alleSprache: 'همه راهنماها به فارسی',
+    alleDeutsch: 'همه راهنماها به آلمانی',
   },
 
   artikel: {

@@ -17,6 +17,8 @@ module.exports = {
     mehrTitel: 'Diğer Türkçe rehberler',
     andereSprachen: 'Bu metin başka dillerde:',
     ratgeberTitel: 'Rehber: Alman resmi dairelerinden gelen mektuplar',
+    alleSprache: 'Tüm Türkçe rehberler',
+    alleDeutsch: 'Tüm rehberler (Almanca)',
   },
 
   artikel: {

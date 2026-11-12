@@ -28,7 +28,7 @@ const THEMEN = [
 ];
 
 const PFLICHT_UI = ['locale', 'start', 'ratgeber', 'testen', 'kurzTitel', 'faqTitel', 'ctaKnopf',
-  'deHinweis', 'mehrTitel', 'andereSprachen', 'ratgeberTitel'];
+  'deHinweis', 'mehrTitel', 'andereSprachen', 'ratgeberTitel', 'alleSprache', 'alleDeutsch'];
 const PFLICHT_ARTIKEL = ['titel', 'beschreibung', 'kurztitel', 'karte', 'brot', 'kicker', 'h1a', 'h1b',
   'intro', 'kurz', 'abschnitte', 'faq', 'hinweis', 'ctaTitel', 'ctaText'];
 
@@ -166,6 +166,8 @@ function seite(s, slug, sprachen, vorlage) {
     PFEIL: s.rtl ? '←' : '→',
     MEHR_TITEL: de(ui.mehrTitel),
     MEHR: mehr.join('\n'),
+    ALLE_SPRACHE: de(ui.alleSprache),
+    ALLE_DEUTSCH: de(ui.alleDeutsch),
     ANDERE_SPRACHEN: de(ui.andereSprachen),
     SPRACH_LINKS: andere.map(sprachLink).join(' · '),
     IMPRESSUM: s.impressum,
